@@ -1,0 +1,7 @@
+package engine.saving;
+
+public enum SaveFileTokenType {
+    LBRACE, RBRACE, STRING, TRUE, FALSE, NUMBER, LBRACKET, RBRACKET, SEMICOLON, NULL, PERCENT, STAR, SLASH, UNDERSCORE,
+
+    EOF
+}
