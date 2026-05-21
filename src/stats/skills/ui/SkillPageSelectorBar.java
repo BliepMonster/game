@@ -59,5 +59,4 @@ public class SkillPageSelectorBar extends Component {
         }
     }
     public void detectContinuousPress(Screen screen, float x, float y) {}
-    // TODO
 }

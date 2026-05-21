@@ -28,7 +28,6 @@ public class SkillComponent extends Component {
     }
     public void display(DrawManager draw, float x, float y, float w, float h) {
         draw.rect(magenta, x, y, w, h);
-        // TODO: draw progress bar and level and name
 
         // skill level
 
