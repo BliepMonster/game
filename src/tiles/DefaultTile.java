@@ -1,6 +1,7 @@
 package tiles;
 
 import engine.core.DrawManager;
+import main.WorldContext;
 
 public class DefaultTile extends Tile {
     private final TileType type;
@@ -15,7 +16,7 @@ public class DefaultTile extends Tile {
     protected boolean isSelfStandable() {
         return type.standable;
     }
-    public void onStand() {
-        part.onStand();
+    public void onStand(WorldContext context) {
+        part.onStand(context);
     }
 }

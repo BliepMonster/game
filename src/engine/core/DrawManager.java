@@ -72,6 +72,17 @@ public class DrawManager {
         glBindVertexArray(textVAO);
         textPositionsVBO = glGenBuffers();
         textTexCoordsVBO = glGenBuffers();
+
+        glEnableVertexAttribArray(0);
+        glEnableVertexAttribArray(1);
+
+        glBindBuffer(GL_ARRAY_BUFFER, textPositionsVBO);
+        glVertexAttribPointer(0, 2, GL_FLOAT, false, 0, 0);
+
+        glBindBuffer(GL_ARRAY_BUFFER, textTexCoordsVBO);
+        glVertexAttribPointer(1, 2, GL_FLOAT, false, 0, 0);
+
+        glBindVertexArray(0);
         lastBoundVAO = -1;
     }
     public static void swapTexture(Texture texture) {
@@ -126,7 +137,6 @@ public class DrawManager {
             lastBoundShader = shader;
         }
     }
-    // TODO: impl slices everywhere
     public void rect(final @NotNull Color color, final @NotNull Matrix4f transform) {
         bindShader(plainColor);
         plainColor.loadColor(plainColor.colorLocation, color);
@@ -301,7 +311,7 @@ public class DrawManager {
             texCoords[12*i+10] = texWidth1;
             texCoords[12*i+11] = texHeight1;
             xPosition += xAdvance;
-            if (xPosition >= 100*paragraphWidthLimit) {
+            if (xPosition >= SIZE_PER_FONT_SIZE*paragraphWidthLimit) {
                 xPosition = 0;
                 yPosition -= SIZE_PER_FONT_SIZE*size*NEW_LINE;
             }
@@ -313,13 +323,14 @@ public class DrawManager {
         storeDataInAttributeList(0, positions, textPositionsVBO);
         storeDataInAttributeList(1, texCoords, textTexCoordsVBO);
         CACHE_VEC1.set(x/screen.getAspectRatio(),y,0);
-        CACHE_VEC2.set(.01f/screen.getAspectRatio(), .01f, .01f);
-        this.text.loadMatrix(this.text.transformLocation, Maths.loadTransform(CACHE_MAT, CACHE_VEC1, CACHE_VEC2));
+        CACHE_VEC2.set(1/screen.getAspectRatio(), 1, 1);
+        var mat = Maths.loadTransform(CACHE_MAT, CACHE_VEC1, CACHE_VEC2);
+        this.text.loadMatrix(this.text.transformLocation, mat);
         this.text.loadColor(this.text.colorLocation, color);
         GL13.glActiveTexture(GL13.GL_TEXTURE0);
         swapTexture(bitmap);
         this.text.loadTexCoords(bitmap, this.text.texCoordsLocation);
-        glDrawArrays(GL_TRIANGLES, 0, positions.length);
+        glDrawArrays(GL_TRIANGLES, 0, positions.length/2);
         ++drawCalls;
     }
 

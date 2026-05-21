@@ -88,9 +88,10 @@ public class Screen {
 
     /**
      * Will create this Screen and its callbacks.
+     *
      * @param console The console (with the input) to use to create the callbacks.
      */
-    public Screen create(Console console, int flags) {
+    public void create(Console console, int flags) {
         boolean initSucceed = GLFW.glfwInit();
         if (!initSucceed)
             throw new RuntimeException("There was a problem starting the screen.");
@@ -127,7 +128,10 @@ public class Screen {
 
         setMouseVisible(true);
         glfwShowWindow(window);
-        return this;
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        glDisable(GL_DEPTH_TEST);
+        glDepthMask(false);
     }
 
     /**

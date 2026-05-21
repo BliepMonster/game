@@ -14,9 +14,9 @@ import tiles.TileType;
 import java.util.ArrayList;
 import java.util.List;
 
-public class World {
+public class World implements WorldContext {
     private final CoordinateMap<Tile> map = CoordinateMap.newDefaultPackedMap();
-    private final List<Entity> entities = new ArrayList<>();
+    public final List<Entity> entities = new ArrayList<>();
     public World() {
         for (int i = -5; i < 5; ++i) {
             for (int j = -5; j < 5; ++j) {
@@ -38,7 +38,7 @@ public class World {
     }
     public void tick() {
         var hitbox = getHitbox();
-        entities.forEach(Entity::tick);
+        entities.forEach(entity -> entity.tick(this));
         entities.forEach(entity -> entity.move(hitbox));
     }
     public void render(RenderContext context, Player player, float tsize) {

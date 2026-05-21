@@ -51,14 +51,14 @@ public class Font {
     }
     public float getSizeForWidth(String s, float width) {
         float xA = getXAdvance(s);
-        return width*10_000/xA;
+        return width*100/xA;
     }
     public float getSizeForHeight(float height) {
-        return height*10_000f/54f;
+        return height*100f/54f;
     }
     public float getWidthForSize(String s, float size) {
         float xA = getXAdvance(s);
-        return size/10_000*xA;
+        return size/100*xA;
     }
     public float getXAdvance(String s) {
         float xA = 0;
