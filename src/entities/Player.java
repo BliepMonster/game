@@ -30,7 +30,6 @@ public class Player implements Entity {
 
     private void updateStats() {
         this.stats = getBaseStats().merge(skills.getStatBoost());
-        System.out.println(stats.foragingYield);
     }
 
     @Override

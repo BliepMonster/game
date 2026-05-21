@@ -1,6 +1,9 @@
 package stats.skills;
 
+import engine.notifications.NotificationSystem;
 import stats.StatHolder;
+
+import java.awt.*;
 
 public class ForagingSkill extends Skill {
     public static final int MAX = 25;
@@ -25,6 +28,7 @@ public class ForagingSkill extends Skill {
             level++;
             this.xp -= needed;
             needed *= MULTIPLIER;
+            NotificationSystem.add("Foraging Level Up! "+level, Color.green);
         }
     }
     public boolean isAtMax() {

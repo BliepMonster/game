@@ -6,6 +6,7 @@ import engine.core.input.Console;
 import engine.core.input.EventManager;
 import engine.core.text.Font;
 import engine.gui.GUI;
+import engine.notifications.NotificationSystem;
 import org.lwjgl.glfw.GLFW;
 import stats.inventory.ui.InventoryPanel;
 import stats.skills.ui.SkillPanel;
@@ -30,6 +31,8 @@ public class Main {
         var lastTick = (double) System.currentTimeMillis();
         final var tickRate = 1000d/Game.TICKS_PER_SECOND;
         var pressed = false;
+
+        NotificationSystem.font = font;
 
         main:
         while (screen.update()) {
@@ -67,6 +70,8 @@ public class Main {
             }
 
             game.render(context, .1f);
+
+            NotificationSystem.tick();
 
             GUI.manage(console);
 

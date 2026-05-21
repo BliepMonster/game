@@ -19,7 +19,7 @@ public class TileType {
     public static final int TILETYPE_WALL = 1;
     public static final TileType[] types = new TileType[TILETYPE_COUNT];
     static {
-        types[TILETYPE_GRASS] = new TileType(true, Color.GREEN);
+        types[TILETYPE_GRASS] = new TileType(true, new Color(0, 200, 0));
         types[TILETYPE_WALL] = new TileType(false, Color.RED);
     }
 }
