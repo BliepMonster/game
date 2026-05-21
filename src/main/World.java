@@ -15,9 +15,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class World {
-    private final CoordinateMap<Tile> map = CoordinateMap.newDefaultPackedMap();
+    private final CoordinateMap<Tile> map;
     public final List<Entity> entities = new ArrayList<>();
+    public World(CoordinateMap<Tile> map) {
+        this.map = map;
+    }
     public World() {
+        this.map = CoordinateMap.newDefaultPackedMap();
         for (int i = -5; i < 5; ++i) {
             for (int j = -5; j < 5; ++j) {
                 if (i == 4 || j == 4 || i == -5 || j == -5)
@@ -68,5 +72,26 @@ public class World {
                 }
             }
         }
+    }
+    private static void addStrawberries(CoordinateMap<Tile> map) {
+        map.get(15, 15).ifPresent(tile -> tile.setPart(new StrawberryTilePart()));
+        map.get(15, 16).ifPresent(tile -> tile.setPart(new StrawberryTilePart()));
+        map.get(17, 14).ifPresent(tile -> tile.setPart(new StrawberryTilePart()));
+        map.get(18, 15).ifPresent(tile -> tile.setPart(new StrawberryTilePart()));
+        map.get(18, 18).ifPresent(tile -> tile.setPart(new StrawberryTilePart()));
+    }
+    public static World home() {
+        CoordinateMap<Tile> map = CoordinateMap.newDefaultPackedMap();
+        for (int i = -20; i < 20; ++i) {
+            for (int j = -20; j < 20; ++j) {
+                if (i == -20 || j == -20 || i == 19 || j == 19) {
+                    map.put(i, j, new DefaultTile(TileType.types[TileType.TILETYPE_WALL]));
+                } else {
+                    map.put(i, j, new DefaultTile(TileType.types[TileType.TILETYPE_GRASS]));
+                }
+            }
+        }
+        addStrawberries(map);
+        return new World(map);
     }
 }

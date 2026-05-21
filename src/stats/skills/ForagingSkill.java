@@ -23,8 +23,8 @@ public class ForagingSkill extends Skill {
         this.xp += xp;
         while (this.xp >= needed && level != MAX) {
             level++;
-            needed *= MULTIPLIER;
             this.xp -= needed;
+            needed *= MULTIPLIER;
         }
     }
     public boolean isAtMax() {

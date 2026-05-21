@@ -28,9 +28,6 @@ public class SkillComponent extends Component {
     }
     public void display(DrawManager draw, float x, float y, float w, float h) {
         draw.rect(magenta, x, y, w, h);
-
-        // skill level
-
         String s = Integer.toString(level);
         float fsize = Math.min(font.getSizeForHeight(.1f), font.getSizeForWidth(s, w/4));
         draw.string(s, black, x+w-font.getWidthForSize(s, fsize), y+.2f/3, font, fsize);
