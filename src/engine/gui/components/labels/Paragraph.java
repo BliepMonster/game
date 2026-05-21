@@ -1,7 +1,8 @@
-package engine.gui.components;
+package engine.gui.components.labels;
 
 import engine.core.DrawManager;
 import engine.core.Screen;
+import engine.gui.components.Component;
 import engine.gui.constraints.position.PositionConstraint;
 import engine.gui.constraints.size.SizeConstraint;
 import engine.core.text.Font;

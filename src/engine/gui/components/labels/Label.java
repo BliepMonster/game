@@ -1,19 +1,20 @@
-package engine.gui.components;
+package engine.gui.components.labels;
 
 import engine.core.DrawManager;
 import engine.core.Screen;
 import engine.core.text.Font;
+import engine.gui.components.Component;
 import engine.gui.constraints.position.PositionConstraint;
 import engine.gui.constraints.size.SizeConstraint;
 
 import java.awt.Color;
 
-public class CenteredLabel extends Component {
+public class Label extends Component {
     protected String text;
     protected Color color;
     protected Font font;
 
-    public CenteredLabel(PositionConstraint x, PositionConstraint y, SizeConstraint width, SizeConstraint height, String text, Color color, Font font) {
+    public Label(PositionConstraint x, PositionConstraint y, SizeConstraint width, SizeConstraint height, String text, Color color, Font font) {
         super(x, y, width, height);
         this.text = text;
         this.color = color;
@@ -21,9 +22,7 @@ public class CenteredLabel extends Component {
     }
 
     public void display(DrawManager draw, float x, float y, float width, float height) {
-        float size = Math.min(font.getSizeForWidth(text, width), font.getSizeForHeight(height));
-        float dWidth = font.getWidthForSize(text, size);
-        draw.string(text, color, x-dWidth/2, y, font, size);
+        draw.string(text, color, x, y, font, Math.min(font.getSizeForWidth(text, width), font.getSizeForHeight(height)));
     }
 
     @Override

@@ -1,10 +1,10 @@
-package engine.gui.components;
+package engine.gui.components.labels;
 
 import engine.core.DrawManager;
 import engine.core.Screen;
-import engine.core.graphics.TextMesh;
 import engine.core.input.Input;
 import engine.core.text.Font;
+import engine.gui.components.Component;
 import engine.gui.constraints.position.PositionConstraint;
 import engine.gui.constraints.size.FullWidthConstraint;
 import org.lwjgl.glfw.GLFW;

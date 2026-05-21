@@ -12,7 +12,7 @@ public class Game implements GameContext {
         return player;
     }
     public Game() {
-        world = World.home();
+        world = World.home(player);
     }
     public void tick(boolean pressed, Screen screen, float tsize) {
         world.tick(this, pressed, screen, tsize);

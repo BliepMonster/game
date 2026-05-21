@@ -1,4 +1,4 @@
-package engine.gui.components;
+package engine.gui.components.sliders;
 
 import engine.gui.constraints.position.PositionConstraint;
 import engine.gui.constraints.size.SizeConstraint;

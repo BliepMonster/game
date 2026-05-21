@@ -80,7 +80,7 @@ public class Player implements Entity {
         }
         if (movement.x != 0 || movement.y != 0) {
             movement.normalize();
-            movement.mul(stats.speed / TICKS_PER_SECOND);
+            movement.mul(stats.get(StatHolder.Stat.SPEED) / TICKS_PER_SECOND);
         }
         position.x += movement.x;
         if (movement.x != 0)

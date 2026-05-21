@@ -9,7 +9,7 @@ import entities.Player;
 import tiles.DefaultTile;
 import tiles.Tile;
 import tiles.TileType;
-import tiles.strawberries.StrawberryTilePart;
+import tiles.resources.StrawberryTilePart;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,19 +19,6 @@ public class World {
     public final List<Entity> entities = new ArrayList<>();
     public World(CoordinateMap<Tile> map) {
         this.map = map;
-    }
-    public World() {
-        this.map = CoordinateMap.newDefaultPackedMap();
-        for (int i = -5; i < 5; ++i) {
-            for (int j = -5; j < 5; ++j) {
-                if (i == 4 || j == 4 || i == -5 || j == -5)
-                    map.put(i, j, new DefaultTile(TileType.types[TileType.TILETYPE_WALL]));
-                else {
-                    map.put(i, j, new DefaultTile(TileType.types[TileType.TILETYPE_GRASS]));
-                    map.get(i, j).ifPresent(tile -> tile.setPart(new StrawberryTilePart()));
-                }
-            }
-        }
     }
     public Hitbox getHitbox() {
         var hitbox = new CompoundHitbox();
@@ -62,9 +49,9 @@ public class World {
         var ySize = bounds.w;
         var y = player.getY();
         var x = player.getX();
-        for (int i = minX; i < minX + xSize; ++i) {
+        for (int i = minX; i <= minX + xSize; ++i) {
             var xoff = i-x;
-            for (int j = minY; j < minY+ySize; ++j) {
+            for (int j = minY; j <= minY+ySize; ++j) {
                 var option = map.get(i, j);
                 if (option.isPresent()) {
                     var tile = option.get();
@@ -73,14 +60,20 @@ public class World {
             }
         }
     }
-    private static void addStrawberries(CoordinateMap<Tile> map) {
-        map.get(15, 15).ifPresent(tile -> tile.setPart(new StrawberryTilePart()));
-        map.get(15, 16).ifPresent(tile -> tile.setPart(new StrawberryTilePart()));
-        map.get(17, 14).ifPresent(tile -> tile.setPart(new StrawberryTilePart()));
-        map.get(18, 15).ifPresent(tile -> tile.setPart(new StrawberryTilePart()));
-        map.get(18, 18).ifPresent(tile -> tile.setPart(new StrawberryTilePart()));
+    private static void addStrawberriesToDefaultWorld(CoordinateMap<Tile> map, Player player) {
+        map.get(15, 15).ifPresent(tile -> tile.setPart(new StrawberryTilePart(player)));
+        map.get(15, 16).ifPresent(tile -> tile.setPart(new StrawberryTilePart(player)));
+        map.get(17, 14).ifPresent(tile -> tile.setPart(new StrawberryTilePart(player)));
+        map.get(18, 15).ifPresent(tile -> tile.setPart(new StrawberryTilePart(player)));
+        map.get(18, 18).ifPresent(tile -> tile.setPart(new StrawberryTilePart(player)));
+        map.get(12, 16).ifPresent(tile -> tile.setPart(new StrawberryTilePart(player)));
+        map.get(12, 13).ifPresent(tile -> tile.setPart(new StrawberryTilePart(player)));
+        map.get(14, 14).ifPresent(tile -> tile.setPart(new StrawberryTilePart(player)));
+        map.get(13, 18).ifPresent(tile -> tile.setPart(new StrawberryTilePart(player)));
+        map.get(17, 12).ifPresent(tile -> tile.setPart(new StrawberryTilePart(player)));
+        // TODO: a proper system + expand this area
     }
-    public static World home() {
+    public static World home(Player player) {
         CoordinateMap<Tile> map = CoordinateMap.newDefaultPackedMap();
         for (int i = -20; i < 20; ++i) {
             for (int j = -20; j < 20; ++j) {
@@ -91,7 +84,7 @@ public class World {
                 }
             }
         }
-        addStrawberries(map);
+        addStrawberriesToDefaultWorld(map, player);
         return new World(map);
     }
 }
