@@ -3,13 +3,13 @@ package entities;
 import engine.hitboxes.Hitbox;
 import engine.hitboxes.Positioned;
 import main.RenderContext;
-import main.WorldContext;
+import main.GameContext;
 
 public interface Entity extends Positioned {
     void move(Hitbox world);
-    void tick(WorldContext context);
+    void tick(GameContext context);
     void render(RenderContext context, float x, float y, float tsize);
-    boolean shouldDie(WorldContext context);
+    boolean shouldDie(GameContext context);
     Hitbox getHitbox();
     Hitbox getWalkHitbox();
 }

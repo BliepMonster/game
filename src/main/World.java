@@ -1,20 +1,20 @@
 package main;
 
 import engine.CoordinateMap;
-import engine.hitboxes.CompoundHitbox;
-import engine.hitboxes.Hitbox;
-import engine.hitboxes.RectangularHitbox;
-import engine.hitboxes.Unpositioned;
+import engine.core.Screen;
+import engine.core.input.Input;
+import engine.hitboxes.*;
 import entities.Entity;
 import entities.Player;
 import tiles.DefaultTile;
 import tiles.Tile;
 import tiles.TileType;
+import tiles.strawberries.StrawberryTilePart;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class World implements WorldContext {
+public class World {
     private final CoordinateMap<Tile> map = CoordinateMap.newDefaultPackedMap();
     public final List<Entity> entities = new ArrayList<>();
     public World() {
@@ -22,8 +22,10 @@ public class World implements WorldContext {
             for (int j = -5; j < 5; ++j) {
                 if (i == 4 || j == 4 || i == -5 || j == -5)
                     map.put(i, j, new DefaultTile(TileType.types[TileType.TILETYPE_WALL]));
-                else
+                else {
                     map.put(i, j, new DefaultTile(TileType.types[TileType.TILETYPE_GRASS]));
+                    map.get(i, j).ifPresent(tile -> tile.setPart(new StrawberryTilePart()));
+                }
             }
         }
     }
@@ -36,10 +38,17 @@ public class World implements WorldContext {
         }
         return hitbox;
     }
-    public void tick() {
+    public void tick(Game game, boolean pressed, Screen screen, float tsize) {
         var hitbox = getHitbox();
-        entities.forEach(entity -> entity.tick(this));
+        entities.forEach(entity -> entity.tick(game));
         entities.forEach(entity -> entity.move(hitbox));
+        if (pressed) {
+            float x = Input.getMouseX(screen);
+            float y = Input.getMouseY(screen);
+            float px = x/tsize+game.player.getX();
+            float py = y/tsize+game.player.getY();
+            map.get((int) Math.floor(px), (int) Math.floor(py)).ifPresent(tile -> tile.onClick(game));
+        }
     }
     public void render(RenderContext context, Player player, float tsize) {
         var bounds = map.getBounds();

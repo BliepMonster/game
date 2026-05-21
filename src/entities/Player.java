@@ -3,10 +3,11 @@ package entities;
 import engine.hitboxes.Hitbox;
 import engine.hitboxes.RectangularHitbox;
 import main.RenderContext;
-import main.WorldContext;
+import main.GameContext;
 import org.joml.Vector2f;
 import stats.StatHolder;
 import stats.inventory.InventoryStorage;
+import stats.skills.SkillSet;
 
 import java.awt.*;
 
@@ -18,8 +19,9 @@ public class Player implements Entity {
     private final Vector2f position = new Vector2f();
     private final Hitbox step = new RectangularHitbox(-.5f, 0, 1, .2f, this);
     private final Hitbox hit = new RectangularHitbox(-.5f, 0, 1, 2, this);
-    private StatHolder stats = new StatHolder();
+    public StatHolder stats = new StatHolder();
     public InventoryStorage inventory = new InventoryStorage();
+    public SkillSet skills = new SkillSet();
     private int ticksTo = 0;
 
     private StatHolder getBaseStats() {
@@ -27,11 +29,12 @@ public class Player implements Entity {
     }
 
     private void updateStats() {
-        this.stats = getBaseStats();
+        this.stats = getBaseStats().merge(skills.getStatBoost());
+        System.out.println(stats.foragingYield);
     }
 
     @Override
-    public void tick(WorldContext context) {
+    public void tick(GameContext context) {
         if (ticksTo++ == 3) {
             updateStats();
             ticksTo = 0;
@@ -44,7 +47,7 @@ public class Player implements Entity {
     }
 
     @Override
-    public boolean shouldDie(WorldContext context) {
+    public boolean shouldDie(GameContext context) {
         return false;
     }
     public float getX() {

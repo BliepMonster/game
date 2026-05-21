@@ -8,6 +8,7 @@ import engine.core.text.Font;
 import engine.gui.GUI;
 import org.lwjgl.glfw.GLFW;
 import stats.inventory.ui.InventoryPanel;
+import stats.skills.ui.SkillPanel;
 
 public class Main {
     public static Font font;
@@ -28,6 +29,7 @@ public class Main {
 
         var lastTick = (double) System.currentTimeMillis();
         final var tickRate = 1000d/Game.TICKS_PER_SECOND;
+        var pressed = false;
 
         main:
         while (screen.update()) {
@@ -39,14 +41,29 @@ public class Main {
                 } else if (event.type() == EventManager.KEY_UP && event.key() == GLFW.GLFW_KEY_E) {
                     if (GUI.getAll(0).isEmpty())
                         GUI.add(new InventoryPanel(game.player.inventory, font), 0);
-                    else GUI.clear(0);
+                    else {
+                        var component = GUI.getAll(0).getFirst();
+                        if (component instanceof InventoryPanel)
+                            GUI.clear(0);
+                    }
+                } else if (event.type() == EventManager.KEY_UP && event.key() == GLFW.GLFW_KEY_K) {
+                    if (GUI.getAll(0).isEmpty()) {
+                        GUI.add(new SkillPanel(game.player.skills, font), 0);
+                    } else {
+                        var component = GUI.getAll(0).getFirst();
+                        if (component instanceof SkillPanel)
+                            GUI.clear(0);
+                    }
+                } else if (event.type() == EventManager.MOUSE_DOWN && event.key() == GLFW.GLFW_MOUSE_BUTTON_1) {
+                    pressed = true;
                 }
             }
             final var framestamp = System.currentTimeMillis();
 
             if (framestamp - lastTick >= tickRate) {
                 lastTick += tickRate;
-                game.tick();
+                game.tick(pressed, screen, .1f);
+                pressed = false;
             }
 
             game.render(context, .1f);

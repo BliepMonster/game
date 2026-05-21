@@ -1,7 +1,7 @@
 package tiles;
 
 import engine.core.DrawManager;
-import main.WorldContext;
+import main.GameContext;
 
 public abstract class Tile {
     protected abstract boolean isSelfStandable();
@@ -12,7 +12,7 @@ public abstract class Tile {
     public void setPart(TilePart part) {
         this.part = part;
     }
-    public abstract void onStand(WorldContext context);
+    public abstract void onStand(GameContext context);
     public boolean isStandable() {
         return isSelfStandable() && (part == null || part.isStandable());
     }
@@ -20,5 +20,8 @@ public abstract class Tile {
     public void render(DrawManager draw, float x, float y, float w, float h) {
         renderSelf(draw, x, y, w, h);
         if (part != null) part.render(draw, x, y, w, h);
+    }
+    public void onClick(GameContext context) {
+        if (part != null) part.onClick(context);
     }
 }
