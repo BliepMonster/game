@@ -12,7 +12,7 @@ public abstract class Tile {
     public void setPart(TilePart part) {
         this.part = part;
     }
-    public abstract void onStand(GameContext context);
+    public abstract void onSelfStand(GameContext context);
     public boolean isStandable() {
         return isSelfStandable() && (part == null || part.isStandable());
     }
@@ -23,5 +23,9 @@ public abstract class Tile {
     }
     public void onClick(GameContext context) {
         if (part != null) part.onClick(context);
+    }
+    public void onStand(GameContext context) {
+        if (part != null) part.onStand(null);
+        onSelfStand(context);
     }
 }

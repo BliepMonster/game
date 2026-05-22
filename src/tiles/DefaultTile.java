@@ -16,7 +16,5 @@ public class DefaultTile extends Tile {
     protected boolean isSelfStandable() {
         return type.standable;
     }
-    public void onStand(GameContext context) {
-        part.onStand(context);
-    }
+    public void onSelfStand(GameContext context) {}
 }

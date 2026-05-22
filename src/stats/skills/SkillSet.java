@@ -2,15 +2,22 @@ package stats.skills;
 
 import stats.StatHolder;
 
+import static stats.skills.SkillSet.SkillType.*;
+
 public class SkillSet {
-    public static final int NUM_SKILLS = 1;
-    public static final int SKILL_FORAGING = 0;
+    public enum SkillType {
+        FORAGING, FARMING
+    }
+    public static final int NUM_SKILLS = SkillType.values().length;
+    public static final int SKILL_FORAGING = FORAGING.ordinal();
+    public static final int SKILL_FARMING = FARMING.ordinal();
     private final Skill[] skills = new Skill[NUM_SKILLS];
     public SkillSet() {
         skills[SKILL_FORAGING] = new ForagingSkill();
+        skills[SKILL_FARMING] = new FarmingSkill();
     }
-    public void giveXP(int skill, int count) {
-        skills[skill].getXP(count);
+    public void giveXP(SkillType skill, int count) {
+        skills[skill.ordinal()].getXP(count);
     }
     public StatHolder getStatBoost() {
         StatHolder holder = new StatHolder();
@@ -24,5 +31,8 @@ public class SkillSet {
     }
     public Skill get(int index) {
         return skills[index];
+    }
+    public Skill get(SkillType type) {
+        return skills[type.ordinal()];
     }
 }

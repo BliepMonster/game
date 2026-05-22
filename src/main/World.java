@@ -6,10 +6,14 @@ import engine.core.input.Input;
 import engine.hitboxes.*;
 import entities.Entity;
 import entities.Player;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 import tiles.DefaultTile;
+import tiles.MagmaTile;
 import tiles.Tile;
 import tiles.TileType;
 import tiles.resources.StrawberryTilePart;
+import tiles.resources.WheatTilePart;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,16 +33,34 @@ public class World {
         }
         return hitbox;
     }
-    public void tick(Game game, boolean pressed, Screen screen, float tsize) {
+    public void tick(Game game, boolean pressed, Screen screen, float tsize, boolean canClick) {
         var hitbox = getHitbox();
         entities.forEach(entity -> entity.tick(game));
         entities.forEach(entity -> entity.move(hitbox));
-        if (pressed) {
+        var player = game.player;
+        int left   = (int)(player.getX());
+        int right  = (int)((player.getX() + 1));
+
+        int top    = (int)(player.getY());
+        int bottom = (int)((player.getY() + .2f));
+        for (int tx = left; tx <= right; tx++) {
+            for (int ty = top; ty <= bottom; ty++) {
+                map.get(tx, ty).ifPresent(tile -> tile.onStand(game));
+            }
+        }
+        if (pressed && canClick) {
             float x = Input.getMouseX(screen);
             float y = Input.getMouseY(screen);
-            float px = x/tsize+game.player.getX();
-            float py = y/tsize+game.player.getY();
-            map.get((int) Math.floor(px), (int) Math.floor(py)).ifPresent(tile -> tile.onClick(game));
+            float px = x/tsize+player.getX();
+            float py = y/tsize+player.getY();
+            var v = map.get((int) Math.floor(px), (int) Math.floor(py));
+            var t = v.orElse(null);
+            var used = game.player.useSelectedItem(game, t);
+            if (v.isPresent()) {
+                if (!used) {
+                    t.onClick(game);
+                }
+            }
         }
     }
     public void render(RenderContext context, Player player, float tsize) {
@@ -60,31 +82,42 @@ public class World {
             }
         }
     }
-    private static void addStrawberriesToDefaultWorld(CoordinateMap<Tile> map, Player player) {
-        map.get(15, 15).ifPresent(tile -> tile.setPart(new StrawberryTilePart(player)));
-        map.get(15, 16).ifPresent(tile -> tile.setPart(new StrawberryTilePart(player)));
-        map.get(17, 14).ifPresent(tile -> tile.setPart(new StrawberryTilePart(player)));
-        map.get(18, 15).ifPresent(tile -> tile.setPart(new StrawberryTilePart(player)));
-        map.get(18, 18).ifPresent(tile -> tile.setPart(new StrawberryTilePart(player)));
-        map.get(12, 16).ifPresent(tile -> tile.setPart(new StrawberryTilePart(player)));
-        map.get(12, 13).ifPresent(tile -> tile.setPart(new StrawberryTilePart(player)));
-        map.get(14, 14).ifPresent(tile -> tile.setPart(new StrawberryTilePart(player)));
-        map.get(13, 18).ifPresent(tile -> tile.setPart(new StrawberryTilePart(player)));
-        map.get(17, 12).ifPresent(tile -> tile.setPart(new StrawberryTilePart(player)));
+    private static void addStrawberriesToDefaultWorld(CoordinateMap<Tile> map) {
+        map.get(15, 15).ifPresent(tile -> tile.setPart(new StrawberryTilePart()));
+        map.get(15, 16).ifPresent(tile -> tile.setPart(new StrawberryTilePart()));
+        map.get(17, 14).ifPresent(tile -> tile.setPart(new StrawberryTilePart()));
+        map.get(18, 15).ifPresent(tile -> tile.setPart(new StrawberryTilePart()));
+        map.get(18, 18).ifPresent(tile -> tile.setPart(new StrawberryTilePart()));
+        map.get(12, 16).ifPresent(tile -> tile.setPart(new StrawberryTilePart()));
+        map.get(12, 13).ifPresent(tile -> tile.setPart(new StrawberryTilePart()));
+        map.get(14, 14).ifPresent(tile -> tile.setPart(new StrawberryTilePart()));
+        map.get(13, 18).ifPresent(tile -> tile.setPart(new StrawberryTilePart()));
+        map.get(17, 12).ifPresent(tile -> tile.setPart(new StrawberryTilePart()));
         // TODO: a proper system + expand this area
     }
-    public static World home(Player player) {
+    private static void addWheatToDefaultWorld(CoordinateMap<Tile> map) {
+        for (int i = 18; i > 14; --i) {
+            for (int j = -19; j < -12; ++j) {
+                map.get(i, j).ifPresent(tile -> tile.setPart(new WheatTilePart()));
+            }
+        }
+    }
+    @Contract(" -> new")
+    public static @NotNull World home() {
         CoordinateMap<Tile> map = CoordinateMap.newDefaultPackedMap();
         for (int i = -20; i < 20; ++i) {
             for (int j = -20; j < 20; ++j) {
                 if (i == -20 || j == -20 || i == 19 || j == 19) {
                     map.put(i, j, new DefaultTile(TileType.types[TileType.TILETYPE_WALL]));
+                } else if (i < -10) {
+                    map.put(i, j, new MagmaTile());
                 } else {
                     map.put(i, j, new DefaultTile(TileType.types[TileType.TILETYPE_GRASS]));
                 }
             }
         }
-        addStrawberriesToDefaultWorld(map, player);
+        addStrawberriesToDefaultWorld(map);
+        addWheatToDefaultWorld(map);
         return new World(map);
     }
 }

@@ -44,8 +44,9 @@ public class GUI {
     public static void clear(int location) {
         components[location].clear();
     }
-    public static void manage(Console console) {
+    public static boolean manage(Console console) {
         boolean pressed = false;
+        boolean clicked = false;
         for (Event event : console.input.events.get()) {
             if (event.type() == EventManager.MOUSE_UP) {
                 pressed = true;
@@ -60,10 +61,14 @@ public class GUI {
             if (list.isEmpty())
                 continue;
             for (Component component : list) {
+                if (component.isInBounds(screen, Input.getMouseX(screen), Input.getMouseY(screen))) {
+                    clicked = true;
+                }
                 component.manage(draw, pressed);
             }
         }
         clearScheduled();
+        return clicked;
     }
     public static void clear() {
         for (int i = 0; i < components.length; i++) {

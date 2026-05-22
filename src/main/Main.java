@@ -1,5 +1,6 @@
 package main;
 
+import engine.abstraction.Keybinds;
 import engine.core.DrawManager;
 import engine.core.Screen;
 import engine.core.input.Console;
@@ -8,8 +9,13 @@ import engine.core.text.Font;
 import engine.gui.GUI;
 import engine.notifications.NotificationSystem;
 import org.lwjgl.glfw.GLFW;
-import stats.inventory.ui.InventoryPanel;
+import stats.inventory.items.Item;
+import stats.inventory.items.ItemDefinition;
+import stats.inventory.items.ui.HotbarComponent;
+import stats.inventory.items.ui.InventoryGridComponent;
+import stats.inventory.resources.ui.InventoryPanel;
 import stats.skills.ui.SkillPanel;
+import stats.ui.HealthBar;
 
 public class Main {
     public static Font font;
@@ -28,11 +34,32 @@ public class Main {
         GUI.init();
         GUI.bindDrawManager(draw);
 
+        GUI.add(new HotbarComponent(game.player), 62);
+
         var lastTick = (double) System.currentTimeMillis();
         final var tickRate = 1000d/Game.TICKS_PER_SECOND;
         var pressed = false;
 
         NotificationSystem.font = font;
+
+        Keybinds.addKeybind(GLFW.GLFW_KEY_1, () -> game.player.selectItem(0));
+        Keybinds.addKeybind(GLFW.GLFW_KEY_2, () -> game.player.selectItem(1));
+        Keybinds.addKeybind(GLFW.GLFW_KEY_3, () -> game.player.selectItem(2));
+        Keybinds.addKeybind(GLFW.GLFW_KEY_4, () -> game.player.selectItem(3));
+        Keybinds.addKeybind(GLFW.GLFW_KEY_5, () -> game.player.selectItem(4));
+        Keybinds.addKeybind(GLFW.GLFW_KEY_6, () -> game.player.selectItem(5));
+        Keybinds.addKeybind(GLFW.GLFW_KEY_7, () -> game.player.selectItem(6));
+        Keybinds.addKeybind(GLFW.GLFW_KEY_8, () -> game.player.selectItem(7));
+        Keybinds.addKeybind(GLFW.GLFW_KEY_9, () -> game.player.selectItem(8));
+
+
+        StaticItemLoader.initAll();
+
+        game.player.items.add(new Item(ItemDefinition.get(StaticItemLoader.BREAD_ITEM_ID)));
+        game.player.items.add(new Item(ItemDefinition.get(StaticItemLoader.BREAD_ITEM_ID)));
+        game.player.items.add(new Item(ItemDefinition.get(StaticItemLoader.BREAD_ITEM_ID)));
+
+        GUI.add(new HealthBar(game.player), 62);
 
         main:
         while (screen.update()) {
@@ -42,38 +69,59 @@ public class Main {
                     screen.destroy();
                     break main;
                 } else if (event.type() == EventManager.KEY_UP && event.key() == GLFW.GLFW_KEY_E) {
-                    if (GUI.getAll(0).isEmpty())
+                    if (GUI.getAll(0).isEmpty()) {
                         GUI.add(new InventoryPanel(game.player.inventory, font), 0);
+                        GUI.toggle(62);
+                    }
                     else {
                         var component = GUI.getAll(0).getFirst();
-                        if (component instanceof InventoryPanel)
+                        if (component instanceof InventoryPanel) {
                             GUI.clear(0);
+                            GUI.toggle(62);
+                        }
                     }
                 } else if (event.type() == EventManager.KEY_UP && event.key() == GLFW.GLFW_KEY_K) {
                     if (GUI.getAll(0).isEmpty()) {
                         GUI.add(new SkillPanel(game.player.skills, font), 0);
+                        GUI.toggle(62);
                     } else {
                         var component = GUI.getAll(0).getFirst();
-                        if (component instanceof SkillPanel)
+                        if (component instanceof SkillPanel) {
                             GUI.clear(0);
+                            GUI.toggle(62);
+                        }
+                    }
+                } else if (event.type() == EventManager.KEY_UP && event.key() == GLFW.GLFW_KEY_TAB) {
+                    if (GUI.getAll(0).isEmpty()) {
+                        GUI.add(new InventoryGridComponent(game.player), 0);
+                        GUI.toggle(62);
+                    } else {
+                        var component = GUI.getAll(0).getFirst();
+                        if (component instanceof InventoryGridComponent) {
+                            GUI.clear(0);
+                            GUI.toggle(62);
+                        }
                     }
                 } else if (event.type() == EventManager.MOUSE_DOWN && event.key() == GLFW.GLFW_MOUSE_BUTTON_1) {
                     pressed = true;
                 }
             }
-            final var framestamp = System.currentTimeMillis();
 
-            if (framestamp - lastTick >= tickRate) {
-                lastTick += tickRate;
-                game.tick(pressed, screen, .1f);
-                pressed = false;
-            }
+            Keybinds.manage(console);
+
+            final var framestamp = System.currentTimeMillis();
 
             game.render(context, .1f);
 
-            NotificationSystem.tick();
+            boolean b = GUI.manage(console);
 
-            GUI.manage(console);
+            if (framestamp - lastTick >= tickRate) {
+                lastTick += tickRate;
+                game.tick(pressed, screen, .1f, !b);
+                pressed = false;
+            }
+
+            NotificationSystem.tick();
 
             console.input.events.clear();
             screen.display();

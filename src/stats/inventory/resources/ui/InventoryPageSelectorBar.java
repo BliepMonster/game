@@ -1,4 +1,4 @@
-package stats.inventory.ui;
+package stats.inventory.resources.ui;
 
 import engine.core.DrawManager;
 import engine.core.Screen;

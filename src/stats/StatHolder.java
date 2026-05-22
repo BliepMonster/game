@@ -3,10 +3,13 @@ package stats;
 public class StatHolder {
     public enum Stat {
         SPEED,
-        FORAGING_YIELD
+        FORAGING_YIELD,
+        FARMING_YIELD,
+        MAX_HEALTH,
     }
     public static final int NUM_STATS = Stat.values().length;
     public static final int SPEED_INDEX = Stat.SPEED.ordinal();
+    public static final int FARMING_YIELD_INDEX = Stat.FARMING_YIELD.ordinal();
     public static final int FORAGING_YIELD_INDEX = Stat.FORAGING_YIELD.ordinal();
     private float[] stats = new float[NUM_STATS];
     public StatHolder withForagingYield(float yield) {
@@ -18,6 +21,10 @@ public class StatHolder {
     }
     public StatHolder withSpeed(float speed) {
         this.stats[SPEED_INDEX] = speed;
+        return this;
+    }
+    public StatHolder with(Stat stat, float v) {
+        this.stats[stat.ordinal()] = v;
         return this;
     }
     public StatHolder merge(StatHolder other) {

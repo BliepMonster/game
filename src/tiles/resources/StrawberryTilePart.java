@@ -13,8 +13,9 @@ import static java.awt.Color.red;
 
 public class StrawberryTilePart extends ResourceCreator {
     public static final Color green = new Color(0, 160, 0);
-    public StrawberryTilePart(Player player) {
-        super(ItemConstants.ITEM_STRAWBERRY, 4, player.skills.get(SkillSet.SKILL_FORAGING), StatHolder.Stat.FORAGING_YIELD, Game.TICKS_PER_SECOND*5, 1);
+    public static final ResourceDefinition DEFINITION = new ResourceDefinition(ItemConstants.ITEM_STRAWBERRY, 4, 1, SkillSet.SkillType.FORAGING, StatHolder.Stat.FORAGING_YIELD, Game.TICKS_PER_SECOND*5);
+    public StrawberryTilePart() {
+        super(DEFINITION);
     }
     public void renderUnready(DrawManager draw, float x, float y, float w, float h) {
         draw.rect(green, x+w/4, y+h/4, w/2, h/2);

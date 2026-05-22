@@ -1,4 +1,4 @@
-package stats.inventory;
+package stats.inventory.resources;
 
 import java.util.*;
 
@@ -41,5 +41,12 @@ public final class InventoryStorage {
     }
     public int size() {
         return inventory.size();
+    }
+    public void subtractAll(InventoryStorage storage) {
+        for (String key : storage.inventory.keySet()) {
+            var v = inventory.get(key);
+            if (v != null)
+                inventory.put(key, v - storage.inventory.get(key));
+        }
     }
 }

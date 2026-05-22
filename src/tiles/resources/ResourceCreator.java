@@ -8,33 +8,21 @@ import engine.saving.objects.SavedObject;
 import main.Game;
 import main.GameContext;
 import main.YieldUtils;
-import stats.StatHolder;
-import stats.skills.Skill;
 import tiles.TilePart;
 
 public abstract class ResourceCreator extends TilePart implements JobActor {
-    public final String itemID;
-    public final int xp;
+    public final ResourceDefinition definition;
     private boolean ready = true;
-    public final int yield;
-    public final Skill skill;
-    public StatHolder.Stat modifier;
-    public int respawnTicks;
-    public ResourceCreator(String itemID, int xp, Skill skill, StatHolder.Stat modifier, int respawnTicks, int yield) {
-        this.itemID = itemID;
-        this.xp = xp;
-        this.skill = skill;
-        this.modifier = modifier;
-        this.respawnTicks = respawnTicks;
-        this.yield = yield;
+    public ResourceCreator(ResourceDefinition definition) {
+        this.definition = definition;
     }
     public void onClick(GameContext context) {
         if (ready) {
             ready = false;
             var player = context.getPlayer();
-            player.inventory.add(this.itemID, YieldUtils.getYieldEffect(this.yield, player.stats.get(this.modifier)));
-            skill.getXP(xp);
-            JobSystem.addJob(new ResourceJob(this, (float) respawnTicks/ Game.TICKS_PER_SECOND));
+            player.inventory.add(this.definition.itemID(), YieldUtils.getYieldEffect(this.definition.yield(), player.stats.get(this.definition.modifier())));
+            player.skills.giveXP(definition.skillID(), definition.xp());
+            JobSystem.addJob(new ResourceJob(this, (float) definition.respawnTicks()/ Game.TICKS_PER_SECOND));
         }
     }
     public SavedObject save() {

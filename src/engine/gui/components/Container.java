@@ -59,4 +59,18 @@ public class Container extends Component implements Iterable<Component> {
     public @NotNull Iterator<Component> iterator() {
         return parts.iterator();
     }
+
+    public boolean isInBounds(Screen screen, float x, float y) {
+        if (super.isInBounds(screen, x, y)) {
+            return true;
+        }
+        for (Component component : parts) {
+            if (component == null)
+                continue;
+            if (component.isInBounds(screen, x, y)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

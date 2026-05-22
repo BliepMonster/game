@@ -1,4 +1,4 @@
-package stats.inventory.ui;
+package stats.inventory.resources.ui;
 
 import engine.core.DrawManager;
 import engine.core.Screen;
@@ -6,7 +6,7 @@ import engine.core.text.Font;
 import engine.gui.components.Component;
 import engine.gui.constraints.position.PositionConstraint;
 import engine.gui.constraints.size.RelativeSizeConstraint;
-import stats.inventory.InventoryStorage;
+import stats.inventory.resources.InventoryStorage;
 
 import java.awt.*;
 

@@ -6,16 +6,21 @@ import entities.Player;
 
 public class Game implements GameContext {
     public static final int TICKS_PER_SECOND = 50;
+    private static int ticks = 0;
+    public static int getTickCount() {
+        return ticks;
+    }
     private final World world;
     final Player player = new Player();
     public Player getPlayer() {
         return player;
     }
     public Game() {
-        world = World.home(player);
+        world = World.home();
     }
-    public void tick(boolean pressed, Screen screen, float tsize) {
-        world.tick(this, pressed, screen, tsize);
+    public void tick(boolean pressed, Screen screen, float tsize, boolean canClick) {
+        ++ticks;
+        world.tick(this, pressed, screen, tsize, canClick);
         player.tick(this);
         player.move(world.getHitbox());
 

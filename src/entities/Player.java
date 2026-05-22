@@ -2,12 +2,17 @@ package entities;
 
 import engine.hitboxes.Hitbox;
 import engine.hitboxes.RectangularHitbox;
+import main.Game;
 import main.RenderContext;
 import main.GameContext;
 import org.joml.Vector2f;
 import stats.StatHolder;
-import stats.inventory.InventoryStorage;
+import stats.inventory.items.Item;
+import stats.inventory.items.ItemInventory;
+import stats.inventory.items.ItemUseResult;
+import stats.inventory.resources.InventoryStorage;
 import stats.skills.SkillSet;
+import tiles.Tile;
 
 import java.awt.*;
 
@@ -20,12 +25,17 @@ public class Player implements Entity {
     private final Hitbox step = new RectangularHitbox(-.5f, 0, 1, .2f, this);
     private final Hitbox hit = new RectangularHitbox(-.5f, 0, 1, 2, this);
     public StatHolder stats = new StatHolder();
+    private int selectedHotbarSlot = 0;
+    public ItemInventory items = new ItemInventory();
     public InventoryStorage inventory = new InventoryStorage();
     public SkillSet skills = new SkillSet();
     private int ticksTo = 0;
+    private int ticksSinceLastDamage = 0;
+    private int ticksSinceLastHeal = 0;
+    private int health = 100;
 
     private StatHolder getBaseStats() {
-        return new StatHolder().withSpeed(5);
+        return new StatHolder().withSpeed(5).with(StatHolder.Stat.MAX_HEALTH, 100);
     }
 
     private void updateStats() {
@@ -37,12 +47,15 @@ public class Player implements Entity {
         if (ticksTo++ == 3) {
             updateStats();
             ticksTo = 0;
+        } if (ticksSinceLastHeal++ == Game.TICKS_PER_SECOND) {
+            heal((int) stats.get(StatHolder.Stat.MAX_HEALTH)/100); // heal 1% per second
         }
+        ticksSinceLastDamage++;
     }
     @Override
     public void render(RenderContext context, float x, float y, float tsize) {
         var draw = context.map();
-        draw.rect(Color.blue, x, y, tsize, tsize*2);
+        draw.rect(ticksSinceLastDamage < 5 ? Color.red : Color.blue, x, y, tsize, tsize*2);
     }
 
     @Override
@@ -97,5 +110,42 @@ public class Player implements Entity {
             position.x = Math.round(position.x * 16) / 16f;
             position.y = Math.round(position.y * 16) / 16f;
         }
+    }
+    public void selectItem(int i) {
+        System.out.println(i);
+        if (i < 0 || i > 9) throw new UnsupportedOperationException("Invalid slot");
+        this.selectedHotbarSlot = i;
+    }
+    public int getSelectedHotbarSlot() {
+        return selectedHotbarSlot;
+    }
+    public int getHealth() {
+        return health;
+    }
+    public void setHealth(int health) {
+        this.health = health;
+    }
+    public void damage(int amount) {
+        health -= amount;
+        if (health <= 0) {
+            health = 0;
+        }
+        ticksSinceLastDamage = 0;
+    }
+    public void heal(int amount) {
+        health += amount;
+        if (health > stats.get(StatHolder.Stat.MAX_HEALTH)) {
+            health = (int) stats.get(StatHolder.Stat.MAX_HEALTH);
+        }
+    }
+    public boolean isAtFullHealth() {
+        return health == (int) stats.get(StatHolder.Stat.MAX_HEALTH);
+    }
+    public boolean useSelectedItem(GameContext context, Tile tile) {
+        Item item  = this.items.get(selectedHotbarSlot);
+        if (item == null) return false;
+        ItemUseResult result = item.definition.use(tile, item, context);
+        this.items.apply(selectedHotbarSlot, result);
+        return result.handled();
     }
 }
