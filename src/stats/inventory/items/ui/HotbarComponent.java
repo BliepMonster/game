@@ -19,6 +19,8 @@ public class HotbarComponent extends Component {
         this.player = player;
     }
 
+    public static final Color COOLDOWN_BG = new Color(128, 128, 128, 128);
+
     @Override
     public void display(DrawManager draw, float x, float y, float w, float h) {
         draw.rect(Color.black, x, y, w, h);
@@ -28,7 +30,14 @@ public class HotbarComponent extends Component {
             float xx = x+.05f*(i+1)+.1f*(i);
             draw.rect(s == i ? Color.cyan : Color.green, xx, y+.05f, .1f, .1f);
             if (item == null) continue;
+            float cooldown = item.getRatioTimeUntilReady();
+            if (cooldown != 1) {
+                draw.rect(COOLDOWN_BG, xx, y+.05f, .1f, .1f);
+            }
             draw.image(item.definition.texture, xx, y+.05f, .1f, .1f);
+            if (cooldown != 1) {
+                draw.rect(Color.red, xx, y+.05f, .1f*cooldown, .02f);
+            }
         }
     }
     @Override

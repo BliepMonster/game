@@ -5,4 +5,7 @@ public class Item {
     public Item(ItemDefinition definition) {
         this.definition = definition;
     }
+    public float getRatioTimeUntilReady() {
+        return 1;
+    }
 }

@@ -53,7 +53,6 @@ public class InventoryGridComponent extends Component {
         float stride = ITEM_SIZE+SPACING;
         float row = (r-base)/stride;
         if (row < 0 || row >= NUM_ROWS) return -1;
-
         return (int) row;
     }
     public void detectClick(Screen screen, float x, float y) {

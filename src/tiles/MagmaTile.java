@@ -1,6 +1,7 @@
 package tiles;
 
 import engine.core.DrawManager;
+import entities.DamageType;
 import main.Game;
 import main.GameContext;
 
@@ -14,7 +15,7 @@ public class MagmaTile extends Tile {
     public void onSelfStand(GameContext context) {
         var player = context.getPlayer();
         if (Game.getTickCount() - lastDamaged > Game.TICKS_PER_SECOND/2) {
-            player.damage(5);
+            player.damage(5, DamageType.FIRE, context);
             lastDamaged = Game.getTickCount();
         }
     }

@@ -7,6 +7,7 @@ import main.RenderContext;
 import main.GameContext;
 import org.joml.Vector2f;
 import stats.StatHolder;
+import stats.VelocityChange;
 import stats.inventory.items.Item;
 import stats.inventory.items.ItemInventory;
 import stats.inventory.items.ItemUseResult;
@@ -15,15 +16,16 @@ import stats.skills.SkillSet;
 import tiles.Tile;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 import static engine.core.input.Input.isKeyDown;
 import static main.Game.TICKS_PER_SECOND;
 import static org.lwjgl.glfw.GLFW.*;
 
 public class Player implements Entity {
+    private final ArrayList<VelocityChange> velocityChanges = new ArrayList<>();
     private final Vector2f position = new Vector2f();
     private final Hitbox step = new RectangularHitbox(-.5f, 0, 1, .2f, this);
-    private final Hitbox hit = new RectangularHitbox(-.5f, 0, 1, 2, this);
     public StatHolder stats = new StatHolder();
     private int selectedHotbarSlot = 0;
     public ItemInventory items = new ItemInventory();
@@ -50,17 +52,18 @@ public class Player implements Entity {
         } if (ticksSinceLastHeal++ == Game.TICKS_PER_SECOND) {
             heal((int) stats.get(StatHolder.Stat.MAX_HEALTH)/100); // heal 1% per second
         }
+        velocityChanges.removeIf(VelocityChange::canBeRemoved);
         ticksSinceLastDamage++;
     }
     @Override
     public void render(RenderContext context, float x, float y, float tsize) {
         var draw = context.map();
-        draw.rect(ticksSinceLastDamage < 5 ? Color.red : Color.blue, x, y, tsize, tsize*2);
+        draw.rect(isDead() ? Color.orange : ticksSinceLastDamage < 5 ? Color.red : Color.blue, x, y, tsize, tsize*2);
     }
 
     @Override
     public boolean shouldDie(GameContext context) {
-        return false;
+        return health == 0;
     }
     public float getX() {
         return position.x;
@@ -71,7 +74,7 @@ public class Player implements Entity {
 
     @Override
     public Hitbox getHitbox() {
-        return hit;
+        return step;
     }
 
     @Override
@@ -95,6 +98,9 @@ public class Player implements Entity {
             movement.normalize();
             movement.mul(stats.get(StatHolder.Stat.SPEED) / TICKS_PER_SECOND);
         }
+        for (VelocityChange change : velocityChanges) {
+            movement.add(change.getVelocityChange());
+        }
         position.x += movement.x;
         if (movement.x != 0)
             m = true;
@@ -112,7 +118,6 @@ public class Player implements Entity {
         }
     }
     public void selectItem(int i) {
-        System.out.println(i);
         if (i < 0 || i > 9) throw new UnsupportedOperationException("Invalid slot");
         this.selectedHotbarSlot = i;
     }
@@ -125,7 +130,7 @@ public class Player implements Entity {
     public void setHealth(int health) {
         this.health = health;
     }
-    public void damage(int amount) {
+    public void damage(int amount, DamageType type, GameContext context) {
         health -= amount;
         if (health <= 0) {
             health = 0;
@@ -141,11 +146,34 @@ public class Player implements Entity {
     public boolean isAtFullHealth() {
         return health == (int) stats.get(StatHolder.Stat.MAX_HEALTH);
     }
-    public boolean useSelectedItem(GameContext context, Tile tile) {
+    public boolean useSelectedItem(GameContext context, Tile tile, Vector2f worldPos) {
         Item item  = this.items.get(selectedHotbarSlot);
         if (item == null) return false;
-        ItemUseResult result = item.definition.use(tile, item, context);
+        ItemUseResult result = item.definition.use(tile, item, context, worldPos);
         this.items.apply(selectedHotbarSlot, result);
         return result.handled();
+    }
+    private int deathTick = -1000;
+    public boolean isDead() {
+        return Game.getTickCount() - deathTick < Game.TICKS_PER_SECOND;
+    }
+    public void respawn(GameContext context) {
+        this.health = (int) this.stats.get(StatHolder.Stat.MAX_HEALTH);
+        this.position.set(context.getPlayerRespawnPosition());
+    }
+    public void die(GameContext context) {
+        deathTick = Game.getTickCount();
+    }
+    public boolean isAttackable() {
+        return false;
+    }
+    public void knock(Vector2f direction, float amount) {
+        velocityChanges.add(Entity.getVelocityChange(direction, amount, (int) ((float) Game.TICKS_PER_SECOND/10*Math.max(amount/5, 1))));
+    }
+    public float getWidth() {
+        return 1;
+    }
+    public float getHeight() {
+        return .2f;
     }
 }

@@ -2,6 +2,7 @@ package stats.inventory.items;
 
 import engine.core.Texture;
 import main.GameContext;
+import org.joml.Vector2f;
 import tiles.Tile;
 
 import java.util.HashMap;
@@ -31,5 +32,5 @@ public abstract class ItemDefinition {
     public static void register(ItemDefinition definition) {
         definitions.put(definition.id, definition);
     }
-    public abstract ItemUseResult use(Tile tile, Item item, GameContext context);
+    public abstract ItemUseResult use(Tile tile, Item item, GameContext context, Vector2f worldPos);
 }

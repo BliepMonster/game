@@ -6,8 +6,10 @@ import engine.core.input.Input;
 import engine.hitboxes.*;
 import entities.Entity;
 import entities.Player;
+import entities.TestEnemy;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
+import org.joml.Vector2f;
 import tiles.DefaultTile;
 import tiles.MagmaTile;
 import tiles.Tile;
@@ -37,6 +39,10 @@ public class World {
         var hitbox = getHitbox();
         entities.forEach(entity -> entity.tick(game));
         entities.forEach(entity -> entity.move(hitbox));
+        for (var entity : entities) {
+            if (entity.shouldDie(game)) entity.die(game);
+        }
+        entities.removeIf(entity -> entity.shouldDie(game));
         var player = game.player;
         int left   = (int)(player.getX());
         int right  = (int)((player.getX() + 1));
@@ -55,7 +61,7 @@ public class World {
             float py = y/tsize+player.getY();
             var v = map.get((int) Math.floor(px), (int) Math.floor(py));
             var t = v.orElse(null);
-            var used = game.player.useSelectedItem(game, t);
+            var used = game.player.useSelectedItem(game, t, new Vector2f(px, py));
             if (v.isPresent()) {
                 if (!used) {
                     t.onClick(game);
@@ -81,6 +87,10 @@ public class World {
                 }
             }
         }
+        entities.forEach(entity -> entity.render(context, (entity.getX()-x)*tsize, (entity.getY()-y)*tsize, tsize));
+    }
+    public void spawn(Entity entity) {
+        this.entities.add(entity);
     }
     private static void addStrawberriesToDefaultWorld(CoordinateMap<Tile> map) {
         map.get(15, 15).ifPresent(tile -> tile.setPart(new StrawberryTilePart()));
@@ -118,6 +128,27 @@ public class World {
         }
         addStrawberriesToDefaultWorld(map);
         addWheatToDefaultWorld(map);
-        return new World(map);
+        World world = new World(map);
+        world.spawn(new TestEnemy(new Vector2f(-5, -5)));
+        world.spawn(new TestEnemy(new Vector2f(-6, -5)));
+        world.spawn(new TestEnemy(new Vector2f(-8, -5)));
+        world.spawn(new TestEnemy(new Vector2f(-5, -3)));
+        world.spawn(new TestEnemy(new Vector2f(6, -3)));
+        world.spawn(new TestEnemy(new Vector2f(8, -3)));
+        world.spawn(new TestEnemy(new Vector2f(5, -4)));
+        world.spawn(new TestEnemy(new Vector2f(7, -5)));
+        world.spawn(new TestEnemy(new Vector2f(-5, 5)));
+        world.spawn(new TestEnemy(new Vector2f(-5, 6)));
+        world.spawn(new TestEnemy(new Vector2f(-6, 6)));
+        world.spawn(new TestEnemy(new Vector2f(-6, 5)));
+        world.spawn(new TestEnemy(new Vector2f(7, 5)));
+        world.spawn(new TestEnemy(new Vector2f(6, 6)));
+        world.spawn(new TestEnemy(new Vector2f(5, 5)));
+        for (int i = 10; i < 15; ++i) {
+            for (int j = 10; j < 15; ++j) {
+                world.spawn(new TestEnemy(new Vector2f(i, j)));
+            }
+        }
+        return world;
     }
 }

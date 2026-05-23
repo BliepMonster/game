@@ -2,6 +2,7 @@ package stats.inventory.items;
 
 import engine.core.Texture;
 import main.GameContext;
+import org.joml.Vector2f;
 import tiles.Tile;
 
 import java.util.Optional;
@@ -13,7 +14,7 @@ public class BasicFoodItemDefinition extends ItemDefinition {
         this.healthRestored = healthRestored;
     }
     @Override
-    public ItemUseResult use(Tile tile, Item item, GameContext context) {
+    public ItemUseResult use(Tile tile, Item item, GameContext context, Vector2f worldPos) {
         var player = context.getPlayer();
         if (player.isAtFullHealth())
             return new ItemUseResult(Optional.of(item), false);

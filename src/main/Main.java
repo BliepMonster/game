@@ -1,5 +1,6 @@
 package main;
 
+import combat.melee.MeleeWeaponItem;
 import engine.abstraction.Keybinds;
 import engine.core.DrawManager;
 import engine.core.Screen;
@@ -16,6 +17,8 @@ import stats.inventory.items.ui.InventoryGridComponent;
 import stats.inventory.resources.ui.InventoryPanel;
 import stats.skills.ui.SkillPanel;
 import stats.ui.HealthBar;
+
+import static main.StaticItemLoader.*;
 
 public class Main {
     public static Font font;
@@ -58,8 +61,13 @@ public class Main {
         game.player.items.add(new Item(ItemDefinition.get(StaticItemLoader.BREAD_ITEM_ID)));
         game.player.items.add(new Item(ItemDefinition.get(StaticItemLoader.BREAD_ITEM_ID)));
         game.player.items.add(new Item(ItemDefinition.get(StaticItemLoader.BREAD_ITEM_ID)));
+        game.player.items.add(new MeleeWeaponItem(DAGGER_ITEM_DEF));
+        game.player.items.add(new MeleeWeaponItem(SWORD_ITEM_DEF));
+        game.player.items.add(new MeleeWeaponItem(CLUB_ITEM_DEF));
 
         GUI.add(new HealthBar(game.player), 62);
+
+        boolean deadLastFrame = false;
 
         main:
         while (screen.update()) {
@@ -117,7 +125,16 @@ public class Main {
 
             if (framestamp - lastTick >= tickRate) {
                 lastTick += tickRate;
-                game.tick(pressed, screen, .1f, !b);
+                if (!game.player.isDead()) {
+                    if (deadLastFrame) {
+                        game.player.respawn(game);
+                        deadLastFrame = false;
+                    }
+                    game.tick(pressed, screen, .1f, !b);
+                } else {
+                    deadLastFrame = true;
+                    Game.ticks++;
+                }
                 pressed = false;
             }
 
