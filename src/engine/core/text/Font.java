@@ -68,7 +68,7 @@ public class Font {
         return xA;
     }
     public float getHeight(float size) {
-        return size*DrawManager.DEMO_HEIGHT/10000f;
+        return size*DrawManager.DEMO_HEIGHT/100f;
     }
 
     @Override

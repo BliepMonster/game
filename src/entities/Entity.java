@@ -2,8 +2,8 @@ package entities;
 
 import engine.hitboxes.Hitbox;
 import engine.hitboxes.Positioned;
+import main.Camera;
 import main.Game;
-import main.RenderContext;
 import main.GameContext;
 import org.joml.Vector2f;
 import stats.AcceleratedVelocityChange;
@@ -13,7 +13,7 @@ import stats.VelocityChange;
 public interface Entity extends Positioned {
     void move(Hitbox world);
     void tick(GameContext context);
-    void render(RenderContext context, float x, float y, float tsize);
+    void render(Camera camera);
     boolean shouldDie(GameContext context);
     Hitbox getHitbox();
     Hitbox getWalkHitbox();

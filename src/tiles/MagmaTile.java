@@ -1,7 +1,7 @@
 package tiles;
 
-import engine.core.DrawManager;
 import entities.DamageType;
+import main.Camera;
 import main.Game;
 import main.GameContext;
 
@@ -19,7 +19,7 @@ public class MagmaTile extends Tile {
             lastDamaged = Game.getTickCount();
         }
     }
-    public void renderSelf(DrawManager draw, float x, float y, float w, float h) {
-        draw.rect(Color.ORANGE, x, y, w, h);
+    public void renderSelf(Camera camera, int x, int y) {
+        camera.rect(Color.ORANGE, x, y, 1, 1);
     }
 }

@@ -6,6 +6,7 @@ import entities.Entity;
 import main.Game;
 import main.GameContext;
 import org.joml.Vector2f;
+import stats.StatHolder;
 import stats.inventory.items.Item;
 import stats.inventory.items.ItemDefinition;
 import stats.inventory.items.ItemUseResult;
@@ -43,7 +44,7 @@ public abstract class MeleeWeaponItemDefinition extends ItemDefinition {
         boolean used = false;
         for (var entity : entities) {
             if (entity.isAttackable() && canHit(entity, worldPos, context)) {
-                entity.damage(damage, type, context);
+                entity.damage((int) (damage*context.getPlayer().stats.get(StatHolder.Stat.STRENGTH)/100), type, context);
                 float angle = (float)Math.atan2(worldPos.y - context.getPlayer().getY(), worldPos.x - context.getPlayer().getX());
                 angle += (float) ((Math.random() - 0.5f) * 0.8f);
                 Vector2f result = new Vector2f(

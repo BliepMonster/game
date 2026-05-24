@@ -1,6 +1,7 @@
 package tiles;
 
 import engine.core.DrawManager;
+import main.Camera;
 import main.GameContext;
 
 public abstract class Tile {
@@ -16,10 +17,10 @@ public abstract class Tile {
     public boolean isStandable() {
         return isSelfStandable() && (part == null || part.isStandable());
     }
-    protected abstract void renderSelf(DrawManager draw, float x, float y, float w, float h);
-    public void render(DrawManager draw, float x, float y, float w, float h) {
-        renderSelf(draw, x, y, w, h);
-        if (part != null) part.render(draw, x, y, w, h);
+    protected abstract void renderSelf(Camera camera, int x, int y);
+    public void render(Camera camera, int x, int y) {
+        renderSelf(camera, x, y);
+        if (part != null) part.render(x, y, camera);
     }
     public void onClick(GameContext context) {
         if (part != null) part.onClick(context);

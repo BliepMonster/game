@@ -1,6 +1,7 @@
 package tiles;
 
 import engine.core.DrawManager;
+import main.Camera;
 import main.GameContext;
 
 public class DefaultTile extends Tile {
@@ -9,8 +10,8 @@ public class DefaultTile extends Tile {
         this.type = type;
     }
     @Override
-    public void renderSelf(DrawManager draw, float x, float y, float w, float h) {
-        type.render(draw, x, y, w, h);
+    public void renderSelf(Camera camera, int x, int y) {
+        type.render(camera, x, y);
     }
     @Override
     protected boolean isSelfStandable() {

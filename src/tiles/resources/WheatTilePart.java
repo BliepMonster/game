@@ -1,6 +1,7 @@
 package tiles.resources;
 
 import engine.core.DrawManager;
+import main.Camera;
 import main.Game;
 import main.ItemConstants;
 import stats.StatHolder;
@@ -19,10 +20,10 @@ public class WheatTilePart extends ResourceCreator {
     public boolean isStandable() {
         return true;
     }
-    public void renderReady(DrawManager draw, float x, float y, float w, float h) {
-        draw.rect(yellow, x, y, w, h*.8f);
+    public void renderReady(Camera camera, int x, int y) {
+        camera.rect(yellow, x, y, 1, .8f);
     }
-    public void renderUnready(DrawManager draw, float x, float y, float w, float h) {
-        draw.rect(UNREADY, x, y, w, h*.8f);
+    public void renderUnready(Camera camera, int x, int y) {
+        camera.rect(UNREADY, x, y, 1, .8f);
     }
 }

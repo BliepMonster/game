@@ -6,10 +6,13 @@ public class StatHolder {
         FORAGING_YIELD,
         FARMING_YIELD,
         MAX_HEALTH,
+        STRENGTH,
     }
     public static final int NUM_STATS = Stat.values().length;
     public static final int SPEED_INDEX = Stat.SPEED.ordinal();
     public static final int FARMING_YIELD_INDEX = Stat.FARMING_YIELD.ordinal();
+    public static final int MAX_HEALTH_INDEX = Stat.MAX_HEALTH.ordinal();
+    public static final int STRENGTH_INDEX = Stat.STRENGTH.ordinal();
     public static final int FORAGING_YIELD_INDEX = Stat.FORAGING_YIELD.ordinal();
     private float[] stats = new float[NUM_STATS];
     public StatHolder withForagingYield(float yield) {

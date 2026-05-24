@@ -4,4 +4,5 @@ public final class ItemConstants {
     private ItemConstants() {}
     public static final String ITEM_STRAWBERRY = "Strawberry";
     public static final String ITEM_WHEAT = "Wheat";
+    public static final String ITEM_FLOUR = "Flour";
 }

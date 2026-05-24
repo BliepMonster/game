@@ -2,11 +2,12 @@ package entities;
 
 import engine.hitboxes.Hitbox;
 import engine.hitboxes.RectangularHitbox;
+import main.Camera;
 import main.Game;
 import main.GameContext;
-import main.RenderContext;
 import org.joml.Vector2f;
 import stats.VelocityChange;
+import stats.skills.SkillSet;
 
 import java.util.ArrayList;
 
@@ -43,8 +44,9 @@ public class TestEnemy implements Entity {
         }
         this.velocityChanges.removeIf(VelocityChange::canBeRemoved);
     }
-    public void render(RenderContext context, float x, float y, float tsize) {
-        context.map().rect(Game.getTickCount() <= lastHurtTick+5 ? java.awt.Color.red : java.awt.Color.orange, x, y, tsize, tsize);
+    public void render(Camera camera) {
+        var color = Game.getTickCount() <= lastHurtTick+5 ? java.awt.Color.red : java.awt.Color.orange;
+        camera.addRenderJob(() -> camera.rect(color, position.x, position.y, 1, 1), -position.y);
     }
     public boolean shouldDie(GameContext context) {
         return health <= 0;
@@ -56,7 +58,9 @@ public class TestEnemy implements Entity {
     public Hitbox getWalkHitbox() {
         return hitbox;
     }
-    public void die(GameContext context) {}
+    public void die(GameContext context) {
+        context.getPlayer().skills.giveXP(SkillSet.SkillType.COMBAT, 10);
+    }
     public float getX() {
         return position.x;
     }
@@ -65,6 +69,7 @@ public class TestEnemy implements Entity {
     }
     public void damage(int damage, DamageType type, GameContext context) {
         health -= damage;
+        System.out.println("Damage:"+damage);
         lastHurtTick = Game.getTickCount();
     }
     public boolean isAttackable() {

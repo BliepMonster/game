@@ -1,10 +1,10 @@
 package tiles.resources;
 
-import engine.core.DrawManager;
 import engine.jobs.Job;
 import engine.jobs.JobActor;
 import engine.jobs.JobSystem;
 import engine.saving.objects.SavedObject;
+import main.Camera;
 import main.Game;
 import main.GameContext;
 import main.YieldUtils;
@@ -32,12 +32,12 @@ public abstract class ResourceCreator extends TilePart implements JobActor {
         ready = true;
     }
     public void onStand(GameContext context) {}
-    public abstract void renderUnready(DrawManager draw, float x, float y, float w, float h);
-    public abstract void renderReady(DrawManager draw, float x, float y, float w, float h);
+    public abstract void renderUnready(Camera camera, int x, int y);
+    public abstract void renderReady(Camera camera, int x, int y);
 
     @Override
-    public void render(DrawManager draw, float x, float y, float w, float h) {
-        if (ready) renderReady(draw, x, y, w, h);
-        else renderUnready(draw, x, y, w, h);
+    public void render(int x, int y, Camera camera) {
+        if (ready) renderReady(camera, x, y);
+        else renderUnready(camera, x, y);
     }
 }

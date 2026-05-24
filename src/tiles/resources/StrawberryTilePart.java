@@ -2,6 +2,7 @@ package tiles.resources;
 
 import engine.core.DrawManager;
 import entities.Player;
+import main.Camera;
 import main.Game;
 import main.ItemConstants;
 import stats.StatHolder;
@@ -17,12 +18,12 @@ public class StrawberryTilePart extends ResourceCreator {
     public StrawberryTilePart() {
         super(DEFINITION);
     }
-    public void renderUnready(DrawManager draw, float x, float y, float w, float h) {
-        draw.rect(green, x+w/4, y+h/4, w/2, h/2);
+    public void renderUnready(Camera camera, int x, int y) {
+        camera.rect(green, x+1f/4f, y+1f/4, 1f/2, 1f/2);
     }
-    public void renderReady(DrawManager draw, float x, float y, float w, float h) {
-        renderUnready(draw, x, y, w, h);
-        draw.rect(red, x+w/3, y+h/3, w/3, h/3);
+    public void renderReady(Camera camera, int x, int y) {
+        renderUnready(camera, x, y);
+        camera.rect(red, x+1f/3, y+1f/3, 1f/3, 1f/3);
     }
     public boolean isStandable() {
         return true; // players & entities can stand on strawberry bushes

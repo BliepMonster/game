@@ -1,5 +1,6 @@
 package main;
 
+import engine.core.DrawManager;
 import engine.core.Screen;
 import engine.jobs.JobSystem;
 import entities.Entity;
@@ -16,11 +17,13 @@ public class Game implements GameContext {
     }
     private final World world;
     final Player player = new Player();
+    private final Camera camera;
     public Player getPlayer() {
         return player;
     }
-    public Game() {
+    public Game(DrawManager draw, float tsize) {
         world = World.home();
+        camera = new Camera(player, tsize, draw);
     }
     public void tick(boolean pressed, Screen screen, float tsize, boolean canClick) {
         ++ticks;
@@ -33,9 +36,10 @@ public class Game implements GameContext {
 
         JobSystem.tick(1f/Game.TICKS_PER_SECOND);
     }
-    public void render(RenderContext context, float tsize) {
-        world.render(context, player, tsize);
-        player.render(context, -tsize/2, 0, tsize);
+    public void render() {
+        world.render(camera);
+        player.render(camera);
+        camera.renderAllJobs();
     }
 
     @Override

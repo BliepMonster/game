@@ -17,6 +17,7 @@ import stats.inventory.items.ui.InventoryGridComponent;
 import stats.inventory.resources.ui.InventoryPanel;
 import stats.skills.ui.SkillPanel;
 import stats.ui.HealthBar;
+import tiles.CraftingStationTilePart;
 
 import static main.StaticItemLoader.*;
 
@@ -32,7 +33,7 @@ public class Main {
 
         font = new Font("res/Unnamed");
 
-        final var game = new Game();
+        final var game = new Game(draw, .1f);
 
         GUI.init();
         GUI.bindDrawManager(draw);
@@ -57,6 +58,7 @@ public class Main {
 
 
         StaticItemLoader.initAll();
+        CraftingStationTilePart.setDefaultFont(font);
 
         game.player.items.add(new Item(ItemDefinition.get(StaticItemLoader.BREAD_ITEM_ID)));
         game.player.items.add(new Item(ItemDefinition.get(StaticItemLoader.BREAD_ITEM_ID)));
@@ -119,7 +121,7 @@ public class Main {
 
             final var framestamp = System.currentTimeMillis();
 
-            game.render(context, .1f);
+            game.render();
 
             boolean b = GUI.manage(console);
 

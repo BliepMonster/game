@@ -1,6 +1,6 @@
 package tiles;
 
-import engine.core.DrawManager;
+import main.Camera;
 
 import java.awt.*;
 
@@ -11,8 +11,8 @@ public class TileType {
         this.standable = standable;
         this.color = color;
     }
-    public void render(DrawManager draw, float x, float y, float w, float h) {
-        draw.rect(color, x, y, w, h);
+    public void render(Camera camera, int x, int y) {
+        camera.rect(color, x, y, 1, 1);
     }
     public static final int TILETYPE_COUNT = 2;
     public static final int TILETYPE_GRASS = 0;

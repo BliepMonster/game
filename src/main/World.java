@@ -5,15 +5,11 @@ import engine.core.Screen;
 import engine.core.input.Input;
 import engine.hitboxes.*;
 import entities.Entity;
-import entities.Player;
 import entities.TestEnemy;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.joml.Vector2f;
-import tiles.DefaultTile;
-import tiles.MagmaTile;
-import tiles.Tile;
-import tiles.TileType;
+import tiles.*;
 import tiles.resources.StrawberryTilePart;
 import tiles.resources.WheatTilePart;
 
@@ -69,25 +65,22 @@ public class World {
             }
         }
     }
-    public void render(RenderContext context, Player player, float tsize) {
+    public void render(Camera camera) {
         var bounds = map.getBounds();
-        var minX = bounds.x;
+        var minX = bounds.x; // TODO: cull out of screen
         var xSize = bounds.y;
         var minY = bounds.z;
         var ySize = bounds.w;
-        var y = player.getY();
-        var x = player.getX();
         for (int i = minX; i <= minX + xSize; ++i) {
-            var xoff = i-x;
             for (int j = minY; j <= minY+ySize; ++j) {
                 var option = map.get(i, j);
                 if (option.isPresent()) {
                     var tile = option.get();
-                    tile.render(context.map(), tsize*xoff, tsize*(j-y), tsize, tsize);
+                    tile.render(camera, i, j);
                 }
             }
         }
-        entities.forEach(entity -> entity.render(context, (entity.getX()-x)*tsize, (entity.getY()-y)*tsize, tsize));
+        entities.forEach(entity -> entity.render(camera));
     }
     public void spawn(Entity entity) {
         this.entities.add(entity);
@@ -128,27 +121,8 @@ public class World {
         }
         addStrawberriesToDefaultWorld(map);
         addWheatToDefaultWorld(map);
+        map.get(0, 5).ifPresent(tile -> tile.setPart(new CraftingStationTilePart()));
         World world = new World(map);
-        world.spawn(new TestEnemy(new Vector2f(-5, -5)));
-        world.spawn(new TestEnemy(new Vector2f(-6, -5)));
-        world.spawn(new TestEnemy(new Vector2f(-8, -5)));
-        world.spawn(new TestEnemy(new Vector2f(-5, -3)));
-        world.spawn(new TestEnemy(new Vector2f(6, -3)));
-        world.spawn(new TestEnemy(new Vector2f(8, -3)));
-        world.spawn(new TestEnemy(new Vector2f(5, -4)));
-        world.spawn(new TestEnemy(new Vector2f(7, -5)));
-        world.spawn(new TestEnemy(new Vector2f(-5, 5)));
-        world.spawn(new TestEnemy(new Vector2f(-5, 6)));
-        world.spawn(new TestEnemy(new Vector2f(-6, 6)));
-        world.spawn(new TestEnemy(new Vector2f(-6, 5)));
-        world.spawn(new TestEnemy(new Vector2f(7, 5)));
-        world.spawn(new TestEnemy(new Vector2f(6, 6)));
-        world.spawn(new TestEnemy(new Vector2f(5, 5)));
-        for (int i = 10; i < 15; ++i) {
-            for (int j = 10; j < 15; ++j) {
-                world.spawn(new TestEnemy(new Vector2f(i, j)));
-            }
-        }
         return world;
     }
 }

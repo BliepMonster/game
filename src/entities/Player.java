@@ -2,6 +2,7 @@ package entities;
 
 import engine.hitboxes.Hitbox;
 import engine.hitboxes.RectangularHitbox;
+import main.Camera;
 import main.Game;
 import main.RenderContext;
 import main.GameContext;
@@ -37,7 +38,8 @@ public class Player implements Entity {
     private int health = 100;
 
     private StatHolder getBaseStats() {
-        return new StatHolder().withSpeed(5).with(StatHolder.Stat.MAX_HEALTH, 100);
+        return new StatHolder().withSpeed(5).with(StatHolder.Stat.MAX_HEALTH, 100)
+                .with(StatHolder.Stat.STRENGTH, 100);
     }
 
     private void updateStats() {
@@ -56,9 +58,9 @@ public class Player implements Entity {
         ticksSinceLastDamage++;
     }
     @Override
-    public void render(RenderContext context, float x, float y, float tsize) {
-        var draw = context.map();
-        draw.rect(isDead() ? Color.orange : ticksSinceLastDamage < 5 ? Color.red : Color.blue, x, y, tsize, tsize*2);
+    public void render(Camera camera) {
+        var color = isDead() ? Color.orange : ticksSinceLastDamage < 5 ? Color.red : Color.blue;
+        camera.addRenderJob(() -> camera.rect(color, position.x, position.y, 1, 2), -position.y);
     }
 
     @Override
