@@ -25,9 +25,6 @@ public abstract class ResourceCreator extends TilePart implements JobActor {
             JobSystem.addJob(new ResourceJob(this, (float) definition.respawnTicks()/ Game.TICKS_PER_SECOND));
         }
     }
-    public SavedObject save() {
-        throw new UnsupportedOperationException();
-    }
     public void notify(Job job) {
         ready = true;
     }

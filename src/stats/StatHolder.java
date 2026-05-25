@@ -7,6 +7,7 @@ public class StatHolder {
         FARMING_YIELD,
         MAX_HEALTH,
         STRENGTH,
+        MINING_YIELD,
     }
     public static final int NUM_STATS = Stat.values().length;
     public static final int SPEED_INDEX = Stat.SPEED.ordinal();

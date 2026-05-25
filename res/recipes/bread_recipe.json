@@ -1,0 +1,19 @@
+{
+  "name": "Bread",
+
+  "inputs": [
+    {
+      "type": "resource",
+      "id": "Flour",
+      "amount": 2
+    }
+  ],
+
+  "outputs": [
+    {
+      "type": "item",
+      "id": "base:food:bread",
+      "amount": 1
+    }
+  ]
+}

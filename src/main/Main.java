@@ -1,11 +1,11 @@
 package main;
 
-import combat.melee.MeleeWeaponItem;
 import engine.abstraction.Keybinds;
 import engine.core.DrawManager;
 import engine.core.Screen;
 import engine.core.input.Console;
 import engine.core.input.EventManager;
+import engine.core.input.Input;
 import engine.core.text.Font;
 import engine.gui.GUI;
 import engine.notifications.NotificationSystem;
@@ -18,15 +18,22 @@ import stats.inventory.resources.ui.InventoryPanel;
 import stats.skills.ui.SkillPanel;
 import stats.ui.HealthBar;
 import tiles.CraftingStationTilePart;
+import tool.editor.EditorToolState;
+import tool.editor.JSONSaver;
+
+import java.io.FileWriter;
+import java.io.IOException;
 
 import static main.StaticItemLoader.*;
 
 public class Main {
+    public static final boolean DEBUG_MODE = true;
     public static Font font;
-    public static void main(String[] _args) {
+    public static void main(String[] _args) throws IOException {
         final var screen = new Screen();
         final var console = new Console();
         screen.create(console, Screen.MAXIMIZED);
+        StaticItemLoader.initAll();
 
         final var draw = new DrawManager(screen);
         final var context = new RenderContext(draw);
@@ -56,16 +63,19 @@ public class Main {
         Keybinds.addKeybind(GLFW.GLFW_KEY_8, () -> game.player.selectItem(7));
         Keybinds.addKeybind(GLFW.GLFW_KEY_9, () -> game.player.selectItem(8));
 
+        var mode = EditorToolState.PLACE_IRON;
 
-        StaticItemLoader.initAll();
+
         CraftingStationTilePart.setDefaultFont(font);
 
-        game.player.items.add(new Item(ItemDefinition.get(StaticItemLoader.BREAD_ITEM_ID)));
-        game.player.items.add(new Item(ItemDefinition.get(StaticItemLoader.BREAD_ITEM_ID)));
-        game.player.items.add(new Item(ItemDefinition.get(StaticItemLoader.BREAD_ITEM_ID)));
-        game.player.items.add(new MeleeWeaponItem(DAGGER_ITEM_DEF));
-        game.player.items.add(new MeleeWeaponItem(SWORD_ITEM_DEF));
-        game.player.items.add(new MeleeWeaponItem(CLUB_ITEM_DEF));
+        game.player.items.add(new Item(ItemDefinition.get(BREAD_ITEM_ID)));
+        game.player.items.add(new Item(ItemDefinition.get(BREAD_ITEM_ID)));
+        game.player.items.add(new Item(ItemDefinition.get(BREAD_ITEM_ID)));
+        game.player.items.add(new Item(ItemDefinition.get(DAGGER_ITEM_ID)));
+        game.player.items.add(new Item(ItemDefinition.get(SWORD_ITEM_ID)));
+        game.player.items.add(new Item(ItemDefinition.get(CLUB_ITEM_ID)));
+        game.player.items.add(new Item(ItemDefinition.get(RUSTY_AXE_ITEM_ID)));
+        game.player.items.add(new Item(ItemDefinition.get(RUSTY_PICKAXE_ITEM_ID)));
 
         GUI.add(new HealthBar(game.player), 62);
 
@@ -125,7 +135,18 @@ public class Main {
 
             boolean b = GUI.manage(console);
 
-            if (framestamp - lastTick >= tickRate) {
+            if (DEBUG_MODE) {
+                if (Input.isKeyDown(GLFW.GLFW_KEY_1)) mode = EditorToolState.MAKE_GRASS;
+                else if (Input.isKeyDown(GLFW.GLFW_KEY_2)) mode = EditorToolState.PLACE_IRON;
+                else if (Input.isKeyDown(GLFW.GLFW_KEY_3)) mode = EditorToolState.ERASE;
+                else if (Input.isKeyDown(GLFW.GLFW_KEY_4)) mode = EditorToolState.MAKE_PATH;
+                else if (Input.isKeyDown(GLFW.GLFW_KEY_5)) mode = EditorToolState.PLACE_COAL;
+                else if (Input.isKeyDown(GLFW.GLFW_KEY_6)) mode = EditorToolState.PLACE_COPPER;
+                else if (Input.isKeyDown(GLFW.GLFW_KEY_7)) mode = EditorToolState.PLACE_STRAWBERRIES;
+                else if (Input.isKeyDown(GLFW.GLFW_KEY_8)) mode = EditorToolState.PLACE_TREE;
+                if (Input.isMouseDown(GLFW.GLFW_MOUSE_BUTTON_1))
+                    game.world.apply(mode, Input.getMouseX(screen), Input.getMouseY(screen), game, .1f);
+            } if (framestamp - lastTick >= tickRate) {
                 lastTick += tickRate;
                 if (!game.player.isDead()) {
                     if (deadLastFrame) {
@@ -145,5 +166,7 @@ public class Main {
             console.input.events.clear();
             screen.display();
         }
+        if (DEBUG_MODE)
+            JSONSaver.save(game.world.map).write(new FileWriter("res/maps/home.json"));
     }
 }

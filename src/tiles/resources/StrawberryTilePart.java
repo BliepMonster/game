@@ -1,12 +1,15 @@
 package tiles.resources;
 
 import engine.core.DrawManager;
+import engine.json.JsonString;
+import engine.json.JsonValue;
 import entities.Player;
 import main.Camera;
 import main.Game;
 import main.ItemConstants;
 import stats.StatHolder;
 import stats.skills.SkillSet;
+import tool.editor.TilePartLoader;
 
 import java.awt.*;
 
@@ -27,5 +30,10 @@ public class StrawberryTilePart extends ResourceCreator {
     }
     public boolean isStandable() {
         return true; // players & entities can stand on strawberry bushes
+    }
+
+    @Override
+    public JsonValue save() {
+        return new JsonString(TilePartLoader.ID_STRAWBERRIES);
     }
 }

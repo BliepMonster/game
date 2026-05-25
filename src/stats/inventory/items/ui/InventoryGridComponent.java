@@ -29,7 +29,7 @@ public class InventoryGridComponent extends Component {
             float yy = y + row * ITEM_SIZE + (row+1) * SPACING;
             draw.rect(i == selectedSlot ? Color.red : row == 0 ? Color.green : Color.blue, xx, yy, ITEM_SIZE, ITEM_SIZE);
             if (player.items.get(i) == null) continue;
-            draw.rect(Color.gray, xx+ITEM_SIZE/4, yy+ITEM_SIZE/4, ITEM_SIZE/2, ITEM_SIZE/2);
+            draw.image(player.items.get(i).definition.texture, xx, yy, ITEM_SIZE, ITEM_SIZE);
         }
     }
     // should refactor later

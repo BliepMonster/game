@@ -1,6 +1,8 @@
 package tiles;
 
 import engine.core.DrawManager;
+import engine.json.JsonValue;
+import engine.saving.objects.SavedObject;
 import main.Camera;
 import main.GameContext;
 
@@ -18,4 +20,7 @@ public class DefaultTile extends Tile {
         return type.standable;
     }
     public void onSelfStand(GameContext context) {}
+    public JsonValue save() {
+        return type.save();
+    }
 }

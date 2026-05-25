@@ -1,23 +1,25 @@
 package main;
 
+import engine.ArrayCoordinateMap;
 import engine.CoordinateMap;
 import engine.core.Screen;
 import engine.core.input.Input;
 import engine.hitboxes.*;
+import engine.json.JsonFile;
 import entities.Entity;
-import entities.TestEnemy;
-import org.jetbrains.annotations.Contract;
+import entities.ZombieEnemy;
 import org.jetbrains.annotations.NotNull;
 import org.joml.Vector2f;
 import tiles.*;
-import tiles.resources.StrawberryTilePart;
-import tiles.resources.WheatTilePart;
+import tiles.resources.*;
+import tool.editor.EditorToolState;
+import tool.editor.JSONLoader;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class World {
-    private final CoordinateMap<Tile> map;
+    final CoordinateMap<Tile> map;
     public final List<Entity> entities = new ArrayList<>();
     public World(CoordinateMap<Tile> map) {
         this.map = map;
@@ -72,7 +74,7 @@ public class World {
         var minY = bounds.z;
         var ySize = bounds.w;
         for (int i = minX; i <= minX + xSize; ++i) {
-            for (int j = minY; j <= minY+ySize; ++j) {
+            for (int j = minY+ySize; j >= minY; --j) {
                 var option = map.get(i, j);
                 if (option.isPresent()) {
                     var tile = option.get();
@@ -85,44 +87,14 @@ public class World {
     public void spawn(Entity entity) {
         this.entities.add(entity);
     }
-    private static void addStrawberriesToDefaultWorld(CoordinateMap<Tile> map) {
-        map.get(15, 15).ifPresent(tile -> tile.setPart(new StrawberryTilePart()));
-        map.get(15, 16).ifPresent(tile -> tile.setPart(new StrawberryTilePart()));
-        map.get(17, 14).ifPresent(tile -> tile.setPart(new StrawberryTilePart()));
-        map.get(18, 15).ifPresent(tile -> tile.setPart(new StrawberryTilePart()));
-        map.get(18, 18).ifPresent(tile -> tile.setPart(new StrawberryTilePart()));
-        map.get(12, 16).ifPresent(tile -> tile.setPart(new StrawberryTilePart()));
-        map.get(12, 13).ifPresent(tile -> tile.setPart(new StrawberryTilePart()));
-        map.get(14, 14).ifPresent(tile -> tile.setPart(new StrawberryTilePart()));
-        map.get(13, 18).ifPresent(tile -> tile.setPart(new StrawberryTilePart()));
-        map.get(17, 12).ifPresent(tile -> tile.setPart(new StrawberryTilePart()));
-        // TODO: a proper system + expand this area
+    public static @NotNull World of(JsonFile file, GameContext context) {
+        var map = new ArrayCoordinateMap<Tile>();
+        JSONLoader.loadWorld(file, map, context);
+        return new World(map);
     }
-    private static void addWheatToDefaultWorld(CoordinateMap<Tile> map) {
-        for (int i = 18; i > 14; --i) {
-            for (int j = -19; j < -12; ++j) {
-                map.get(i, j).ifPresent(tile -> tile.setPart(new WheatTilePart()));
-            }
-        }
-    }
-    @Contract(" -> new")
-    public static @NotNull World home() {
-        CoordinateMap<Tile> map = CoordinateMap.newDefaultPackedMap();
-        for (int i = -20; i < 20; ++i) {
-            for (int j = -20; j < 20; ++j) {
-                if (i == -20 || j == -20 || i == 19 || j == 19) {
-                    map.put(i, j, new DefaultTile(TileType.types[TileType.TILETYPE_WALL]));
-                } else if (i < -10) {
-                    map.put(i, j, new MagmaTile());
-                } else {
-                    map.put(i, j, new DefaultTile(TileType.types[TileType.TILETYPE_GRASS]));
-                }
-            }
-        }
-        addStrawberriesToDefaultWorld(map);
-        addWheatToDefaultWorld(map);
-        map.get(0, 5).ifPresent(tile -> tile.setPart(new CraftingStationTilePart()));
-        World world = new World(map);
-        return world;
+    public void apply(EditorToolState mode, float sx, float sy, Game game, float tsize) {
+        int wx = (int)Math.floor(sx / tsize + game.player.getX());
+        int wy = (int)Math.floor(sy / tsize + game.player.getY());
+        mode.apply(map.get(wx, wy).orElse(null), map, wx, wy);
     }
 }

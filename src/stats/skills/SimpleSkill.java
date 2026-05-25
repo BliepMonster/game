@@ -7,12 +7,12 @@ import java.awt.*;
 
 public abstract class SimpleSkill extends Skill {
     private final int MAX;
-    private final int MULTIPLIER;
+    private final float MULTIPLIER;
     private int level = 0;
     private int xp = 0;
     private int needed;
     private final String name;
-    public SimpleSkill(int max, int multiplier, int needed, String name) {
+    public SimpleSkill(int max, float multiplier, int needed, String name) {
         MAX = max;
         MULTIPLIER = multiplier;
         this.needed = needed;
@@ -32,7 +32,7 @@ public abstract class SimpleSkill extends Skill {
         while (this.xp >= needed && level != MAX) {
             level++;
             this.xp -= needed;
-            needed *= MULTIPLIER;
+            needed = (int) (needed*MULTIPLIER);
             NotificationSystem.add(name+" Level Up! "+level, Color.green);
         }
     }

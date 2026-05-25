@@ -8,7 +8,7 @@ import java.awt.*;
 public class ForagingSkill extends SimpleSkill {
 
     public ForagingSkill() {
-        super(25, 2, 10, "Foraging");
+        super(25, 1.2f, 10, "Foraging");
     }
 
     @Override

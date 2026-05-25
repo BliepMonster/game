@@ -15,7 +15,6 @@ public class SimpleJob extends Job {
     }
     public SavedObject save() {
         ArrayList<SavedObject> list = new ArrayList<>();
-        list.add(this.actor.save());
         list.add(new SavedFloat(time));
         return new SavedArray(list);
     }

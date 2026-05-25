@@ -1,0 +1,44 @@
+package tiles.resources;
+
+import engine.json.JsonString;
+import engine.json.JsonValue;
+import main.Camera;
+import main.Game;
+import main.ItemConstants;
+import stats.StatHolder;
+import stats.inventory.items.ToolItemDefinition;
+import stats.skills.SkillSet;
+import tool.editor.TilePartLoader;
+
+import java.awt.*;
+
+public class CopperOrePart extends HittableResourceCreator {
+    public static final HittableResourceDescription DESC = new HittableResourceDescription(
+            Game.TICKS_PER_SECOND*12,
+            ItemConstants.ITEM_COPPER_ORE,
+            1,
+            SkillSet.SkillType.MINING,
+            15,
+            StatHolder.Stat.MINING_YIELD,
+            200,
+            2,
+            false,
+            ToolItemDefinition.PowerType.MINING
+    );
+    public CopperOrePart() {
+        super(DESC);
+    }
+    public void renderReady(int ticksSinceLastHit, boolean wasLastHitSuccessFul, int x, int y, float health, Camera camera) {
+        camera.addRenderJob(() ->
+                camera.rect(Color.ORANGE, x, y, 1, 1), -y);
+    }
+    public void renderUnready(int x, int y, Camera camera) {
+        camera.addRenderJob(() ->
+                camera.rect(Color.GRAY, x, y, 1, 1), -y);
+    }
+
+    @Override
+    public JsonValue save() {
+        return new JsonString(TilePartLoader.ID_COPPER_ORE);
+    }
+}

@@ -4,7 +4,6 @@ import engine.hitboxes.Hitbox;
 import engine.hitboxes.RectangularHitbox;
 import main.Camera;
 import main.Game;
-import main.RenderContext;
 import main.GameContext;
 import org.joml.Vector2f;
 import stats.StatHolder;
@@ -26,7 +25,7 @@ import static org.lwjgl.glfw.GLFW.*;
 public class Player implements Entity {
     private final ArrayList<VelocityChange> velocityChanges = new ArrayList<>();
     private final Vector2f position = new Vector2f();
-    private final Hitbox step = new RectangularHitbox(-.5f, 0, 1, .2f, this);
+    private final Hitbox step = new RectangularHitbox(-0, 0, 1, .2f, this);
     public StatHolder stats = new StatHolder();
     private int selectedHotbarSlot = 0;
     public ItemInventory items = new ItemInventory();

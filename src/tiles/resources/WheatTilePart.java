@@ -1,11 +1,14 @@
 package tiles.resources;
 
 import engine.core.DrawManager;
+import engine.json.JsonString;
+import engine.json.JsonValue;
 import main.Camera;
 import main.Game;
 import main.ItemConstants;
 import stats.StatHolder;
 import stats.skills.SkillSet;
+import tool.editor.TilePartLoader;
 
 import java.awt.*;
 
@@ -25,5 +28,10 @@ public class WheatTilePart extends ResourceCreator {
     }
     public void renderUnready(Camera camera, int x, int y) {
         camera.rect(UNREADY, x, y, 1, .8f);
+    }
+
+    @Override
+    public JsonValue save() {
+        return new JsonString(TilePartLoader.ID_WHEAT);
     }
 }

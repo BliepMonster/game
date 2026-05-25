@@ -4,7 +4,7 @@ import stats.StatHolder;
 
 public class FarmingSkill extends SimpleSkill {
     public FarmingSkill() {
-        super(25, 2, 10, "Farming");
+        super(25, 1.2f, 10, "Farming");
     }
 
     @Override

@@ -8,23 +8,31 @@ import main.GameContext;
 import org.joml.Vector2f;
 import stats.VelocityChange;
 import stats.skills.SkillSet;
+import tiles.EnemySpawner;
 
 import java.util.ArrayList;
 
-public class TestEnemy implements Entity {
+public class ZombieEnemy extends RespawnableEnemy {
     private Vector2f position;
+    public static final float AGGRO_RADIUS = 5, DEAGGRO_RADIUS = 12;
     private final ArrayList<VelocityChange> velocityChanges = new ArrayList<>();
     private int health = 100;
     private int lastHitTick = 0, lastHurtTick = 0;
     private static final int HIT_INTERVAL = 10;
+    private boolean angry = false;
     private GameContext context;
-    public TestEnemy(Vector2f position) {
+    public ZombieEnemy(Vector2f position, EnemySpawner spawner) {
+        super(spawner);
         this.position = position;
     }
     public void move(Hitbox world) {
         var x = context.getPlayer().getX();
         var y = context.getPlayer().getY();
-        var move = new Vector2f(x - position.x, y - position.y).normalize().mul(2f/Game.TICKS_PER_SECOND);
+        var diff = new Vector2f(x - position.x, y - position.y);
+        var move = angry ? diff.normalize(new Vector2f()).mul(2f / Game.TICKS_PER_SECOND) : new Vector2f();
+        if (diff.length() < AGGRO_RADIUS) angry = true;
+        else if (Game.getTickCount() - lastHitTick < Game.TICKS_PER_SECOND*5) angry = true;
+        else if (diff.length() >= DEAGGRO_RADIUS) angry = false;
         for (var change : velocityChanges) {
             move.add(change.getVelocityChange());
         }
@@ -59,6 +67,7 @@ public class TestEnemy implements Entity {
         return hitbox;
     }
     public void die(GameContext context) {
+        super.die(context);
         context.getPlayer().skills.giveXP(SkillSet.SkillType.COMBAT, 10);
     }
     public float getX() {
@@ -69,7 +78,7 @@ public class TestEnemy implements Entity {
     }
     public void damage(int damage, DamageType type, GameContext context) {
         health -= damage;
-        System.out.println("Damage:"+damage);
+        angry = true;
         lastHurtTick = Game.getTickCount();
     }
     public boolean isAttackable() {

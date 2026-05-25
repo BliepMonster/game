@@ -37,9 +37,8 @@ public abstract class MeleeWeaponItemDefinition extends ItemDefinition {
     public abstract boolean canHit(Entity entity, Vector2f target, GameContext context);
     public ItemUseResult use(Tile tile, Item item, GameContext context, Vector2f worldPos) {
         int ticks = Game.getTickCount();
-        if (!(item instanceof MeleeWeaponItem weapon)) throw new UnsupportedOperationException("Invalid item");
-        if (ticks-weapon.getLastAttack() < cooldownTicks) return new ItemUseResult(Optional.of(item), false);
-        weapon.setLastAttack(ticks);
+        if (ticks-item.lastUse < cooldownTicks) return new ItemUseResult(Optional.of(item), false);
+        item.lastUse = ticks;
         var entities = context.getEntities();
         boolean used = false;
         for (var entity : entities) {
@@ -56,5 +55,10 @@ public abstract class MeleeWeaponItemDefinition extends ItemDefinition {
             }
         }
         return new ItemUseResult(Optional.of(item), used);
+    }
+
+    @Override
+    public int getCooldownTime() {
+        return cooldownTicks;
     }
 }

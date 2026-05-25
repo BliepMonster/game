@@ -1,0 +1,22 @@
+{
+  "name": "Steel Bar",
+  "inputs": [
+    {
+      "type": "resource",
+      "id": "Iron Bar",
+      "amount": 2
+    },
+    {
+      "type": "resource",
+      "id": "Coal",
+      "amount": 3
+    }
+  ],
+  "outputs": [
+    {
+      "type": "resource",
+      "id": "Steel Bar",
+      "amount": 1
+    }
+  ]
+}

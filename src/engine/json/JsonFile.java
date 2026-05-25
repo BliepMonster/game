@@ -15,5 +15,6 @@ public class JsonFile {
             sb.deleteCharAt(sb.length() - 1);
         sb.append("}");
         writer.write(sb.toString());
+        writer.flush();
     }
 }

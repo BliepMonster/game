@@ -33,4 +33,7 @@ public abstract class ItemDefinition {
         definitions.put(definition.id, definition);
     }
     public abstract ItemUseResult use(Tile tile, Item item, GameContext context, Vector2f worldPos);
+    public int getCooldownTime() {
+        return 0;
+    }
 }

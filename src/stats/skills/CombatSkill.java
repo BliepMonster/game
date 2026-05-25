@@ -4,7 +4,7 @@ import stats.StatHolder;
 
 public class CombatSkill extends SimpleSkill {
     public CombatSkill() {
-        super(25, 2, 10, "Combat");
+        super(25, 1.2f, 10, "Combat");
     }
 
     @Override

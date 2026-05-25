@@ -1,8 +1,10 @@
 package main;
 
+import engine.FileUtils;
 import engine.core.DrawManager;
 import engine.core.Screen;
 import engine.jobs.JobSystem;
+import engine.json.JsonParser;
 import entities.Entity;
 import entities.Player;
 import org.joml.Vector2f;
@@ -15,14 +17,14 @@ public class Game implements GameContext {
     public static int getTickCount() {
         return ticks;
     }
-    private final World world;
+    World world;
     final Player player = new Player();
     private final Camera camera;
     public Player getPlayer() {
         return player;
     }
     public Game(DrawManager draw, float tsize) {
-        world = World.home();
+        world = World.of(new JsonParser().parse(FileUtils.readAllOrEmpty("res/maps/home.json")), this);
         camera = new Camera(player, tsize, draw);
     }
     public void tick(boolean pressed, Screen screen, float tsize, boolean canClick) {

@@ -1,6 +1,7 @@
 package tiles;
 
-import engine.core.DrawManager;
+import engine.json.JsonValue;
+import engine.saving.ObjectSaveable;
 import main.Camera;
 import main.GameContext;
 
@@ -29,4 +30,5 @@ public abstract class Tile {
         if (part != null) part.onStand(null);
         onSelfStand(context);
     }
+    public abstract JsonValue save();
 }
