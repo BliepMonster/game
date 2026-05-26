@@ -6,6 +6,8 @@ import main.GameContext;
 import org.joml.Vector2i;
 import tiles.CraftingStationTilePart;
 import tiles.TilePart;
+import tiles.npc.ShopDefinitionRegistry;
+import tiles.npc.ShopNPC;
 import tiles.resources.*;
 
 public final class TilePartLoader {
@@ -19,9 +21,10 @@ public final class TilePartLoader {
     public static final String ID_STRAWBERRIES = "strawberries";
     public static final String ID_SPAWNER = "spawner";
     public static final String ID_CRAFTING_STATION = "crafting_station";
+    public static final String ID_SHOP_NPC = "shop_npc";
 
-    public static TilePart load(Vector2i position, JsonString obj, GameContext context) {
-        String type = obj.value;
+    public static TilePart load(Vector2i position, JsonObject obj, GameContext context) {
+        String type = ((JsonString) obj.values.get("type")).value;
 
         return switch (type) {
             case ID_IRON_ORE -> new IronOrePart();
@@ -34,6 +37,7 @@ public final class TilePartLoader {
             case ID_COPPER_ORE -> new CopperOrePart();
             case ID_COAL_ORE -> new CoalOrePart();
             case ID_CRAFTING_STATION -> new CraftingStationTilePart();
+            case ID_SHOP_NPC -> new ShopNPC(ShopDefinitionRegistry.get(((JsonString)obj.values.get("id")).value));
             default -> throw new RuntimeException("Unknown object: " + type);
         };
     }

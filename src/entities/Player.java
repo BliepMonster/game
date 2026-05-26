@@ -8,6 +8,7 @@ import main.GameContext;
 import org.joml.Vector2f;
 import stats.StatHolder;
 import stats.VelocityChange;
+import stats.inventory.CurrencyStorage;
 import stats.inventory.items.Item;
 import stats.inventory.items.ItemInventory;
 import stats.inventory.items.ItemUseResult;
@@ -35,6 +36,7 @@ public class Player implements Entity {
     private int ticksSinceLastDamage = 0;
     private int ticksSinceLastHeal = 0;
     private int health = 100;
+    public CurrencyStorage currency = new CurrencyStorage(0);
 
     private StatHolder getBaseStats() {
         return new StatHolder().withSpeed(5).with(StatHolder.Stat.MAX_HEALTH, 100)

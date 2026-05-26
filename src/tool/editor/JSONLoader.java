@@ -29,7 +29,7 @@ public class JSONLoader {
             int x = (int) ((JsonNumber) obj.values.get("x")).num;
             int y = (int) ((JsonNumber) obj.values.get("y")).num;
 
-            var data = (JsonString) obj.values.get("object");
+            var data = (JsonObject) obj.values.get("object");
 
             Tile tile = map.get(x, y)
                     .orElseThrow(() -> new RuntimeException("No tile at " + x + "," + y));

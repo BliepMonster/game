@@ -26,7 +26,13 @@ public class JSONSaver {
                     var object = new JsonObject();
                     object.values.put("x", xn);
                     object.values.put("y", yn);
-                    object.values.put("object", tile.getPart().save());
+                    var part = tile.getPart().save();
+                    if (part instanceof JsonString) {
+                        var o = new JsonObject();
+                        o.values.put("type", part);
+                        part = o;
+                    }
+                    object.values.put("object", part);
                     map2.values.add(object);
                 }
                 map.values.add(m);
