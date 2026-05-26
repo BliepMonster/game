@@ -5,7 +5,6 @@ import engine.jobs.JobActor;
 import engine.jobs.JobSystem;
 import engine.json.JsonString;
 import engine.json.JsonValue;
-import engine.saving.objects.SavedObject;
 import entities.RespawnableEnemy;
 import main.Camera;
 import main.Game;

@@ -24,7 +24,7 @@ public class Game implements GameContext {
         return player;
     }
     public Game(DrawManager draw, float tsize) {
-        world = World.of(new JsonParser().parse(FileUtils.readAllOrEmpty("res/maps/home.json")), this);
+        world = World.of(new JsonParser().parse(FileUtils.readAllOrEmpty("res/maps/home.json")), "res/maps/home.json", this);
         camera = new Camera(player, tsize, draw);
     }
     public void tick(boolean pressed, Screen screen, float tsize, boolean canClick) {

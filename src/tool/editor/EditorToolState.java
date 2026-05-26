@@ -10,27 +10,27 @@ import tiles.npc.ShopNPC;
 import tiles.resources.*;
 
 public enum EditorToolState {
-    PLACE_TREE,
-    PLACE_IRON,
-    PLACE_STRAWBERRIES,
-    PLACE_COAL,
-    PLACE_COPPER,
-    ERASE,
-    MAKE_PATH,
-    MAKE_GRASS,
-    PLACE_NPC,
+    O1,
+    O2,
+    O3,
+    O4,
+    O5,
+    O6,
+    O7,
+    O8,
+    O9,
     ;
     public void apply(Tile tile, CoordinateMap<Tile> map, int x, int y) {
         switch (this) {
-            case PLACE_TREE -> tile.setPart(new MapleTreePart());
-            case PLACE_IRON -> tile.setPart(new IronOrePart());
-            case PLACE_STRAWBERRIES -> tile.setPart(new StrawberryTilePart());
-            case PLACE_COAL -> tile.setPart(new CoalOrePart());
-            case PLACE_COPPER -> tile.setPart(new CopperOrePart());
-            case ERASE -> tile.setPart(null);
-            case MAKE_PATH -> map.put(x, y, new DefaultTile(TileType.DIRT_PATH));
-            case MAKE_GRASS -> map.put(x, y, new DefaultTile(TileType.GRASS));
-            case PLACE_NPC -> tile.setPart(new ShopNPC(ShopDefinitionRegistry.get("void"), TilePartLoader.font));
+            case O1 -> map.put(x, y, new DefaultTile(TileType.ROAD));
+            case O2 -> tile.setPart(new PotatoTilePart());
+            case O3 -> tile.setPart(new CarrotTilePart());
+            case O4 -> map.put(x, y, new DefaultTile(TileType.GRASS_DARK));
+            case O5 -> tile.setPart(new CopperOrePart());
+            case O6 -> tile.setPart(null);
+            case O7 -> map.put(x, y, new DefaultTile(TileType.DIRT_PATH));
+            case O8 -> map.put(x, y, new DefaultTile(TileType.GRASS));
+            case O9 -> tile.setPart(new WheatTilePart());
         }
     }
 }

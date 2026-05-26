@@ -20,9 +20,11 @@ import java.util.List;
 
 public class World {
     final CoordinateMap<Tile> map;
+    final String address;
     public final List<Entity> entities = new ArrayList<>();
-    public World(CoordinateMap<Tile> map) {
+    public World(CoordinateMap<Tile> map, String address) {
         this.map = map;
+        this.address = address;
     }
     public Hitbox getHitbox() {
         var hitbox = new CompoundHitbox();
@@ -87,10 +89,10 @@ public class World {
     public void spawn(Entity entity) {
         this.entities.add(entity);
     }
-    public static @NotNull World of(JsonFile file, GameContext context) {
+    public static @NotNull World of(JsonFile file, String address, GameContext context) {
         var map = new ArrayCoordinateMap<Tile>();
         JSONLoader.loadWorld(file, map, context);
-        return new World(map);
+        return new World(map, address);
     }
     public void apply(EditorToolState mode, float sx, float sy, Game game, float tsize) {
         int wx = (int)Math.floor(sx / tsize + game.player.getX());

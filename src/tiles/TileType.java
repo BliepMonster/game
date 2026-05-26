@@ -1,24 +1,25 @@
 package tiles;
 
+import engine.core.Texture;
 import engine.json.JsonObject;
 import engine.json.JsonString;
 import engine.json.JsonValue;
 import main.Camera;
 
-import java.awt.*;
-
 public enum TileType {
-    GRASS(true, Color.GREEN),
-    WALL(false, Color.RED),
-    ROAD(true, Color.GRAY),
-    DIRT_PATH(true, new Color(160, 150, 0)),
+    GRASS(true, new Texture("res/grass_tile.png")),
+    WALL(false, new Texture("res/wall_tile.png")),
+    ROAD(true, new Texture("res/road_tile.png")),
+    DIRT_PATH(true, new Texture("res/path_tile.png")),
+    COMPOST(true, new Texture("res/compost_tile.png")),
+    GRASS_DARK(true, new Texture("res/grass_dark_tile.png")),
     ;
     public final boolean standable;
-    public final Color color;
+    public final Texture color;
     public void render(Camera camera, int x, int y) {
-        camera.rect(color, x, y, 1, 1);
+        camera.image(color, x, y, 1, 1);
     }
-    TileType(boolean isStandable, Color color) {
+    TileType(boolean isStandable, Texture color) {
         this.standable = isStandable;
         this.color = color;
     }
