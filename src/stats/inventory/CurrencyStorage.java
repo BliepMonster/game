@@ -1,5 +1,7 @@
 package stats.inventory;
 
+import tiles.npc.Currency;
+
 public class CurrencyStorage {
     private int coins;
     public CurrencyStorage(int coins) {
@@ -18,5 +20,10 @@ public class CurrencyStorage {
     }
     public int getCoins() {
         return this.coins;
+    }
+    public int get(Currency currency) {
+        return switch (currency) {
+            case COINS -> coins;
+        };
     }
 }

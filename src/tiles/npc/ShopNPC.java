@@ -10,6 +10,7 @@ import main.Camera;
 import main.GameContext;
 import tiles.TilePart;
 import tiles.npc.ui.ShopPanel;
+import tiles.npc.ui.ShopWrapper;
 import tool.editor.TilePartLoader;
 
 public class ShopNPC extends TilePart {
@@ -32,7 +33,7 @@ public class ShopNPC extends TilePart {
     public void onClick(GameContext context) {
         if (GUI.getAll(0).isEmpty()) {
             var player = context.getPlayer();
-            GUI.add(new ShopPanel(definition, font, new FullItemStorage(player.items, player.inventory, player.currency), context), 0);
+            GUI.add(new ShopWrapper(definition, font, new FullItemStorage(player.items, player.inventory, player.currency), context), 0);
             GUI.toggle(62);
         }
     }

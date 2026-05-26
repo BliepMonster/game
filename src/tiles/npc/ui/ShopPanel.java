@@ -19,18 +19,22 @@ public class ShopPanel extends Component {
     public final FullItemStorage storage;
     public final GameContext context;
     public final ShopPanelCloseButton closeButton = new ShopPanelCloseButton(this);
-    int lp = 0;
+    public int lp = 0;
+    final ShopPageSelector selector;
     ShopPanelPage page;
     ShopDefinitionDisplayComponent display;
-    public ShopPanel(ShopNpcDefinition definition, Font font, FullItemStorage storage, GameContext context) {
+    private final ShopSellSelectButton select;
+    public ShopPanel(ShopNpcDefinition definition, Font font, FullItemStorage storage, GameContext context, ShopWrapper wrapper) {
         super(CenterConstraint.CENTER, CenterConstraint.CENTER, new RelativeSizeConstraint(1.5f), new RelativeSizeConstraint(1.1f));
         this.definition = definition;
         this.font = font;
         this.storage = storage;
         this.context = context;
-        loadPage(0);
+        switchPage(0);
+        select = new ShopSellSelectButton(wrapper);
+        selector = new ShopPageSelector(font, this);
     }
-    public void loadPage(int page) {
+    public void switchPage(int page) {
         lp = page;
         var size = Math.min(definition.entries().length-page*5, 5);
         var entries = new ShopEntry[size];
@@ -52,6 +56,8 @@ public class ShopPanel extends Component {
         closeButton.manage(draw, pressed);
         if (display != null) display.manage(draw, pressed);
         page.manage(draw, pressed);
+        select.manage(draw, pressed);
+        selector.manage(draw, pressed);
     }
     public void display(DrawManager draw, float x, float y, float w, float h) {
         draw.rect(Color.gray, x, y, w*2/3, h-.1f);

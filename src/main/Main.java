@@ -16,8 +16,10 @@ import stats.inventory.items.ui.HotbarComponent;
 import stats.inventory.items.ui.InventoryGridComponent;
 import stats.inventory.resources.ui.InventoryPanel;
 import stats.skills.ui.SkillPanel;
+import stats.ui.CoinDisplayComponent;
 import stats.ui.HealthBar;
 import tiles.CraftingStationTilePart;
+import tiles.npc.Currency;
 import tool.editor.EditorToolState;
 import tool.editor.JSONSaver;
 import tool.editor.TilePartLoader;
@@ -48,6 +50,7 @@ public class Main {
         GUI.bindDrawManager(draw);
 
         GUI.add(new HotbarComponent(game.player), 62);
+        GUI.add(new CoinDisplayComponent(game.player, font, Currency.COINS), 61);
 
         var lastTick = (double) System.currentTimeMillis();
         final var tickRate = 1000d/Game.TICKS_PER_SECOND;

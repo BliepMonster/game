@@ -1,9 +1,11 @@
 package stats.inventory.resources;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.*;
 
 // storage for stackable items
-public final class InventoryStorage {
+public final class InventoryStorage implements Iterable<Map.Entry<String, Integer>> {
     private final HashMap<String, Integer> inventory = new HashMap<>();
     private final List<String> keys = new ArrayList<>();
     public void add(String name, int count) {
@@ -39,6 +41,12 @@ public final class InventoryStorage {
         var e = keys.get(n);
         return new InventoryEntry(e, inventory.get(e));
     }
+
+    @Override
+    public @NotNull Iterator<Map.Entry<String, Integer>> iterator() {
+        return this.inventory.entrySet().iterator();
+    }
+
     public int size() {
         return inventory.size();
     }
