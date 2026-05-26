@@ -1,8 +1,10 @@
 package stats.inventory.items;
 
+import combat.equipment.EquipmentSlot;
 import engine.core.Texture;
 import main.GameContext;
 import org.joml.Vector2f;
+import stats.StatHolder;
 import tiles.Tile;
 
 import java.util.Optional;
@@ -20,5 +22,20 @@ public class BasicFoodItemDefinition extends ItemDefinition {
             return new ItemUseResult(Optional.of(item), false);
         player.heal(healthRestored);
         return new ItemUseResult(Optional.empty(), true);
+    }
+
+    @Override
+    public StatHolder getHeldStats(Item item, GameContext context) {
+        return new StatHolder();
+    }
+
+    @Override
+    public StatHolder getWornStats(Item item, GameContext context) {
+        return new StatHolder();
+    }
+
+    @Override
+    public EquipmentSlot getEquipmentSlot() {
+        return EquipmentSlot.NONE;
     }
 }

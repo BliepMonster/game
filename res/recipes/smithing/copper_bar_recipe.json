@@ -18,5 +18,12 @@
       "id": "Copper Bar",
       "amount": 1
     }
+  ],
+  "requirements": [
+    {
+      "type": "skill",
+      "skill": "MINING",
+      "level": 3
+    }
   ]
 }

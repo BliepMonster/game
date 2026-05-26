@@ -4,9 +4,12 @@ import engine.core.text.Font;
 import engine.json.JsonObject;
 import engine.json.JsonString;
 import main.GameContext;
+import org.joml.Vector2f;
 import org.joml.Vector2i;
 import tiles.CraftingStationTilePart;
 import tiles.TilePart;
+import tiles.TombstoneTilePart;
+import tiles.ZombieSpawner;
 import tiles.npc.ShopDefinitionRegistry;
 import tiles.npc.ShopNPC;
 import tiles.resources.*;
@@ -20,9 +23,10 @@ public final class TilePartLoader {
     public static final String ID_CARROTS = "carrots";
     public static final String ID_POTATOES = "potatoes";
     public static final String ID_STRAWBERRIES = "strawberries";
-    public static final String ID_SPAWNER = "spawner";
     public static final String ID_CRAFTING_STATION = "crafting_station";
     public static final String ID_SHOP_NPC = "shop_npc";
+    public static final String ID_TOMBSTONE = "tombstone";
+    public static final String ID_ZOMBIE_SPAWNER = "zombie_spawner";
     public static Font font;
 
     public static TilePart load(Vector2i position, JsonObject obj, GameContext context) {
@@ -31,7 +35,6 @@ public final class TilePartLoader {
         return switch (type) {
             case ID_IRON_ORE -> new IronOrePart();
             case ID_CARROTS -> new CarrotTilePart();
-            case ID_SPAWNER -> SpawnerLoader.loadSpawner(position, context);
             case ID_STRAWBERRIES -> new StrawberryTilePart();
             case ID_POTATOES -> new PotatoTilePart();
             case ID_MAPLE_TREE -> new MapleTreePart();
@@ -40,6 +43,8 @@ public final class TilePartLoader {
             case ID_COAL_ORE -> new CoalOrePart();
             case ID_CRAFTING_STATION -> new CraftingStationTilePart();
             case ID_SHOP_NPC -> new ShopNPC(ShopDefinitionRegistry.get(((JsonString)obj.values.get("id")).value), font);
+            case ID_TOMBSTONE -> new TombstoneTilePart();
+            case ID_ZOMBIE_SPAWNER -> new ZombieSpawner(new Vector2f(position.x, position.y), context);
             default -> throw new RuntimeException("Unknown object: " + type);
         };
     }

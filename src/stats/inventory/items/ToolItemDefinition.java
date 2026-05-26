@@ -1,9 +1,11 @@
 package stats.inventory.items;
 
+import combat.equipment.EquipmentSlot;
 import engine.core.Texture;
 import main.Game;
 import main.GameContext;
 import org.joml.Vector2f;
+import stats.StatHolder;
 import tiles.Tile;
 import tiles.resources.HittableResourceCreator;
 
@@ -14,16 +16,25 @@ public class ToolItemDefinition extends ItemDefinition {
     public enum PowerType {
         WOODCUTTING,
         MINING,
+        ;
+        StatHolder.Stat getStat() {
+            return switch (this) {
+                case WOODCUTTING -> StatHolder.Stat.FORAGING_POWER;
+                case MINING -> StatHolder.Stat.MINING_POWER;
+            };
+        }
     }
     public final int cooldown;
     private final int[] strengths;
-    public ToolItemDefinition(int cooldown, String id, String name, String description, Texture texture, PowerPair... pairs) {
+    private final StatHolder stats;
+    public ToolItemDefinition(int cooldown, String id, String name, String description, Texture texture, StatHolder stats, PowerPair... pairs) {
         super(id, name, description, texture);
         this.strengths = new int[PowerType.values().length];
         for (PowerPair pair : pairs) {
             strengths[pair.type.ordinal()] = pair.value;
         }
         this.cooldown = cooldown;
+        this.stats = stats;
     }
     public ItemUseResult use(Tile tile, Item item, GameContext context, Vector2f worldPos) {
         if (Game.getTickCount() - item.lastUse < cooldown) {
@@ -33,13 +44,29 @@ public class ToolItemDefinition extends ItemDefinition {
         if (tile.getPart() == null) return new ItemUseResult(Optional.of(item), false);
         if (!(tile.getPart() instanceof HittableResourceCreator creator)) return new ItemUseResult(Optional.of(item), false);
         var type = creator.getPowerType();
-        var power = this.strengths[type.ordinal()]; // and later power buffs too
-        creator.hit(context, power);
+        var power = context.getPlayer().stats.get(type.getStat()); // and later power buffs too
+        creator.hit(context, (int) power);
         return new ItemUseResult(Optional.of(item), true);
     }
 
     @Override
     public int getCooldownTime() {
         return this.cooldown;
+    }
+
+    @Override
+    public EquipmentSlot getEquipmentSlot() {
+        return EquipmentSlot.NONE;
+    }
+
+    @Override
+    public StatHolder getWornStats(Item item, GameContext context) {
+        return new StatHolder();
+    }
+
+    @Override
+    public StatHolder getHeldStats(Item item, GameContext context) {
+        return stats.clone().with(StatHolder.Stat.MINING_POWER, strengths[PowerType.MINING.ordinal()])
+                .with(StatHolder.Stat.FORAGING_POWER, strengths[PowerType.WOODCUTTING.ordinal()]);
     }
 }

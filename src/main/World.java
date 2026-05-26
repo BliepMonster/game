@@ -97,6 +97,6 @@ public class World {
     public void apply(EditorToolState mode, float sx, float sy, Game game, float tsize) {
         int wx = (int)Math.floor(sx / tsize + game.player.getX());
         int wy = (int)Math.floor(sy / tsize + game.player.getY());
-        mode.apply(map.get(wx, wy).orElse(null), map, wx, wy);
+        mode.apply(map.get(wx, wy).orElse(null), map, wx, wy, game);
     }
 }

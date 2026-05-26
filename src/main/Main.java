@@ -30,7 +30,7 @@ import java.io.IOException;
 import static main.StaticItemLoader.*;
 
 public class Main {
-    public static final boolean DEBUG_MODE = true;
+    public static boolean DEBUG_MODE = false;
     public static Font font;
     public static void main(String[] _args) throws IOException {
         final var screen = new Screen();
@@ -129,7 +129,7 @@ public class Main {
                     }
                 } else if (event.type() == EventManager.MOUSE_DOWN && event.key() == GLFW.GLFW_MOUSE_BUTTON_1) {
                     pressed = true;
-                }
+                } else if (event.type() == EventManager.KEY_DOWN && event.key() == GLFW.GLFW_KEY_F3) DEBUG_MODE = !DEBUG_MODE;
             }
 
             Keybinds.manage(console);

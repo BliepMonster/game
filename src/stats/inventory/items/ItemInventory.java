@@ -1,5 +1,8 @@
 package stats.inventory.items;
 
+import combat.equipment.EquipmentSlot;
+
+import java.util.EnumMap;
 import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
@@ -8,6 +11,7 @@ public class ItemInventory {
     public static final int NUM_ITEMS_PER_ROW = 9;
     public static final int NUM_ROWS = 5;
     public static final int NUM_ITEMS = NUM_ITEMS_PER_ROW * NUM_ROWS;
+    private final EnumMap<EquipmentSlot, Item> equipment = new EnumMap<>(EquipmentSlot.class);
     /*
     In this case, the first 9 represent the hotbar items, while the last 36 are pure 'inventory' items.
     */
@@ -78,5 +82,11 @@ public class ItemInventory {
         } else {
             items[slot] = result.leftover().get();
         }
+    }
+    public void setEquipment(EquipmentSlot slot, Item item) {
+        equipment.put(slot, item);
+    }
+    public Item getEquipment(EquipmentSlot slot) {
+        return equipment.get(slot);
     }
 }

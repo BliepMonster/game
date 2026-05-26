@@ -14,12 +14,10 @@ import tool.editor.TilePartLoader;
 
 import java.util.function.Function;
 
-public class EnemySpawner extends TilePart implements JobActor {
-    private final Function<EnemySpawner, RespawnableEnemy> creator;
-    private final GameContext context;
-    private final int ticksToRespawn;
-    public EnemySpawner(Function<EnemySpawner, RespawnableEnemy> creator, GameContext context, int ticksToRespawn) {
-        this.creator = creator;
+public abstract class EnemySpawner extends TilePart implements JobActor {
+    protected final GameContext context;
+    protected final int ticksToRespawn;
+    public EnemySpawner(GameContext context, int ticksToRespawn) {
         this.context = context;
         this.ticksToRespawn = ticksToRespawn;
         applyRespawnJob();
@@ -33,15 +31,7 @@ public class EnemySpawner extends TilePart implements JobActor {
     }
     public void onStand(GameContext context) {}
     public void onClick(GameContext context) {}
-    public void notify(Job job) {
-        context.spawn(creator.apply(this));
-    }
     private void applyRespawnJob() {
         JobSystem.addJob(new ResourceJob(this, ticksToRespawn/(float) Game.TICKS_PER_SECOND));
-    }
-
-    @Override
-    public JsonValue save() {
-        return new JsonString(TilePartLoader.ID_SPAWNER);
     }
 }

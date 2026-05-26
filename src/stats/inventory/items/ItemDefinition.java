@@ -1,8 +1,10 @@
 package stats.inventory.items;
 
+import combat.equipment.EquipmentSlot;
 import engine.core.Texture;
 import main.GameContext;
 import org.joml.Vector2f;
+import stats.StatHolder;
 import tiles.Tile;
 
 import java.util.HashMap;
@@ -36,4 +38,7 @@ public abstract class ItemDefinition {
     public int getCooldownTime() {
         return 0;
     }
+    public abstract StatHolder getHeldStats(Item item, GameContext context);
+    public abstract StatHolder getWornStats(Item item, GameContext context);
+    public abstract EquipmentSlot getEquipmentSlot();
 }

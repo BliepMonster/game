@@ -6,6 +6,7 @@ import crafting.ui.CraftingPanel;
 import engine.FileUtils;
 import engine.core.text.Font;
 import engine.gui.GUI;
+import engine.json.JsonObject;
 import engine.json.JsonParser;
 import engine.json.JsonString;
 import engine.json.JsonValue;
@@ -21,27 +22,9 @@ import static tool.editor.TilePartLoader.ID_CRAFTING_STATION;
 public class CraftingStationTilePart extends TilePart {
     public static final Color COLOR = new Color(100, 100, 0);
     private static Font FONT;
-    public static final List<CraftingRecipe> RECIPES = new ArrayList<>();
-    static {
-        RECIPES.add(JsonRecipeLoader.decodeSimpleJSON(
-                new JsonParser().parse(FileUtils.readAllOrEmpty("res/recipes/flour_recipe.json"))
-        ));
-        RECIPES.add(JsonRecipeLoader.decodeSimpleJSON(
-                new JsonParser().parse(FileUtils.readAllOrEmpty("res/recipes/bread_recipe.json"))
-        ));
-        RECIPES.add(JsonRecipeLoader.decodeSimpleJSON(
-                new JsonParser().parse(FileUtils.readAllOrEmpty("res/recipes/smithing/iron_bar_recipe.json"))
-        ));
-        RECIPES.add(JsonRecipeLoader.decodeSimpleJSON(
-                new JsonParser().parse(FileUtils.readAllOrEmpty("res/recipes/smithing/steel_bar_recipe.json"))
-        ));
-        RECIPES.add(JsonRecipeLoader.decodeSimpleJSON(
-                new JsonParser().parse(FileUtils.readAllOrEmpty("res/recipes/smithing/steel_pickaxe_recipe.json"))
-        ));
-        RECIPES.add(JsonRecipeLoader.decodeSimpleJSON(
-                new JsonParser().parse(FileUtils.readAllOrEmpty("res/recipes/smithing/copper_bar_recipe.json"))
-        ));
-    }
+    public static final List<CraftingRecipe> RECIPES = CraftingStationLoader.load(
+            new JsonParser().parse(FileUtils.readAllOrEmpty("res/crafting/crafting_table.json"))
+    );
     public static void setDefaultFont(Font font) {
         FONT = font;
     }

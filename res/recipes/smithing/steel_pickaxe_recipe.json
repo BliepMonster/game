@@ -20,5 +20,12 @@
       "id": "base:tools:steel_pickaxe",
       "amount": 1
     }
+  ],
+  "requirements": [
+    {
+      "type": "skill",
+      "skill": "MINING",
+      "level": 10
+    }
   ]
 }

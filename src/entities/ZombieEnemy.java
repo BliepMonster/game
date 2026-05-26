@@ -13,7 +13,7 @@ import tiles.EnemySpawner;
 import java.util.ArrayList;
 
 public class ZombieEnemy extends RespawnableEnemy {
-    private Vector2f position;
+    private final Vector2f position;
     public static final float AGGRO_RADIUS = 5, DEAGGRO_RADIUS = 12;
     private final ArrayList<VelocityChange> velocityChanges = new ArrayList<>();
     private int health = 100;
@@ -31,7 +31,7 @@ public class ZombieEnemy extends RespawnableEnemy {
         var diff = new Vector2f(x - position.x, y - position.y);
         var move = angry ? diff.normalize(new Vector2f()).mul(2f / Game.TICKS_PER_SECOND) : new Vector2f();
         if (diff.length() < AGGRO_RADIUS) angry = true;
-        else if (Game.getTickCount() - lastHitTick < Game.TICKS_PER_SECOND*5) angry = true;
+        else if (Game.getTickCount() - lastHurtTick < Game.TICKS_PER_SECOND*5) angry = true;
         else if (diff.length() >= DEAGGRO_RADIUS) angry = false;
         for (var change : velocityChanges) {
             move.add(change.getVelocityChange());

@@ -4,6 +4,7 @@ import crafting.*;
 import engine.json.*;
 import stats.inventory.items.Item;
 import stats.inventory.items.ItemDefinition;
+import stats.skills.SkillSet;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -31,13 +32,28 @@ public class JsonRecipeLoader {
         }
         return reqs;
     }
-    public static List<ItemCraftingRecipe> decodeAll(JsonFile file) {
-        JsonArray array = (JsonArray) file.values.get("recipes");
-        var list = new ArrayList<ItemCraftingRecipe>();
-        for (var value : array.values) {
-            list.add(decodeSimpleJSON((JsonObject)value));
+    private static PreCraftRequirement decodeSkillReq(JsonObject object) {
+        return new SkillRequirement(
+                SkillSet.SkillType.valueOf(
+                        ((JsonString) object.values.get("skill")).value
+                ),
+                (int) ((JsonNumber) object.values.get("level")).num
+        );
+    }
+    private static PreCraftRequirement decode(JsonObject object) {
+        String s;
+        return switch(s = ((JsonString) object.values.get("type")).value) {
+            case "skill" -> decodeSkillReq(object);
+            default -> throw new RuntimeException(s);
+        };
+    }
+    private static PreCraftRequirement[] loadPReqs(JsonArray array) {
+        if (array == null) return new PreCraftRequirement[0];
+        var reqs = new PreCraftRequirement[array.values.size()];
+        for (int i = 0; i < reqs.length; i++) {
+            reqs[i] = decode((JsonObject) array.values.get(i));
         }
-        return list;
+        return reqs;
     }
     // limited in that it only allows 1 item per object
     private static Supplier<Item> loadItemSupplier(JsonObject object) {
@@ -73,23 +89,6 @@ public class JsonRecipeLoader {
         }
         return new CraftingResult(v.values, list.toArray(new Supplier[0]));
     }
-    public static ItemCraftingRecipe decodeSimpleJSON(JsonObject file) {
-        JsonValue namej = file.values.get("name");
-        if (!(namej instanceof JsonString namestr)) throw new RuntimeException("required string for name");
-        String name = namestr.value;
-        JsonValue inputsj = file.values.get("inputs");
-        if (!(inputsj instanceof JsonArray inputsarr)) throw new RuntimeException("required array for inputs");
-        ItemRequirement[] reqs = loadIReqs(inputsarr);
-        JsonArray array = (JsonArray) file.values.get("outputs");
-        CraftingResult result = loadResult(array);
-        // later requirements?
-        return new ItemCraftingRecipe(
-                reqs,
-                result,
-                new PreCraftRequirement[0],
-                name
-        );
-    }
     public static ItemCraftingRecipe decodeSimpleJSON(JsonFile file) {
         JsonValue namej = file.values.get("name");
         if (!(namej instanceof JsonString namestr)) throw new RuntimeException("required string for name");
@@ -97,13 +96,16 @@ public class JsonRecipeLoader {
         JsonValue inputsj = file.values.get("inputs");
         if (!(inputsj instanceof JsonArray inputsarr)) throw new RuntimeException("required array for inputs");
         ItemRequirement[] reqs = loadIReqs(inputsarr);
+        PreCraftRequirement[] preqs = loadPReqs(
+                (JsonArray) file.values.get("requirements")
+        );
         JsonArray array = (JsonArray) file.values.get("outputs");
         CraftingResult result = loadResult(array);
         // later requirements?
         return new ItemCraftingRecipe(
                 reqs,
                 result,
-                new PreCraftRequirement[0],
+                preqs,
                 name
         );
     }

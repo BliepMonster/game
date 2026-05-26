@@ -1,5 +1,6 @@
 package entities;
 
+import combat.equipment.EquipmentSlot;
 import engine.hitboxes.Hitbox;
 import engine.hitboxes.RectangularHitbox;
 import main.Camera;
@@ -26,7 +27,7 @@ import static org.lwjgl.glfw.GLFW.*;
 public class Player implements Entity {
     private final ArrayList<VelocityChange> velocityChanges = new ArrayList<>();
     private final Vector2f position = new Vector2f();
-    private final Hitbox step = new RectangularHitbox(-0, 0, 1, .2f, this);
+    private final Hitbox step = new RectangularHitbox(.075f, 0, .85f, .2f, this);
     public StatHolder stats = new StatHolder();
     private int selectedHotbarSlot = 0;
     public ItemInventory items = new ItemInventory();
@@ -35,7 +36,7 @@ public class Player implements Entity {
     private int ticksTo = 0;
     private int ticksSinceLastDamage = 0;
     private int ticksSinceLastHeal = 0;
-    private int health = 100;
+    private float health = 100;
     public CurrencyStorage currency = new CurrencyStorage(0);
 
     private StatHolder getBaseStats() {
@@ -43,14 +44,26 @@ public class Player implements Entity {
                 .with(StatHolder.Stat.STRENGTH, 100);
     }
 
-    private void updateStats() {
+    private void updateStats(GameContext context) {
+        var i = items.get(selectedHotbarSlot);
+        var helmet = items.getEquipment(EquipmentSlot.HELMET);
+        var cp = items.getEquipment(EquipmentSlot.CHESTPLATE);
+        var ring = items.getEquipment(EquipmentSlot.RING);
+        var legs = items.getEquipment(EquipmentSlot.LEGGINGS);
+        var boots = items.getEquipment(EquipmentSlot.BOOTS);
         this.stats = getBaseStats().merge(skills.getStatBoost());
+        if (i != null) stats.merge(i.definition.getHeldStats(i, context));
+        if (helmet != null) stats.merge(helmet.definition.getWornStats(helmet, context));
+        if (cp != null) stats.merge(cp.definition.getWornStats(cp, context));
+        if (ring != null) stats.merge(ring.definition.getWornStats(ring, context));
+        if (legs != null) stats.merge(legs.definition.getWornStats(legs, context));
+        if (boots != null) stats.merge(boots.definition.getWornStats(boots, context));
     }
 
     @Override
     public void tick(GameContext context) {
         if (ticksTo++ == 3) {
-            updateStats();
+            updateStats(context);
             ticksTo = 0;
         } if (ticksSinceLastHeal++ == Game.TICKS_PER_SECOND) {
             heal((int) stats.get(StatHolder.Stat.MAX_HEALTH)/100); // heal 1% per second
@@ -127,23 +140,24 @@ public class Player implements Entity {
     public int getSelectedHotbarSlot() {
         return selectedHotbarSlot;
     }
-    public int getHealth() {
+    public float getHealth() {
         return health;
     }
-    public void setHealth(int health) {
+    public void setHealth(float health) {
         this.health = health;
     }
     public void damage(int amount, DamageType type, GameContext context) {
-        health -= amount;
+        float def = stats.get(StatHolder.Stat.DEFENSE);
+        health -= (amount*(1-def/(def+100)));
         if (health <= 0) {
             health = 0;
         }
         ticksSinceLastDamage = 0;
     }
-    public void heal(int amount) {
+    public void heal(float amount) {
         health += amount;
         if (health > stats.get(StatHolder.Stat.MAX_HEALTH)) {
-            health = (int) stats.get(StatHolder.Stat.MAX_HEALTH);
+            health = stats.get(StatHolder.Stat.MAX_HEALTH);
         }
     }
     public boolean isAtFullHealth() {

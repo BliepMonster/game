@@ -1,0 +1,31 @@
+{
+  "name": "Copper Chestplate",
+
+  "inputs": [
+    {
+      "type": "resource",
+      "id": "Copper Bar",
+      "amount": 5
+    }
+  ],
+
+  "outputs": [
+    {
+      "type": "item",
+      "id": "base:armor:copper_chestplate",
+      "amount": 1
+    }
+  ],
+  "requirements": [
+    {
+      "type": "skill",
+      "skill": "MINING",
+      "level": 3
+    },
+    {
+      "type": "skill",
+      "skill": "COMBAT",
+      "level": 1
+    }
+  ]
+}

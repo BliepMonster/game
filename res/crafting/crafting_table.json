@@ -1,0 +1,14 @@
+{
+  "recipes": [
+    "res/recipes/flour_recipe.json",
+    "res/recipes/bread_recipe.json",
+    "res/recipes/smithing/copper_bar_recipe.json",
+    "res/recipes/smithing/copper_boots_recipe.json",
+    "res/recipes/smithing/copper_leggings_recipe.json",
+    "res/recipes/smithing/copper_chestplate_recipe.json",
+    "res/recipes/smithing/copper_helmet_recipe.json",
+    "res/recipes/smithing/iron_bar_recipe.json",
+    "res/recipes/smithing/steel_bar_recipe.json",
+    "res/recipes/smithing/steel_pickaxe_recipe.json"
+  ]
+}
