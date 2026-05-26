@@ -38,6 +38,9 @@ public class CraftingStationTilePart extends TilePart {
         RECIPES.add(JsonRecipeLoader.decodeSimpleJSON(
                 new JsonParser().parse(FileUtils.readAllOrEmpty("res/recipes/smithing/steel_pickaxe_recipe.json"))
         ));
+        RECIPES.add(JsonRecipeLoader.decodeSimpleJSON(
+                new JsonParser().parse(FileUtils.readAllOrEmpty("res/recipes/smithing/copper_bar_recipe.json"))
+        ));
     }
     public static void setDefaultFont(Font font) {
         FONT = font;
@@ -54,18 +57,10 @@ public class CraftingStationTilePart extends TilePart {
     public void onStand(GameContext context) {}
     public void onClick(GameContext context) {
         var player = context.getPlayer();
-        var inv = new FullItemStorage(player.items, player.inventory);
+        var inv = new FullItemStorage(player.items, player.inventory, player.currency);
         if (GUI.getAll(0).isEmpty()) {
-            GUI.add(
-                    new CraftingPanel(
-                            RECIPES,
-                            inv,
-                            context,
-                            FONT,
-                            0
-                    ),
-                    0
-            );
+            GUI.add(new CraftingPanel(RECIPES, inv, context, FONT, 0), 0);
+            GUI.toggle(62);
         }
     }
 

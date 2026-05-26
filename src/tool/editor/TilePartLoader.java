@@ -1,5 +1,6 @@
 package tool.editor;
 
+import engine.core.text.Font;
 import engine.json.JsonObject;
 import engine.json.JsonString;
 import main.GameContext;
@@ -22,6 +23,7 @@ public final class TilePartLoader {
     public static final String ID_SPAWNER = "spawner";
     public static final String ID_CRAFTING_STATION = "crafting_station";
     public static final String ID_SHOP_NPC = "shop_npc";
+    public static Font font;
 
     public static TilePart load(Vector2i position, JsonObject obj, GameContext context) {
         String type = ((JsonString) obj.values.get("type")).value;
@@ -37,7 +39,7 @@ public final class TilePartLoader {
             case ID_COPPER_ORE -> new CopperOrePart();
             case ID_COAL_ORE -> new CoalOrePart();
             case ID_CRAFTING_STATION -> new CraftingStationTilePart();
-            case ID_SHOP_NPC -> new ShopNPC(ShopDefinitionRegistry.get(((JsonString)obj.values.get("id")).value));
+            case ID_SHOP_NPC -> new ShopNPC(ShopDefinitionRegistry.get(((JsonString)obj.values.get("id")).value), font);
             default -> throw new RuntimeException("Unknown object: " + type);
         };
     }

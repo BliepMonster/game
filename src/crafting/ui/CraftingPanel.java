@@ -54,7 +54,10 @@ public class CraftingPanel extends Component {
             if (y > HEIGHT/2-.2f && x < -WIDTH/2+.2f) {
                 if (state == State.SELECTED)
                     state = State.MENU;
-                else GUI.scheduleClear(uiIndex);
+                else {
+                    GUI.scheduleClear(uiIndex);
+                    GUI.toggle(62);
+                }
             }
         }
     }

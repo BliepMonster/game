@@ -1,17 +1,23 @@
 package tiles.npc;
 
+import crafting.FullItemStorage;
+import engine.core.text.Font;
+import engine.gui.GUI;
 import engine.json.JsonObject;
 import engine.json.JsonString;
 import engine.json.JsonValue;
 import main.Camera;
 import main.GameContext;
 import tiles.TilePart;
+import tiles.npc.ui.ShopPanel;
 import tool.editor.TilePartLoader;
 
 public class ShopNPC extends TilePart {
     private final ShopNpcDefinition definition;
-    public ShopNPC(ShopNpcDefinition definition) {
+    private final Font font;
+    public ShopNPC(ShopNpcDefinition definition, Font font) {
         this.definition = definition;
+        this.font = font;
     }
     public void render(int x, int y, Camera camera) {
         camera.addRenderJob(
@@ -24,7 +30,11 @@ public class ShopNPC extends TilePart {
     }
     public void onStand(GameContext context) {}
     public void onClick(GameContext context) {
-        // TODO
+        if (GUI.getAll(0).isEmpty()) {
+            var player = context.getPlayer();
+            GUI.add(new ShopPanel(definition, font, new FullItemStorage(player.items, player.inventory, player.currency), context), 0);
+            GUI.toggle(62);
+        }
     }
 
     @Override

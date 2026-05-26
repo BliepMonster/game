@@ -1,5 +1,7 @@
 package tiles.npc;
 
 import crafting.ItemRequirement;
+import crafting.PreCraftRequirement;
+import engine.core.Texture;
 
-public record ShopEntry(ItemRequirement[] requirements, MoneyRequirement price, ItemGiver item) {}
+public record ShopEntry(PreCraftRequirement[] preCraft, ItemRequirement[] requirements, MoneyRequirement price, ItemGiver item, Texture texture) {}

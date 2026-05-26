@@ -39,7 +39,7 @@ public class CraftingMenuSelectorBar extends Component {
         }
     }
     public void detectClick(Screen screen, float x, float y) {
-        if (isInBounds(screen, x, y) && y < -.45f && y > -.55f && x > -.4f && x < .4f) {
+        if (isInBounds(screen, x, y) && y < -.55f && y > -.65f && x > -.4f && x < .4f) {
             switch (x) {
                 case float v when v < -.3f -> callback.switchPage(current - 2);
                 case float v when v < -.225f -> {

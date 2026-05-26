@@ -1,0 +1,22 @@
+{
+  "name": "Copper Bar",
+  "inputs": [
+    {
+      "type": "resource",
+      "id": "Copper Ore",
+      "amount": 2
+    },
+    {
+      "type": "resource",
+      "id": "Coal",
+      "amount": 1
+    }
+  ],
+  "outputs": [
+    {
+      "type": "resource",
+      "id": "Copper Bar",
+      "amount": 1
+    }
+  ]
+}

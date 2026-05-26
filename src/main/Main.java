@@ -20,6 +20,7 @@ import stats.ui.HealthBar;
 import tiles.CraftingStationTilePart;
 import tool.editor.EditorToolState;
 import tool.editor.JSONSaver;
+import tool.editor.TilePartLoader;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -27,7 +28,7 @@ import java.io.IOException;
 import static main.StaticItemLoader.*;
 
 public class Main {
-    public static final boolean DEBUG_MODE = true;
+    public static final boolean DEBUG_MODE = false;
     public static Font font;
     public static void main(String[] _args) throws IOException {
         final var screen = new Screen();
@@ -36,9 +37,10 @@ public class Main {
         StaticItemLoader.initAll();
 
         final var draw = new DrawManager(screen);
-        final var context = new RenderContext(draw);
 
         font = new Font("res/Unnamed");
+
+        TilePartLoader.font = font;
 
         final var game = new Game(draw, .1f);
 
@@ -144,6 +146,7 @@ public class Main {
                 else if (Input.isKeyDown(GLFW.GLFW_KEY_6)) mode = EditorToolState.PLACE_COPPER;
                 else if (Input.isKeyDown(GLFW.GLFW_KEY_7)) mode = EditorToolState.PLACE_STRAWBERRIES;
                 else if (Input.isKeyDown(GLFW.GLFW_KEY_8)) mode = EditorToolState.PLACE_TREE;
+                else if (Input.isKeyDown(GLFW.GLFW_KEY_9)) mode = EditorToolState.PLACE_NPC;
                 if (Input.isMouseDown(GLFW.GLFW_MOUSE_BUTTON_1))
                     game.world.apply(mode, Input.getMouseX(screen), Input.getMouseY(screen), game, .1f);
             } if (framestamp - lastTick >= tickRate) {
