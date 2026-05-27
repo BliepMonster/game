@@ -1,0 +1,13 @@
+{
+  "type": "equipment",
+  "id": "base:armor:reinforced_copper_leggings",
+  "name": "Reinforced Copper Leggings",
+  "texture": "res/reinforced_copper_leggings.png",
+  "stats": [
+    {
+      "type": "DEFENSE",
+      "count": 20
+    }
+  ],
+  "slot": "LEGGINGS"
+}

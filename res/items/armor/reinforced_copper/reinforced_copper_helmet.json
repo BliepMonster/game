@@ -1,0 +1,13 @@
+{
+  "type": "equipment",
+  "id": "base:armor:reinforced_copper_helmet",
+  "name": "Reinforced Copper Helmet",
+  "texture": "res/reinforced_copper_helmet.png",
+  "stats": [
+    {
+      "type": "DEFENSE",
+      "count": 15
+    }
+  ],
+  "slot": "HELMET"
+}
