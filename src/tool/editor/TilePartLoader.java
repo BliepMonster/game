@@ -6,16 +6,14 @@ import engine.json.JsonString;
 import main.GameContext;
 import org.joml.Vector2f;
 import org.joml.Vector2i;
-import tiles.CraftingStationTilePart;
-import tiles.TilePart;
-import tiles.TombstoneTilePart;
-import tiles.ZombieSpawner;
+import tiles.*;
 import tiles.npc.ShopDefinitionRegistry;
 import tiles.npc.ShopNPC;
 import tiles.resources.*;
 
 public final class TilePartLoader {
     public static final String ID_IRON_ORE = "iron_ore";
+    public static final String ID_FURNACE = "furnace";
     public static final String ID_COAL_ORE = "coal_ore";
     public static final String ID_COPPER_ORE = "copper_ore";
     public static final String ID_WHEAT = "wheat";
@@ -45,6 +43,7 @@ public final class TilePartLoader {
             case ID_SHOP_NPC -> new ShopNPC(ShopDefinitionRegistry.get(((JsonString)obj.values.get("id")).value), font);
             case ID_TOMBSTONE -> new TombstoneTilePart();
             case ID_ZOMBIE_SPAWNER -> new ZombieSpawner(new Vector2f(position.x, position.y), context);
+            case ID_FURNACE -> new FurnaceTilePart();
             default -> throw new RuntimeException("Unknown object: " + type);
         };
     }

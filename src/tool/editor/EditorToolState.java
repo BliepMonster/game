@@ -22,7 +22,7 @@ public enum EditorToolState {
     public void apply(Tile tile, CoordinateMap<Tile> map, int x, int y, GameContext context) {
         switch (this) {
             case O1 -> map.put(x, y, new DefaultTile(TileType.ROAD));
-            case O2 -> tile.setPart(new PotatoTilePart());
+            case O2 -> tile.setPart(new FurnaceTilePart());
             case O3 -> tile.setPart(new CarrotTilePart());
             case O4 -> map.put(x, y, new DefaultTile(TileType.GRASS_DARK));
             case O5 -> tile.setPart(new TombstoneTilePart());

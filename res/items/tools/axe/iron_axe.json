@@ -1,0 +1,14 @@
+{
+  "type": "tool",
+  "texture": "res/iron_axe.png",
+  "name": "Iron Axe",
+  "id": "base:tools:iron_axe",
+  "stats": [],
+  "power": [
+    {
+      "type": "WOODCUTTING",
+      "amount": 20
+    }
+  ],
+  "cooldown": 19
+}

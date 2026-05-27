@@ -1,0 +1,36 @@
+{
+  "name": "Iron Axe",
+
+  "inputs": [
+    {
+      "type": "resource",
+      "id": "Iron Bar",
+      "amount": 2
+    },
+    {
+      "type": "resource",
+      "id": "Maple Wood",
+      "amount": 1
+    }
+  ],
+
+  "outputs": [
+    {
+      "type": "item",
+      "id": "base:tools:iron_axe",
+      "amount": 1
+    }
+  ],
+  "requirements": [
+    {
+      "type": "skill",
+      "skill": "MINING",
+      "level": 5
+    },
+    {
+      "type": "skill",
+      "skill": "FORAGING",
+      "level": 3
+    }
+  ]
+}

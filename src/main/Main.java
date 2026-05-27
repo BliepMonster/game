@@ -30,7 +30,7 @@ import java.io.IOException;
 public class Main {
     public static boolean DEBUG_MODE = false;
     public static Font font;
-    public static void main(String[] _args) throws IOException {
+    public static void main() throws IOException {
         final var screen = new Screen();
         final var console = new Console();
         screen.create(console, Screen.MAXIMIZED);
