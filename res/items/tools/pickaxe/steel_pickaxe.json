@@ -1,0 +1,14 @@
+{
+  "type": "tool",
+  "texture": "res/steel_pickaxe.png",
+  "name": "Steel Pickaxe",
+  "id": "base:tools:steel_pickaxe",
+  "stats": [],
+  "power": [
+    {
+      "type": "MINING",
+      "amount": 100
+    }
+  ],
+  "cooldown": 20
+}

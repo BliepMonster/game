@@ -45,7 +45,7 @@ public class ZombieEnemy extends RespawnableEnemy {
         this.context = context;
         if (context.getPlayer().getHitbox().collidesWith(getHitbox())) {
             if (Game.getTickCount() - lastHitTick >= HIT_INTERVAL) {
-                context.getPlayer().damage(5, DamageType.NORMAL, context);
+                context.getPlayer().damage(20, DamageType.NORMAL, context);
                 context.getPlayer().knock(new Vector2f(context.getPlayer().getX() - position.x, context.getPlayer().getY() - position.y).normalize(), 1);
                 lastHitTick = Game.getTickCount();
             }

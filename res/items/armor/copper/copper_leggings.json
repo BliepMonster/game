@@ -1,0 +1,13 @@
+{
+  "type": "equipment",
+  "id": "base:armor:copper_leggings",
+  "name": "Copper Leggings",
+  "texture": "res/copper_leggings.png",
+  "stats": [
+    {
+      "type": "DEFENSE",
+      "count": 15
+    }
+  ],
+  "slot": "LEGGINGS"
+}

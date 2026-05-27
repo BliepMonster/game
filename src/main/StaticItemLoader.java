@@ -1,43 +1,36 @@
 package main;
 
-import combat.equipment.EquipmentItemDefinition;
-import combat.equipment.EquipmentSlot;
-import combat.melee.ConeWeaponDefinition;
-import combat.melee.SpecificStabWeaponDefinition;
-import engine.core.Texture;
-import entities.DamageType;
-import stats.StatHolder;
-import stats.inventory.items.BasicFoodItemDefinition;
-import stats.inventory.items.ToolItemDefinition;
+import crafting.json.JsonItemLoader;
+import engine.json.JsonParser;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.stream.Stream;
 
 import static stats.inventory.items.ItemDefinition.register;
 
 public class StaticItemLoader {
-    public static final Texture BREAD_TEXTURE = new Texture("res/bred.png");
-    public static final String BREAD_NAME = "Bread";
-    public static final String BREAD_DESCRIPTION = "A piece of bread";
-    public static final String BREAD_ITEM_ID = "base:food:bread";
-    public static final String DAGGER_ITEM_ID = "base:weapons:dagger";
-    public static final String SWORD_ITEM_ID = "base:weapons:sword";
-    public static final String CLUB_ITEM_ID = "base:weapons:club";
-    public static final String RUSTY_AXE_ITEM_ID = "base:tools:rusty_axe";
-    public static final String STEEL_PICKAXE_ITEM_ID = "base:tools:steel_pickaxe";
-    public static final String RUSTY_PICKAXE_ITEM_ID = "base:tools:rusty_pickaxe";
-    public static final String COPPER_CHESTPLATE_ITEM_ID = "base:armor:copper_chestplate";
-    public static final String COPPER_LEGGINGS_ITEM_ID = "base:armor:copper_leggings";
-    public static final String COPPER_HELMET_ITEM_ID = "base:armor:copper_helmet";
-    public static final String COPPER_BOOTS_ITEM_ID = "base:armor:copper_boots";
     public static void initAll() {
-        register(new BasicFoodItemDefinition(BREAD_ITEM_ID, BREAD_NAME, BREAD_DESCRIPTION, BREAD_TEXTURE, 75));
-        register(new ConeWeaponDefinition(1.5f, DamageType.NORMAL, 30, 5, (float) Math.toRadians(20), 3*Game.TICKS_PER_SECOND/5, "Sword", "A sword", SWORD_ITEM_ID, new Texture("res/bred.png"), new StatHolder()));
-        register(new SpecificStabWeaponDefinition(10, entities.DamageType.NORMAL, Game.TICKS_PER_SECOND/5, "Dagger", "A stab", DAGGER_ITEM_ID, new Texture("res/bred.png"), new StatHolder()));
-        register(new ConeWeaponDefinition(8, DamageType.NORMAL, 15, 4, (float) Math.toRadians(35), 3*Game.TICKS_PER_SECOND, "Club", "A club", CLUB_ITEM_ID, new Texture("res/bred.png"), new StatHolder()));
-        register(new ToolItemDefinition(Game.TICKS_PER_SECOND/5, RUSTY_AXE_ITEM_ID, "Rusty Axe", "", BREAD_TEXTURE, new StatHolder(), new ToolItemDefinition.PowerPair(ToolItemDefinition.PowerType.WOODCUTTING, 10)));
-        register(new ToolItemDefinition(Game.TICKS_PER_SECOND, STEEL_PICKAXE_ITEM_ID, "Steel Pickaxe", "", new Texture("res/steel_pickaxe.png"), new StatHolder(), new ToolItemDefinition.PowerPair(ToolItemDefinition.PowerType.MINING, 100)));
-        register(new ToolItemDefinition(Game.TICKS_PER_SECOND*2/3, RUSTY_PICKAXE_ITEM_ID, "Rusty Pickaxe", "", new Texture("res/rusty_pickaxe.png"), new StatHolder(), new ToolItemDefinition.PowerPair(ToolItemDefinition.PowerType.MINING, 40)));
-        register(new EquipmentItemDefinition(new StatHolder().with(StatHolder.Stat.DEFENSE, 25), EquipmentSlot.CHESTPLATE, COPPER_CHESTPLATE_ITEM_ID, "Copper Chestplate", "", new Texture("res/copper_chestplate.png")));
-        register(new EquipmentItemDefinition(new StatHolder().with(StatHolder.Stat.DEFENSE, 15), EquipmentSlot.LEGGINGS, COPPER_LEGGINGS_ITEM_ID, "Copper Leggings", "", new Texture("res/copper_leggings.png")));
-        register(new EquipmentItemDefinition(new StatHolder().with(StatHolder.Stat.DEFENSE, 10), EquipmentSlot.HELMET, COPPER_HELMET_ITEM_ID, "Copper Helmet", "", new Texture("res/copper_helmet.png")));
-        register(new EquipmentItemDefinition(new StatHolder().with(StatHolder.Stat.DEFENSE, 10), EquipmentSlot.BOOTS, COPPER_BOOTS_ITEM_ID, "Copper Boots", "", new Texture("res/copper_boots.png")));
+        try (Stream<Path> paths = Files.walk(Path.of("res/items"))) {
+            paths
+                    .filter(Files::isRegularFile)
+                    .map(path -> {
+                        try {
+                            return Files.readString(path);
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
+                    })
+                    .forEach(string ->
+                            register(
+                                    JsonItemLoader.load(
+                                            new JsonParser().parse(string)
+                                    )
+                            )
+                    );
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

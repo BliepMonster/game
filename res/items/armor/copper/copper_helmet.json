@@ -1,0 +1,13 @@
+{
+  "type": "equipment",
+  "id": "base:armor:copper_helmet",
+  "name": "Copper Helmet",
+  "texture": "res/copper_helmet.png",
+  "stats": [
+    {
+      "type": "DEFENSE",
+      "count": 10
+    }
+  ],
+  "slot": "HELMET"
+}

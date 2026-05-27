@@ -1,0 +1,14 @@
+{
+  "type": "tool",
+  "texture": "res/copper_axe.png",
+  "name": "Copper Axe",
+  "id": "base:tools:copper_axe",
+  "stats": [],
+  "power": [
+    {
+      "type": "WOODCUTTING",
+      "amount": 15
+    }
+  ],
+  "cooldown": 17
+}

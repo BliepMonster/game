@@ -1,0 +1,12 @@
+{
+  "type": "melee",
+  "id": "base:weapons:broken_dagger",
+  "name": "Broken Dagger",
+  "texture": "res/broken_dagger.png",
+
+  "damage_type": "NORMAL",
+  "stats": [],
+  "melee_type": "stab",
+  "damage": 10,
+  "cooldown": 4
+}

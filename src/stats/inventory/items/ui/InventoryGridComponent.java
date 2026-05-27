@@ -133,7 +133,7 @@ public class InventoryGridComponent extends Component {
     void switchWithEquipment(EquipmentSlot slot) {
         if (this.selectedSlot == null && player.items.getEquipment(slot) != null) {
             selectedSlot = new SelectedItem(false, slot.ordinal());
-        } else {
+        } else if (this.selectedSlot == null) {} else {
             var item = selectedSlot.get(player);
             if (item.definition.getEquipmentSlot() != slot) {
                 selectedSlot = null;
@@ -147,7 +147,7 @@ public class InventoryGridComponent extends Component {
     void switchWithItem(int index) {
         if (this.selectedSlot == null && player.items.get(index) != null) {
             selectedSlot = new SelectedItem(true, index);
-        } else {
+        } else if (this.selectedSlot == null) {} else {
             var item = selectedSlot.get(player);
             selectedSlot.set(player, player.items.get(index));
             player.items.set(index, item);

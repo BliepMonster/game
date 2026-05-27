@@ -1,0 +1,13 @@
+{
+  "type": "equipment",
+  "id": "base:armor:copper_boots",
+  "name": "Copper Boots",
+  "texture": "res/copper_boots.png",
+  "stats": [
+    {
+      "type": "DEFENSE",
+      "count": 10
+    }
+  ],
+  "slot": "BOOTS"
+}

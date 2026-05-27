@@ -27,8 +27,6 @@ import tool.editor.TilePartLoader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import static main.StaticItemLoader.*;
-
 public class Main {
     public static boolean DEBUG_MODE = false;
     public static Font font;
@@ -72,15 +70,10 @@ public class Main {
 
 
         CraftingStationTilePart.setDefaultFont(font);
-
-        game.player.items.add(new Item(ItemDefinition.get(BREAD_ITEM_ID)));
-        game.player.items.add(new Item(ItemDefinition.get(BREAD_ITEM_ID)));
-        game.player.items.add(new Item(ItemDefinition.get(BREAD_ITEM_ID)));
-        game.player.items.add(new Item(ItemDefinition.get(DAGGER_ITEM_ID)));
-        game.player.items.add(new Item(ItemDefinition.get(SWORD_ITEM_ID)));
-        game.player.items.add(new Item(ItemDefinition.get(CLUB_ITEM_ID)));
-        game.player.items.add(new Item(ItemDefinition.get(RUSTY_AXE_ITEM_ID)));
-        game.player.items.add(new Item(ItemDefinition.get(RUSTY_PICKAXE_ITEM_ID)));
+        game.player.items.add(new Item(ItemDefinition.get("base:weapons:broken_dagger")));
+        game.player.items.add(new Item(ItemDefinition.get("base:weapons:broken_sword")));
+        game.player.items.add(new Item(ItemDefinition.get("base:tools:broken_axe")));
+        game.player.items.add(new Item(ItemDefinition.get("base:tools:broken_pickaxe")));
 
         GUI.add(new HealthBar(game.player), 62);
 

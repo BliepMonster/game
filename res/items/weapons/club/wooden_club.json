@@ -1,0 +1,16 @@
+{
+  "type": "melee",
+  "id": "base:weapons:wooden_club",
+  "name": "Wooden Club",
+  "texture": "res/wooden_club.png",
+
+  "knockback": 8,
+  "damage_type": "NORMAL",
+  "stats": [],
+  "melee_type": "cone",
+  "damage": 15,
+  "cooldown": 60,
+
+  "range": 4,
+  "angle": 35
+}

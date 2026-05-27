@@ -1,0 +1,14 @@
+{
+  "type": "tool",
+  "texture": "res/copper_pickaxe.png",
+  "name": "Copper Pickaxe",
+  "id": "base:tools:copper_pickaxe",
+  "stats": [],
+  "power": [
+    {
+      "type": "MINING",
+      "amount": 50
+    }
+  ],
+  "cooldown": 17
+}

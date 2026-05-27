@@ -1,0 +1,14 @@
+{
+  "type": "tool",
+  "texture": "res/broken_pickaxe.png",
+  "name": "Broken Pickaxe",
+  "id": "base:tools:broken_pickaxe",
+  "stats": [],
+  "power": [
+    {
+      "type": "MINING",
+      "amount": 40
+    }
+  ],
+  "cooldown": 17
+}

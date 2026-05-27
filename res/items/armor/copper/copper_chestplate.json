@@ -1,0 +1,13 @@
+{
+  "type": "equipment",
+  "id": "base:armor:copper_chestplate",
+  "name": "Copper Chestplate",
+  "texture": "res/copper_chestplate.png",
+  "stats": [
+    {
+      "type": "DEFENSE",
+      "count": 25
+    }
+  ],
+  "slot": "CHESTPLATE"
+}

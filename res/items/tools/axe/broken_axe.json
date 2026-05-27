@@ -1,0 +1,14 @@
+{
+  "type": "tool",
+  "texture": "res/broken_axe.png",
+  "name": "Broken Axe",
+  "id": "base:tools:broken_axe",
+  "stats": [],
+  "power": [
+    {
+      "type": "WOODCUTTING",
+      "amount": 10
+    }
+  ],
+  "cooldown": 17
+}

@@ -1,0 +1,36 @@
+{
+  "name": "Copper Axe",
+
+  "inputs": [
+    {
+      "type": "resource",
+      "id": "Copper Bar",
+      "amount": 2
+    },
+    {
+      "type": "resource",
+      "id": "Maple Wood",
+      "amount": 1
+    }
+  ],
+
+  "outputs": [
+    {
+      "type": "item",
+      "id": "base:tools:copper_axe",
+      "amount": 1
+    }
+  ],
+  "requirements": [
+    {
+      "type": "skill",
+      "skill": "MINING",
+      "level": 3
+    },
+    {
+      "type": "skill",
+      "skill": "FORAGING",
+      "level": 1
+    }
+  ]
+}

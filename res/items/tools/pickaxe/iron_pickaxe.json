@@ -1,0 +1,14 @@
+{
+  "type": "tool",
+  "texture": "res/iron_pickaxe.png",
+  "name": "Iron Pickaxe",
+  "id": "base:tools:iron_pickaxe",
+  "stats": [],
+  "power": [
+    {
+      "type": "MINING",
+      "amount": 80
+    }
+  ],
+  "cooldown": 19
+}

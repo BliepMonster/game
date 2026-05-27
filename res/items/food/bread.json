@@ -1,0 +1,7 @@
+{
+  "type": "food",
+  "id": "base:food:bread",
+  "name": "Bread",
+  "texture": "res/bred.png",
+  "restored": 75
+}

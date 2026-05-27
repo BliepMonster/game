@@ -1,0 +1,16 @@
+{
+  "type": "melee",
+  "id": "base:weapons:broken_sword",
+  "name": "Broken Sword",
+  "texture": "res/broken_sword.png",
+
+  "knockback": 1.5,
+  "damage_type": "NORMAL",
+  "stats": [],
+  "melee_type": "cone",
+  "damage": 30,
+  "cooldown": 12,
+
+  "range": 5,
+  "angle": 20
+}
