@@ -1,0 +1,14 @@
+{
+  "type": "tool",
+  "texture": "res/steel_axe.png",
+  "name": "Steel Axe",
+  "id": "base:tools:steel_axe",
+  "stats": [],
+  "power": [
+    {
+      "type": "WOODCUTTING",
+      "amount": 30
+    }
+  ],
+  "cooldown": 20
+}

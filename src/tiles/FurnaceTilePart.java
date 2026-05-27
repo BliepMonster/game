@@ -1,12 +1,9 @@
 package tiles;
 
 import crafting.*;
-import crafting.json.JsonRecipeLoader;
 import crafting.ui.CraftingPanel;
 import engine.FileUtils;
-import engine.core.text.Font;
 import engine.gui.GUI;
-import engine.json.JsonObject;
 import engine.json.JsonParser;
 import engine.json.JsonString;
 import engine.json.JsonValue;

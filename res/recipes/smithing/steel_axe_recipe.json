@@ -1,0 +1,36 @@
+{
+  "name": "Steel Axe",
+
+  "inputs": [
+    {
+      "type": "resource",
+      "id": "Steel Bar",
+      "amount": 2
+    },
+    {
+      "type": "resource",
+      "id": "Maple Wood",
+      "amount": 1
+    }
+  ],
+
+  "outputs": [
+    {
+      "type": "item",
+      "id": "base:tools:steel_axe",
+      "amount": 1
+    }
+  ],
+  "requirements": [
+    {
+      "type": "skill",
+      "skill": "MINING",
+      "level": 10
+    },
+    {
+      "type": "skill",
+      "skill": "FORAGING",
+      "level": 5
+    }
+  ]
+}

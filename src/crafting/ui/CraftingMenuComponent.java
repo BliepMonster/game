@@ -44,7 +44,6 @@ public class CraftingMenuComponent extends Component {
     public void detectClick(Screen screen, float x, float y) {}
     public void detectContinuousPress(Screen screen, float x, float y) {}
     public void switchPage(int page) {
-        System.out.println(page);
         if (page > recipes.size()/5) return;
         lp = page;
         this.page = new CraftingMenuPage(recipes, lp * 5, storage, context, font, panel);

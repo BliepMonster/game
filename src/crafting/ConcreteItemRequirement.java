@@ -18,7 +18,9 @@ public class ConcreteItemRequirement extends ItemRequirement {
     public boolean isMet(FullItemStorage storage) {
         int c = 0;
         for (int i = 0; i < ItemInventory.NUM_ITEMS; i++) {
-            if (storage.inventory.get(i).definition == item) { // since definitions are singletons
+            var item = storage.inventory.get(i);
+            if (item == null) continue;
+            if (item.definition == this.item) { // since definitions are singletons
                 c++;
             }
         }

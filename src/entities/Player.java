@@ -66,7 +66,8 @@ public class Player implements Entity {
             updateStats(context);
             ticksTo = 0;
         } if (ticksSinceLastHeal++ == Game.TICKS_PER_SECOND) {
-            heal((int) stats.get(StatHolder.Stat.MAX_HEALTH)/100); // heal 1% per second
+            heal(stats.get(StatHolder.Stat.MAX_HEALTH)/100); // heal 1% per second
+            ticksSinceLastHeal = Game.getTickCount();
         }
         velocityChanges.removeIf(VelocityChange::canBeRemoved);
         ticksSinceLastDamage++;

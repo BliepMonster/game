@@ -1,0 +1,36 @@
+{
+  "name": "Reinforced Copper Chestplate",
+
+  "inputs": [
+    {
+      "type": "resource",
+      "id": "Iron Bar",
+      "amount": 1
+    },
+    {
+      "type": "item",
+      "id": "base:armor:copper_chestplate",
+      "amount": 1
+    }
+  ],
+
+  "outputs": [
+    {
+      "type": "item",
+      "id": "base:armor:reinforced_copper_chestplate",
+      "amount": 1
+    }
+  ],
+  "requirements": [
+    {
+      "type": "skill",
+      "skill": "MINING",
+      "level": 5
+    },
+    {
+      "type": "skill",
+      "skill": "COMBAT",
+      "level": 2
+    }
+  ]
+}
