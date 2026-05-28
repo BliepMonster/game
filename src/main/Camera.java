@@ -37,4 +37,7 @@ public class Camera {
     public void image(Texture texture, float x, float y, float w, float h) {
         draw.image(texture, (x-player.getX())*tileSize, (y-player.getY())*tileSize, w*tileSize, h*tileSize);
     }
+    public void tintedImage(Texture texture, Color color, float x, float y, float w, float h) {
+        draw.tintedImage(texture, color, (x-player.getX())*tileSize, (y-player.getY())*tileSize, w*tileSize, h*tileSize);
+    }
 }

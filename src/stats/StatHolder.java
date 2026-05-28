@@ -26,6 +26,8 @@ public class StatHolder implements Cloneable {
         FORAGING_POWER,
         KNOCKBACK,
         DEFENSE,
+        CRIT_CHANCE,
+        CRIT_DAMAGE,
     }
     public static final int NUM_STATS = Stat.values().length;
     public static final int SPEED_INDEX = Stat.SPEED.ordinal();

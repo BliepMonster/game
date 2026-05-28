@@ -1,0 +1,13 @@
+{
+  "type": "equipment",
+  "id": "base:armor:iron_helmet",
+  "name": "Iron Helmet",
+  "texture": "res/iron_helmet.png",
+  "stats": [
+    {
+      "type": "DEFENSE",
+      "count": 20
+    }
+  ],
+  "slot": "HELMET"
+}

@@ -7,7 +7,9 @@ import main.Camera;
 import main.Game;
 import main.GameContext;
 import org.joml.Vector2f;
+import saving.SavedPlayer;
 import stats.StatHolder;
+import stats.StatusEffect;
 import stats.VelocityChange;
 import stats.inventory.CurrencyStorage;
 import stats.inventory.items.Item;
@@ -19,6 +21,7 @@ import tiles.Tile;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 import static engine.core.input.Input.isKeyDown;
 import static main.Game.TICKS_PER_SECOND;
@@ -30,18 +33,39 @@ public class Player implements Entity {
     private final Hitbox step = new RectangularHitbox(.075f, 0, .85f, .2f, this);
     public StatHolder stats = new StatHolder();
     private int selectedHotbarSlot = 0;
-    public ItemInventory items = new ItemInventory();
-    public InventoryStorage inventory = new InventoryStorage();
-    public SkillSet skills = new SkillSet();
+    public final ItemInventory items;
+    public final InventoryStorage inventory;
+    public final SkillSet skills;
     private int ticksTo = 0;
     private int ticksSinceLastDamage = 0;
     private int ticksSinceLastHeal = 0;
     private float health = 100;
-    public CurrencyStorage currency = new CurrencyStorage(0);
+    public final CurrencyStorage currency;
+    public final HashSet<StatusEffect> effects = new HashSet<>();
+    public Player() {
+        currency = new CurrencyStorage(0);
+        skills = new SkillSet();
+        inventory = new InventoryStorage();
+        items = new ItemInventory();
+    }
+    public Player(SavedPlayer player) {
+        this.currency = new CurrencyStorage(player.currency());
+        this.skills = new SkillSet(player.skills());
+        this.inventory = new InventoryStorage(player.storage());
+        this.position.x = player.x();
+        this.position.y = player.y();
+        for (var effect : player.statusEffects()) {
+            effects.add(new StatusEffect(effect));
+        }
+        this.health = player.health();
+        this.items = new ItemInventory(player.items());
+    }
 
     private StatHolder getBaseStats() {
         return new StatHolder().withSpeed(5).with(StatHolder.Stat.MAX_HEALTH, 100)
-                .with(StatHolder.Stat.STRENGTH, 100);
+                .with(StatHolder.Stat.STRENGTH, 100)
+                .with(StatHolder.Stat.CRIT_CHANCE, 30)
+                .with(StatHolder.Stat.CRIT_DAMAGE, 150);
     }
 
     private void updateStats(GameContext context) {
@@ -58,6 +82,10 @@ public class Player implements Entity {
         if (ring != null) stats.merge(ring.definition.getWornStats(ring, context));
         if (legs != null) stats.merge(legs.definition.getWornStats(legs, context));
         if (boots != null) stats.merge(boots.definition.getWornStats(boots, context));
+        effects.removeIf(StatusEffect::isDone);
+        for (var effect : effects) {
+            stats.merge(effect.stats);
+        }
     }
 
     @Override
@@ -181,6 +209,7 @@ public class Player implements Entity {
     }
     public void die(GameContext context) {
         deathTick = Game.getTickCount();
+        this.currency.spend(currency.getCoins());
     }
     public boolean isAttackable() {
         return false;
@@ -193,5 +222,8 @@ public class Player implements Entity {
     }
     public float getHeight() {
         return .2f;
+    }
+    public void addEffect(StatusEffect effect) {
+        effects.add(effect);
     }
 }

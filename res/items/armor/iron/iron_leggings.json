@@ -1,0 +1,13 @@
+{
+  "type": "equipment",
+  "id": "base:armor:iron_leggings",
+  "name": "Iron Leggings",
+  "texture": "res/iron_leggings.png",
+  "stats": [
+    {
+      "type": "DEFENSE",
+      "count": 25
+    }
+  ],
+  "slot": "LEGGINGS"
+}

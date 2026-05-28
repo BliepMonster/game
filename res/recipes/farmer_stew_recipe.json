@@ -1,0 +1,36 @@
+{
+  "name": "Farmer's Stew",
+
+  "inputs": [
+    {
+      "type": "resource",
+      "id": "Carrot",
+      "amount": 5
+    },
+    {
+      "type": "resource",
+      "id": "Potato",
+      "amount": 20
+    },
+    {
+      "type": "resource",
+      "id": "Bowl",
+      "amount": 1
+    }
+  ],
+
+  "outputs": [
+    {
+      "type": "item",
+      "id": "base:food:farmer_stew",
+      "amount": 1
+    }
+  ],
+  "requirements": [
+    {
+      "type": "skill",
+      "skill": "FARMING",
+      "level": 5
+    }
+  ]
+}

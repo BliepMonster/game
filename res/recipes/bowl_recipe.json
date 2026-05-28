@@ -1,0 +1,19 @@
+{
+  "name": "Bowl",
+
+  "inputs": [
+    {
+      "type": "resource",
+      "id": "Maple Wood",
+      "amount": 5
+    }
+  ],
+
+  "outputs": [
+    {
+      "type": "resource",
+      "id": "Bowl",
+      "amount": 1
+    }
+  ]
+}

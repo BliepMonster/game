@@ -1,0 +1,14 @@
+{
+  "type": "consumable",
+  "id": "base:food:carrot_cake",
+  "name": "Carrot Cake",
+  "texture": "res/carrot_cake.png",
+  "stats": [
+    {
+      "type": "CRIT_CHANCE",
+      "count": 5
+    }
+  ],
+  "duration": 2000,
+  "eid": "carrot_cake"
+}

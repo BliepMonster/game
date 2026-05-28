@@ -1,0 +1,9 @@
+{
+  "type": "ability",
+  "id": "base:tools:steel_hoe",
+  "name": "Steel Hoe",
+  "texture": "res/steel_hoe.png",
+  "ability": "steel_hoe",
+  "cooldown": 1,
+  "stats": []
+}

@@ -9,7 +9,9 @@ import engine.core.input.Input;
 import engine.core.text.Font;
 import engine.gui.GUI;
 import engine.notifications.NotificationSystem;
+import engine.saving.TokenizedSaveFile;
 import org.lwjgl.glfw.GLFW;
+import saving.SavedGame;
 import stats.inventory.items.Item;
 import stats.inventory.items.ItemDefinition;
 import stats.inventory.items.ui.HotbarComponent;
@@ -24,6 +26,7 @@ import tool.editor.EditorToolState;
 import tool.editor.JSONSaver;
 import tool.editor.TilePartLoader;
 
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -41,8 +44,10 @@ public class Main {
         font = new Font("res/Unnamed");
 
         TilePartLoader.font = font;
+        var s = new TokenizedSaveFile();
+        s.readAndOverride(new FileReader("saves/save.save"));
 
-        final var game = new Game(draw, .1f);
+        final var game = new Game(draw, .1f, new SavedGame(s));
 
         GUI.init();
         GUI.bindDrawManager(draw);
@@ -70,10 +75,6 @@ public class Main {
 
 
         CraftingStationTilePart.setDefaultFont(font);
-        game.player.items.add(new Item(ItemDefinition.get("base:weapons:broken_dagger")));
-        game.player.items.add(new Item(ItemDefinition.get("base:weapons:broken_sword")));
-        game.player.items.add(new Item(ItemDefinition.get("base:tools:broken_axe")));
-        game.player.items.add(new Item(ItemDefinition.get("base:tools:broken_pickaxe")));
 
         GUI.add(new HealthBar(game.player), 62);
 
@@ -169,5 +170,6 @@ public class Main {
         }
         if (DEBUG_MODE)
             JSONSaver.save(game.world.map).write(new FileWriter(game.world.address));
+        game.save().save().writeToFile(new FileWriter("saves/save.save"));
     }
 }

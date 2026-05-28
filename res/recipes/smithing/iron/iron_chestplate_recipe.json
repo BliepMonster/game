@@ -1,0 +1,31 @@
+{
+  "name": "Iron Chestplate",
+
+  "inputs": [
+    {
+      "type": "resource",
+      "id": "Iron Bar",
+      "amount": 5
+    }
+  ],
+
+  "outputs": [
+    {
+      "type": "item",
+      "id": "base:armor:iron_chestplate",
+      "amount": 1
+    }
+  ],
+  "requirements": [
+    {
+      "type": "skill",
+      "skill": "MINING",
+      "level": 5
+    },
+    {
+      "type": "skill",
+      "skill": "COMBAT",
+      "level": 3
+    }
+  ]
+}

@@ -1,5 +1,7 @@
 package crafting.json;
 
+import combat.abilities.AbilityItemDefinition;
+import combat.abilities.AbilityRegistry;
 import combat.equipment.EquipmentItemDefinition;
 import combat.equipment.EquipmentSlot;
 import combat.melee.ConeWeaponDefinition;
@@ -11,7 +13,37 @@ import entities.DamageType;
 import stats.StatHolder;
 import stats.inventory.items.*;
 
+// How would this work with items with custom abilities?
+
 public class JsonItemLoader {
+    private static EffectConsumableItemDefinition loadConsumable(JsonFile file, String id, String name, String description, Texture texture) {
+        var stats = JsonStatLoader.load((JsonArray) file.values.get("stats"));
+        int duration = (int) ((JsonNumber) file.values.get("duration")).num;
+        String eid = ((JsonString) file.values.get("eid")).value;
+        return new EffectConsumableItemDefinition(
+                id,
+                name,
+                description,
+                texture,
+                stats,
+                duration,
+                eid
+        );
+    }
+    private static AbilityItemDefinition loadAbility(JsonFile file, String id, String name, String description, Texture texture) {
+        String ability = ((JsonString) file.values.get("ability")).value;
+        int cooldown = (int) ((JsonNumber) file.values.get("cooldown")).num;
+        var stats = JsonStatLoader.load((JsonArray) file.values.get("stats"));
+        return new AbilityItemDefinition(
+                id,
+                name,
+                description,
+                texture,
+                stats,
+                cooldown,
+                AbilityRegistry.registry.get(ability)
+        );
+    }
     private static EquipmentItemDefinition loadEquipment(JsonFile file, String id, String name, String description, Texture texture) {
         String slot = ((JsonString) file.values.get("slot")).value;
         StatHolder stats = JsonStatLoader.load((JsonArray) file.values.get("stats"));
@@ -93,6 +125,8 @@ public class JsonItemLoader {
             case "food" -> loadFood(file, id, name, description, texture);
             case "tool" -> loadTool(file, id, name, description, texture);
             case "melee" -> loadMelee(file, id, name, description, texture);
+            case "ability" -> loadAbility(file, id, name, description, texture);
+            case "consumable" -> loadConsumable(file, id, name, description, texture);
             default -> throw new RuntimeException(type);
         };
     }

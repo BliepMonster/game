@@ -8,6 +8,9 @@ import engine.json.JsonParser;
 import entities.Entity;
 import entities.Player;
 import org.joml.Vector2f;
+import saving.PlayerSaver;
+import saving.SavedGame;
+import tiles.Tile;
 
 import java.util.List;
 
@@ -18,12 +21,13 @@ public class Game implements GameContext {
         return ticks;
     }
     World world;
-    final Player player = new Player();
+    final Player player;
     private final Camera camera;
     public Player getPlayer() {
         return player;
     }
-    public Game(DrawManager draw, float tsize) {
+    public Game(DrawManager draw, float tsize, SavedGame save) {
+        player = new Player(save.player());
         world = World.of(new JsonParser().parse(FileUtils.readAllOrEmpty("res/maps/home.json")), "res/maps/home.json", this);
         camera = new Camera(player, tsize, draw);
     }
@@ -53,5 +57,13 @@ public class Game implements GameContext {
     }
     public void spawn(Entity entity) {
         world.spawn(entity);
+    }
+    public Tile getTile(int x, int y) {
+        return world.map.get(x, y).orElse(null);
+    }
+    public SavedGame save() {
+        return new SavedGame(
+                PlayerSaver.savePlayer(player)
+        );
     }
 }

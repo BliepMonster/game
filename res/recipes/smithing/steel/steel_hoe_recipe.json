@@ -1,0 +1,36 @@
+{
+  "name": "Steel Hoe",
+
+  "inputs": [
+    {
+      "type": "resource",
+      "id": "Steel Bar",
+      "amount": 2
+    },
+    {
+      "type": "resource",
+      "id": "Maple Wood",
+      "amount": 1
+    }
+  ],
+
+  "outputs": [
+    {
+      "type": "item",
+      "id": "base:tools:steel_hoe",
+      "amount": 1
+    }
+  ],
+  "requirements": [
+    {
+      "type": "skill",
+      "skill": "MINING",
+      "level": 10
+    },
+    {
+      "type": "skill",
+      "skill": "FARMING",
+      "level": 5
+    }
+  ]
+}

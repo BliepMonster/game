@@ -1,0 +1,29 @@
+{
+  "name": "Carrot Cake",
+  "inputs": [
+    {
+      "type": "resource",
+      "id": "Carrot",
+      "amount": 25
+    },
+    {
+      "type": "resource",
+      "id": "Flour",
+      "amount": 10
+    }
+  ],
+  "outputs": [
+    {
+      "type": "item",
+      "id": "base:food:carrot_cake",
+      "amount": 1
+    }
+  ],
+  "requirements": [
+    {
+      "type": "skill",
+      "skill": "FARMING",
+      "level": 4
+    }
+  ]
+}

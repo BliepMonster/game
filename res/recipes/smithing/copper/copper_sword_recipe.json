@@ -1,0 +1,36 @@
+{
+  "name": "Copper Sword",
+
+  "inputs": [
+    {
+      "type": "resource",
+      "id": "Copper Bar",
+      "amount": 3
+    },
+    {
+      "type": "resource",
+      "id": "Maple Wood",
+      "amount": 1
+    }
+  ],
+
+  "outputs": [
+    {
+      "type": "item",
+      "id": "base:tools:copper_sword",
+      "amount": 1
+    }
+  ],
+  "requirements": [
+    {
+      "type": "skill",
+      "skill": "MINING",
+      "level": 3
+    },
+    {
+      "type": "skill",
+      "skill": "COMBAT",
+      "level": 1
+    }
+  ]
+}

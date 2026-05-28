@@ -1,0 +1,13 @@
+{
+  "type": "equipment",
+  "id": "base:armor:iron_chestplate",
+  "name": "Iron Chestplate",
+  "texture": "res/iron_chestplate.png",
+  "stats": [
+    {
+      "type": "DEFENSE",
+      "count": 35
+    }
+  ],
+  "slot": "CHESTPLATE"
+}

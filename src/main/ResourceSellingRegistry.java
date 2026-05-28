@@ -25,5 +25,6 @@ public final class ResourceSellingRegistry {
         register(ItemConstants.ITEM_WHEAT, 3);
         register(ItemConstants.ITEM_POTATO, 6);
         register(ItemConstants.ITEM_FLOUR, 35);
+        register(ItemConstants.ITEM_BOWL, 12);
     }
 }

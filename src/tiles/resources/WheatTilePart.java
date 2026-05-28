@@ -1,6 +1,5 @@
 package tiles.resources;
 
-import engine.core.DrawManager;
 import engine.json.JsonString;
 import engine.json.JsonValue;
 import main.Camera;
@@ -14,7 +13,7 @@ import java.awt.*;
 
 import static java.awt.Color.*;
 
-public class WheatTilePart extends ResourceCreator {
+public class WheatTilePart extends CropTilePart {
     public static final Color UNREADY = new Color(128, 222, 117);
     public static final ResourceDefinition DEFINITION = new ResourceDefinition(ItemConstants.ITEM_WHEAT, 3, 1, SkillSet.SkillType.FARMING, StatHolder.Stat.FARMING_YIELD, Game.TICKS_PER_SECOND*10);
     public WheatTilePart() {

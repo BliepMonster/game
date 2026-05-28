@@ -1,6 +1,8 @@
 package stats.inventory.resources;
 
 import org.jetbrains.annotations.NotNull;
+import saving.SavedItemInventory;
+import saving.SavedStorage;
 
 import java.util.*;
 
@@ -24,6 +26,12 @@ public final class InventoryStorage implements Iterable<Map.Entry<String, Intege
             return inventory.get(name) >= amount;
         }
         return false;
+    }
+    public InventoryStorage() {}
+    public InventoryStorage(SavedStorage storage) {
+        for (var pair : storage.entries()) {
+            add(pair.key(), pair.value());
+        }
     }
 
     // This method does not care whether you have enough. Please check before using this method.

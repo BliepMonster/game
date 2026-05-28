@@ -1,5 +1,6 @@
 package tiles.resources;
 
+import engine.core.Texture;
 import engine.json.JsonString;
 import engine.json.JsonValue;
 import main.Camera;
@@ -28,9 +29,14 @@ public class MapleTreePart extends HittableResourceCreator {
     public MapleTreePart() {
         super(DESCRIPTION);
     }
-    public static final Color COLOR = new Color(200, 100, 0);
+    public static final Texture TEXTURE = new Texture("res/maple_tree.png");
+    public static final Texture OUTLINE = new Texture("res/maple_tree_outline.png");
     public void renderReady(int lastHitTick, boolean wasSuccessful, int x, int y, float remainingHealth, Camera camera) {
-        camera.addRenderJob(() -> camera.rect(Game.getTickCount() - lastHitTick > 5 ? COLOR : wasSuccessful ? Color.RED : Color.ORANGE, x, y, 1, 2), -y);
+        if (Game.getTickCount() - lastHitTick <= 5) {
+            camera.addRenderJob(() -> camera.tintedImage(OUTLINE, wasSuccessful ? Color.red : Color.orange, x, y, 1, 2), -y);
+        } else {
+            camera.addRenderJob(() -> camera.image(TEXTURE, x, y, 1, 2), -y);
+        }
     }
     public void renderUnready(int x, int y, Camera camera) {}
 

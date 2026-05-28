@@ -3,6 +3,7 @@ package tiles.resources;
 import engine.jobs.Job;
 import engine.jobs.JobActor;
 import engine.jobs.JobSystem;
+import engine.notifications.NotificationSystem;
 import engine.saving.objects.SavedObject;
 import main.Camera;
 import main.Game;
@@ -10,6 +11,8 @@ import main.GameContext;
 import main.YieldUtils;
 import stats.inventory.items.ToolItemDefinition;
 import tiles.TilePart;
+
+import java.awt.*;
 
 public abstract class HittableResourceCreator extends TilePart implements JobActor {
     private final HittableResourceDescription description;
@@ -48,6 +51,7 @@ public abstract class HittableResourceCreator extends TilePart implements JobAct
         lastHitTick = Game.getTickCount();
         if (context.getPlayer().skills.get(description.skill()).getLevel() < description.levelRequirement()) {
             wasLastHitValid = false;
+            NotificationSystem.add("You need "+context.getPlayer().skills.get(description.skill()).getName()+" level "+description.levelRequirement()+"!", Color.RED);
             return;
         }
         if (power == 0) {

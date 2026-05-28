@@ -1,11 +1,15 @@
 package stats.inventory;
 
+import saving.SavedCurrencyHolder;
 import tiles.npc.Currency;
 
 public class CurrencyStorage {
     private int coins;
     public CurrencyStorage(int coins) {
         this.coins = coins;
+    }
+    public CurrencyStorage(SavedCurrencyHolder holder) {
+        this.coins = holder.coins();
     }
     public boolean hasCoins(int coins) {
         return this.coins >= coins;

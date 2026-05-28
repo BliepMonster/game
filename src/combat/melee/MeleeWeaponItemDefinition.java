@@ -45,7 +45,14 @@ public abstract class MeleeWeaponItemDefinition extends ItemDefinition {
         var stats = context.getPlayer().stats;
         for (var entity : entities) {
             if (entity.isAttackable() && canHit(entity, worldPos, context)) {
-                entity.damage((int) (stats.get(StatHolder.Stat.DAMAGE)*stats.get(StatHolder.Stat.STRENGTH)/100), type, context);
+                var cc = stats.get(StatHolder.Stat.CRIT_CHANCE);
+                var cd = stats.get(StatHolder.Stat.CRIT_DAMAGE);
+                var chance = cc % 100;
+                var mul = (cc-chance)/100;
+                float ccount = mul;
+                if (Math.random() < chance/100) ccount++;
+                var dmg = (int) ((stats.get(StatHolder.Stat.DAMAGE)*stats.get(StatHolder.Stat.STRENGTH)/100)*ccount*cd);
+                entity.damage(dmg, type, context);
                 float angle = (float)Math.atan2(worldPos.y - context.getPlayer().getY(), worldPos.x - context.getPlayer().getX());
                 angle += (float) ((Math.random() - 0.5f) * 0.8f);
                 Vector2f result = new Vector2f(

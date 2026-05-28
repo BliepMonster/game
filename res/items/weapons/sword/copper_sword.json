@@ -1,0 +1,16 @@
+{
+  "type": "melee",
+  "id": "base:weapons:copper_sword",
+  "name": "Copper Sword",
+  "texture": "res/copper_sword.png",
+
+  "knockback": 1.5,
+  "damage_type": "NORMAL",
+  "stats": [],
+  "melee_type": "cone",
+  "damage": 35,
+  "cooldown": 13,
+
+  "range": 5,
+  "angle": 20
+}

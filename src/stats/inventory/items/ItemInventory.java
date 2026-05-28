@@ -1,6 +1,7 @@
 package stats.inventory.items;
 
 import combat.equipment.EquipmentSlot;
+import saving.SavedItemInventory;
 
 import java.util.EnumMap;
 import java.util.Optional;
@@ -16,6 +17,16 @@ public class ItemInventory {
     In this case, the first 9 represent the hotbar items, while the last 36 are pure 'inventory' items.
     */
     private final Item[] items = new Item[NUM_ITEMS];
+    public ItemInventory() {}
+    public ItemInventory(SavedItemInventory inventory) {
+        for (int i = 0; i < inventory.slots().length; ++i) {
+            equipment.put(inventory.slots()[i], new Item(inventory.equipment()[i]));
+        }
+        for (int i = 0; i < NUM_ITEMS; ++i) {
+            var item = inventory.items()[i];
+            if (item != null) items[i] = new Item(item);
+        }
+    }
     public boolean add(Item item) {
         for (int i = 0; i < NUM_ITEMS; i++) {
             if (items[i] == null) {

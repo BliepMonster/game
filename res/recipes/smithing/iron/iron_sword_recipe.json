@@ -1,0 +1,36 @@
+{
+  "name": "Iron Sword",
+
+  "inputs": [
+    {
+      "type": "resource",
+      "id": "Iron Bar",
+      "amount": 3
+    },
+    {
+      "type": "resource",
+      "id": "Maple Wood",
+      "amount": 1
+    }
+  ],
+
+  "outputs": [
+    {
+      "type": "item",
+      "id": "base:tools:iron_sword",
+      "amount": 1
+    }
+  ],
+  "requirements": [
+    {
+      "type": "skill",
+      "skill": "MINING",
+      "level": 5
+    },
+    {
+      "type": "skill",
+      "skill": "COMBAT",
+      "level": 3
+    }
+  ]
+}

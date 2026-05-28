@@ -1,0 +1,36 @@
+{
+  "name": "Steel Sword",
+
+  "inputs": [
+    {
+      "type": "resource",
+      "id": "Steel Bar",
+      "amount": 3
+    },
+    {
+      "type": "resource",
+      "id": "Maple Wood",
+      "amount": 1
+    }
+  ],
+
+  "outputs": [
+    {
+      "type": "item",
+      "id": "base:tools:steel_sword",
+      "amount": 1
+    }
+  ],
+  "requirements": [
+    {
+      "type": "skill",
+      "skill": "MINING",
+      "level": 10
+    },
+    {
+      "type": "skill",
+      "skill": "COMBAT",
+      "level": 5
+    }
+  ]
+}

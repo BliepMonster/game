@@ -8,9 +8,9 @@ import java.awt.*;
 public abstract class SimpleSkill extends Skill {
     private final int MAX;
     private final float MULTIPLIER;
-    private int level = 0;
-    private int xp = 0;
-    private int needed;
+    protected int level = 0;
+    protected int xp = 0;
+    protected int needed;
     private final String name;
     public SimpleSkill(int max, float multiplier, int needed, String name) {
         MAX = max;

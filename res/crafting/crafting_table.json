@@ -2,6 +2,7 @@
   "recipes": [
     "res/recipes/flour_recipe.json",
     "res/recipes/bread_recipe.json",
-    "res/recipes/weapons/wooden_club_recipe.json"
+    "res/recipes/weapons/wooden_club_recipe.json",
+    "res/recipes/farmer_stew_recipe.json"
   ]
 }

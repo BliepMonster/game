@@ -12,15 +12,27 @@ import tiles.TilePart;
 
 public abstract class ResourceCreator extends TilePart implements JobActor {
     public final ResourceDefinition definition;
-    private boolean ready = true;
+    protected boolean ready = true;
     public ResourceCreator(ResourceDefinition definition) {
         this.definition = definition;
     }
     public void onClick(GameContext context) {
+        use(context);
+    }
+    public void use(GameContext context) {
         if (ready) {
             ready = false;
             var player = context.getPlayer();
             player.inventory.add(this.definition.itemID(), YieldUtils.getYieldEffect(this.definition.yield(), player.stats.get(this.definition.modifier())));
+            player.skills.giveXP(definition.skillID(), definition.xp());
+            JobSystem.addJob(new ResourceJob(this, (float) definition.respawnTicks()/ Game.TICKS_PER_SECOND));
+        }
+    }
+    public void penalty(GameContext context, float penalty) {
+        if (ready) {
+            ready = false;
+            var player = context.getPlayer();
+            player.inventory.add(this.definition.itemID(), YieldUtils.getYieldEffect(this.definition.yield(), player.stats.get(this.definition.modifier())*penalty));
             player.skills.giveXP(definition.skillID(), definition.xp());
             JobSystem.addJob(new ResourceJob(this, (float) definition.respawnTicks()/ Game.TICKS_PER_SECOND));
         }

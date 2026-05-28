@@ -1,5 +1,6 @@
 package stats.skills;
 
+import saving.SavedSkillSet;
 import stats.StatHolder;
 
 import static stats.skills.SkillSet.SkillType.*;
@@ -14,6 +15,12 @@ public class SkillSet {
     public static final int SKILL_COMBAT = COMBAT.ordinal();
     public static final int SKILL_MINING = MINING.ordinal();
     private final Skill[] skills = new Skill[NUM_SKILLS];
+    public SkillSet(SavedSkillSet set) {
+        skills[SKILL_FORAGING] = new ForagingSkill(set.skills()[FORAGING.ordinal()]);
+        skills[SKILL_FARMING] = new FarmingSkill(set.skills()[FARMING.ordinal()]);
+        skills[SKILL_COMBAT] = new CombatSkill(set.skills()[COMBAT.ordinal()]);
+        skills[SKILL_MINING] = new MiningSkill(set.skills()[MINING.ordinal()]);
+    }
     public SkillSet() {
         skills[SKILL_FORAGING] = new ForagingSkill();
         skills[SKILL_FARMING] = new FarmingSkill();

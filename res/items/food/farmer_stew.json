@@ -1,0 +1,14 @@
+{
+  "type": "consumable",
+  "id": "base:food:farmer_stew",
+  "name": "Farmer's Stew",
+  "texture": "res/farmer_stew.png",
+  "stats": [
+    {
+      "type": "FARMING_YIELD",
+      "count": 20
+    }
+  ],
+  "duration": 2000,
+  "eid": "farmer_stew"
+}

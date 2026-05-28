@@ -1,21 +1,32 @@
 {
   "recipes": [
-    "res/recipes/smithing/copper_bar_recipe.json",
-    "res/recipes/smithing/copper_boots_recipe.json",
-    "res/recipes/smithing/copper_leggings_recipe.json",
-    "res/recipes/smithing/copper_chestplate_recipe.json",
-    "res/recipes/smithing/copper_helmet_recipe.json",
-    "res/recipes/smithing/copper_pickaxe_recipe.json",
-    "res/recipes/smithing/copper_axe_recipe.json",
-    "res/recipes/smithing/iron_bar_recipe.json",
+    "res/recipes/smithing/copper/copper_bar_recipe.json",
+    "res/recipes/smithing/copper/copper_boots_recipe.json",
+    "res/recipes/smithing/copper/copper_leggings_recipe.json",
+    "res/recipes/smithing/copper/copper_chestplate_recipe.json",
+    "res/recipes/smithing/copper/copper_helmet_recipe.json",
+    "res/recipes/smithing/copper/copper_pickaxe_recipe.json",
+    "res/recipes/smithing/copper/copper_hoe_recipe.json",
+    "res/recipes/smithing/copper/copper_axe_recipe.json",
+    "res/recipes/smithing/copper/copper_sword_recipe.json",
+
+    "res/recipes/smithing/iron/iron_bar_recipe.json",
     "res/recipes/smithing/reinforced_copper_boots_recipe.json",
     "res/recipes/smithing/reinforced_copper_leggings_recipe.json",
     "res/recipes/smithing/reinforced_copper_chestplate_recipe.json",
     "res/recipes/smithing/reinforced_copper_helmet_recipe.json",
-    "res/recipes/smithing/iron_pickaxe_recipe.json",
-    "res/recipes/smithing/iron_axe_recipe.json",
-    "res/recipes/smithing/steel_bar_recipe.json",
-    "res/recipes/smithing/steel_pickaxe_recipe.json",
-    "res/recipes/smithing/steel_axe_recipe.json"
+    "res/recipes/smithing/iron/iron_boots_recipe.json",
+    "res/recipes/smithing/iron/iron_leggings_recipe.json",
+    "res/recipes/smithing/iron/iron_chestplate_recipe.json",
+    "res/recipes/smithing/iron/iron_helmet_recipe.json",
+    "res/recipes/smithing/iron/iron_pickaxe_recipe.json",
+    "res/recipes/smithing/iron/iron_hoe_recipe.json",
+    "res/recipes/smithing/iron/iron_sword_recipe.json",
+
+    "res/recipes/smithing/steel/steel_bar_recipe.json",
+    "res/recipes/smithing/steel/steel_pickaxe_recipe.json",
+    "res/recipes/smithing/steel/steel_axe_recipe.json",
+    "res/recipes/smithing/steel/steel_hoe_recipe.json",
+    "res/recipes/smithing/steel/steel_sword_recipe.json"
   ]
 }
