@@ -15,4 +15,5 @@ public final class ItemConstants {
     public static final String ITEM_STEEL_BAR = "Steel Bar";
     public static final String ITEM_IRON_BAR = "Iron Bar";
     public static final String ITEM_BOWL = "Bowl";
+    public static final String ITEM_GOLD_ORE = "Gold Ore";
 }

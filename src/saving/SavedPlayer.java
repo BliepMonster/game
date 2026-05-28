@@ -12,8 +12,6 @@ public record SavedPlayer(
         SavedCurrencyHolder currency,
         SavedItemInventory items, //
         SavedStorage storage,
-        float x,
-        float y,
         SavedStatusEffect[] statusEffects,
         float health,
         SavedSkillSet skills
@@ -31,8 +29,6 @@ public record SavedPlayer(
                 new SavedCurrencyHolder(dict.get("currency")),
                 new SavedItemInventory((SavedDictionary) dict.get("items")),
                 new SavedStorage(dict.get("storage")),
-                (float) dict.get("x").get(),
-                (float) dict.get("y").get(),
                 decodeStatuses((SavedArray) dict.get("status")),
                 (float) dict.get("hp").get(),
                 new SavedSkillSet(dict.get("skills"))
@@ -43,8 +39,6 @@ public record SavedPlayer(
         map.put("currency", currency.save());
         map.put("items", items.save());
         map.put("storage", storage.save());
-        map.put("x", new SavedFloat(x));
-        map.put("y", new SavedFloat(y));
         SavedArray array = new SavedArray(new ArrayList<>());
         for (var effect : statusEffects) {
             array.add(effect.save());

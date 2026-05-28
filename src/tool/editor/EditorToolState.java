@@ -1,11 +1,12 @@
 package tool.editor;
 
 import engine.CoordinateMap;
+import engine.core.Texture;
 import main.GameContext;
+import main.WorldRegistry;
 import org.joml.Vector2f;
 import tiles.*;
-import tiles.npc.ShopDefinitionRegistry;
-import tiles.npc.ShopNPC;
+import tiles.doors.EntranceTilePart;
 import tiles.resources.*;
 
 public enum EditorToolState {
@@ -28,8 +29,8 @@ public enum EditorToolState {
             case O5 -> tile.setPart(new TombstoneTilePart());
             case O6 -> tile.setPart(null);
             case O7 -> map.put(x, y, new DefaultTile(TileType.DIRT_PATH));
-            case O8 -> map.put(x, y, new DefaultTile(TileType.GRASS));
-            case O9 -> tile.setPart(new ZombieSpawner(new Vector2f(x, y), context));
+            case O8 -> map.put(x, y, new DefaultTile(TileType.WALL));
+            case O9 -> tile.setPart(new GoldOrePart());
         }
     }
 }

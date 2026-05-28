@@ -2,6 +2,7 @@ package tool.editor;
 
 import engine.CoordinateMap;
 import engine.json.*;
+import main.World;
 import tiles.Tile;
 
 record TwoObjects(JsonValue o1, JsonValue o2) {}
@@ -40,11 +41,12 @@ public class JSONSaver {
         }
         return new TwoObjects(map, map2);
     }
-    public static JsonFile save(CoordinateMap<Tile> tiles) {
+    public static JsonFile save(World world, CoordinateMap<Tile> tiles) {
         var file = new JsonFile();
         var objects = saveTiles(tiles);
         file.values.put("tiles", objects.o1());
         file.values.put("objects", objects.o2());
+        file.values.put("id", new JsonString(world.getID()));
         return file;
     }
 }

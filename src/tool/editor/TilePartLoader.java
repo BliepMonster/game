@@ -1,15 +1,21 @@
 package tool.editor;
 
+import engine.core.Texture;
 import engine.core.text.Font;
+import engine.json.JsonNumber;
 import engine.json.JsonObject;
 import engine.json.JsonString;
 import main.GameContext;
+import main.WorldRegistry;
 import org.joml.Vector2f;
 import org.joml.Vector2i;
 import tiles.*;
+import tiles.doors.EntranceTilePart;
 import tiles.npc.ShopDefinitionRegistry;
 import tiles.npc.ShopNPC;
 import tiles.resources.*;
+
+import java.util.HashMap;
 
 public final class TilePartLoader {
     public static final String ID_IRON_ORE = "iron_ore";
@@ -25,7 +31,24 @@ public final class TilePartLoader {
     public static final String ID_SHOP_NPC = "shop_npc";
     public static final String ID_TOMBSTONE = "tombstone";
     public static final String ID_ZOMBIE_SPAWNER = "zombie_spawner";
+    public static final String ID_ENTRANCE = "entrance";
+    public static final String ID_GOLD_ORE = "gold_ore";
     public static Font font;
+    public static final HashMap<String, Texture> tcache = new HashMap<>();
+
+    public static EntranceTilePart loadEntrance(JsonObject object) {
+        var tid = ((JsonString) object.values.get("texture_id")).value;
+        if (!tcache.containsKey(tid)) tcache.put(tid, new Texture(tid));
+        var wid = ((JsonString) object.values.get("world_id"));
+        return new EntranceTilePart(
+                wid.value,
+                new Vector2f(
+                        ((JsonNumber) object.values.get("x")).num,
+                        ((JsonNumber) object.values.get("y")).num
+                ),
+                tcache.get(tid)
+        );
+    }
 
     public static TilePart load(Vector2i position, JsonObject obj, GameContext context) {
         String type = ((JsonString) obj.values.get("type")).value;
@@ -44,6 +67,8 @@ public final class TilePartLoader {
             case ID_TOMBSTONE -> new TombstoneTilePart();
             case ID_ZOMBIE_SPAWNER -> new ZombieSpawner(new Vector2f(position.x, position.y), context);
             case ID_FURNACE -> new FurnaceTilePart();
+            case ID_ENTRANCE -> loadEntrance(obj);
+            case ID_GOLD_ORE -> new GoldOrePart();
             default -> throw new RuntimeException("Unknown object: " + type);
         };
     }

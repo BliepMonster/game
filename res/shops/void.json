@@ -1,0 +1,60 @@
+{
+  "name": "Void",
+  "id": "void",
+  "texture": "res/npc_test.png",
+  "height": 1.5,
+  "entries": [
+    {
+      "requirements": [],
+      "ingredients": [],
+      "price": {
+        "currency": "COINS",
+        "amount": 500
+      },
+      "texture": "res/broken_pickaxe.png",
+      "result": {
+        "type": "item",
+        "id": "base:tools:broken_pickaxe"
+      }
+    },
+    {
+      "requirements": [],
+      "ingredients": [],
+      "price": {
+        "currency": "COINS",
+        "amount": 500
+      },
+      "texture": "res/broken_axe.png",
+      "result": {
+        "type": "item",
+        "id": "base:tools:broken_axe"
+      }
+    },
+    {
+      "requirements": [],
+      "ingredients": [],
+      "price": {
+        "currency": "COINS",
+        "amount": 600
+      },
+      "texture": "res/broken_sword.png",
+      "result": {
+        "type": "item",
+        "id": "base:weapons:broken_sword"
+      }
+    },
+    {
+      "requirements": [],
+      "ingredients": [],
+      "price": {
+        "currency": "COINS",
+        "amount": 400
+      },
+      "texture": "res/broken_dagger.png",
+      "result": {
+        "type": "item",
+        "id": "base:weapons:broken_dagger"
+      }
+    }
+  ]
+}

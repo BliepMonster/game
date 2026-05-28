@@ -23,12 +23,13 @@ public class ConeWeaponDefinition extends MeleeWeaponItemDefinition {
     private boolean canHit(Vector2f entity, Vector2f direction, Player player) {
         var vectorToEntity = new Vector2f(entity.x - player.getX(), entity.y - player.getY());
         var distanceToEntity = vectorToEntity.length();
+        vectorToEntity.normalize();
         var angle = vectorToEntity.angle(direction);
-        return angle <= this.angle && distanceToEntity <= size;
+        return Math.abs(angle) <= this.angle && distanceToEntity <= size;
     }
     public boolean canHit(Entity entity, Vector2f hitLocation, GameContext context) {
         var player = context.getPlayer();
-        var direction = CACHE2.set(hitLocation.x - player.getX(), hitLocation.y - player.getY());
+        var direction = CACHE2.set(hitLocation.x - player.getX(), hitLocation.y - player.getY()).normalize();
         return canHit(CACHE.set(entity.getX(), entity.getY()), direction, player)
                 || canHit(CACHE.set(entity.getX()+entity.getWidth(), entity.getY()), direction, player)
                 || canHit(CACHE.set(entity.getX(), entity.getY()+entity.getHeight()), direction, player)

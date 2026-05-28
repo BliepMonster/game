@@ -31,14 +31,13 @@ public class Player implements Entity {
     private final ArrayList<VelocityChange> velocityChanges = new ArrayList<>();
     private final Vector2f position = new Vector2f();
     private final Hitbox step = new RectangularHitbox(.075f, 0, .85f, .2f, this);
-    public StatHolder stats = new StatHolder();
+    public StatHolder stats;
     private int selectedHotbarSlot = 0;
     public final ItemInventory items;
     public final InventoryStorage inventory;
     public final SkillSet skills;
     private int ticksTo = 0;
     private int ticksSinceLastDamage = 0;
-    private int ticksSinceLastHeal = 0;
     private float health = 100;
     public final CurrencyStorage currency;
     public final HashSet<StatusEffect> effects = new HashSet<>();
@@ -52,8 +51,6 @@ public class Player implements Entity {
         this.currency = new CurrencyStorage(player.currency());
         this.skills = new SkillSet(player.skills());
         this.inventory = new InventoryStorage(player.storage());
-        this.position.x = player.x();
-        this.position.y = player.y();
         for (var effect : player.statusEffects()) {
             effects.add(new StatusEffect(effect));
         }
@@ -90,13 +87,11 @@ public class Player implements Entity {
 
     @Override
     public void tick(GameContext context) {
-        if (ticksTo++ == 3) {
+        if (ticksTo++ == 3 || stats == null) {
             updateStats(context);
             ticksTo = 0;
-        } if (ticksSinceLastHeal++ == Game.TICKS_PER_SECOND) {
-            heal(stats.get(StatHolder.Stat.MAX_HEALTH)/100); // heal 1% per second
-            ticksSinceLastHeal = Game.getTickCount();
         }
+        heal(stats.get(StatHolder.Stat.MAX_HEALTH)/(100*TICKS_PER_SECOND)); // heal 1% per second
         velocityChanges.removeIf(VelocityChange::canBeRemoved);
         ticksSinceLastDamage++;
     }
@@ -225,5 +220,8 @@ public class Player implements Entity {
     }
     public void addEffect(StatusEffect effect) {
         effects.add(effect);
+    }
+    public Vector2f getPosition() {
+        return position;
     }
 }

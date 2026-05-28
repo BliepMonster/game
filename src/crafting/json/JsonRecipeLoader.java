@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.function.Supplier;
 
 public class JsonRecipeLoader {
-    private static ItemRequirement loadIReq(JsonObject object) {
+    public static ItemRequirement loadIReq(JsonObject object) {
         JsonValue typej = object.values.get("type");
         if (!(typej instanceof JsonString typestr)) throw new RuntimeException("required string for type field");
         if (typestr.value.equals("item")) {
@@ -25,7 +25,7 @@ public class JsonRecipeLoader {
             return new ResourceRequirement(name, amount);
         } else throw new RuntimeException("expected 'item' or 'resource'");
     }
-    private static ItemRequirement[] loadIReqs(JsonArray array) {
+    public static ItemRequirement[] loadIReqs(JsonArray array) {
         var reqs = new ItemRequirement[array.values.size()];
         for (int i = 0; i < array.values.size(); ++i) {
             reqs[i] = loadIReq((JsonObject) array.values.get(i));
@@ -47,7 +47,7 @@ public class JsonRecipeLoader {
             default -> throw new RuntimeException(s);
         };
     }
-    private static PreCraftRequirement[] loadPReqs(JsonArray array) {
+    public static PreCraftRequirement[] loadPReqs(JsonArray array) {
         if (array == null) return new PreCraftRequirement[0];
         var reqs = new PreCraftRequirement[array.values.size()];
         for (int i = 0; i < reqs.length; i++) {

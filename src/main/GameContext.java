@@ -13,4 +13,5 @@ public interface GameContext {
     List<Entity> getEntities();
     void spawn(Entity entity);
     Tile getTile(int x, int y);
+    void movePlayer(World world, Vector2f position);
 }

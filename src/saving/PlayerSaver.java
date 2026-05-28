@@ -76,8 +76,6 @@ public class PlayerSaver {
                 saveCurrency(player.currency),
                 saveItems(player.items),
                 saveStorage(player.inventory),
-                player.getX(),
-                player.getY(),
                 saveStatusEffects(player.effects),
                 player.getHealth(),
                 saveSkills(player.skills)

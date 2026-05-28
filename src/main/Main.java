@@ -22,6 +22,7 @@ import stats.ui.CoinDisplayComponent;
 import stats.ui.HealthBar;
 import tiles.CraftingStationTilePart;
 import tiles.npc.Currency;
+import tiles.npc.JsonShopDefinitionLoader;
 import tool.editor.EditorToolState;
 import tool.editor.JSONSaver;
 import tool.editor.TilePartLoader;
@@ -38,6 +39,7 @@ public class Main {
         final var console = new Console();
         screen.create(console, Screen.MAXIMIZED);
         StaticItemLoader.initAll();
+        JsonShopDefinitionLoader.registerAll();
 
         final var draw = new DrawManager(screen);
 
@@ -145,7 +147,7 @@ public class Main {
                 else if (Input.isKeyDown(GLFW.GLFW_KEY_8)) mode = EditorToolState.O8;
                 else if (Input.isKeyDown(GLFW.GLFW_KEY_9)) mode = EditorToolState.O9;
                 else if (Input.isKeyDown(GLFW.GLFW_KEY_S))
-                    JSONSaver.save(game.world.map).write(new FileWriter(game.world.address));
+                    JSONSaver.save(game.world, game.world.map).write(new FileWriter(game.world.address));
                 if (Input.isMouseDown(GLFW.GLFW_MOUSE_BUTTON_1))
                     game.world.apply(mode, Input.getMouseX(screen), Input.getMouseY(screen), game, .1f);
             } if (framestamp - lastTick >= tickRate) {
@@ -169,7 +171,7 @@ public class Main {
             screen.display();
         }
         if (DEBUG_MODE)
-            JSONSaver.save(game.world.map).write(new FileWriter(game.world.address));
+            JSONSaver.save(game.world, game.world.map).write(new FileWriter(game.world.address));
         game.save().save().writeToFile(new FileWriter("saves/save.save"));
     }
 }

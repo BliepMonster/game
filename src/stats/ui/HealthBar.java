@@ -21,6 +21,7 @@ public class HealthBar extends Component {
         w *= .8f;
         h *= .8f;
         draw.rect(Color.gray, x, y, w, h);
+        if (player.stats == null) return;
         h *= (player.getHealth()/player.stats.get(StatHolder.Stat.MAX_HEALTH));
         draw.rect(Color.green, x, y, w, h);
     }

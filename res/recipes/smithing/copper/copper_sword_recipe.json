@@ -17,7 +17,7 @@
   "outputs": [
     {
       "type": "item",
-      "id": "base:tools:copper_sword",
+      "id": "base:weapons:copper_sword",
       "amount": 1
     }
   ],

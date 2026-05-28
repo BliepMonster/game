@@ -27,7 +27,7 @@ public abstract class Tile {
         if (part != null) part.onClick(context);
     }
     public void onStand(GameContext context) {
-        if (part != null) part.onStand(null);
+        if (part != null) part.onStand(context);
         onSelfStand(context);
     }
     public abstract JsonValue save();
