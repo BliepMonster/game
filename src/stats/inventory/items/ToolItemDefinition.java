@@ -41,6 +41,7 @@ public class ToolItemDefinition extends ItemDefinition {
             return new ItemUseResult(Optional.of(item), false);
         }
         item.lastUse = Game.getTickCount();
+        if (tile == null) return new ItemUseResult(Optional.of(item), false);
         if (tile.getPart() == null) return new ItemUseResult(Optional.of(item), false);
         if (!(tile.getPart() instanceof HittableResourceCreator creator)) return new ItemUseResult(Optional.of(item), false);
         var type = creator.getPowerType();

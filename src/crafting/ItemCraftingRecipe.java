@@ -20,7 +20,7 @@ public class ItemCraftingRecipe implements CraftingRecipe {
         for (ItemRequirement requirement : ingredients) {
             if (!requirement.isMet(storage)) return false;
         }
-        return true;
+        return result.canCraft(storage);
     }
     public void craft(FullItemStorage storage, GameContext context) {
         // double check for safety

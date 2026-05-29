@@ -100,4 +100,11 @@ public class ItemInventory {
     public Item getEquipment(EquipmentSlot slot) {
         return equipment.get(slot);
     }
+    public int getRoomLeft() {
+        int i = 0;
+        for (int j = 0; j < NUM_ITEMS; ++j) {
+            if (get(j) == null) ++i;
+        }
+        return i;
+    }
 }

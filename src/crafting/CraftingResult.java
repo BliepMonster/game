@@ -21,4 +21,7 @@ public class CraftingResult {
             storage.storage.add(entry.getKey(), entry.getValue());
         }
     }
+    public boolean canCraft(FullItemStorage storage) {
+        return storage.inventory.getRoomLeft() >= items.length;
+    }
 }
