@@ -16,7 +16,6 @@ public interface Entity extends Positioned {
     void render(Camera camera);
     boolean shouldDie(GameContext context);
     Hitbox getHitbox();
-    Hitbox getWalkHitbox();
     void die(GameContext context);
     void damage(int damage, DamageType type, GameContext context);
     boolean isAttackable();

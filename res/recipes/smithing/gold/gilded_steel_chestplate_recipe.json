@@ -1,0 +1,36 @@
+{
+  "name": "Gilded Steel Chestplate",
+
+  "inputs": [
+    {
+      "type": "resource",
+      "id": "Gold Bar",
+      "amount": 2
+    },
+    {
+      "type": "item",
+      "id": "base:armor:steel_chestplate",
+      "amount": 1
+    }
+  ],
+
+  "outputs": [
+    {
+      "type": "item",
+      "id": "base:armor:gilded_steel_chestplate",
+      "amount": 1
+    }
+  ],
+  "requirements": [
+    {
+      "type": "skill",
+      "skill": "MINING",
+      "level": 12
+    },
+    {
+      "type": "skill",
+      "skill": "COMBAT",
+      "level": 7
+    }
+  ]
+}

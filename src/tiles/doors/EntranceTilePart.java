@@ -7,7 +7,6 @@ import engine.json.JsonString;
 import engine.json.JsonValue;
 import main.Camera;
 import main.GameContext;
-import main.World;
 import main.WorldRegistry;
 import org.joml.Vector2f;
 import tiles.TilePart;

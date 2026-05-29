@@ -1,0 +1,29 @@
+{
+  "name": "Gold Bar",
+  "inputs": [
+    {
+      "type": "resource",
+      "id": "Gold Ore",
+      "amount": 2
+    },
+    {
+      "type": "resource",
+      "id": "Coal",
+      "amount": 1
+    }
+  ],
+  "outputs": [
+    {
+      "type": "resource",
+      "id": "Gold Bar",
+      "amount": 1
+    }
+  ],
+  "requirements": [
+    {
+      "type": "skill",
+      "skill": "MINING",
+      "level": 10
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "type": "equipment",
+  "id": "base:rings:golden_ring",
+  "name": "Golden Ring",
+  "texture": "res/golden_ring.png",
+  "stats": [
+    {
+      "type": "MAX_HEALTH",
+      "count": 10
+    }
+  ],
+  "slot": "RING"
+}

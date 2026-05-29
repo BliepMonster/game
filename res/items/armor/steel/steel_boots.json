@@ -1,0 +1,13 @@
+{
+  "type": "equipment",
+  "id": "base:armor:steel_boots",
+  "name": "Steel Boots",
+  "texture": "res/steel_boots.png",
+  "stats": [
+    {
+      "type": "DEFENSE",
+      "count": 30
+    }
+  ],
+  "slot": "BOOTS"
+}

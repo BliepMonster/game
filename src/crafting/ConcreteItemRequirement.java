@@ -30,7 +30,9 @@ public class ConcreteItemRequirement extends ItemRequirement {
         int c = amount;
         if (c == 0) return;
         for (int i = 0; i < ItemInventory.NUM_ITEMS; i++) {
-            if (storage.inventory.get(i).definition == item) {
+            var item = storage.inventory.get(i);
+            if (item == null) continue;
+            if (item.definition == this.item) {
                 c--;
                 storage.inventory.remove(i);
                 if (c == 0) return;

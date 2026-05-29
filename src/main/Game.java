@@ -67,6 +67,7 @@ public class Game implements GameContext {
     }
     public void movePlayer(World world, Vector2f position) {
         this.world = world;
+        world.load();
         player.getPosition().set(position);
     }
 }

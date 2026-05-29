@@ -1,0 +1,13 @@
+{
+  "id": "base:armor:gilded_steel_boots",
+  "results": [
+    {
+      "id": "Steel Bar",
+      "amount": 1
+    },
+    {
+      "id": "Gold Bar",
+      "amount": 1
+    }
+  ]
+}

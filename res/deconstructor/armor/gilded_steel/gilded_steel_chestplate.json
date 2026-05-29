@@ -1,0 +1,13 @@
+{
+  "id": "base:armor:gilded_steel_chestplate",
+  "results": [
+    {
+      "id": "Steel Bar",
+      "amount": 2
+    },
+    {
+      "id": "Gold Bar",
+      "amount": 1
+    }
+  ]
+}

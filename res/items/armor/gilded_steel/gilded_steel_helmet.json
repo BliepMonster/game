@@ -1,0 +1,17 @@
+{
+  "type": "equipment",
+  "id": "base:armor:gilded_steel_helmet",
+  "name": "Gilded Steel Helmet",
+  "texture": "res/gilded_steel_helmet.png",
+  "stats": [
+    {
+      "type": "DEFENSE",
+      "count": 35
+    },
+    {
+      "type": "CRIT_DAMAGE",
+      "count": 5
+    }
+  ],
+  "slot": "HELMET"
+}

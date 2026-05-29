@@ -1,0 +1,17 @@
+{
+  "type": "equipment",
+  "id": "base:armor:gilded_steel_leggings",
+  "name": "Gilded Steel Leggings",
+  "texture": "res/gilded_steel_leggings.png",
+  "stats": [
+    {
+      "type": "DEFENSE",
+      "count": 40
+    },
+    {
+      "type": "CRIT_DAMAGE",
+      "count": 5
+    }
+  ],
+  "slot": "LEGGINGS"
+}

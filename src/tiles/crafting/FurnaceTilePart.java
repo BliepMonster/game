@@ -1,4 +1,4 @@
-package tiles;
+package tiles.crafting;
 
 import crafting.*;
 import crafting.ui.CraftingPanel;
@@ -9,6 +9,7 @@ import engine.json.JsonString;
 import engine.json.JsonValue;
 import main.Camera;
 import main.GameContext;
+import tiles.TilePart;
 
 import java.awt.Color;
 import java.util.List;

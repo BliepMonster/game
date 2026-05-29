@@ -2,10 +2,16 @@ package tool.editor;
 
 import engine.CoordinateMap;
 import engine.json.*;
+import entities.Entity;
+import main.EntityProducer;
 import main.GameContext;
+import main.World;
+import org.joml.Vector2f;
 import org.joml.Vector2i;
 import tiles.Tile;
 import tiles.TilePart;
+
+import java.lang.reflect.Constructor;
 
 public class JSONLoader {
     private static void loadTiles(JsonArray array, CoordinateMap<Tile> map) {
@@ -47,5 +53,18 @@ public class JSONLoader {
         loadTiles(tiles, map);
         loadObjects(objects, map, context);
     }
-
+    public static void loadOnSpawn(World world, JsonFile file) throws ClassNotFoundException, NoSuchMethodException {
+        if (!file.values.containsKey("onLoad")) return;
+        var array = (JsonArray) file.values.get("onLoad");
+        for (var object : array.values) {
+            JsonObject o = (JsonObject) object;
+            world.onLoadEntities.add(new EntityProducer(
+                    (Constructor<Entity>)
+                            Class.forName(((JsonString) o.values.get("class")).value)
+                                    .getConstructor(Vector2f.class),
+                    ((JsonNumber) o.values.get("x")).num,
+                    ((JsonNumber) o.values.get("y")).num
+            ));
+        }
+    }
 }

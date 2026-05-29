@@ -1,7 +1,7 @@
 package entities;
 
 import main.GameContext;
-import tiles.EnemySpawner;
+import tiles.spawner.EnemySpawner;
 
 public abstract class RespawnableEnemy implements Entity {
     private final EnemySpawner spawner;

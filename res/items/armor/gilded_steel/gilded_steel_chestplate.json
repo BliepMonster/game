@@ -1,0 +1,17 @@
+{
+  "type": "equipment",
+  "id": "base:armor:gilded_steel_chestplate",
+  "name": "Gilded Steel Chestplate",
+  "texture": "res/gilded_steel_chestplate.png",
+  "stats": [
+    {
+      "type": "DEFENSE",
+      "count": 50
+    },
+    {
+      "type": "CRIT_CHANCE",
+      "count": 3
+    }
+  ],
+  "slot": "CHESTPLATE"
+}

@@ -1,0 +1,31 @@
+{
+  "name": "Steel Chestplate",
+
+  "inputs": [
+    {
+      "type": "resource",
+      "id": "Steel Bar",
+      "amount": 5
+    }
+  ],
+
+  "outputs": [
+    {
+      "type": "item",
+      "id": "base:armor:steel_chestplate",
+      "amount": 1
+    }
+  ],
+  "requirements": [
+    {
+      "type": "skill",
+      "skill": "MINING",
+      "level": 10
+    },
+    {
+      "type": "skill",
+      "skill": "COMBAT",
+      "level": 5
+    }
+  ]
+}

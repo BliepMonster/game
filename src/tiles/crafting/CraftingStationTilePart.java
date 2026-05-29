@@ -1,20 +1,18 @@
-package tiles;
+package tiles.crafting;
 
 import crafting.*;
-import crafting.json.JsonRecipeLoader;
 import crafting.ui.CraftingPanel;
 import engine.FileUtils;
 import engine.core.text.Font;
 import engine.gui.GUI;
-import engine.json.JsonObject;
 import engine.json.JsonParser;
 import engine.json.JsonString;
 import engine.json.JsonValue;
 import main.Camera;
 import main.GameContext;
+import tiles.TilePart;
 
 import java.awt.Color;
-import java.util.ArrayList;
 import java.util.List;
 
 import static tool.editor.TilePartLoader.ID_CRAFTING_STATION;

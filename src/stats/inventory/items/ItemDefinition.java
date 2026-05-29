@@ -29,6 +29,7 @@ public abstract class ItemDefinition {
         register(this);
     }
     public static ItemDefinition get(String id) {
+        if (!definitions.containsKey(id)) throw new RuntimeException("Invalid ID: "+id);
         return definitions.get(id);
     }
     public static void register(ItemDefinition definition) {

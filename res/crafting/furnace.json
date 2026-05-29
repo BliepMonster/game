@@ -25,9 +25,19 @@
     "res/recipes/smithing/iron/iron_sword_recipe.json",
 
     "res/recipes/smithing/steel/steel_bar_recipe.json",
+    "res/recipes/smithing/steel/steel_boots_recipe.json",
+    "res/recipes/smithing/steel/steel_leggings_recipe.json",
+    "res/recipes/smithing/steel/steel_chestplate_recipe.json",
+    "res/recipes/smithing/steel/steel_helmet_recipe.json",
     "res/recipes/smithing/steel/steel_pickaxe_recipe.json",
     "res/recipes/smithing/steel/steel_axe_recipe.json",
     "res/recipes/smithing/steel/steel_hoe_recipe.json",
-    "res/recipes/smithing/steel/steel_sword_recipe.json"
+    "res/recipes/smithing/steel/steel_sword_recipe.json",
+
+    "res/recipes/smithing/gold/gold_bar_recipe.json",
+    "res/recipes/smithing/gold/gilded_steel_boots_recipe.json",
+    "res/recipes/smithing/gold/gilded_steel_leggings_recipe.json",
+    "res/recipes/smithing/gold/gilded_steel_chestplate_recipe.json",
+    "res/recipes/smithing/gold/gilded_steel_helmet_recipe.json"
   ]
 }

@@ -38,6 +38,7 @@ public class Player implements Entity {
     public final SkillSet skills;
     private int ticksTo = 0;
     private int ticksSinceLastDamage = 0;
+    private boolean hitLastTick;
     private float health = 100;
     public final CurrencyStorage currency;
     public final HashSet<StatusEffect> effects = new HashSet<>();
@@ -91,7 +92,8 @@ public class Player implements Entity {
             updateStats(context);
             ticksTo = 0;
         }
-        heal(stats.get(StatHolder.Stat.MAX_HEALTH)/(100*TICKS_PER_SECOND)); // heal 1% per second
+        if (ticksSinceLastDamage > 5)
+            heal(stats.get(StatHolder.Stat.MAX_HEALTH)/(100*TICKS_PER_SECOND)); // heal 1% per second
         velocityChanges.removeIf(VelocityChange::canBeRemoved);
         ticksSinceLastDamage++;
     }
@@ -114,11 +116,6 @@ public class Player implements Entity {
 
     @Override
     public Hitbox getHitbox() {
-        return step;
-    }
-
-    @Override
-    public Hitbox getWalkHitbox() {
         return step;
     }
     public void move(Hitbox world) {
@@ -185,7 +182,7 @@ public class Player implements Entity {
         }
     }
     public boolean isAtFullHealth() {
-        return health == (int) stats.get(StatHolder.Stat.MAX_HEALTH);
+        return health == stats.get(StatHolder.Stat.MAX_HEALTH);
     }
     public boolean useSelectedItem(GameContext context, Tile tile, Vector2f worldPos) {
         Item item  = this.items.get(selectedHotbarSlot);

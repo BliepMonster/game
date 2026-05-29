@@ -1,25 +1,19 @@
-package tiles;
+package tiles.spawner;
 
-import engine.jobs.Job;
 import engine.jobs.JobActor;
 import engine.jobs.JobSystem;
-import engine.json.JsonString;
-import engine.json.JsonValue;
-import entities.RespawnableEnemy;
-import main.Camera;
-import main.Game;
-import main.GameContext;
+import main.*;
+import tiles.TilePart;
 import tiles.resources.ResourceJob;
-import tool.editor.TilePartLoader;
-
-import java.util.function.Function;
 
 public abstract class EnemySpawner extends TilePart implements JobActor {
     protected final GameContext context;
+    protected final String worldToSpawn;
     protected final int ticksToRespawn;
-    public EnemySpawner(GameContext context, int ticksToRespawn) {
+    public EnemySpawner(GameContext context, int ticksToRespawn, String worldID) {
         this.context = context;
         this.ticksToRespawn = ticksToRespawn;
+        this.worldToSpawn = worldID;
         applyRespawnJob();
     }
     public void onMobDeath() {
@@ -33,5 +27,8 @@ public abstract class EnemySpawner extends TilePart implements JobActor {
     public void onClick(GameContext context) {}
     private void applyRespawnJob() {
         JobSystem.addJob(new ResourceJob(this, ticksToRespawn/(float) Game.TICKS_PER_SECOND));
+    }
+    public World getWorld() {
+        return WorldRegistry.get(worldToSpawn);
     }
 }

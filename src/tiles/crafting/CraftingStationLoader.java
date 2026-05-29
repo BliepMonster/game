@@ -1,4 +1,4 @@
-package tiles;
+package tiles.crafting;
 
 import crafting.CraftingRecipe;
 import crafting.json.JsonRecipeLoader;

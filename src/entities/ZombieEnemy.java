@@ -8,7 +8,7 @@ import main.GameContext;
 import org.joml.Vector2f;
 import stats.VelocityChange;
 import stats.skills.SkillSet;
-import tiles.EnemySpawner;
+import tiles.spawner.EnemySpawner;
 
 import java.util.ArrayList;
 
