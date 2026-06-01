@@ -16,8 +16,8 @@ import java.util.ArrayList;
 
 public class ShopSellPanel extends Component {
     public record Entry(String key, int value, int amount) {}
-    final ArrayList<Entry> sellable;
-    private final Font font;
+    ArrayList<Entry> sellable;
+    final Font font;
     ShopSellPage page;
     private final FullItemStorage storage;
     int lp = 0;
@@ -39,6 +39,12 @@ public class ShopSellPanel extends Component {
     }
     public void selectPage(int page) {
         lp = page;
+        this.sellable = new ArrayList<>();
+        for (var entry : storage.storage) {
+            var v = ResourceSellingRegistry.get(entry.getKey());
+            if (v == -1) continue;
+            sellable.add(new Entry(entry.getKey(), v, entry.getValue()));
+        }
         int size = Math.min(sellable.size()-page*5, 5);
         var entries = new Entry[size];
         for (int i = 0; i < size; ++i) {

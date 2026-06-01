@@ -4,6 +4,7 @@ import engine.CoordinateMap;
 import engine.core.Texture;
 import entities.DumbZombieEnemy;
 import entities.Entity;
+import entities.dungeons.SpeedsterEnemy;
 import main.EntityProducer;
 import main.Game;
 import main.GameContext;
@@ -40,7 +41,7 @@ public enum EditorToolState {
                     new Texture("res/bred.png")
             ));
             case O3 -> tile.setPart(new CarrotTilePart());
-            case O4 -> map.put(x, y, new DefaultTile(TileType.GRASS_DARK));
+            case O4 -> map.put(x, y, new DefaultTile(TileType.ROAD));
             case O5 -> tile.setPart(new TombstoneTilePart());
             case O6 -> tile.setPart(null);
             case O7 -> map.put(x, y, new DefaultTile(TileType.DIRT_PATH));
@@ -49,7 +50,7 @@ public enum EditorToolState {
                 try {
                     world.onLoadEntities.add(
                             new EntityProducer(
-                                    DumbZombieEnemy.class.getConstructor(Vector2f.class),
+                                    SpeedsterEnemy.class.getConstructor(Vector2f.class),
                                     x,
                                     y
                             )

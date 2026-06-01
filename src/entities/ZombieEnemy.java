@@ -6,11 +6,8 @@ import main.Camera;
 import main.Game;
 import main.GameContext;
 import org.joml.Vector2f;
-import stats.VelocityChange;
 import stats.skills.SkillSet;
 import tiles.spawner.EnemySpawner;
-
-import java.util.ArrayList;
 
 public class ZombieEnemy extends RespawnableEnemy {
     public static final float AGGRO_RADIUS = 5, DEAGGRO_RADIUS = 12;

@@ -28,5 +28,6 @@ public final class ResourceSellingRegistry {
         register(ItemConstants.ITEM_BOWL, 12);
         register(ItemConstants.ITEM_GOLD_ORE, 55);
         register(ItemConstants.ITEM_GOLD_BAR, 130);
+        register("Zombie Fragment", 100);
     }
 }

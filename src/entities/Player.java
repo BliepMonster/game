@@ -176,7 +176,7 @@ public class Player implements Entity {
         ticksSinceLastDamage = 0;
     }
     public void heal(float amount) {
-        health += amount;
+        health += amount*(stats.get(StatHolder.Stat.REGENERATION)/100+1);
         if (health > stats.get(StatHolder.Stat.MAX_HEALTH)) {
             health = stats.get(StatHolder.Stat.MAX_HEALTH);
         }

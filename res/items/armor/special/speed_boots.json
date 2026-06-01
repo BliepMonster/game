@@ -1,0 +1,17 @@
+{
+  "type": "equipment",
+  "id": "base:armor:speed_boots",
+  "name": "Boots of Speed",
+  "texture": "res/speed_boots.png",
+  "stats": [
+    {
+      "type": "SPEED",
+      "count": 2
+    },
+    {
+      "type": "MAX_HEALTH",
+      "count": 5
+    }
+  ],
+  "slot": "BOOTS"
+}

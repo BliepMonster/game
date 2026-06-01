@@ -1,0 +1,14 @@
+{
+  "type": "consumable",
+  "id": "base:food:golden_strawberry",
+  "name": "Golden Strawberry",
+  "texture": "res/golden_strawberry.png",
+  "stats": [
+    {
+      "type": "REGENERATION",
+      "count": 10
+    }
+  ],
+  "duration": 1000,
+  "eid": "golden_strawberry"
+}

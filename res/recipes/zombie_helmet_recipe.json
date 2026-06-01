@@ -1,0 +1,26 @@
+{
+  "name": "Zombie Helmet",
+
+  "inputs": [
+    {
+      "type": "resource",
+      "id": "Zombie Fragment",
+      "amount": 5
+    }
+  ],
+
+  "outputs": [
+    {
+      "type": "item",
+      "id": "base:armor:zombie_helmet",
+      "amount": 1
+    }
+  ],
+  "requirements": [
+    {
+      "type": "skill",
+      "skill": "COMBAT",
+      "level": 9
+    }
+  ]
+}

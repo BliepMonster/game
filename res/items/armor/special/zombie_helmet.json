@@ -1,0 +1,25 @@
+{
+  "type": "equipment",
+  "id": "base:armor:zombie_helmet",
+  "name": "Zombie Helmet",
+  "texture": "res/zombie_helmet.png",
+  "stats": [
+    {
+      "type": "DEFENSE",
+      "count": -40
+    },
+    {
+      "type": "STRENGTH",
+      "count": 25
+    },
+    {
+      "type": "CRIT_DAMAGE",
+      "count": 20
+    },
+    {
+      "type": "CRIT_CHANCE",
+      "count": 7
+    }
+  ],
+  "slot": "HELMET"
+}
