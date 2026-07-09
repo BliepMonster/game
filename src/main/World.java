@@ -22,6 +22,7 @@ public class World {
     final CoordinateMap<Tile> map;
     final String address;
     final String id;
+    public final List<Entity> toAdd = new ArrayList<>();
     public final ArrayList<EntityProducer> onLoadEntities = new ArrayList<>();
     public final List<Entity> entities = new ArrayList<>();
     public World(CoordinateMap<Tile> map, String address, String id) {
@@ -59,6 +60,8 @@ public class World {
         var hitbox = getHitbox();
         entities.forEach(entity -> entity.tick(game));
         entities.forEach(entity -> entity.move(hitbox));
+        entities.addAll(toAdd);
+        toAdd.clear();
         for (var entity : entities) {
             if (entity.shouldDie(game)) entity.die(game);
         }
@@ -107,7 +110,7 @@ public class World {
         entities.forEach(entity -> entity.render(camera));
     }
     public void spawn(Entity entity) {
-        this.entities.add(entity);
+        this.toAdd.add(entity);
     }
     public static @NotNull World of(JsonFile file, String address, GameContext context) {
         var map = new ArrayCoordinateMap<Tile>();

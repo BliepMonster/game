@@ -4,6 +4,7 @@ import engine.CoordinateMap;
 import engine.core.Texture;
 import entities.DumbZombieEnemy;
 import entities.Entity;
+import entities.dungeons.ShooterEnemy;
 import entities.dungeons.SpeedsterEnemy;
 import main.EntityProducer;
 import main.Game;
@@ -50,7 +51,7 @@ public enum EditorToolState {
                 try {
                     world.onLoadEntities.add(
                             new EntityProducer(
-                                    SpeedsterEnemy.class.getConstructor(Vector2f.class),
+                                    ShooterEnemy.class.getConstructor(Vector2f.class),
                                     x,
                                     y
                             )
