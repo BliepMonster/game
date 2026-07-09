@@ -92,12 +92,24 @@ public class World {
             }
         }
     }
-    public void render(Camera camera) {
+    public void render(Game game, Camera camera, float tsize) {
         var bounds = map.getBounds();
-        var minX = bounds.x; // TODO: cull out of screen
+        var minX = bounds.x;
+        Screen screen = camera.getDraw().getScreen();
+        var player = game.player;
+        float px = -screen.getAspectRatio()/tsize+player.getX();
+        float py = -1/tsize+player.getY();
+        float pw = 2*screen.getAspectRatio()/tsize+player.getX();
+        float ph = 2/tsize+player.getY();
+        minX = Math.max((int) Math.floor(px), minX);
         var xSize = bounds.y;
+
+        xSize = Math.min(xSize, (int) pw);
+
         var minY = bounds.z;
+        minY = Math.max((int) Math.floor(py), minY);
         var ySize = bounds.w;
+        ySize = Math.min(ySize, (int) ph);
         for (int i = minX; i <= minX + xSize; ++i) {
             for (int j = minY+ySize; j >= minY; --j) {
                 var option = map.get(i, j);

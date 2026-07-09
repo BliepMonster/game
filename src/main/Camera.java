@@ -18,6 +18,15 @@ public class Camera {
         this.tileSize = tileSize;
         this.draw = draw;
     }
+
+    public float getTileSize() {
+        return tileSize;
+    }
+
+    public DrawManager getDraw() {
+        return draw;
+    }
+
     public void setTileSize(float tileSize) {
         this.tileSize = tileSize;
     }

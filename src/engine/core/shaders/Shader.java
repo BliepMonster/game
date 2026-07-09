@@ -44,8 +44,7 @@ public class Shader {
         texCoordsLocation = getLocation("texCoordsMultiplier");
         textureLocation = getLocation("tex");
         if (transformLocation == colorLocation || transformLocation == texCoordsLocation || transformLocation == textureLocation || colorLocation == texCoordsLocation || colorLocation == textureLocation || texCoordsLocation == textureLocation) {
-            System.err.println("Error: Shader has a location that is used by more than one uniform!");
-            throw new RuntimeException();
+            System.err.println("Warning: Shader has a location that is used by more than one uniform!");
         }
     }
 

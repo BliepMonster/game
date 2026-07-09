@@ -32,7 +32,7 @@ import java.io.IOException;
 public class Main {
     public static boolean DEBUG_MODE = false;
     public static Font font;
-    public static void main() throws IOException {
+    static void main() throws IOException {
         final var screen = new Screen();
         final var console = new Console();
         screen.create(console, Screen.MAXIMIZED);
@@ -128,7 +128,7 @@ public class Main {
 
             Keybinds.manage(console);
 
-            final var framestamp = System.currentTimeMillis();
+            System.out.println(screen.getFPS());
 
             game.render();
 

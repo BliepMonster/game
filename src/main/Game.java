@@ -13,7 +13,7 @@ import tiles.Tile;
 import java.util.List;
 
 public class Game implements GameContext {
-    public static final int TICKS_PER_SECOND = 20;
+    public static final int TICKS_PER_SECOND = 40;
     static int ticks = 0;
     public static int getTickCount() {
         return ticks;
@@ -42,7 +42,7 @@ public class Game implements GameContext {
         JobSystem.tick(1f/Game.TICKS_PER_SECOND);
     }
     public void render() {
-        world.render(camera);
+        world.render(this, camera, camera.getTileSize());
         player.render(camera);
         camera.renderAllJobs();
     }
