@@ -62,6 +62,7 @@ public class JSONSaver {
         file.values.put("objects", objects.o2());
         file.values.put("id", new JsonString(world.getID()));
         file.values.put("onLoad", saveOnLoadEntities(world.onLoadEntities));
+        file.values.put("brightness", new JsonNumber(world.getBrightness()));
         return file;
     }
 }

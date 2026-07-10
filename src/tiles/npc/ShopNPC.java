@@ -8,6 +8,7 @@ import engine.json.JsonString;
 import engine.json.JsonValue;
 import main.Camera;
 import main.GameContext;
+import org.joml.Vector2f;
 import tiles.TilePart;
 import tiles.npc.ui.ShopPanel;
 import tiles.npc.ui.ShopWrapper;
@@ -16,7 +17,8 @@ import tool.editor.TilePartLoader;
 public class ShopNPC extends TilePart {
     private final ShopNpcDefinition definition;
     private final Font font;
-    public ShopNPC(ShopNpcDefinition definition, Font font) {
+    public ShopNPC(Vector2f position, ShopNpcDefinition definition, Font font) {
+        super(position);
         this.definition = definition;
         this.font = font;
     }

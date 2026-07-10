@@ -10,6 +10,7 @@ import engine.json.JsonString;
 import engine.json.JsonValue;
 import main.Camera;
 import main.GameContext;
+import org.joml.Vector2f;
 import tiles.TilePart;
 
 import java.awt.Color;
@@ -18,6 +19,9 @@ import java.util.List;
 import static tool.editor.TilePartLoader.ID_CRAFTING_STATION;
 
 public class CraftingStationTilePart extends TilePart {
+    public CraftingStationTilePart(Vector2f position) {
+        super(position);
+    }
     public static final Color COLOR = new Color(100, 100, 0);
     private static Font FONT;
     public static final List<CraftingRecipe> RECIPES = CraftingStationLoader.load(

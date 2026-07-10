@@ -5,6 +5,7 @@ import engine.json.JsonString;
 import engine.json.JsonValue;
 import main.Camera;
 import main.Game;
+import org.joml.Vector2f;
 import main.ItemConstants;
 import stats.StatHolder;
 import stats.skills.SkillSet;
@@ -17,8 +18,8 @@ import static java.awt.Color.*;
 public class CarrotTilePart extends CropTilePart {
     public static final Color UNREADY = new Color(150, 240, 130);
     public static final ResourceDefinition DEFINITION = new ResourceDefinition(ItemConstants.ITEM_CARROT, 5, 3, SkillSet.SkillType.FARMING, StatHolder.Stat.FARMING_YIELD, Game.TICKS_PER_SECOND*20);
-    public CarrotTilePart() {
-        super(DEFINITION);
+    public CarrotTilePart(Vector2f position) {
+        super(DEFINITION, position);
     }
     public boolean isStandable() {
         return true;

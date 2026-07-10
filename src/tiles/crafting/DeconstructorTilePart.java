@@ -6,12 +6,16 @@ import engine.json.JsonString;
 import engine.json.JsonValue;
 import main.Camera;
 import main.GameContext;
+import org.joml.Vector2f;
 import tiles.TilePart;
 import tool.editor.TilePartLoader;
 
 import java.awt.*;
 
 public class DeconstructorTilePart extends TilePart {
+    public DeconstructorTilePart(Vector2f position) {
+        super(position);
+    }
     @Override
     public boolean isStandable() {
         return false;

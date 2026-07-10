@@ -5,6 +5,7 @@ import engine.json.JsonString;
 import engine.json.JsonValue;
 import entities.Player;
 import main.Camera;
+import org.joml.Vector2f;
 import main.Game;
 import main.ItemConstants;
 import stats.StatHolder;
@@ -18,8 +19,8 @@ import static java.awt.Color.red;
 public class StrawberryTilePart extends ResourceCreator {
     public static final Color green = new Color(0, 160, 0);
     public static final ResourceDefinition DEFINITION = new ResourceDefinition(ItemConstants.ITEM_STRAWBERRY, 4, 1, SkillSet.SkillType.FORAGING, StatHolder.Stat.FORAGING_YIELD, Game.TICKS_PER_SECOND*5);
-    public StrawberryTilePart() {
-        super(DEFINITION);
+    public StrawberryTilePart(Vector2f position) {
+        super(DEFINITION, position);
     }
     public void renderUnready(Camera camera, int x, int y) {
         camera.rect(green, x+1f/4f, y+1f/4, 1f/2, 1f/2);

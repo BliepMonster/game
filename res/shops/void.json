@@ -11,7 +11,7 @@
         "currency": "COINS",
         "amount": 500
       },
-      "texture": "res/broken_pickaxe.png",
+      "texture": "res/textures/broken/broken_pickaxe.png",
       "result": {
         "type": "item",
         "id": "base:tools:broken_pickaxe"
@@ -24,7 +24,7 @@
         "currency": "COINS",
         "amount": 500
       },
-      "texture": "res/broken_axe.png",
+      "texture": "res/textures/broken/broken_axe.png",
       "result": {
         "type": "item",
         "id": "base:tools:broken_axe"
@@ -37,7 +37,7 @@
         "currency": "COINS",
         "amount": 600
       },
-      "texture": "res/broken_sword.png",
+      "texture": "res/textures/broken/broken_sword.png",
       "result": {
         "type": "item",
         "id": "base:weapons:broken_sword"
@@ -50,7 +50,7 @@
         "currency": "COINS",
         "amount": 400
       },
-      "texture": "res/broken_dagger.png",
+      "texture": "res/textures/broken/broken_dagger.png",
       "result": {
         "type": "item",
         "id": "base:weapons:broken_dagger"

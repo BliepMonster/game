@@ -9,7 +9,7 @@
   "stats": [],
   "melee_type": "cone",
   "damage": 35,
-  "cooldown": 13,
+  "cooldown": 26,
 
   "range": 5,
   "angle": 20

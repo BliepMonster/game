@@ -41,13 +41,17 @@ public class Main {
 
         final var draw = new DrawManager(screen);
 
+        final var mapd = new DrawManager(screen);
+        mapd.switchTextureFragmentShader("res/shaders/lighting_fragment.glsl");
+        mapd.switchColorFragmentShader("res/shaders/lighting_rfragment.glsl");
+
         font = new Font("res/Unnamed");
 
         TilePartLoader.font = font;
         var s = new TokenizedSaveFile();
         s.readAndOverride(new FileReader("saves/save.save"));
 
-        final var game = new Game(draw, .1f, new SavedGame(s));
+        final var game = new Game(mapd, .1f, new SavedGame(s));
 
         GUI.init();
         GUI.bindDrawManager(draw);
@@ -128,7 +132,7 @@ public class Main {
 
             Keybinds.manage(console);
 
-            System.out.println(screen.getFPS());
+            long framestamp = System.currentTimeMillis();
 
             game.render();
 

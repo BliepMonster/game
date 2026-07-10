@@ -10,12 +10,10 @@ import org.joml.Vector2f;
 import tool.editor.TilePartLoader;
 
 public class GoldenZombieSpawner extends EnemySpawner {
-    private final Vector2f position;
     public static final int TICKS = Game.TICKS_PER_SECOND*50;
 
     public GoldenZombieSpawner(Vector2f position, GameContext context) {
-        super(context, TICKS, "GOLD_CAVE_WORLD");
-        this.position = position;
+        super(position, context, TICKS, "GOLD_CAVE_WORLD");
     }
 
     @Override

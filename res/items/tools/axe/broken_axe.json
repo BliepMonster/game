@@ -1,6 +1,6 @@
 {
   "type": "tool",
-  "texture": "res/broken_axe.png",
+  "texture": "res/textures/broken/broken_axe.png",
   "name": "Broken Axe",
   "id": "base:tools:broken_axe",
   "stats": [],
@@ -10,5 +10,5 @@
       "amount": 10
     }
   ],
-  "cooldown": 17
+  "cooldown": 34
 }

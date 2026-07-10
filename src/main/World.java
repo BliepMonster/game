@@ -6,8 +6,10 @@ import engine.core.Screen;
 import engine.core.input.Input;
 import engine.hitboxes.*;
 import engine.json.JsonFile;
+import engine.json.JsonNumber;
 import engine.json.JsonString;
 import entities.Entity;
+import lighting.LightSource;
 import org.jetbrains.annotations.NotNull;
 import org.joml.Vector2f;
 import tiles.*;
@@ -22,9 +24,13 @@ public class World {
     final CoordinateMap<Tile> map;
     final String address;
     final String id;
+    private float brightness = 1f;
     public final List<Entity> toAdd = new ArrayList<>();
     public final ArrayList<EntityProducer> onLoadEntities = new ArrayList<>();
     public final List<Entity> entities = new ArrayList<>();
+    public float getBrightness() {
+        return brightness;
+    }
     public World(CoordinateMap<Tile> map, String address, String id) {
         this.map = map;
         this.address = address;
@@ -99,17 +105,26 @@ public class World {
         var player = game.player;
         float px = -screen.getAspectRatio()/tsize+player.getX();
         float py = -1/tsize+player.getY();
-        float pw = 2*screen.getAspectRatio()/tsize+player.getX();
-        float ph = 2/tsize+player.getY();
+        float pw = 2*screen.getAspectRatio()/tsize;
+        float ph = 2/tsize;
         minX = Math.max((int) Math.floor(px), minX);
         var xSize = bounds.y;
-
         xSize = Math.min(xSize, (int) pw);
-
         var minY = bounds.z;
         minY = Math.max((int) Math.floor(py), minY);
         var ySize = bounds.w;
         ySize = Math.min(ySize, (int) ph);
+
+        camera.clearLights();
+        for (int i = minX; i <= minX + xSize; ++i) {
+            for (int j = minY; j <= minY + ySize; ++j) {
+                map.get(i, j).ifPresent(tile -> {
+                    var part = tile.getPart();
+                    if (part instanceof LightSource ls) camera.addLight(ls);
+                });
+            }
+        }
+
         for (int i = minX; i <= minX + xSize; ++i) {
             for (int j = minY+ySize; j >= minY; --j) {
                 var option = map.get(i, j);
@@ -128,6 +143,8 @@ public class World {
         var map = new ArrayCoordinateMap<Tile>();
         JSONLoader.loadWorld(file, map, context);
         var world = new World(map, address, ((JsonString) file.values.get("id")).value);
+        var b = file.values.get("brightness");
+        if (b instanceof JsonNumber bn) world.brightness = bn.num;
         try {
             JSONLoader.loadOnSpawn(world, file);
         } catch (Exception _) {

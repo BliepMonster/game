@@ -41,14 +41,16 @@ public final class TilePartLoader {
     public static final String ID_GOLD_ORE = "gold_ore";
     public static final String ID_DECONSTRUCTOR = "deconstructor";
     public static final String ID_DUNGEON_EXIT = "dungeon_exit";
+    public static final String ID_RUBY = "ruby";
     public static Font font;
     public static final HashMap<String, Texture> tcache = new HashMap<>();
 
-    public static EntranceTilePart loadEntrance(JsonObject object) {
+    public static EntranceTilePart loadEntrance(Vector2f tilePos, JsonObject object) {
         var tid = ((JsonString) object.values.get("texture_id")).value;
         if (!tcache.containsKey(tid)) tcache.put(tid, new Texture(tid));
         var wid = ((JsonString) object.values.get("world_id"));
         return new EntranceTilePart(
+                tilePos,
                 wid.value,
                 new Vector2f(
                         ((JsonNumber) object.values.get("x")).num,
@@ -57,11 +59,12 @@ public final class TilePartLoader {
                 tcache.get(tid)
         );
     }
-    public static DungeonExitTilePart loadExit(JsonObject object) {
+    public static DungeonExitTilePart loadExit(Vector2f tilePos, JsonObject object) {
         var tid = ((JsonString) object.values.get("texture_id")).value;
         if (!tcache.containsKey(tid)) tcache.put(tid, new Texture(tid));
         var wid = ((JsonString) object.values.get("world_id"));
         return new DungeonExitTilePart(
+                tilePos,
                 wid.value,
                 new Vector2f(
                         ((JsonNumber) object.values.get("x")).num,
@@ -73,26 +76,28 @@ public final class TilePartLoader {
 
     public static TilePart load(Vector2i position, JsonObject obj, GameContext context) {
         String type = ((JsonString) obj.values.get("type")).value;
+        var pos = new Vector2f(position.x, position.y);
 
         return switch (type) {
-            case ID_IRON_ORE -> new IronOrePart();
-            case ID_CARROTS -> new CarrotTilePart();
-            case ID_STRAWBERRIES -> new StrawberryTilePart();
-            case ID_POTATOES -> new PotatoTilePart();
-            case ID_MAPLE_TREE -> new MapleTreePart();
-            case ID_WHEAT -> new WheatTilePart();
-            case ID_COPPER_ORE -> new CopperOrePart();
-            case ID_COAL_ORE -> new CoalOrePart();
-            case ID_CRAFTING_STATION -> new CraftingStationTilePart();
-            case ID_SHOP_NPC -> new ShopNPC(ShopDefinitionRegistry.get(((JsonString)obj.values.get("id")).value), font);
-            case ID_TOMBSTONE -> new TombstoneTilePart();
-            case ID_ZOMBIE_SPAWNER -> new ZombieSpawner(new Vector2f(position.x, position.y), context);
-            case ID_FURNACE -> new FurnaceTilePart();
-            case ID_ENTRANCE -> loadEntrance(obj);
-            case ID_DUNGEON_EXIT -> loadExit(obj);
-            case ID_GOLD_ORE -> new GoldOrePart();
-            case ID_GOLDEN_ZOMBIE_SPAWNER -> new GoldenZombieSpawner(new Vector2f(position.x, position.y), context);
-            case ID_DECONSTRUCTOR -> new DeconstructorTilePart();
+            case ID_IRON_ORE -> new IronOrePart(pos);
+            case ID_CARROTS -> new CarrotTilePart(pos);
+            case ID_STRAWBERRIES -> new StrawberryTilePart(pos);
+            case ID_POTATOES -> new PotatoTilePart(pos);
+            case ID_MAPLE_TREE -> new MapleTreePart(pos);
+            case ID_WHEAT -> new WheatTilePart(pos);
+            case ID_COPPER_ORE -> new CopperOrePart(pos);
+            case ID_COAL_ORE -> new CoalOrePart(pos);
+            case ID_CRAFTING_STATION -> new CraftingStationTilePart(pos);
+            case ID_SHOP_NPC -> new ShopNPC(pos, ShopDefinitionRegistry.get(((JsonString)obj.values.get("id")).value), font);
+            case ID_TOMBSTONE -> new TombstoneTilePart(pos);
+            case ID_ZOMBIE_SPAWNER -> new ZombieSpawner(pos, context);
+            case ID_FURNACE -> new FurnaceTilePart(pos);
+            case ID_ENTRANCE -> loadEntrance(pos, obj);
+            case ID_DUNGEON_EXIT -> loadExit(pos, obj);
+            case ID_GOLD_ORE -> new GoldOrePart(pos);
+            case ID_GOLDEN_ZOMBIE_SPAWNER -> new GoldenZombieSpawner(pos, context);
+            case ID_DECONSTRUCTOR -> new DeconstructorTilePart(pos);
+            case ID_RUBY -> new RubyGemstoneTilePart(pos);
             default -> throw new RuntimeException("Unknown object: " + type);
         };
     }

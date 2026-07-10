@@ -8,12 +8,14 @@ import main.Camera;
 import main.Game;
 import main.GameContext;
 import main.YieldUtils;
+import org.joml.Vector2f;
 import tiles.TilePart;
 
 public abstract class ResourceCreator extends TilePart implements JobActor {
     public final ResourceDefinition definition;
     protected boolean ready = true;
-    public ResourceCreator(ResourceDefinition definition) {
+    public ResourceCreator(ResourceDefinition definition, Vector2f position) {
+        super(position);
         this.definition = definition;
     }
     public void onClick(GameContext context) {

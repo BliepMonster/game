@@ -13,7 +13,7 @@ public record SavedItemInventory(SavedItem[] items, SavedItem[] equipment, Equip
         for (int i = 0; i < items.length(); ++i) {
             var g = items.get(i);
             if (g instanceof SavedNull) it[i] = null;
-            else it[i] = new SavedItem(g);
+            else it[i] = SavedItem.from(g);
         }
         SavedArray equipment = (SavedArray) object.get("equipment");
         SavedItem[] eq = new SavedItem[equipment.length()];
@@ -21,7 +21,7 @@ public record SavedItemInventory(SavedItem[] items, SavedItem[] equipment, Equip
         for (int i = 0; i < slots.length; ++i) {
             SavedDictionary dict = (SavedDictionary) equipment.get(i);
             SavedObject o = dict.get("item");
-            eq[i] = new SavedItem(o);
+            eq[i] = SavedItem.from(o);
             slots[i] = EquipmentSlot.values()[
                     (int) ((SavedFloat) dict.get("slot")).getCore()
                     ];

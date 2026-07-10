@@ -9,6 +9,7 @@ import engine.json.JsonString;
 import engine.json.JsonValue;
 import main.Camera;
 import main.GameContext;
+import org.joml.Vector2f;
 import tiles.TilePart;
 
 import java.awt.Color;
@@ -17,6 +18,9 @@ import java.util.List;
 import static tool.editor.TilePartLoader.ID_FURNACE;
 
 public class FurnaceTilePart extends TilePart {
+    public FurnaceTilePart(Vector2f position) {
+        super(position);
+    }
     public static final Color COLOR = Color.gray;
     public static final List<CraftingRecipe> RECIPES = CraftingStationLoader.load(
             new JsonParser().parse(FileUtils.readAllOrEmpty("res/crafting/furnace.json"))

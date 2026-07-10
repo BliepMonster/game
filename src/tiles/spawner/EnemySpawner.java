@@ -3,6 +3,7 @@ package tiles.spawner;
 import engine.jobs.JobActor;
 import engine.jobs.JobSystem;
 import main.*;
+import org.joml.Vector2f;
 import tiles.TilePart;
 import tiles.resources.ResourceJob;
 
@@ -10,7 +11,8 @@ public abstract class EnemySpawner extends TilePart implements JobActor {
     protected final GameContext context;
     protected final String worldToSpawn;
     protected final int ticksToRespawn;
-    public EnemySpawner(GameContext context, int ticksToRespawn, String worldID) {
+    public EnemySpawner(Vector2f position, GameContext context, int ticksToRespawn, String worldID) {
+        super(position);
         this.context = context;
         this.ticksToRespawn = ticksToRespawn;
         this.worldToSpawn = worldID;

@@ -1,0 +1,13 @@
+{
+  "id": "base:tools:ruby_pickaxe",
+  "results": [
+    {
+      "id": "Steel Bar",
+      "amount": 1
+    },
+    {
+      "id": "Ruby",
+      "amount": 1
+    }
+  ]
+}

@@ -20,10 +20,11 @@ public class DungeonExitTilePart extends TilePart {
     private final String world;
     private final Vector2f spawnPosition;
     private final Texture texture;
-    public DungeonExitTilePart(String world, Vector2f position, Texture texture) {
+    public DungeonExitTilePart(Vector2f tilePosition, String world, Vector2f spawnPosition, Texture texture) {
+        super(tilePosition);
         if (world == null) throw new RuntimeException();
         this.world = world;
-        this.spawnPosition = position;
+        this.spawnPosition = spawnPosition;
         this.texture = texture;
     }
     public void render(int x, int y, Camera camera) {

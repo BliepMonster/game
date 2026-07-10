@@ -1,6 +1,6 @@
 {
   "type": "tool",
-  "texture": "res/broken_pickaxe.png",
+  "texture": "res/textures/broken/broken_pickaxe.png",
   "name": "Broken Pickaxe",
   "id": "base:tools:broken_pickaxe",
   "stats": [],
@@ -10,5 +10,5 @@
       "amount": 40
     }
   ],
-  "cooldown": 17
+  "cooldown": 34
 }

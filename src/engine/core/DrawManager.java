@@ -40,6 +40,18 @@ public class DrawManager {
     protected Shader text = new Shader(colorVertexName, textFragName);
     protected Shader plainColor = new Shader(texVertexName, colorFragName);
     private int drawCalls = 0;
+    private float nextLightLevel = -1;
+
+    public void setLightLevel(float level) {
+        nextLightLevel = level;
+    }
+    private void applyLightLevel() {
+        if (nextLightLevel < 0) return;
+        plainColor.loadFloat(plainColor.lightLevelLocation, nextLightLevel);
+        textured.loadFloat(textured.lightLevelLocation, nextLightLevel);
+        text.loadFloat(text.lightLevelLocation, nextLightLevel);
+        nextLightLevel = -1;
+    }
     public DrawManager(Screen screen) {
         this.screen = screen;
     }
@@ -139,6 +151,7 @@ public class DrawManager {
     }
     public void rect(final @NotNull Color color, final @NotNull Matrix4f transform) {
         bindShader(plainColor);
+        applyLightLevel();
         plainColor.loadColor(plainColor.colorLocation, color);
         plainColor.loadMatrix(plainColor.transformLocation, transform);
         if (lastBoundVAO != rectVAO) {
@@ -158,6 +171,7 @@ public class DrawManager {
     }
     public void tintedImage(Texture tex, Color col, Matrix4f transform) {
         bindShader(textured);
+        applyLightLevel();
         textured.loadColor(textured.colorLocation, col);
         textured.loadMatrix(textured.transformLocation, transform);
         if (lastBoundVAO != rectVAO) {
@@ -237,6 +251,7 @@ public class DrawManager {
     }
     public void paragraphCore(final @NotNull String text, final @NotNull Color color, final float x, final float y, final @NotNull Font font, final float size, final float paragraphWidthLimit) {
         bindShader(this.text);
+        applyLightLevel();
         float xPosition = 0;
         float yPosition = 0;
         final Texture bitmap = font.getBitmap();

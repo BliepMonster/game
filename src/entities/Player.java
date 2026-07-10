@@ -74,12 +74,12 @@ public class Player implements Entity {
         var legs = items.getEquipment(EquipmentSlot.LEGGINGS);
         var boots = items.getEquipment(EquipmentSlot.BOOTS);
         this.stats = getBaseStats().merge(skills.getStatBoost());
-        if (i != null) stats.merge(i.definition.getHeldStats(i, context));
-        if (helmet != null) stats.merge(helmet.definition.getWornStats(helmet, context));
-        if (cp != null) stats.merge(cp.definition.getWornStats(cp, context));
-        if (ring != null) stats.merge(ring.definition.getWornStats(ring, context));
-        if (legs != null) stats.merge(legs.definition.getWornStats(legs, context));
-        if (boots != null) stats.merge(boots.definition.getWornStats(boots, context));
+        if (i != null) stats.merge(i.definition.getHeldStats_(i, context));
+        if (helmet != null) stats.merge(helmet.definition.getWornStats_(helmet, context));
+        if (cp != null) stats.merge(cp.definition.getWornStats_(cp, context));
+        if (ring != null) stats.merge(ring.definition.getWornStats_(ring, context));
+        if (legs != null) stats.merge(legs.definition.getWornStats_(legs, context));
+        if (boots != null) stats.merge(boots.definition.getWornStats_(boots, context));
         effects.removeIf(StatusEffect::isDone);
         for (var effect : effects) {
             stats.merge(effect.stats);
@@ -201,7 +201,6 @@ public class Player implements Entity {
     }
     public void die(GameContext context) {
         deathTick = Game.getTickCount();
-        this.currency.spend(currency.getCoins());
     }
     public boolean isAttackable() {
         return false;

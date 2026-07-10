@@ -10,12 +10,10 @@ import org.joml.Vector2f;
 import tool.editor.TilePartLoader;
 
 public class ZombieSpawner extends EnemySpawner {
-    private final Vector2f position;
     public static final int TICKS = Game.TICKS_PER_SECOND*20;
 
     public ZombieSpawner(Vector2f position, GameContext context) {
-        super(context, TICKS, "HOME_WORLD");
-        this.position = position;
+        super(position, context, TICKS, "HOME_WORLD");
     }
 
     @Override

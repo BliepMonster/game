@@ -2,8 +2,10 @@ package crafting.json;
 
 import crafting.*;
 import engine.json.*;
+import stats.StatHolder;
 import stats.inventory.items.Item;
 import stats.inventory.items.ItemDefinition;
+import stats.inventory.items.ItemScrollSet;
 import stats.skills.SkillSet;
 
 import java.util.ArrayList;
@@ -19,11 +21,15 @@ public class JsonRecipeLoader {
             String id = ((JsonString) object.values.get("id")).value;
             int amount = (int) ((JsonNumber) object.values.get("amount")).num;
             return new ConcreteItemRequirement(ItemDefinition.get(id), amount);
+        } else if (typestr.value.equals("upgrade")) {
+            String id = ((JsonString) object.values.get("id")).value;
+            int amount = (int) ((JsonNumber) object.values.get("amount")).num;
+            return new UpgradeItemRequirement(ItemDefinition.get(id), amount);
         } else if (typestr.value.equals("resource")) {
             String name = ((JsonString) object.values.get("id")).value;
             int amount = (int) ((JsonNumber) object.values.get("amount")).num;
             return new ResourceRequirement(name, amount);
-        } else throw new RuntimeException("expected 'item' or 'resource'");
+        } else throw new RuntimeException("expected 'item', 'upgrade', or 'resource'");
     }
     public static ItemRequirement[] loadIReqs(JsonArray array) {
         var reqs = new ItemRequirement[array.values.size()];
@@ -61,6 +67,15 @@ public class JsonRecipeLoader {
         var definition = ItemDefinition.get(id);
         return () -> new Item(definition);
     }
+    private static Supplier<Item> loadUpgradeItemSupplier(JsonObject object, UpgradeItemRequirement upgradeReq) {
+        String id = ((JsonString) object.values.get("id")).value;
+        var definition = ItemDefinition.get(id);
+        return () -> {
+            var captured = upgradeReq.getCaptured();
+            var scrolls = captured != null ? captured.scrolls : new ItemScrollSet(new StatHolder());
+            return new Item(definition, scrolls);
+        };
+    }
     record ValuePair(HashMap<String, Integer> values) {
         void add(ValuePair other) {
             for (var entry : other.values.entrySet()) {
@@ -75,14 +90,14 @@ public class JsonRecipeLoader {
         map.put(id, amount);
         return new ValuePair(map);
     }
-    private static CraftingResult loadResult(JsonArray array) {
+    private static CraftingResult loadResult(JsonArray array, UpgradeItemRequirement upgradeReq) {
         ValuePair v = new ValuePair(new HashMap<>());
         ArrayList<Supplier<Item>> list = new ArrayList<>();
         for (var value : array.values) {
             var object = (JsonObject) value;
             var type = ((JsonString)object.values.get("type")).value;
             if (type.equals("item")) {
-                list.add(loadItemSupplier(object));
+                list.add(upgradeReq != null ? loadUpgradeItemSupplier(object, upgradeReq) : loadItemSupplier(object));
             } else if (type.equals("resource"))
                 v.add(loadValuePair(object));
             else throw new RuntimeException();
@@ -96,11 +111,18 @@ public class JsonRecipeLoader {
         JsonValue inputsj = file.values.get("inputs");
         if (!(inputsj instanceof JsonArray inputsarr)) throw new RuntimeException("required array for inputs");
         ItemRequirement[] reqs = loadIReqs(inputsarr);
+        UpgradeItemRequirement upgradeReq = null;
+        for (var req : reqs) {
+            if (req instanceof UpgradeItemRequirement u) {
+                upgradeReq = u;
+                break;
+            }
+        }
         PreCraftRequirement[] preqs = loadPReqs(
                 (JsonArray) file.values.get("requirements")
         );
         JsonArray array = (JsonArray) file.values.get("outputs");
-        CraftingResult result = loadResult(array);
+        CraftingResult result = loadResult(array, upgradeReq);
         // later requirements?
         return new ItemCraftingRecipe(
                 reqs,

@@ -8,7 +8,7 @@
       "amount": 2
     },
     {
-      "type": "item",
+      "type": "upgrade",
       "id": "base:armor:steel_chestplate",
       "amount": 1
     }

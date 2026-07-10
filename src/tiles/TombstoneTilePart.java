@@ -5,9 +5,13 @@ import engine.json.JsonString;
 import engine.json.JsonValue;
 import main.Camera;
 import main.GameContext;
+import org.joml.Vector2f;
 import tool.editor.TilePartLoader;
 
 public class TombstoneTilePart extends TilePart {
+    public TombstoneTilePart(Vector2f position) {
+        super(position);
+    }
     public static final Texture TEX = new Texture("res/tombstone.png");
     public void render(int x, int y, Camera camera) {
         camera.addRenderJob(

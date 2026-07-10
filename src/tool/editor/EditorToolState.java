@@ -37,13 +37,14 @@ public enum EditorToolState {
         switch (this) {
             case O1 -> map.put(x, y, new DefaultTile(TileType.WALL));
             case O2 -> tile.setPart(new EntranceTilePart(
-                    "DUNGEON1_WORLD",
+                    new Vector2f(x, y),
+                    "GOLD_CAVE_WORLD",
                     new Vector2f(),
                     new Texture("res/bred.png")
             ));
-            case O3 -> tile.setPart(new CarrotTilePart());
+            case O3 -> tile.setPart(new RubyGemstoneTilePart(new Vector2f(x, y)));
             case O4 -> map.put(x, y, new DefaultTile(TileType.ROAD));
-            case O5 -> tile.setPart(new TombstoneTilePart());
+            case O5 -> tile.setPart(new TombstoneTilePart(new Vector2f(x, y)));
             case O6 -> tile.setPart(null);
             case O7 -> map.put(x, y, new DefaultTile(TileType.DIRT_PATH));
             case O8 -> {
@@ -61,7 +62,7 @@ public enum EditorToolState {
                 }
                 lastTick = Game.getTickCount();
             }
-            case O9 -> tile.setPart(new DungeonExitTilePart("HOME_WORLD", new Vector2f(), new Texture("res/bred.png")));
+            case O9 -> tile.setPart(new DungeonExitTilePart(new Vector2f(x, y), "HOME_WORLD", new Vector2f(), new Texture("res/bred.png")));
         }
     }
 }

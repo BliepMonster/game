@@ -9,6 +9,7 @@ import main.Camera;
 import main.Game;
 import main.GameContext;
 import main.YieldUtils;
+import org.joml.Vector2f;
 import stats.inventory.items.ToolItemDefinition;
 import tiles.TilePart;
 
@@ -19,7 +20,8 @@ public abstract class HittableResourceCreator extends TilePart implements JobAct
     private int lastHitTick = -20;
     private boolean wasLastHitValid = true;
     private int health;
-    public HittableResourceCreator(HittableResourceDescription description) {
+    public HittableResourceCreator(HittableResourceDescription description, Vector2f position) {
+        super(position);
         this.description = description;
         health = description.health();
     }
@@ -74,5 +76,9 @@ public abstract class HittableResourceCreator extends TilePart implements JobAct
     }
     private void spawnJob() {
         JobSystem.addJob(new ResourceJob(this, (float) description.respawnTicks()/Game.TICKS_PER_SECOND));
+    }
+
+    protected boolean isAlive() {
+        return this.health > 0;
     }
 }

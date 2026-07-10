@@ -6,6 +6,7 @@ import engine.json.JsonValue;
 import main.Camera;
 import main.Game;
 import main.ItemConstants;
+import org.joml.Vector2f;
 import stats.StatHolder;
 import stats.inventory.items.ToolItemDefinition;
 import stats.skills.SkillSet;
@@ -26,8 +27,8 @@ public class MapleTreePart extends HittableResourceCreator {
             false,
             ToolItemDefinition.PowerType.WOODCUTTING
     );
-    public MapleTreePart() {
-        super(DESCRIPTION);
+    public MapleTreePart(Vector2f position) {
+        super(DESCRIPTION, position);
     }
     public static final Texture TEXTURE = new Texture("res/maple_tree.png");
     public static final Texture OUTLINE = new Texture("res/maple_tree_outline.png");

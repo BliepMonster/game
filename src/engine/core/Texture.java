@@ -58,6 +58,7 @@ public class Texture implements AutoCloseable {
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
             glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, pixels);
         } catch(IOException e) {
+            System.err.println(filename);
             throw new UncheckedIOException(e);
         }
     }

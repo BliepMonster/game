@@ -24,6 +24,7 @@ public class Shader {
     public final int texCoordsLocation;
     public final int textureLocation;
     public final int colorLocation;
+    public final int lightLevelLocation;
     private static final FloatBuffer matrixBuffer = BufferUtils.createFloatBuffer(16);
 
     public Shader(String vertexFile, String fragmentFile) {
@@ -43,6 +44,7 @@ public class Shader {
         colorLocation = getLocation("color");
         texCoordsLocation = getLocation("texCoordsMultiplier");
         textureLocation = getLocation("tex");
+        lightLevelLocation = getLocation("lightLevel");
         if (transformLocation == colorLocation || transformLocation == texCoordsLocation || transformLocation == textureLocation || colorLocation == texCoordsLocation || colorLocation == textureLocation || texCoordsLocation == textureLocation) {
             System.err.println("Warning: Shader has a location that is used by more than one uniform!");
         }

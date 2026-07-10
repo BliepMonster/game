@@ -17,10 +17,11 @@ public class EntranceTilePart extends TilePart {
     private final String world;
     private final Vector2f spawnPosition;
     private final Texture texture;
-    public EntranceTilePart(String world, Vector2f position, Texture texture) {
+    public EntranceTilePart(Vector2f tilePosition, String world, Vector2f spawnPosition, Texture texture) {
+        super(tilePosition);
         if (world == null) throw new RuntimeException();
         this.world = world;
-        this.spawnPosition = position;
+        this.spawnPosition = spawnPosition;
         this.texture = texture;
     }
     public void render(int x, int y, Camera camera) {

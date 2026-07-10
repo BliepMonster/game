@@ -2,9 +2,11 @@ package tiles.resources;
 
 import engine.json.JsonString;
 import engine.json.JsonValue;
+import lighting.LightSource;
 import main.Camera;
 import main.Game;
 import main.ItemConstants;
+import org.joml.Vector2f;
 import stats.StatHolder;
 import stats.inventory.items.ToolItemDefinition;
 import stats.skills.SkillSet;
@@ -12,7 +14,7 @@ import tool.editor.TilePartLoader;
 
 import java.awt.*;
 
-public class GoldOrePart extends HittableResourceCreator {
+public class GoldOrePart extends HittableResourceCreator implements LightSource {
     public static final HittableResourceDescription DEFINITION = new HittableResourceDescription(
             /*respawn*/ Game.TICKS_PER_SECOND*50,
             /*id*/ ItemConstants.ITEM_GOLD_ORE,
@@ -51,7 +53,20 @@ public class GoldOrePart extends HittableResourceCreator {
     public JsonValue save() {
         return new JsonString(TilePartLoader.ID_GOLD_ORE);
     }
-    public GoldOrePart() {
-        super(DEFINITION);
+    public GoldOrePart(Vector2f position) {
+        super(DEFINITION, position);
+    }
+
+    @Override
+    public float getLightLevel() {
+        return .05f;
+    }
+
+    @Override
+    public float getX() {
+        return position.x+.5f;
+    }
+    public float getY() {
+        return position.y+.5f;
     }
 }

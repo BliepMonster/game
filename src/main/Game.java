@@ -42,6 +42,7 @@ public class Game implements GameContext {
         JobSystem.tick(1f/Game.TICKS_PER_SECOND);
     }
     public void render() {
+        camera.defaultBrightness = world.getBrightness();
         world.render(this, camera, camera.getTileSize());
         player.render(camera);
         camera.renderAllJobs();

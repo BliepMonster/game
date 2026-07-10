@@ -5,6 +5,7 @@ import engine.json.JsonValue;
 import main.Camera;
 import main.Game;
 import main.ItemConstants;
+import org.joml.Vector2f;
 import stats.StatHolder;
 import stats.inventory.items.ToolItemDefinition;
 import stats.skills.SkillSet;
@@ -25,8 +26,8 @@ public class CopperOrePart extends HittableResourceCreator {
             false,
             ToolItemDefinition.PowerType.MINING
     );
-    public CopperOrePart() {
-        super(DESC);
+    public CopperOrePart(Vector2f position) {
+        super(DESC, position);
     }
     public void renderReady(int ticksSinceLastHit, boolean wasLastHitSuccessFul, int x, int y, float health, Camera camera) {
         camera.addRenderJob(() ->
