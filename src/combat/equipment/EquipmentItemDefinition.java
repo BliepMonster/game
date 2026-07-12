@@ -24,13 +24,21 @@ public class EquipmentItemDefinition extends ItemDefinition {
     public ItemUseResult use(Tile tile, Item item, GameContext context, Vector2f worldPos) {
         return new ItemUseResult(Optional.of(item), false);
     }
+
     public StatHolder getHeldStats(Item item, GameContext context) {
         return new StatHolder();
     }
+
     public StatHolder getWornStats(Item item, GameContext context) {
         return stats.clone();
     }
+
     public EquipmentSlot getEquipmentSlot() {
         return slot;
+    }
+
+    @Override
+    public boolean canApplyScrolls() {
+        return true;
     }
 }

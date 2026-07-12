@@ -2,7 +2,7 @@
   "type": "consumable",
   "id": "base:food:carrot_cake",
   "name": "Carrot Cake",
-  "texture": "res/carrot_cake.png",
+  "texture": "res/textures/food/carrot_cake.png",
   "stats": [
     {
       "type": "CRIT_CHANCE",

@@ -2,7 +2,7 @@
   "type": "equipment",
   "id": "base:armor:gilded_steel_boots",
   "name": "Gilded Steel Boots",
-  "texture": "res/gilded_steel_boots.png",
+  "texture": "res/textures/steel/gilded/gilded_steel_boots.png",
   "stats": [
     {
       "type": "DEFENSE",

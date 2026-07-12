@@ -111,6 +111,11 @@ public class JsonItemLoader {
         int health = (int) ((JsonNumber) file.values.get("restored")).num;
         return new BasicFoodItemDefinition(id, name, description, texture, health);
     }
+    private static ScrollItemDefinition loadScroll(JsonFile file, String id, String name, String description, Texture texture) {
+        var stat = StatHolder.Stat.valueOf(((JsonString) file.values.get("stat")).value);
+        var scaling = ((JsonNumber) file.values.get("scaling")).num;
+        return new ScrollItemDefinition(id, name, description, texture, stat, scaling);
+    }
     public static ItemDefinition load(JsonFile file) {
         String id = ((JsonString) file.values.get("id")).value;
         String name = ((JsonString) file.values.get("name")).value;
@@ -127,6 +132,7 @@ public class JsonItemLoader {
             case "melee" -> loadMelee(file, id, name, description, texture);
             case "ability" -> loadAbility(file, id, name, description, texture);
             case "consumable" -> loadConsumable(file, id, name, description, texture);
+            case "scroll" -> loadScroll(file, id, name, description, texture);
             default -> throw new RuntimeException(type);
         };
     }

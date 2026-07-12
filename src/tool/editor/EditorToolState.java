@@ -11,12 +11,16 @@ import main.Game;
 import main.GameContext;
 import main.World;
 import org.joml.Vector2f;
+import stats.inventory.items.Item;
+import stats.inventory.items.ItemDefinition;
 import tiles.*;
 import tiles.crafting.DeconstructorTilePart;
 import tiles.crafting.FurnaceTilePart;
+import tiles.crafting.scrolls.ScrollApplicationTilePart;
 import tiles.doors.DungeonExitTilePart;
 import tiles.doors.EntranceTilePart;
 import tiles.resources.*;
+import tiles.spawner.GemstoneGolemSpawner;
 import tiles.spawner.GoldenZombieSpawner;
 
 import java.lang.reflect.Constructor;
@@ -42,9 +46,11 @@ public enum EditorToolState {
                     new Vector2f(),
                     new Texture("res/bred.png")
             ));
-            case O3 -> tile.setPart(new RubyGemstoneTilePart(new Vector2f(x, y)));
+            case O3 -> {
+                tile.setPart(new GemstoneGolemSpawner(new Vector2f(x, y), context));
+            }
             case O4 -> map.put(x, y, new DefaultTile(TileType.ROAD));
-            case O5 -> tile.setPart(new TombstoneTilePart(new Vector2f(x, y)));
+            case O5 -> tile.setPart(new ScrollApplicationTilePart(new Vector2f(x, y)));
             case O6 -> tile.setPart(null);
             case O7 -> map.put(x, y, new DefaultTile(TileType.DIRT_PATH));
             case O8 -> {

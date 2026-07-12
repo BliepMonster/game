@@ -1,0 +1,22 @@
+{
+  "name": "Paper",
+  "inputs": [
+    {
+      "type": "resource",
+      "id": "Wheat",
+      "amount": 5
+    },
+    {
+      "type": "resource",
+      "id": "Maple Wood",
+      "amount": 5
+    }
+  ],
+  "outputs": [
+    {
+      "type": "resource",
+      "id": "Paper",
+      "amount": 1
+    }
+  ]
+}

@@ -12,11 +12,13 @@ import tiles.*;
 import tiles.crafting.CraftingStationTilePart;
 import tiles.crafting.DeconstructorTilePart;
 import tiles.crafting.FurnaceTilePart;
+import tiles.crafting.scrolls.ScrollApplicationTilePart;
 import tiles.doors.DungeonExitTilePart;
 import tiles.doors.EntranceTilePart;
 import tiles.npc.ShopDefinitionRegistry;
 import tiles.npc.ShopNPC;
 import tiles.resources.*;
+import tiles.spawner.GemstoneGolemSpawner;
 import tiles.spawner.GoldenZombieSpawner;
 import tiles.spawner.ZombieSpawner;
 
@@ -42,6 +44,8 @@ public final class TilePartLoader {
     public static final String ID_DECONSTRUCTOR = "deconstructor";
     public static final String ID_DUNGEON_EXIT = "dungeon_exit";
     public static final String ID_RUBY = "ruby";
+    public static final String ID_SCROLL_APPLIER = "scroll_applier";
+    public static final String ID_SPAWNER_GEMGOLEM = "gg_spawner";
     public static Font font;
     public static final HashMap<String, Texture> tcache = new HashMap<>();
 
@@ -98,6 +102,8 @@ public final class TilePartLoader {
             case ID_GOLDEN_ZOMBIE_SPAWNER -> new GoldenZombieSpawner(pos, context);
             case ID_DECONSTRUCTOR -> new DeconstructorTilePart(pos);
             case ID_RUBY -> new RubyGemstoneTilePart(pos);
+            case ID_SCROLL_APPLIER -> new ScrollApplicationTilePart(pos);
+            case ID_SPAWNER_GEMGOLEM -> new GemstoneGolemSpawner(pos, context);
             default -> throw new RuntimeException("Unknown object: " + type);
         };
     }

@@ -25,6 +25,7 @@ public class DeconstructorPanel extends Component {
     public static final float WIDTH = SPACING*(NUM_ITEMS_PER_ROW+1)+NUM_ITEMS_PER_ROW*ITEM_SIZE;
     public static final float EQUIPMENT_PANEL_WIDTH = 3*SPACING+ITEM_SIZE;
     public static final float HEIGHT = SPACING*(NUM_ROWS+1)+NUM_ROWS*ITEM_SIZE+.1f;
+    public final long opened = System.currentTimeMillis();
     public DeconstructorPanel(Player player) {
         super(new RelativeYConstraint(-WIDTH/2), CenterConstraint.CENTER, new RelativeSizeConstraint(WIDTH+EQUIPMENT_PANEL_WIDTH), new RelativeSizeConstraint(HEIGHT));
         this.player = player;
@@ -95,6 +96,7 @@ public class DeconstructorPanel extends Component {
     }
     public void detectClick(Screen screen, float x, float y) {
         if (isInBounds(screen, x, y)) {
+            if (System.currentTimeMillis()-opened < 500) return;
             if (y > HEIGHT/2-.1f && x > (WIDTH+EQUIPMENT_PANEL_WIDTH)/2-.1f) {
                 GUI.scheduleClear(0);
                 GUI.toggle(62);

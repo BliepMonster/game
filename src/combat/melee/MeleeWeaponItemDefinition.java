@@ -84,4 +84,9 @@ public abstract class MeleeWeaponItemDefinition extends ItemDefinition {
     public StatHolder getHeldStats(Item item, GameContext context) {
         return getSelfStats(item, context).with(StatHolder.Stat.DAMAGE, damage).with(StatHolder.Stat.KNOCKBACK, knockback);
     }
+
+    @Override
+    public boolean canApplyScrolls() {
+        return true;
+    }
 }

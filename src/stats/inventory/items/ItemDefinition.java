@@ -43,9 +43,10 @@ public abstract class ItemDefinition {
         return getHeldStats(item, context).merge(item.scrolls.stats());
     }
     public StatHolder getWornStats_(Item item, GameContext context) {
-        return getHeldStats(item, context).merge(item.scrolls.stats());
+        return getWornStats(item, context).merge(item.scrolls.stats());
     }
     public abstract StatHolder getHeldStats(Item item, GameContext context);
     public abstract StatHolder getWornStats(Item item, GameContext context);
     public abstract EquipmentSlot getEquipmentSlot();
+    public abstract boolean canApplyScrolls();
 }

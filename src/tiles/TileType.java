@@ -7,12 +7,12 @@ import engine.json.JsonValue;
 import main.Camera;
 
 public enum TileType {
-    GRASS(true, new Texture("res/grass_tile.png")),
-    WALL(false, new Texture("res/wall_tile.png")),
-    ROAD(true, new Texture("res/road_tile.png")),
-    DIRT_PATH(true, new Texture("res/path_tile.png")),
-    COMPOST(true, new Texture("res/compost_tile.png")),
-    GRASS_DARK(true, new Texture("res/grass_dark_tile.png")),
+    GRASS(true, new Texture("res/textures/tiles/grass_tile.png")),
+    WALL(false, new Texture("res/textures/tiles/wall_tile.png")),
+    ROAD(true, new Texture("res/textures/tiles/road_tile.png")),
+    DIRT_PATH(true, new Texture("res/textures/tiles/path_tile.png")),
+    COMPOST(true, new Texture("res/textures/tiles/compost_tile.png")),
+    GRASS_DARK(true, new Texture("res/textures/tiles/grass_dark_tile.png")),
     ;
     public final boolean standable;
     public final Texture color;

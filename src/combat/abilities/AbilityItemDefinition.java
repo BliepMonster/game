@@ -48,4 +48,9 @@ public class AbilityItemDefinition extends ItemDefinition {
     public EquipmentSlot getEquipmentSlot() {
         return EquipmentSlot.NONE;
     }
+
+    @Override
+    public boolean canApplyScrolls() {
+        return true;
+    }
 }

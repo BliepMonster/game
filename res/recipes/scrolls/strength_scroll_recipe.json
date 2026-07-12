@@ -1,0 +1,34 @@
+{
+  "name": "Scroll of Strength",
+  "inputs": [
+    {
+      "type": "resource",
+      "id": "Paper",
+      "amount": 5
+    },
+    {
+      "type": "resource",
+      "id": "Steel Bar",
+      "amount": 2
+    }
+  ],
+  "outputs": [
+    {
+      "type": "item",
+      "id": "base:scrolls:scroll_strength",
+      "amount": 1
+    }
+  ],
+  "requirements": [
+    {
+      "type": "skill",
+      "skill": "COMBAT",
+      "level": 12
+    },
+    {
+      "type": "skill",
+      "skill": "MINING",
+      "level": 8
+    }
+  ]
+}

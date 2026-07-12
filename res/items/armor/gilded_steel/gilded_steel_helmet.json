@@ -2,7 +2,7 @@
   "type": "equipment",
   "id": "base:armor:gilded_steel_helmet",
   "name": "Gilded Steel Helmet",
-  "texture": "res/gilded_steel_helmet.png",
+  "texture": "res/textures/steel/gilded/gilded_steel_helmet.png",
   "stats": [
     {
       "type": "DEFENSE",

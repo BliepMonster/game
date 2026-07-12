@@ -7,6 +7,8 @@
     "res/recipes/farmer_stew_recipe.json",
     "res/recipes/carrot_cake_recipe.json",
     "res/recipes/zombie_helmet_recipe.json",
-    "res/recipes/golden_strawberry_recipe.json"
+    "res/recipes/golden_strawberry_recipe.json",
+    "res/recipes/paper_recipe.json",
+    "res/recipes/scrolls/strength_scroll_recipe.json"
   ]
 }

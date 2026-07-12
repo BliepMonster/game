@@ -70,4 +70,9 @@ public class ToolItemDefinition extends ItemDefinition {
         return stats.clone().with(StatHolder.Stat.MINING_POWER, strengths[PowerType.MINING.ordinal()])
                 .with(StatHolder.Stat.FORAGING_POWER, strengths[PowerType.WOODCUTTING.ordinal()]);
     }
+
+    @Override
+    public boolean canApplyScrolls() {
+        return true;
+    }
 }

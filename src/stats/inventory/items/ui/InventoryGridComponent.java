@@ -48,6 +48,7 @@ public class InventoryGridComponent extends Component {
             float yy = y + row * ITEM_SIZE + (row+1) * SPACING;
             draw.rect(isSelected(true, i) ? Color.red : row == 0 ? Color.green : Color.blue, xx, yy, ITEM_SIZE, ITEM_SIZE);
             if (player.items.get(i) == null) continue;
+            if (!player.items.get(i).scrolls.stats.isEmpty() && !isSelected(true, i)) draw.rect(Color.magenta, xx, yy, ITEM_SIZE, ITEM_SIZE);
             draw.image(player.items.get(i).definition.texture, xx, yy, ITEM_SIZE, ITEM_SIZE);
         }
         // draw helmet

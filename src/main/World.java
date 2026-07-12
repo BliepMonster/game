@@ -37,7 +37,7 @@ public class World {
         this.id = id;
         WorldRegistry.put(id, this);
     }
-    public void load() {
+    public void load(Camera camera) {
         onLoadEntities.forEach(
                 (constructor) -> {
                     try {
@@ -52,6 +52,20 @@ public class World {
                     }
                 }
         );
+        camera.clearLights();
+        var mapBounds = map.getBounds();
+        var minX = mapBounds.x;
+        var xSize = mapBounds.y;
+        var minY = mapBounds.z;
+        var ySize = mapBounds.w;
+        for (int i = minX; i <= minX + xSize; ++i) {
+            for (int j = minY; j <= minY + ySize; ++j) {
+                map.get(i, j).ifPresent(tile -> {
+                    var part = tile.getPart();
+                    if (part instanceof LightSource ls) camera.addLight(ls);
+                });
+            }
+        }
     }
     public Hitbox getHitbox() {
         var hitbox = new CompoundHitbox();
@@ -114,16 +128,6 @@ public class World {
         minY = Math.max((int) Math.floor(py), minY);
         var ySize = bounds.w;
         ySize = Math.min(ySize, (int) ph);
-
-        camera.clearLights();
-        for (int i = minX; i <= minX + xSize; ++i) {
-            for (int j = minY; j <= minY + ySize; ++j) {
-                map.get(i, j).ifPresent(tile -> {
-                    var part = tile.getPart();
-                    if (part instanceof LightSource ls) camera.addLight(ls);
-                });
-            }
-        }
 
         for (int i = minX; i <= minX + xSize; ++i) {
             for (int j = minY+ySize; j >= minY; --j) {

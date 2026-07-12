@@ -11,10 +11,12 @@ import java.util.Optional;
 
 public class ScrollItemDefinition extends ItemDefinition {
     public final StatHolder.Stat stat;
+    public final float scaling;
 
-    public ScrollItemDefinition(String id, String name, String description, Texture texture, StatHolder.Stat stat) {
+    public ScrollItemDefinition(String id, String name, String description, Texture texture, StatHolder.Stat stat, float scaling) {
         super(id, name, description, texture);
         this.stat = stat;
+        this.scaling = scaling;
     }
 
     @Override
@@ -35,5 +37,10 @@ public class ScrollItemDefinition extends ItemDefinition {
     @Override
     public EquipmentSlot getEquipmentSlot() {
         return EquipmentSlot.NONE;
+    }
+
+    @Override
+    public boolean canApplyScrolls() {
+        return false;
     }
 }

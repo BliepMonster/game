@@ -2,7 +2,7 @@
   "type": "melee",
   "id": "base:weapons:copper_sword",
   "name": "Copper Sword",
-  "texture": "res/copper_sword.png",
+  "texture": "res/textures/copper/copper_sword.png",
 
   "knockback": 1.5,
   "damage_type": "NORMAL",

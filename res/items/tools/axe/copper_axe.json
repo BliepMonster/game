@@ -1,6 +1,6 @@
 {
   "type": "tool",
-  "texture": "res/copper_axe.png",
+  "texture": "res/textures/copper/copper_axe.png",
   "name": "Copper Axe",
   "id": "base:tools:copper_axe",
   "stats": [],

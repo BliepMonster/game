@@ -2,7 +2,7 @@
   "type": "equipment",
   "id": "base:armor:gilded_steel_leggings",
   "name": "Gilded Steel Leggings",
-  "texture": "res/gilded_steel_leggings.png",
+  "texture": "res/textures/steel/gilded/gilded_steel_leggings.png",
   "stats": [
     {
       "type": "DEFENSE",
