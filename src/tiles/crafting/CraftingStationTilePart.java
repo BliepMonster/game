@@ -3,6 +3,7 @@ package tiles.crafting;
 import crafting.*;
 import crafting.ui.CraftingPanel;
 import engine.FileUtils;
+import engine.core.Texture;
 import engine.core.text.Font;
 import engine.gui.GUI;
 import engine.json.JsonParser;
@@ -13,7 +14,6 @@ import main.GameContext;
 import org.joml.Vector2f;
 import tiles.TilePart;
 
-import java.awt.Color;
 import java.util.List;
 
 import static tool.editor.TilePartLoader.ID_CRAFTING_STATION;
@@ -22,7 +22,6 @@ public class CraftingStationTilePart extends TilePart {
     public CraftingStationTilePart(Vector2f position) {
         super(position);
     }
-    public static final Color COLOR = new Color(100, 100, 0);
     private static Font FONT;
     public static final List<CraftingRecipe> RECIPES = CraftingStationLoader.load(
             new JsonParser().parse(FileUtils.readAllOrEmpty("res/crafting/crafting_table.json"))
@@ -34,7 +33,7 @@ public class CraftingStationTilePart extends TilePart {
         return FONT;
     }
     public void render(int x, int y, Camera camera) {
-        camera.rect(COLOR, x, y, 1, 1);
+        camera.image(TEXTURE, x, y, 1, 1);
     }
     public boolean isStandable() {
         return false;
@@ -48,6 +47,8 @@ public class CraftingStationTilePart extends TilePart {
             GUI.toggle(62);
         }
     }
+
+    public static final Texture TEXTURE = new Texture("res/textures/tiles/crafting_table.png");
 
     @Override
     public JsonValue save() {

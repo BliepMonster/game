@@ -10,6 +10,7 @@ import engine.gui.constraints.size.RelativeSizeConstraint;
 import engine.gui.constraints.size.SizeConstraint;
 import main.Main;
 import stats.StatHolder;
+import stats.inventory.items.ItemScrollSet;
 
 import java.awt.*;
 
@@ -33,7 +34,7 @@ public class ScrollChoiceButton extends Component {
     public void display(DrawManager draw, float x, float y, float width, float height) {
         boolean canApply = owner.selected != null && owner.selected.canApplyScroll(this.stat, owner.storage);
         draw.rect(canApply ? Color.green : Color.red, x, y, width, height);
-        int level = owner.selected != null ? (int) owner.selected.scrolls.stats.get(this.stat) / 3 : -1;
+        int level = owner.selected != null ? (int) (owner.selected.scrolls.stats.get(this.stat) / ItemScrollSet.getScroll(stat).scaling) : -1;
         String s = stat.name().toLowerCase() + " : " + level;
         Font font = Main.font;
         float size = Math.min(font.getSizeForHeight(height), font.getSizeForWidth(s, width));

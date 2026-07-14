@@ -40,6 +40,7 @@
     "res/recipes/smithing/gold/gilded_steel_chestplate_recipe.json",
     "res/recipes/smithing/gold/gilded_steel_helmet_recipe.json",
 
-    "res/recipes/smithing/ruby_pickaxe_recipe.json"
+    "res/recipes/smithing/ruby_pickaxe_recipe.json",
+    "res/recipes/smithing/ruby_axe_recipe.json"
   ]
 }

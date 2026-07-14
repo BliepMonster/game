@@ -1,6 +1,7 @@
 package tiles.crafting;
 
 import crafting.ui.DeconstructorPanel;
+import engine.core.Texture;
 import engine.gui.GUI;
 import engine.json.JsonString;
 import engine.json.JsonValue;
@@ -9,8 +10,6 @@ import main.GameContext;
 import org.joml.Vector2f;
 import tiles.TilePart;
 import tool.editor.TilePartLoader;
-
-import java.awt.*;
 
 public class DeconstructorTilePart extends TilePart {
     public DeconstructorTilePart(Vector2f position) {
@@ -39,10 +38,11 @@ public class DeconstructorTilePart extends TilePart {
     @Override
     public void onStand(GameContext context) {}
 
+    public static final Texture TEXTURE = new Texture("res/textures/tiles/deconstructor.png");
     @Override
     public void render(int x, int y, Camera camera) {
         camera.addRenderJob(
-                () -> camera.rect(Color.MAGENTA, x, y, 1, 1),
+                () -> camera.image(TEXTURE, x, y, 1, 1),
                 -y
         );
     }

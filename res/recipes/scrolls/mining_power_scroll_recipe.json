@@ -1,0 +1,29 @@
+{
+  "name": "Scroll of Mining Power",
+  "inputs": [
+    {
+      "type": "resource",
+      "id": "Paper",
+      "amount": 5
+    },
+    {
+      "type": "resource",
+      "id": "Gold Bar",
+      "amount": 2
+    }
+  ],
+  "outputs": [
+    {
+      "type": "item",
+      "id": "base:scrolls:scroll_mining_power",
+      "amount": 1
+    }
+  ],
+  "requirements": [
+    {
+      "type": "skill",
+      "skill": "MINING",
+      "level": 13
+    }
+  ]
+}

@@ -3,6 +3,7 @@ package tiles.crafting;
 import crafting.*;
 import crafting.ui.CraftingPanel;
 import engine.FileUtils;
+import engine.core.Texture;
 import engine.gui.GUI;
 import engine.json.JsonParser;
 import engine.json.JsonString;
@@ -21,12 +22,12 @@ public class FurnaceTilePart extends TilePart {
     public FurnaceTilePart(Vector2f position) {
         super(position);
     }
-    public static final Color COLOR = Color.gray;
+    public static final Texture TEXTURE = new Texture("res/textures/tiles/furnace.png");
     public static final List<CraftingRecipe> RECIPES = CraftingStationLoader.load(
             new JsonParser().parse(FileUtils.readAllOrEmpty("res/crafting/furnace.json"))
     );
     public void render(int x, int y, Camera camera) {
-        camera.rect(COLOR, x, y, 1, 1);
+        camera.image(TEXTURE, x, y, 1, 1);
     }
     public boolean isStandable() {
         return false;

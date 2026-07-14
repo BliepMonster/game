@@ -20,7 +20,7 @@ public class GemstoneGolemEnemy extends MeleeDungeonEnemy {
     public static final LootTable table;
     static {
         var map = new HashMap<String, Integer>();
-        map.put("Ruby", 1);
+        map.put("Ruby", 3);
         table = new LootTable(new LootPiece(LootType.COMMON, new LootReward(1, new ItemDefinition[]{}, map)));
     }
     public GemstoneGolemEnemy(Vector2f location, EnemySpawner spawner) {
@@ -34,7 +34,7 @@ public class GemstoneGolemEnemy extends MeleeDungeonEnemy {
                 300,
                 50,
                 40,
-                2
+                1
         );
         this.spawner = spawner;
     }
@@ -48,7 +48,6 @@ public class GemstoneGolemEnemy extends MeleeDungeonEnemy {
     @Override
     public void die(GameContext context) {
         super.die(context);
-        spawner.onMobDeath();
     }
 
     public Hitbox getHitbox() {

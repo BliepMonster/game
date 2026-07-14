@@ -1,0 +1,36 @@
+{
+  "name": "Ruby Axe",
+
+  "inputs": [
+    {
+      "type": "resource",
+      "id": "Ruby",
+      "amount": 5
+    },
+    {
+      "type": "upgrade",
+      "id": "base:tools:steel_axe",
+      "amount": 1
+    }
+  ],
+
+  "outputs": [
+    {
+      "type": "item",
+      "id": "base:tools:ruby_axe",
+      "amount": 1
+    }
+  ],
+  "requirements": [
+    {
+      "type": "skill",
+      "skill": "MINING",
+      "level": 12
+    },
+    {
+      "type": "skill",
+      "skill": "FORAGING",
+      "level": 8
+    }
+  ]
+}

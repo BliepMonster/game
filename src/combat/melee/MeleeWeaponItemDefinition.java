@@ -38,8 +38,8 @@ public abstract class MeleeWeaponItemDefinition extends ItemDefinition {
     public abstract boolean canHit(Entity entity, Vector2f target, GameContext context);
     public ItemUseResult use(Tile tile, Item item, GameContext context, Vector2f worldPos) {
         int ticks = Game.getTickCount();
-        if (ticks-item.lastUse < cooldownTicks) return new ItemUseResult(Optional.of(item), false);
-        item.lastUse = ticks;
+        if (ticks-lastUse < cooldownTicks) return new ItemUseResult(Optional.of(item), false);
+        lastUse = ticks;
         var entities = context.getEntities();
         boolean used = false;
         var stats = context.getPlayer().stats;

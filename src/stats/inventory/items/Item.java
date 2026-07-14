@@ -6,7 +6,6 @@ import saving.SavedItem;
 import stats.StatHolder;
 
 public class Item {
-    public int lastUse = 0;
     public final ItemDefinition definition;
     public final ItemScrollSet scrolls;
     public Item(ItemDefinition definition) {
@@ -17,7 +16,7 @@ public class Item {
         this.scrolls = scrolls;
     }
     public float getRatioTimeUntilReady() {
-        return Math.min((Game.getTickCount()-lastUse)/(float)definition.getCooldownTime(), 1f);
+        return Math.min((Game.getTickCount()-definition.lastUse)/(float)definition.getCooldownTime(), 1f);
     }
     public Item(SavedItem item) {
         this(ItemDefinition.get(item.id()), new ItemScrollSet(item.stats()));

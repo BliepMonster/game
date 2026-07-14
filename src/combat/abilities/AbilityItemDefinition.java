@@ -27,8 +27,8 @@ public class AbilityItemDefinition extends ItemDefinition {
 
     @Override
     public ItemUseResult use(Tile tile, Item item, GameContext context, Vector2f worldPos) {
-        if (Game.getTickCount() - cooldownTicks > item.lastUse) {
-            item.lastUse = Game.getTickCount();
+        if (Game.getTickCount() - cooldownTicks > lastUse) {
+            lastUse = Game.getTickCount();
             return ability.use(tile, item, worldPos, context);
         }
         return new ItemUseResult(Optional.of(item), false);

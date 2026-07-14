@@ -3,7 +3,6 @@ package tiles.spawner;
 import engine.jobs.Job;
 import engine.json.JsonString;
 import engine.json.JsonValue;
-import entities.*;
 import entities.dungeons.GemstoneGolemEnemy;
 import main.Game;
 import main.GameContext;
@@ -14,7 +13,7 @@ public class GemstoneGolemSpawner extends EnemySpawner {
     public static final int TICKS = Game.TICKS_PER_SECOND*40;
 
     public GemstoneGolemSpawner(Vector2f position, GameContext context) {
-        super(position, context, TICKS, "GOLD_CAVE_WORLD");
+        super(position, context, TICKS, "GEMSTONE_CAVE");
     }
 
     @Override

@@ -1,6 +1,7 @@
 package entities;
 
 import combat.equipment.EquipmentSlot;
+import engine.core.Texture;
 import engine.hitboxes.Hitbox;
 import engine.hitboxes.RectangularHitbox;
 import main.Camera;
@@ -97,10 +98,11 @@ public class Player implements Entity {
         velocityChanges.removeIf(VelocityChange::canBeRemoved);
         ticksSinceLastDamage++;
     }
+    public static final Texture TEXTURE = new Texture("res/textures/enemies/character.png");
     @Override
     public void render(Camera camera) {
-        var color = isDead() ? Color.orange : ticksSinceLastDamage < 5 ? Color.red : Color.blue;
-        camera.addRenderJob(() -> camera.rect(color, position.x, position.y, 1, 2), -position.y);
+        var color = isDead() ? Color.orange : ticksSinceLastDamage < 5 ? Color.red : Color.white;
+        camera.addRenderJob(() -> camera.tintedImage(TEXTURE, color, position.x, position.y, 1, 2), -position.y);
     }
 
     @Override

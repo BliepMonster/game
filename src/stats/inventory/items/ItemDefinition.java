@@ -13,6 +13,7 @@ public abstract class ItemDefinition {
     public final String id, name;
     public final String description;
     public final Texture texture;
+    public int lastUse = 0;
     public static final HashMap<String, ItemDefinition> definitions = new HashMap<>();
     public ItemDefinition(String id, String name, Texture texture) {
         this.id = id;

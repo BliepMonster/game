@@ -50,7 +50,7 @@ public enum EditorToolState {
                 tile.setPart(new GemstoneGolemSpawner(new Vector2f(x, y), context));
             }
             case O4 -> map.put(x, y, new DefaultTile(TileType.ROAD));
-            case O5 -> tile.setPart(new ScrollApplicationTilePart(new Vector2f(x, y)));
+            case O5 -> tile.setPart(new IronOrePart(new Vector2f(x, y)));
             case O6 -> tile.setPart(null);
             case O7 -> map.put(x, y, new DefaultTile(TileType.DIRT_PATH));
             case O8 -> {

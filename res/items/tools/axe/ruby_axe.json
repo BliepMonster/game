@@ -1,0 +1,14 @@
+{
+  "type": "tool",
+  "texture": "res/textures/ruby/ruby_axe.png",
+  "name": "Ruby Axe",
+  "id": "base:tools:ruby_axe",
+  "stats": [],
+  "power": [
+    {
+      "type": "WOODCUTTING",
+      "amount": 75
+    }
+  ],
+  "cooldown": 44
+}

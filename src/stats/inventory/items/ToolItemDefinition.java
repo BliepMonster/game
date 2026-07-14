@@ -37,10 +37,10 @@ public class ToolItemDefinition extends ItemDefinition {
         this.stats = stats;
     }
     public ItemUseResult use(Tile tile, Item item, GameContext context, Vector2f worldPos) {
-        if (Game.getTickCount() - item.lastUse < cooldown) {
+        if (Game.getTickCount() - lastUse < cooldown) {
             return new ItemUseResult(Optional.of(item), false);
         }
-        item.lastUse = Game.getTickCount();
+        lastUse = Game.getTickCount();
         if (tile == null) return new ItemUseResult(Optional.of(item), false);
         if (tile.getPart() == null) return new ItemUseResult(Optional.of(item), false);
         if (!(tile.getPart() instanceof HittableResourceCreator creator)) return new ItemUseResult(Optional.of(item), false);

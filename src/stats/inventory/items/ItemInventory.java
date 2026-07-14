@@ -23,6 +23,7 @@ public class ItemInventory {
             equipment.put(inventory.slots()[i], new Item(inventory.equipment()[i]));
         }
         for (int i = 0; i < NUM_ITEMS; ++i) {
+            if (i >= inventory.items().length) break;
             var item = inventory.items()[i];
             if (item != null) items[i] = new Item(item);
         }
