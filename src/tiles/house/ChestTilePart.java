@@ -1,6 +1,7 @@
 package tiles.house;
 
 import crafting.json.JsonStatLoader;
+import engine.core.Texture;
 import engine.gui.GUI;
 import engine.json.JsonArray;
 import engine.json.JsonNull;
@@ -10,6 +11,7 @@ import engine.json.JsonValue;
 import engine.saving.objects.SavedObject;
 import main.Camera;
 import main.GameContext;
+import main.TextureIdMap;
 import org.joml.Vector2f;
 import saving.SavedItem;
 import stats.inventory.items.Item;
@@ -24,6 +26,7 @@ public class ChestTilePart extends TilePart {
     public static final int NUM_ITEMS_PER_ROW = 10;
     public static final int NUM_ROWS = 3;
     public static final int NUM_ITEMS = NUM_ITEMS_PER_ROW * NUM_ROWS;
+    public static final Texture TEXTURE = TextureIdMap.get("base:tiles:chest");
     private final Item[] items = new Item[NUM_ITEMS];
 
     public ChestTilePart(Vector2f position) {
@@ -49,7 +52,7 @@ public class ChestTilePart extends TilePart {
     @Override
     public void render(int x, int y, Camera camera) {
         camera.addRenderJob(
-                () -> camera.rect(new Color(0x8B5A2B), x, y, 1, 1.5f),
+                () -> camera.image(TEXTURE, x, y, 1, 1.5f),
                 -y
         );
     }
