@@ -21,8 +21,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class World {
-    final CoordinateMap<Tile> map;
-    final String address;
+    public final CoordinateMap<Tile> map;
+    public final String address;
     final String id;
     private float brightness = 1f;
     public final List<Entity> toAdd = new ArrayList<>();
@@ -163,5 +163,9 @@ public class World {
     }
     public String getID() {
         return id;
+    }
+
+    public void setBrightness(float brightness) {
+        this.brightness = brightness;
     }
 }

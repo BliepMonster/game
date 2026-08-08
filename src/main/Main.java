@@ -11,7 +11,7 @@ import engine.core.text.Font;
 import engine.gui.GUI;
 import engine.jobs.JobSystem;
 import engine.notifications.NotificationSystem;
-import engine.saving.SaveFile;
+import engine.saving.objects.SaveFile;
 import engine.saving.TokenizedSaveFile;
 import org.lwjgl.glfw.GLFW;
 import saving.SavedGame;
@@ -45,6 +45,8 @@ public class Main {
 
     static String filename;
 
+    public static final float TILE_SIZE = .08f;
+
     static Game game;
     static boolean pressed, deadLastFrame;
 
@@ -54,7 +56,7 @@ public class Main {
 
     public static void open(SaveFile file, String filename) {
         JobSystem.clear();
-        game = new Game(mapd, .1f, new SavedGame(file));
+        game = new Game(mapd, TILE_SIZE, file);
         Main.filename = filename;
 
         GUI.clear();
@@ -68,7 +70,7 @@ public class Main {
 
     public static void open(SavedGame gamme, String filename) {
         JobSystem.clear();
-        game = new Game(mapd, .1f, gamme);
+        game = new Game(mapd, TILE_SIZE, gamme);
         Main.filename = filename;
 
         GUI.clear();
@@ -121,7 +123,7 @@ public class Main {
                 }
             } else if (event.type() == EventManager.MOUSE_DOWN && event.key() == GLFW.GLFW_MOUSE_BUTTON_1) {
                 pressed = true;
-            } else if (event.type() == EventManager.KEY_DOWN && event.key() == GLFW.GLFW_KEY_F3 && false) DEBUG_MODE = !DEBUG_MODE;
+            } else if (event.type() == EventManager.KEY_DOWN && event.key() == GLFW.GLFW_KEY_F3) DEBUG_MODE = !DEBUG_MODE;
         }
 
         Keybinds.manage(console);
@@ -145,7 +147,7 @@ public class Main {
             else if (Input.isKeyDown(GLFW.GLFW_KEY_S))
                 JSONSaver.save(game.world, game.world.map).write(new FileWriter(game.world.address));
             if (Input.isMouseDown(GLFW.GLFW_MOUSE_BUTTON_1))
-                game.world.apply(mode, Input.getMouseX(screen), Input.getMouseY(screen), game, .1f);
+                game.world.apply(mode, Input.getMouseX(screen), Input.getMouseY(screen), game, Main.TILE_SIZE);
         } if (framestamp - lastTick >= tickRate) {
             lastTick += tickRate;
             if (!game.player.isDead()) {
@@ -153,7 +155,7 @@ public class Main {
                     game.player.respawn(game);
                     deadLastFrame = false;
                 }
-                game.tick(pressed, screen, .1f, !b);
+                game.tick(pressed, screen, TILE_SIZE, !b);
             } else {
                 deadLastFrame = true;
                 Game.ticks++;
@@ -181,13 +183,8 @@ public class Main {
         var s = new TokenizedSaveFile();
         s.readAndOverride(new FileReader("saves/save.save"));
 
-        game = new Game(mapd, .1f, new SavedGame(s));
-
         GUI.init();
         GUI.bindDrawManager(draw);
-
-        GUI.add(new HotbarComponent(game.player), 62);
-        GUI.add(new CoinDisplayComponent(game.player, font, Currency.COINS), 61);
 
         Main.lastTick = (double) System.currentTimeMillis();
         final var tickRate = 1000d/Game.TICKS_PER_SECOND;
@@ -205,8 +202,6 @@ public class Main {
         Keybinds.addKeybind(GLFW.GLFW_KEY_9, () -> game.player.selectItem(8));
 
         CraftingStationTilePart.setDefaultFont(font);
-
-        GUI.add(new HealthBar(game.player), 62);
 
         while (screen.update()) {
             final var events = console.input.events.get();

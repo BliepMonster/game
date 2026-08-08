@@ -2,7 +2,7 @@
   "type": "equipment",
   "id": "base:rings:golden_ring",
   "name": "Golden Ring",
-  "texture": "res/golden_ring.png",
+  "texture": "base:item:golden_ring",
   "stats": [
     {
       "type": "MAX_HEALTH",

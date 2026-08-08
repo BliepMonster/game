@@ -1,0 +1,5 @@
+{
+  "base:item:copper_hoe": "res/textures/copper/copper_hoe.png",
+  "base:item:iron_hoe": "res/textures/iron/iron_hoe.png",
+  "base:item:steel_hoe": "res/textures/steel/steel_hoe.png"
+}

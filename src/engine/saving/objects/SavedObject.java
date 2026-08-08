@@ -1,6 +1,8 @@
 package engine.saving.objects;
 
-public sealed abstract class SavedObject permits SavedBoolean, SavedNull, SavedString, SavedDictionary, SavedArray, SavedFloat {
+import engine.json.JsonValue;
+
+public sealed abstract class SavedObject permits SavedBoolean, SavedNull, SavedString, SavedDictionary, SavedArray, SavedFloat, SaveFile {
     public abstract Object get();
 
     @Override
@@ -13,4 +15,5 @@ public sealed abstract class SavedObject permits SavedBoolean, SavedNull, SavedS
             return false;
         }
     }
+    public abstract JsonValue toJSON();
 }

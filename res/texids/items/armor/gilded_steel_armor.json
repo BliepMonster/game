@@ -1,0 +1,6 @@
+{
+  "base:item:gilded_steel_helmet": "res/textures/steel/gilded/gilded_steel_helmet.png",
+  "base:item:gilded_steel_chestplate": "res/textures/steel/gilded/gilded_steel_chestplate.png",
+  "base:item:gilded_steel_leggings": "res/textures/steel/gilded/gilded_steel_leggings.png",
+  "base:item:gilded_steel_boots": "res/textures/steel/gilded/gilded_steel_boots.png"
+}

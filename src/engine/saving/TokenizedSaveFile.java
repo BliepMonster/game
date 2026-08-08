@@ -1,5 +1,6 @@
 package engine.saving;
 
+import engine.json.JsonValue;
 import engine.saving.objects.*;
 
 import java.io.*;
@@ -73,6 +74,9 @@ public class TokenizedSaveFile extends SaveFile {
                 }
                 return sb.append("]");
             }
+            case SaveFile file -> {
+                return parse(new SavedDictionary(file.map));
+            }
         }
     }
     private String encodeRepeat(int amount) {
@@ -91,5 +95,15 @@ public class TokenizedSaveFile extends SaveFile {
         }
         sb.append("%".repeat(amount));
         return sb.toString();
+    }
+
+    @Override
+    public Object get() {
+        return new SavedDictionary(map).get();
+    }
+
+    @Override
+    public JsonValue toJSON() {
+        return new SavedDictionary(this.map).toJSON();
     }
 }

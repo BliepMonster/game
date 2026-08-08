@@ -1,6 +1,6 @@
 {
   "type": "tool",
-  "texture": "res/steel_axe.png",
+  "texture": "base:item:steel_axe",
   "name": "Steel Axe",
   "id": "base:tools:steel_axe",
   "stats": [],

@@ -1,6 +1,6 @@
 {
   "type": "tool",
-  "texture": "res/textures/copper/copper_pickaxe.png",
+  "texture": "base:item:copper_pickaxe",
   "name": "Copper Pickaxe",
   "id": "base:tools:copper_pickaxe",
   "stats": [],

@@ -2,7 +2,7 @@
   "type": "equipment",
   "id": "base:armor:reinforced_copper_helmet",
   "name": "Reinforced Copper Helmet",
-  "texture": "res/reinforced_copper_helmet.png",
+  "texture": "base:item:reinforced_copper_helmet",
   "stats": [
     {
       "type": "DEFENSE",

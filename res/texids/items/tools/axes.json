@@ -1,0 +1,7 @@
+{
+  "base:item:broken_axe": "res/textures/broken/broken_axe.png",
+  "base:item:copper_axe": "res/textures/copper/copper_axe.png",
+  "base:item:iron_axe": "res/textures/iron/iron_axe.png",
+  "base:item:steel_axe": "res/textures/steel/steel_axe.png",
+  "base:item:ruby_axe": "res/textures/ruby/ruby_axe.png"
+}

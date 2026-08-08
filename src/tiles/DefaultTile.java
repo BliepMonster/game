@@ -1,8 +1,6 @@
 package tiles;
 
-import engine.core.DrawManager;
 import engine.json.JsonValue;
-import engine.saving.objects.SavedObject;
 import main.Camera;
 import main.GameContext;
 

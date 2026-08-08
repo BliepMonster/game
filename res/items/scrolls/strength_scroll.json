@@ -1,6 +1,6 @@
 {
   "type": "scroll",
-  "texture": "res/textures/scrolls/strength_scroll.png",
+  "texture": "base:item:strength_scroll",
   "name": "Scroll of Strength",
   "id": "base:scrolls:scroll_strength",
   "stat": "STRENGTH",

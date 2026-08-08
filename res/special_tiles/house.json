@@ -1,0 +1,30 @@
+{
+  "type": "texture_adapt",
+  "standable": false,
+  "ids": [
+    "base:tiles:house11",
+    "base:tiles:house31",
+    "base:tiles:house41",
+    "base:tiles:house51",
+    "base:tiles:house12",
+    "base:tiles:house22",
+    "base:tiles:house32",
+    "base:tiles:house42",
+    "base:tiles:house52",
+    "base:tiles:house13",
+    "base:tiles:house23",
+    "base:tiles:house33",
+    "base:tiles:house43",
+    "base:tiles:house53",
+    "base:tiles:house14",
+    "base:tiles:house24",
+    "base:tiles:house34",
+    "base:tiles:house44",
+    "base:tiles:house54",
+    "base:tiles:house15",
+    "base:tiles:house25",
+    "base:tiles:house35",
+    "base:tiles:house45",
+    "base:tiles:house55"
+  ]
+}

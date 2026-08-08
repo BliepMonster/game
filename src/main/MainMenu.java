@@ -19,7 +19,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 
 public class MainMenu {
-    private static ArrayList<String> filenames = new ArrayList<>();
+    private static final ArrayList<String> filenames = new ArrayList<>();
 
     public static void tick(DrawManager draw) {
         Screen screen = draw.getScreen();
@@ -38,7 +38,7 @@ public class MainMenu {
                     new SavedSkill(0, 0),
                     new SavedSkill(0, 0),
                     new SavedSkill(0, 0)
-            })));
+            })), new SavedHome(WorldRegistry.get("HOUSE")));
             MainMenu.initLoadWorldMenu();
             Main.open(game, "saves/save"+filenames.size()+".save");
             Main.state = Main.State.ONGOING;

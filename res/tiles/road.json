@@ -1,0 +1,5 @@
+{
+  "id": "ROAD",
+  "standable": true,
+  "texture": "base:tiles:road"
+}

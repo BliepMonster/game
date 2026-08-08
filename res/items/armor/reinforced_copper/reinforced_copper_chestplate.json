@@ -2,7 +2,7 @@
   "type": "equipment",
   "id": "base:armor:reinforced_copper_chestplate",
   "name": "Reinforced Copper Chestplate",
-  "texture": "res/reinforced_copper_chestplate.png",
+  "texture": "base:item:reinforced_copper_chestplate",
   "stats": [
     {
       "type": "DEFENSE",

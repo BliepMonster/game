@@ -1,6 +1,6 @@
 {
   "type": "tool",
-  "texture": "res/iron_pickaxe.png",
+  "texture": "base:item:iron_pickaxe",
   "name": "Iron Pickaxe",
   "id": "base:tools:iron_pickaxe",
   "stats": [],

@@ -2,7 +2,7 @@
   "type": "equipment",
   "id": "base:armor:speed_boots",
   "name": "Boots of Speed",
-  "texture": "res/speed_boots.png",
+  "texture": "base:item:speed_boots",
   "stats": [
     {
       "type": "SPEED",

@@ -2,7 +2,7 @@
   "type": "equipment",
   "id": "base:armor:zombie_helmet",
   "name": "Zombie Helmet",
-  "texture": "res/zombie_helmet.png",
+  "texture": "base:item:zombie_helmet",
   "stats": [
     {
       "type": "DEFENSE",

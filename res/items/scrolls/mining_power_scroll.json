@@ -1,6 +1,6 @@
 {
   "type": "scroll",
-  "texture": "res/textures/scrolls/mining_power_scroll.png",
+  "texture": "base:item:mining_power_scroll",
   "name": "Scroll of Mining Power",
   "id": "base:scrolls:scroll_mining_power",
   "stat": "MINING_POWER",

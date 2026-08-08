@@ -2,7 +2,7 @@
   "type": "equipment",
   "id": "base:armor:copper_boots",
   "name": "Copper Boots",
-  "texture": "res/textures/copper/copper_boots.png",
+  "texture": "base:item:copper_boots",
   "stats": [
     {
       "type": "DEFENSE",

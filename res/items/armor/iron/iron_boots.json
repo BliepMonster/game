@@ -2,7 +2,7 @@
   "type": "equipment",
   "id": "base:armor:iron_boots",
   "name": "Iron Boots",
-  "texture": "res/iron_boots.png",
+  "texture": "base:item:iron_boots",
   "stats": [
     {
       "type": "DEFENSE",

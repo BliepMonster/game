@@ -2,7 +2,7 @@
   "type": "equipment",
   "id": "base:armor:reinforced_copper_boots",
   "name": "Reinforced Copper Boots",
-  "texture": "res/reinforced_copper_boots.png",
+  "texture": "base:item:reinforced_copper_boots",
   "stats": [
     {
       "type": "DEFENSE",

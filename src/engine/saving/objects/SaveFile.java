@@ -1,14 +1,12 @@
-package engine.saving;
-
-import engine.saving.objects.SavedObject;
+package engine.saving.objects;
 
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
 
-public abstract class SaveFile {
-    protected HashMap<String, SavedObject> map;
+public abstract non-sealed class SaveFile extends SavedObject {
+    public HashMap<String, SavedObject> map;
     public SaveFile() {
         this.map = new HashMap<>();
     }

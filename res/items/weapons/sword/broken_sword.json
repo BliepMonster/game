@@ -2,7 +2,7 @@
   "type": "melee",
   "id": "base:weapons:broken_sword",
   "name": "Broken Sword",
-  "texture": "res/textures/broken/broken_sword.png",
+  "texture": "base:item:broken_sword",
 
   "knockback": 1.5,
   "damage_type": "NORMAL",

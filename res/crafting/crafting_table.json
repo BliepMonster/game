@@ -10,6 +10,7 @@
     "res/recipes/golden_strawberry_recipe.json",
     "res/recipes/paper_recipe.json",
     "res/recipes/scrolls/strength_scroll_recipe.json",
-    "res/recipes/scrolls/mining_power_scroll_recipe.json"
+    "res/recipes/scrolls/mining_power_scroll_recipe.json",
+    "res/recipes/crafting_table_recipe.json"
   ]
 }

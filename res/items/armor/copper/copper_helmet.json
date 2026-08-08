@@ -2,7 +2,7 @@
   "type": "equipment",
   "id": "base:armor:copper_helmet",
   "name": "Copper Helmet",
-  "texture": "res/textures/copper/copper_helmet.png",
+  "texture": "base:item:copper_helmet",
   "stats": [
     {
       "type": "DEFENSE",

@@ -2,7 +2,7 @@
   "type": "equipment",
   "id": "base:armor:copper_chestplate",
   "name": "Copper Chestplate",
-  "texture": "res/textures/copper/copper_chestplate.png",
+  "texture": "base:item:copper_chestplate",
   "stats": [
     {
       "type": "DEFENSE",

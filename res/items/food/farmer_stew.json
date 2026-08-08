@@ -2,7 +2,7 @@
   "type": "consumable",
   "id": "base:food:farmer_stew",
   "name": "Farmer's Stew",
-  "texture": "res/textures/food/farmer_stew.png",
+  "texture": "base:item:farmer_stew",
   "stats": [
     {
       "type": "FARMING_YIELD",

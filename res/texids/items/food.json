@@ -1,0 +1,6 @@
+{
+  "base:placeholder": "res/bred.png",
+  "base:item:carrot_cake": "res/textures/food/carrot_cake.png",
+  "base:item:farmer_stew": "res/textures/food/farmer_stew.png",
+  "base:item:golden_strawberry": "res/textures/food/golden_strawberry.png"
+}

@@ -2,7 +2,7 @@
   "type": "melee",
   "id": "base:weapons:steel_sword",
   "name": "Steel Sword",
-  "texture": "res/steel_sword.png",
+  "texture": "base:item:steel_sword",
 
   "knockback": 1.5,
   "damage_type": "NORMAL",

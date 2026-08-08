@@ -1,5 +1,8 @@
 package engine.saving.objects;
 
+import engine.json.JsonObject;
+import engine.json.JsonValue;
+
 import java.util.HashMap;
 
 public final class SavedDictionary extends SavedObject {
@@ -24,5 +27,12 @@ public final class SavedDictionary extends SavedObject {
     }
     public boolean isEmpty() {
         return map.isEmpty();
+    }
+
+    @Override
+    public JsonValue toJSON() {
+        JsonObject object = new JsonObject();
+        for (var entry : map.entrySet()) object.values.put(entry.getKey(), entry.getValue().toJSON());
+        return object;
     }
 }

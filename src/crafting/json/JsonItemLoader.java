@@ -10,6 +10,7 @@ import combat.melee.SpecificStabWeaponDefinition;
 import engine.core.Texture;
 import engine.json.*;
 import entities.DamageType;
+import main.TextureIdMap;
 import stats.StatHolder;
 import stats.inventory.items.*;
 
@@ -123,7 +124,8 @@ public class JsonItemLoader {
         if (file.values.containsKey("description"))
             description = ((JsonString) file.values.get("description")).value;
         String ta = ((JsonString) file.values.get("texture")).value;
-        Texture texture = new Texture(ta);
+        Texture texture = TextureIdMap.get(ta);
+        if (texture == null) texture = new Texture(ta);
         String type = ((JsonString) file.values.get("type")).value;
         return switch (type) {
             case "equipment" -> loadEquipment(file, id, name, description, texture);

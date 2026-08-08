@@ -1,6 +1,6 @@
 {
   "type": "tool",
-  "texture": "res/textures/broken/broken_pickaxe.png",
+  "texture": "base:item:broken_pickaxe",
   "name": "Broken Pickaxe",
   "id": "base:tools:broken_pickaxe",
   "stats": [],

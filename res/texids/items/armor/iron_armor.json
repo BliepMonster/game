@@ -1,0 +1,6 @@
+{
+  "base:item:iron_helmet": "res/textures/iron/iron_helmet.png",
+  "base:item:iron_chestplate": "res/textures/iron/iron_chestplate.png",
+  "base:item:iron_leggings": "res/textures/iron/iron_leggings.png",
+  "base:item:iron_boots": "res/textures/iron/iron_boots.png"
+}

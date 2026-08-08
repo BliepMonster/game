@@ -2,7 +2,7 @@
   "type": "equipment",
   "id": "base:armor:iron_helmet",
   "name": "Iron Helmet",
-  "texture": "res/iron_helmet.png",
+  "texture": "base:item:iron_helmet",
   "stats": [
     {
       "type": "DEFENSE",

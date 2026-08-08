@@ -1,6 +1,6 @@
 {
   "type": "tool",
-  "texture": "res/textures/broken/broken_axe.png",
+  "texture": "base:item:broken_axe",
   "name": "Broken Axe",
   "id": "base:tools:broken_axe",
   "stats": [],

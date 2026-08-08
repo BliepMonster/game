@@ -1,5 +1,8 @@
 package engine.saving.objects;
 
+import engine.json.JsonArray;
+import engine.json.JsonValue;
+
 import java.util.ArrayList;
 
 public final class SavedArray extends SavedObject {
@@ -21,5 +24,12 @@ public final class SavedArray extends SavedObject {
     }
     public void add(SavedObject object) {
         array.add(object);
+    }
+
+    @Override
+    public JsonValue toJSON() {
+        JsonArray a = new JsonArray();
+        for (var o : array) a.values.add(o.toJSON());
+        return a;
     }
 }

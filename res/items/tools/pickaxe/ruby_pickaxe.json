@@ -1,6 +1,6 @@
 {
   "type": "tool",
-  "texture": "res/ruby_pickaxe.png",
+  "texture": "base:item:ruby_pickaxe",
   "name": "Ruby Pickaxe",
   "id": "base:tools:ruby_pickaxe",
   "stats": [],

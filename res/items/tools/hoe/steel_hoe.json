@@ -2,7 +2,7 @@
   "type": "ability",
   "id": "base:tools:steel_hoe",
   "name": "Steel Hoe",
-  "texture": "res/steel_hoe.png",
+  "texture": "base:item:steel_hoe",
   "ability": "steel_hoe",
   "cooldown": 1,
   "stats": []

@@ -2,7 +2,7 @@
   "type": "equipment",
   "id": "base:armor:steel_boots",
   "name": "Steel Boots",
-  "texture": "res/steel_boots.png",
+  "texture": "base:item:steel_boots",
   "stats": [
     {
       "type": "DEFENSE",

@@ -2,7 +2,7 @@
   "type": "consumable",
   "id": "base:food:golden_strawberry",
   "name": "Golden Strawberry",
-  "texture": "res/textures/food/golden_strawberry.png",
+  "texture": "base:item:golden_strawberry",
   "stats": [
     {
       "type": "REGENERATION",

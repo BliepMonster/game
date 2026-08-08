@@ -2,28 +2,15 @@ package tool.editor;
 
 import engine.CoordinateMap;
 import engine.core.Texture;
-import entities.DumbZombieEnemy;
-import entities.Entity;
 import entities.dungeons.ShooterEnemy;
-import entities.dungeons.SpeedsterEnemy;
-import main.EntityProducer;
-import main.Game;
-import main.GameContext;
-import main.World;
+import main.*;
 import org.joml.Vector2f;
-import stats.inventory.items.Item;
-import stats.inventory.items.ItemDefinition;
 import tiles.*;
-import tiles.crafting.DeconstructorTilePart;
-import tiles.crafting.FurnaceTilePart;
-import tiles.crafting.scrolls.ScrollApplicationTilePart;
 import tiles.doors.DungeonExitTilePart;
 import tiles.doors.EntranceTilePart;
 import tiles.resources.*;
 import tiles.spawner.GemstoneGolemSpawner;
-import tiles.spawner.GoldenZombieSpawner;
 
-import java.lang.reflect.Constructor;
 
 public enum EditorToolState {
     O1,
@@ -39,7 +26,9 @@ public enum EditorToolState {
     public static int lastTick = 0;
     public void apply(Tile tile, CoordinateMap<Tile> map, int x, int y, World world, GameContext context) {
         switch (this) {
-            case O1 -> map.put(x, y, new DefaultTile(TileType.WALL));
+            case O1 -> {
+                tile.setPart(new EntranceTilePart(new Vector2f(), "HOUSE", new Vector2f(), TextureIdMap.get("base:empty")));
+            }
             case O2 -> tile.setPart(new EntranceTilePart(
                     new Vector2f(x, y),
                     "GOLD_CAVE_WORLD",
@@ -49,10 +38,10 @@ public enum EditorToolState {
             case O3 -> {
                 tile.setPart(new GemstoneGolemSpawner(new Vector2f(x, y), context));
             }
-            case O4 -> map.put(x, y, new DefaultTile(TileType.ROAD));
+            case O4 -> map.put(x, y, new DefaultTile(TileType.get("ROAD")));
             case O5 -> tile.setPart(new IronOrePart(new Vector2f(x, y)));
             case O6 -> tile.setPart(null);
-            case O7 -> map.put(x, y, new DefaultTile(TileType.DIRT_PATH));
+            case O7 -> map.put(x, y, new DefaultTile(TileType.get("DIRT_PATH")));
             case O8 -> {
                 if (Game.getTickCount()-lastTick < 20) return;
                 try {

@@ -1,0 +1,9 @@
+{
+  "base:tiles:house": "res/textures/tiles/house.png",
+  "base:tiles:grass": "res/textures/tiles/grass_tile.png",
+  "base:tiles:wall": "res/textures/tiles/wall_tile.png",
+  "base:tiles:road": "res/textures/tiles/road_tile.png",
+  "base:tiles:dirt_path": "res/textures/tiles/path_tile.png",
+  "base:tiles:compost": "res/textures/tiles/compost_tile.png",
+  "base:tiles:grass_dark": "res/textures/tiles/grass_dark_tile.png"
+}

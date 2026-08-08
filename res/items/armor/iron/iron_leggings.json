@@ -2,7 +2,7 @@
   "type": "equipment",
   "id": "base:armor:iron_leggings",
   "name": "Iron Leggings",
-  "texture": "res/iron_leggings.png",
+  "texture": "base:item:iron_leggings",
   "stats": [
     {
       "type": "DEFENSE",

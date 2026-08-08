@@ -2,7 +2,7 @@
   "type": "ability",
   "id": "base:tools:copper_hoe",
   "name": "Copper Hoe",
-  "texture": "res/textures/copper/copper_hoe.png",
+  "texture": "base:item:copper_hoe",
   "ability": "copper_hoe",
   "cooldown": 1,
   "stats": []

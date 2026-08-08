@@ -30,6 +30,10 @@ public class Item {
     public boolean canApplyScroll(StatHolder.Stat stat, FullItemStorage inv) {
         var count = scrolls.stats().get(stat) / ItemScrollSet.getScroll(stat).scaling;
         if (count > 5) {
+            scrolls.stats.with(stat, ItemScrollSet.getScroll(stat).scaling*5);
+            return false;
+        }
+        if (count == 5) {
             return false;
         }
         var cost = 1 << (int) count;

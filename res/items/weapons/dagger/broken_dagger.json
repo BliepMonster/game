@@ -2,7 +2,7 @@
   "type": "melee",
   "id": "base:weapons:broken_dagger",
   "name": "Broken Dagger",
-  "texture": "res/textures/broken/broken_dagger.png",
+  "texture": "base:item:broken_dagger",
 
   "damage_type": "NORMAL",
   "stats": [],

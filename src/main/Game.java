@@ -3,11 +3,13 @@ package main;
 import engine.core.DrawManager;
 import engine.core.Screen;
 import engine.jobs.JobSystem;
+import engine.saving.objects.SaveFile;
 import entities.Entity;
 import entities.Player;
 import org.joml.Vector2f;
 import saving.PlayerSaver;
 import saving.SavedGame;
+import saving.SavedHome;
 import tiles.Tile;
 
 import java.util.List;
@@ -24,11 +26,22 @@ public class Game implements GameContext {
     public Player getPlayer() {
         return player;
     }
+    public Game(DrawManager draw, float tsize, SaveFile file) {
+        SavedGame save = new SavedGame(file, this);
+        player = new Player(save.player());
+        AutoWorldRegisterer.registerAll(this);
+        world = WorldRegistry.get("HOME_WORLD");
+        camera = new Camera(player, tsize, draw);
+        if (save.home().home() != null)
+            WorldRegistry.put("HOUSE", save.home().home());
+    }
     public Game(DrawManager draw, float tsize, SavedGame save) {
         player = new Player(save.player());
         AutoWorldRegisterer.registerAll(this);
         world = WorldRegistry.get("HOME_WORLD");
         camera = new Camera(player, tsize, draw);
+        if (save.home().home() != null)
+            WorldRegistry.put("HOUSE", save.home().home());
     }
     public void tick(boolean pressed, Screen screen, float tsize, boolean canClick) {
         ++ticks;
@@ -63,12 +76,18 @@ public class Game implements GameContext {
     }
     public SavedGame save() {
         return new SavedGame(
-                PlayerSaver.savePlayer(player)
+                PlayerSaver.savePlayer(player),
+                new SavedHome(WorldRegistry.get("HOUSE"))
         );
     }
     public void movePlayer(World world, Vector2f position) {
         this.world = world;
         world.load(camera);
         player.getPosition().set(position);
+    }
+
+    @Override
+    public World getWorld() {
+        return world;
     }
 }

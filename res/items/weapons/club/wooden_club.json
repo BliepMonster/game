@@ -2,7 +2,7 @@
   "type": "melee",
   "id": "base:weapons:wooden_club",
   "name": "Wooden Club",
-  "texture": "res/wooden_club.png",
+  "texture": "base:item:wooden_club",
 
   "knockback": 8,
   "damage_type": "NORMAL",

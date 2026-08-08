@@ -2,7 +2,7 @@
   "type": "equipment",
   "id": "base:armor:copper_leggings",
   "name": "Copper Leggings",
-  "texture": "res/textures/copper/copper_leggings.png",
+  "texture": "base:item:copper_leggings",
   "stats": [
     {
       "type": "DEFENSE",

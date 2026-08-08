@@ -53,6 +53,14 @@ public class JSONLoader {
         loadTiles(tiles, map);
         loadObjects(objects, map, context);
     }
+    public static void loadWorld(JsonObject file, CoordinateMap<Tile> map, GameContext context) {
+
+        JsonArray tiles = (JsonArray) file.values.get("tiles");
+        JsonArray objects = (JsonArray) file.values.get("objects");
+
+        loadTiles(tiles, map);
+        loadObjects(objects, map, context);
+    }
     public static void loadOnSpawn(World world, JsonFile file) throws ClassNotFoundException, NoSuchMethodException {
         if (!file.values.containsKey("onLoad")) return;
         var array = (JsonArray) file.values.get("onLoad");

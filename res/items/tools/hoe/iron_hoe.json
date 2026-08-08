@@ -2,7 +2,7 @@
   "type": "ability",
   "id": "base:tools:iron_hoe",
   "name": "Iron Hoe",
-  "texture": "res/iron_hoe.png",
+  "texture": "base:item:iron_hoe",
   "ability": "iron_hoe",
   "cooldown": 1,
   "stats": []

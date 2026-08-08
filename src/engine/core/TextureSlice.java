@@ -23,16 +23,26 @@ public class TextureSlice extends Texture {
         }
         return slices;
     }
+    public static TextureSlice[] split(Texture tex, int x, int y) {
+        TextureSlice[] slices = new TextureSlice[x*y];
+        float ic = 1f/x;
+        float jc = 1f/y;
+        int index = 0;
+        for (float j = 1-jc; j >= 0; j -= jc) {
+            for (float i = 0; i < 1; i += ic) {
+                slices[index++] = new TextureSlice(tex, i, j, ic, jc);
+            }
+        }
+        return slices;
+    }
 
     @Override
     public boolean equals(Object other) {
         if (other == null) return false;
         if (other == this) return true;
-        if (!(other instanceof TextureSlice)) return false;
+        if (!(other instanceof TextureSlice otherCast)) return false;
         if (!super.equals(other)) return false;
-        var otherCast = (TextureSlice) other;
-        if (!java.util.Arrays.equals(this.dimensions, otherCast.dimensions)) return false;
-        return true;
+        return java.util.Arrays.equals(this.dimensions, otherCast.dimensions);
     }
 
     @Override

@@ -1,0 +1,22 @@
+{
+  "type": "texture_adapt",
+  "ids": [
+    "base:tiles:house16",
+    "base:tiles:house26",
+    "base:tiles:house36",
+    "base:tiles:house46",
+    "base:tiles:house56",
+    "base:tiles:house17",
+    "base:tiles:house27",
+    "base:tiles:house37",
+    "base:tiles:house47",
+    "base:tiles:house57",
+    "base:tiles:house18",
+    "base:tiles:house28",
+    "base:tiles:house38",
+    "base:tiles:house48",
+    "base:tiles:house58",
+    "base:tiles:house21"
+  ],
+  "standable": true
+}

@@ -2,7 +2,7 @@
   "type": "melee",
   "id": "base:weapons:iron_sword",
   "name": "Iron Sword",
-  "texture": "res/iron_sword.png",
+  "texture": "base:item:iron_sword",
 
   "knockback": 1.5,
   "damage_type": "NORMAL",

@@ -1,0 +1,6 @@
+{
+  "base:item:reinforced_copper_helmet": "res/textures/copper/reinforced_copper_helmet.png",
+  "base:item:reinforced_copper_chestplate": "res/textures/copper/reinforced_copper_chestplate.png",
+  "base:item:reinforced_copper_leggings": "res/textures/copper/reinforced_copper_leggings.png",
+  "base:item:reinforced_copper_boots": "res/textures/copper/reinforced_copper_boots.png"
+}
