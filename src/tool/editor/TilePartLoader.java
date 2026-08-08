@@ -15,6 +15,7 @@ import tiles.crafting.FurnaceTilePart;
 import tiles.crafting.scrolls.ScrollApplicationTilePart;
 import tiles.doors.DungeonExitTilePart;
 import tiles.doors.EntranceTilePart;
+import tiles.house.ChestTilePart;
 import tiles.npc.ShopDefinitionRegistry;
 import tiles.npc.ShopNPC;
 import tiles.resources.*;
@@ -46,6 +47,7 @@ public final class TilePartLoader {
     public static final String ID_RUBY = "ruby";
     public static final String ID_SCROLL_APPLIER = "scroll_applier";
     public static final String ID_SPAWNER_GEMGOLEM = "gg_spawner";
+    public static final String ID_CHEST = "chest";
     public static Font font;
     public static final HashMap<String, Texture> tcache = new HashMap<>();
 
@@ -104,6 +106,7 @@ public final class TilePartLoader {
             case ID_RUBY -> new RubyGemstoneTilePart(pos);
             case ID_SCROLL_APPLIER -> new ScrollApplicationTilePart(pos);
             case ID_SPAWNER_GEMGOLEM -> new GemstoneGolemSpawner(pos, context);
+            case ID_CHEST -> ChestTilePart.load(pos, obj);
             default -> throw new RuntimeException("Unknown object: " + type);
         };
     }
