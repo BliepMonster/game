@@ -1,0 +1,9 @@
+{
+  "type": "ability",
+  "id": "base:placers:deconstructor",
+  "name": "Deconstructor",
+  "texture": "base:item:deconstructor",
+  "ability": "deconstructor",
+  "cooldown": 1,
+  "stats": []
+}

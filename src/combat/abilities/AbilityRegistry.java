@@ -9,5 +9,6 @@ public class AbilityRegistry {
         registry.put("iron_hoe", new HoeHarvestAbility(3));
         registry.put("steel_hoe", new HoeHarvestAbility(5));
         registry.put("crafting_station", new CraftingTablePlacerAbility());
+        registry.put("deconstructor", new DeconstructorPlacerAbility());
     }
 }

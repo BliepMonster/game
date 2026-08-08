@@ -1,0 +1,23 @@
+{
+  "name": "Deconstructor",
+  "inputs": [
+    {
+      "type": "resource",
+      "id": "Maple Wood",
+      "amount": 5
+    },
+    {
+      "type": "resource",
+      "id": "Copper Bar",
+      "amount": 2
+    }
+  ],
+  "outputs": [
+    {
+      "type": "item",
+      "id": "base:placers:deconstructor",
+      "amount": 1
+    }
+  ],
+  "requirements": []
+}
