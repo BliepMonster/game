@@ -1,0 +1,5 @@
+{
+  "id": "FLOOR_PLANK",
+  "standable": true,
+  "texture": "base:tiles:plank_floor"
+}

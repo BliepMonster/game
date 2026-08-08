@@ -12,7 +12,6 @@ import engine.gui.GUI;
 import engine.jobs.JobSystem;
 import engine.notifications.NotificationSystem;
 import engine.saving.objects.SaveFile;
-import engine.saving.TokenizedSaveFile;
 import org.lwjgl.glfw.GLFW;
 import saving.SavedGame;
 import stats.inventory.items.ui.HotbarComponent;
@@ -28,7 +27,6 @@ import tool.editor.EditorToolState;
 import tool.editor.JSONSaver;
 import tool.editor.TilePartLoader;
 
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -180,8 +178,6 @@ public class Main {
         font = new Font("res/Unnamed");
 
         TilePartLoader.font = font;
-        var s = new TokenizedSaveFile();
-        s.readAndOverride(new FileReader("saves/save.save"));
 
         GUI.init();
         GUI.bindDrawManager(draw);

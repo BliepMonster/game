@@ -27,7 +27,7 @@ public enum EditorToolState {
     public void apply(Tile tile, CoordinateMap<Tile> map, int x, int y, World world, GameContext context) {
         switch (this) {
             case O1 -> {
-                tile.setPart(new EntranceTilePart(new Vector2f(), "HOUSE", new Vector2f(), TextureIdMap.get("base:empty")));
+                map.put(x, y, new DefaultTile(TileType.get("FLOOR_PLANK")));
             }
             case O2 -> tile.setPart(new EntranceTilePart(
                     new Vector2f(x, y),
