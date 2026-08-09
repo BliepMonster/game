@@ -1,0 +1,17 @@
+{
+  "type": "equipment",
+  "id": "base:rings:miner_ring",
+  "name": "Miner's Ring",
+  "texture": "base:item:miner_ring",
+  "stats": [
+    {
+      "type": "MINING_YIELD",
+      "count": 5
+    },
+    {
+      "type": "MINING_POWER",
+      "count": 25
+    }
+  ],
+  "slot": "RING"
+}

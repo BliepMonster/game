@@ -1,0 +1,31 @@
+{
+  "name": "Miner's Ring",
+
+  "inputs": [
+    {
+      "type": "resource",
+      "id": "Gold Bar",
+      "amount": 3
+    },
+    {
+      "type": "resource",
+      "id": "Steel Bar",
+      "amount": 2
+    }
+  ],
+
+  "outputs": [
+    {
+      "type": "item",
+      "id": "base:rings:miner_ring",
+      "amount": 1
+    }
+  ],
+  "requirements": [
+    {
+      "type": "skill",
+      "skill": "MINING",
+      "level": 11
+    }
+  ]
+}

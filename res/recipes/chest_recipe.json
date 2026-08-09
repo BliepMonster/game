@@ -1,0 +1,23 @@
+{
+  "name": "Chest",
+  "inputs": [
+    {
+      "type": "resource",
+      "id": "Maple Wood",
+      "amount": 10
+    },
+    {
+      "type": "resource",
+      "id": "Copper Bar",
+      "amount": 1
+    }
+  ],
+  "outputs": [
+    {
+      "type": "item",
+      "id": "base:placers:chest",
+      "amount": 1
+    }
+  ],
+  "requirements": []
+}

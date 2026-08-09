@@ -31,7 +31,7 @@ public enum EditorToolState {
             }
             case O2 -> tile.setPart(new EntranceTilePart(
                     new Vector2f(x, y),
-                    "GOLD_CAVE_WORLD",
+                    "HOME_WORLD",
                     new Vector2f(),
                     new Texture("res/bred.png")
             ));

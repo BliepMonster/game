@@ -21,7 +21,7 @@ public class RubyGemstoneTilePart extends HittableResourceCreator implements Lig
             SkillSet.SkillType.MINING,
             150,
             StatHolder.Stat.MINING_YIELD,
-            3000,
+            900,
             12,
             false,
             ToolItemDefinition.PowerType.MINING

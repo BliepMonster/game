@@ -20,9 +20,9 @@ public class GoldOrePart extends HittableResourceCreator implements LightSource 
             /*id*/ ItemConstants.ITEM_GOLD_ORE,
             /*yield*/ 1,
             /*skill*/ SkillSet.SkillType.MINING,
-            /*xp*/ 50,
+            /*xp*/ 80,
             /*modifier*/ StatHolder.Stat.MINING_YIELD,
-            /*health*/ 1500,
+            /*health*/ 750,
             /*levelRequirement*/ 10,
             /*standable*/ false,
             /*powerType*/ ToolItemDefinition.PowerType.MINING

@@ -1,0 +1,9 @@
+{
+  "type": "ability",
+  "id": "base:placers:chest",
+  "name": "Chest",
+  "texture": "base:item:chest",
+  "ability": "chest",
+  "cooldown": 1,
+  "stats": []
+}

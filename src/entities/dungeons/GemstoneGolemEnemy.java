@@ -26,7 +26,7 @@ public class GemstoneGolemEnemy extends MeleeDungeonEnemy {
     public GemstoneGolemEnemy(Vector2f location, EnemySpawner spawner) {
         super(
                 location,
-                300,
+                150,
                 60,
                 table,
                 8,

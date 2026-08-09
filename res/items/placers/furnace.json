@@ -1,0 +1,9 @@
+{
+  "type": "ability",
+  "id": "base:placers:furnace",
+  "name": "Furnace",
+  "texture": "base:item:furnace",
+  "ability": "furnace",
+  "cooldown": 1,
+  "stats": []
+}

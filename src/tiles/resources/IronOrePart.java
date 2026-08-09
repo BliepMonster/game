@@ -19,9 +19,9 @@ public class IronOrePart extends HittableResourceCreator {
             ItemConstants.ITEM_IRON_ORE,
             1,
             SkillSet.SkillType.MINING,
-            25,
+            35,
             StatHolder.Stat.MINING_YIELD,
-            500,
+            300,
             5,
             false,
             ToolItemDefinition.PowerType.MINING

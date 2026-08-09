@@ -1,0 +1,28 @@
+{
+  "name": "Furnace",
+  "inputs": [
+    {
+      "type": "resource",
+      "id": "Maple Wood",
+      "amount": 4
+    },
+    {
+      "type": "resource",
+      "id": "Copper Bar",
+      "amount": 3
+    },
+    {
+      "type": "resource",
+      "id": "Coal",
+      "amount": 8
+    }
+  ],
+  "outputs": [
+    {
+      "type": "item",
+      "id": "base:placers:furnace",
+      "amount": 1
+    }
+  ],
+  "requirements": []
+}

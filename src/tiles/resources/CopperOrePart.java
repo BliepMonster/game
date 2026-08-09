@@ -19,7 +19,7 @@ public class CopperOrePart extends HittableResourceCreator {
             ItemConstants.ITEM_COPPER_ORE,
             1,
             SkillSet.SkillType.MINING,
-            15,
+            22  ,
             StatHolder.Stat.MINING_YIELD,
             200,
             2,

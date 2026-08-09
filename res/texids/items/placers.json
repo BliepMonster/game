@@ -1,3 +1,5 @@
 {
-  "base:item:deconstructor": "res/textures/placers/deconstructor.png"
+  "base:item:deconstructor": "res/textures/placers/deconstructor.png",
+  "base:item:chest": "res/textures/placers/chest.png",
+  "base:item:furnace": "res/textures/placers/furnace.png"
 }

@@ -6,20 +6,25 @@ public class JsonParser {
     private ArrayList<JsonToken> tokens;
     private int index = 0;
     public JsonFile parse(String json) {
-        tokens = new JsonScanner(json).scan();
-        index = 0;
-        JsonToken.Type type = advance().type();
-        JsonFile file = new JsonFile();
-        if (type != JsonToken.Type.LBRACE) throw new RuntimeException("Expected {");
-        if (!match(JsonToken.Type.RBRACE)) {
-            do {
-                String skey = advance().token().toString();
-                if (!match(JsonToken.Type.COLON)) throw new RuntimeException("Expected :");
-                JsonValue svalue = value();
-                file.values.put(skey, svalue);
-            } while (match(JsonToken.Type.COMMA));
+        try {
+            tokens = new JsonScanner(json).scan();
+            index = 0;
+            JsonToken.Type type = advance().type();
+            JsonFile file = new JsonFile();
+            if (type != JsonToken.Type.LBRACE) throw new RuntimeException("Expected {");
+            if (!match(JsonToken.Type.RBRACE)) {
+                do {
+                    String skey = advance().token().toString();
+                    if (!match(JsonToken.Type.COLON)) throw new RuntimeException("Expected :");
+                    JsonValue svalue = value();
+                    file.values.put(skey, svalue);
+                } while (match(JsonToken.Type.COMMA));
+            }
+            return file;
+        } catch (Exception e) {
+            System.out.println(json);
+            throw new RuntimeException(e);
         }
-        return file;
     }
     JsonValue value() {
         JsonToken token = advance();

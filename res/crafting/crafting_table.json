@@ -12,6 +12,8 @@
     "res/recipes/scrolls/strength_scroll_recipe.json",
     "res/recipes/scrolls/mining_power_scroll_recipe.json",
     "res/recipes/crafting_table_recipe.json",
-    "res/recipes/deconstructor_recipe.json"
+    "res/recipes/deconstructor_recipe.json",
+    "res/recipes/chest_recipe.json",
+    "res/recipes/furnace_recipe.json"
   ]
 }
