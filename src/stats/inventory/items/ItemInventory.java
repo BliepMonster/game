@@ -108,4 +108,10 @@ public class ItemInventory {
         }
         return i;
     }
+    public int indexOf(Item item) {
+        for (int i = 0; i < items.length; ++i) {
+            if (items[i] == item) return i;
+        }
+        return -1;
+    }
 }

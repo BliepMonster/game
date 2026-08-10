@@ -24,12 +24,14 @@ public class ShopPanel extends Component {
     ShopPanelPage page;
     ShopDefinitionDisplayComponent display;
     private final ShopSellSelectButton select;
+    private final ShopWrapper wrapper;
     public ShopPanel(ShopNpcDefinition definition, Font font, FullItemStorage storage, GameContext context, ShopWrapper wrapper) {
         super(CenterConstraint.CENTER, CenterConstraint.CENTER, new RelativeSizeConstraint(1.5f), new RelativeSizeConstraint(1.1f));
         this.definition = definition;
         this.font = font;
         this.storage = storage;
         this.context = context;
+        this.wrapper = wrapper;
         switchPage(0);
         select = new ShopSellSelectButton(wrapper);
         selector = new ShopPageSelector(font, this);
@@ -67,8 +69,7 @@ public class ShopPanel extends Component {
     public void detectClick(Screen screen, float x, float y) {}
     public void detectContinuousPress(Screen screen, float x, float y) {}
     public void close() {
-        GUI.scheduleClear(0);
-        GUI.toggle(62);
+        wrapper.advance();
     }
     public void selectEntry(ShopEntry entry) {
         display = new ShopDefinitionDisplayComponent(

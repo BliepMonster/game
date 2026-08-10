@@ -10,6 +10,8 @@ import main.Camera;
 import main.GameContext;
 import org.joml.Vector2f;
 import tiles.TilePart;
+import tiles.npc.dialogue.DialogueController;
+import tiles.npc.dialogue.DialoguePiece;
 import tiles.npc.ui.ShopPanel;
 import tiles.npc.ui.ShopWrapper;
 import tool.editor.TilePartLoader;
@@ -35,7 +37,9 @@ public class ShopNPC extends TilePart {
     public void onClick(GameContext context) {
         if (GUI.getAll(0).isEmpty()) {
             var player = context.getPlayer();
-            GUI.add(new ShopWrapper(definition, font, new FullItemStorage(player.items, player.inventory, player.currency), context), 0);
+            var controller = new DialogueController();
+            controller.set(new DialoguePiece[]{new ShopWrapper(definition, font, new FullItemStorage(player.items, player.inventory, player.currency), context, controller)});
+            GUI.add(controller, 0);
             GUI.toggle(62);
         }
     }

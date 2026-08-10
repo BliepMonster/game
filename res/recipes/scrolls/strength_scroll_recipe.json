@@ -22,13 +22,13 @@
   "requirements": [
     {
       "type": "skill",
-      "skill": "COMBAT",
-      "level": 12
+      "skill": "MINING",
+      "level": 13
     },
     {
       "type": "skill",
-      "skill": "MINING",
-      "level": 8
+      "skill": "COMBAT",
+      "level": 10
     }
   ]
 }

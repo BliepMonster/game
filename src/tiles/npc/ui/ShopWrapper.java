@@ -9,9 +9,11 @@ import engine.gui.constraints.position.CenterConstraint;
 import engine.gui.constraints.size.RelativeSizeConstraint;
 import main.GameContext;
 import tiles.npc.ShopNpcDefinition;
+import tiles.npc.dialogue.DialogueController;
+import tiles.npc.dialogue.DialoguePiece;
 import tiles.npc.ui.sell.ShopSellPanel;
 
-public class ShopWrapper extends Component {
+public class ShopWrapper extends DialoguePiece {
     enum State {
         SELL,
         BUY
@@ -21,8 +23,8 @@ public class ShopWrapper extends Component {
     ShopSellPanel sell;
     final FullItemStorage storage;
     final Font font;
-    public ShopWrapper(ShopNpcDefinition definition, Font font, FullItemStorage storage, GameContext context) {
-        super(CenterConstraint.CENTER, CenterConstraint.CENTER, new RelativeSizeConstraint(100), new RelativeSizeConstraint(100)); // this doesn't matter here
+    public ShopWrapper(ShopNpcDefinition definition, Font font, FullItemStorage storage, GameContext context, DialogueController controller) {
+        super(CenterConstraint.CENTER, CenterConstraint.CENTER, new RelativeSizeConstraint(100), new RelativeSizeConstraint(100), controller); // this doesn't matter here
         buy = new ShopPanel(definition, font, storage, context, this);
         sell = new ShopSellPanel(storage, font, this);
         this.storage = storage;

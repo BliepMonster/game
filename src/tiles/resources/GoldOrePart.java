@@ -58,6 +58,11 @@ public class GoldOrePart extends HittableResourceCreator implements LightSource 
     }
 
     @Override
+    public Color[] getChipColors() {
+        return new Color[] { Color.YELLOW, new Color(220, 180, 60), new Color(160, 120, 40) };
+    }
+
+    @Override
     public float getLightLevel() {
         return .05f;
     }

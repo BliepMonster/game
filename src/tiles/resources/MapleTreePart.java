@@ -42,6 +42,11 @@ public class MapleTreePart extends HittableResourceCreator {
     public void renderUnready(int x, int y, Camera camera) {}
 
     @Override
+    public Color[] getChipColors() {
+        return new Color[] { new Color(140, 90, 50), new Color(90, 60, 30), new Color(90, 140, 60) };
+    }
+
+    @Override
     public JsonValue save() {
         return new JsonString(TilePartLoader.ID_MAPLE_TREE);
     }

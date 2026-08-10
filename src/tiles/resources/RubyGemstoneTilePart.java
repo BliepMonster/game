@@ -52,10 +52,14 @@ public class RubyGemstoneTilePart extends HittableResourceCreator implements Lig
     }
 
     @Override
+    public Color[] getChipColors() {
+        return new Color[] { Color.RED, new Color(180, 0, 0), new Color(120, 0, 0) };
+    }
+
+    @Override
     public float getLightLevel() {
         return this.isAlive() ? .8f : 0f;
     }
-
     @Override
     public float getX() {
         return position.x;

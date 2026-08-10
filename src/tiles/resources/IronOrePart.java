@@ -31,11 +31,20 @@ public class IronOrePart extends HittableResourceCreator {
     }
     public void renderReady(int ticksSinceLastHit, boolean wasLastHitSuccessFul, int x, int y, float health, Camera camera) {
         camera.addRenderJob(() ->
-                camera.rect(Color.WHITE, x, y, 1, 1), -y);
+                camera.rect(
+                        Game.getTickCount()-ticksSinceLastHit < 5 ?
+                                wasLastHitSuccessFul ? new Color(230, 230, 255) : new Color(150, 150, 160)
+                                : Color.WHITE,
+                        x, y, 1, 1), -y);
     }
     public void renderUnready(int x, int y, Camera camera) {
         camera.addRenderJob(() ->
                 camera.rect(Color.GRAY, x, y, 1, 1), -y);
+    }
+
+    @Override
+    public Color[] getChipColors() {
+        return new Color[] { Color.WHITE, new Color(160, 160, 160), new Color(120, 120, 120) };
     }
 
     @Override

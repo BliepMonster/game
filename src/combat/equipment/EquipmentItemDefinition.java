@@ -22,7 +22,14 @@ public class EquipmentItemDefinition extends ItemDefinition {
 
     @Override
     public ItemUseResult use(Tile tile, Item item, GameContext context, Vector2f worldPos) {
-        return new ItemUseResult(Optional.of(item), false);
+        var player = context.getPlayer();
+        var it = player.items.getEquipment(slot);
+        if (it == null) {
+            player.items.setEquipment(slot, item);
+        } else {
+            player.items.setEquipment(slot, item);
+        }
+        return new ItemUseResult(Optional.ofNullable(it), true);
     }
 
     public StatHolder getHeldStats(Item item, GameContext context) {
