@@ -1,0 +1,41 @@
+{
+  "name": "Glowing Ring",
+
+  "inputs": [
+    {
+      "type": "resource",
+      "id": "Glowing Mushroom",
+      "amount": 28
+    },
+    {
+      "type": "resource",
+      "id": "Ruby",
+      "amount": 6
+    },
+    {
+      "type": "resource",
+      "id": "Steel Bar",
+      "amount": 4
+    }
+  ],
+
+  "outputs": [
+    {
+      "type": "item",
+      "id": "base:rings:glow_ring",
+      "amount": 1
+    }
+  ],
+  "requirements": [
+    {
+      "type": "skill",
+      "skill": "MINING",
+      "level": 12
+    },
+    {
+      "type": "skill",
+      "skill": "FORAGING",
+      "level": 9
+    }
+  ]
+}

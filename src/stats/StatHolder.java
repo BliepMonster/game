@@ -35,6 +35,7 @@ public class StatHolder implements Cloneable {
         CRIT_CHANCE,
         CRIT_DAMAGE,
         REGENERATION,
+        GLOWING,
     }
     public static final int NUM_STATS = Stat.values().length;
     public static final int SPEED_INDEX = Stat.SPEED.ordinal();

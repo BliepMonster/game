@@ -1,6 +1,7 @@
 {
   "base:item:golden_ring": "res/textures/rings/golden_ring.png",
   "base:item:miner_ring": "res/textures/rings/miner_ring.png",
+  "base:item:glow_ring": "res/textures/rings/glow_ring.png",
   "base:item:speed_boots": "res/textures/special/speed_boots.png",
   "base:item:zombie_helmet": "res/textures/special/zombie_helmet.png"
 }

@@ -4,6 +4,7 @@ import combat.equipment.EquipmentSlot;
 import engine.core.Texture;
 import engine.hitboxes.Hitbox;
 import engine.hitboxes.RectangularHitbox;
+import lighting.LightSource;
 import main.Camera;
 import main.Game;
 import main.GameContext;
@@ -28,10 +29,10 @@ import static engine.core.input.Input.isKeyDown;
 import static main.Game.TICKS_PER_SECOND;
 import static org.lwjgl.glfw.GLFW.*;
 
-public class Player implements Entity {
+public class Player implements Entity, LightSource {
     private final ArrayList<VelocityChange> velocityChanges = new ArrayList<>();
     private final Vector2f position = new Vector2f();
-    private final Hitbox step = new RectangularHitbox(.075f, 0, .85f, .2f, this);
+    private final Hitbox step = new RectangularHitbox(-.425f, -1f, .85f, .2f, this);
     public StatHolder stats;
     private int selectedHotbarSlot = 0;
     public final ItemInventory items;
@@ -110,10 +111,10 @@ public class Player implements Entity {
         return health == 0;
     }
     public float getX() {
-        return position.x;
+        return position.x+.5f;
     }
     public float getY() {
-        return position.y;
+        return position.y+1;
     }
 
     @Override
@@ -221,5 +222,11 @@ public class Player implements Entity {
     }
     public Vector2f getPosition() {
         return position;
+    }
+
+    @Override
+    public float getLightLevel() {
+        if (stats == null) return 0;
+        return stats.get(StatHolder.Stat.GLOWING);
     }
 }

@@ -1,0 +1,13 @@
+{
+  "type": "equipment",
+  "id": "base:rings:glow_ring",
+  "name": "Glowing Ring",
+  "texture": "base:item:glow_ring",
+  "stats": [
+    {
+      "type": "GLOWING",
+      "count": 1
+    }
+  ],
+  "slot": "RING"
+}

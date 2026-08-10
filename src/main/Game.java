@@ -34,6 +34,7 @@ public class Game implements GameContext {
         camera = new Camera(player, tsize, draw);
         if (save.home().home() != null)
             WorldRegistry.put("HOUSE", save.home().home());
+        camera.addLight(player);
     }
     public Game(DrawManager draw, float tsize, SavedGame save) {
         player = new Player(save.player());
@@ -42,6 +43,7 @@ public class Game implements GameContext {
         camera = new Camera(player, tsize, draw);
         if (save.home().home() != null)
             WorldRegistry.put("HOUSE", save.home().home());
+        camera.addLight(player);
     }
     public void tick(boolean pressed, Screen screen, float tsize, boolean canClick) {
         ++ticks;

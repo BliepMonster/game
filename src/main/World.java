@@ -87,11 +87,11 @@ public class World {
         }
         entities.removeIf(entity -> entity.shouldDie(game));
         var player = game.player;
-        int left   = (int)Math.floor(player.getX());
-        int right  = (int)Math.floor((player.getX() + 1));
+        int left   = (int)Math.floor(player.getX()-.5f);
+        int right  = (int)Math.floor((player.getX() + .5f));
 
-        int top    = (int)Math.floor(player.getY());
-        int bottom = (int)Math.floor((player.getY() + .2f));
+        int top    = (int)Math.floor(player.getY()-1);
+        int bottom = (int)Math.floor((player.getY() - .8));
         for (int tx = left; tx <= right; tx++) {
             for (int ty = bottom; ty <= top; ty++) {
                 map.get(tx, ty).ifPresent(tile -> tile.onStand(game));

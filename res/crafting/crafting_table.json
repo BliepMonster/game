@@ -14,6 +14,7 @@
     "res/recipes/crafting_table_recipe.json",
     "res/recipes/deconstructor_recipe.json",
     "res/recipes/chest_recipe.json",
-    "res/recipes/furnace_recipe.json"
+    "res/recipes/furnace_recipe.json",
+    "res/recipes/smithing/glow_ring_recipe.json"
   ]
 }
