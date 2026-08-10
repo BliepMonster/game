@@ -25,6 +25,7 @@ public class Shader {
     public final int textureLocation;
     public final int colorLocation;
     public final int lightLevelLocation;
+    public final int lightLevelsLocation;
     private static final FloatBuffer matrixBuffer = BufferUtils.createFloatBuffer(16);
 
     public Shader(String vertexFile, String fragmentFile) {
@@ -45,6 +46,7 @@ public class Shader {
         texCoordsLocation = getLocation("texCoordsMultiplier");
         textureLocation = getLocation("tex");
         lightLevelLocation = getLocation("lightLevel");
+        lightLevelsLocation = getLocation("lightLevels");
         if (transformLocation == colorLocation || transformLocation == texCoordsLocation || transformLocation == textureLocation || colorLocation == texCoordsLocation || colorLocation == textureLocation || texCoordsLocation == textureLocation) {
             System.err.println("Warning: Shader has a location that is used by more than one uniform!");
         }
@@ -110,6 +112,10 @@ public class Shader {
 
     public void loadFloat(int location, float value) {
         GL46.glUniform1f(location, value);
+    }
+
+    public void loadLightLevels(float topLeft, float topRight, float bottomRight, float bottomLeft) {
+        GL46.glUniform4f(lightLevelsLocation, topLeft, topRight, bottomRight, bottomLeft);
     }
 
     public void loadTexCoords(Texture texture, int location) {

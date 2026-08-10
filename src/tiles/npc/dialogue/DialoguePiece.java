@@ -15,4 +15,5 @@ public abstract class DialoguePiece extends Component {
     public void advance() {
         controller.advance();
     }
+    public void start() {}
 }

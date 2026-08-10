@@ -170,10 +170,7 @@ public class Main {
         JsonShopDefinitionLoader.registerAll();
 
         final var draw = new DrawManager(screen);
-
         mapd = new DrawManager(screen);
-        mapd.switchTextureFragmentShader("res/shaders/lighting_fragment.glsl");
-        mapd.switchColorFragmentShader("res/shaders/lighting_rfragment.glsl");
 
         font = new Font("res/Unnamed");
 

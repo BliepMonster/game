@@ -17,7 +17,7 @@ import tiles.doors.DungeonExitTilePart;
 import tiles.doors.EntranceTilePart;
 import tiles.house.ChestTilePart;
 import tiles.npc.ShopDefinitionRegistry;
-import tiles.npc.ShopNPC;
+import tiles.npc.DialogueNPC;
 import tiles.resources.*;
 import tiles.spawner.GemstoneGolemSpawner;
 import tiles.spawner.GoldenZombieSpawner;
@@ -48,6 +48,7 @@ public final class TilePartLoader {
     public static final String ID_SCROLL_APPLIER = "scroll_applier";
     public static final String ID_SPAWNER_GEMGOLEM = "gg_spawner";
     public static final String ID_CHEST = "chest";
+    public static final String ID_GLOWING_MUSHROOM = "glowing_mushroom";
     public static Font font;
     public static final HashMap<String, Texture> tcache = new HashMap<>();
 
@@ -94,7 +95,7 @@ public final class TilePartLoader {
             case ID_COPPER_ORE -> new CopperOrePart(pos);
             case ID_COAL_ORE -> new CoalOrePart(pos);
             case ID_CRAFTING_STATION -> new CraftingStationTilePart(pos);
-            case ID_SHOP_NPC -> new ShopNPC(pos, ShopDefinitionRegistry.get(((JsonString)obj.values.get("id")).value), font);
+            case ID_SHOP_NPC -> new DialogueNPC(pos, ShopDefinitionRegistry.get(((JsonString)obj.values.get("id")).value), font);
             case ID_TOMBSTONE -> new TombstoneTilePart(pos);
             case ID_ZOMBIE_SPAWNER -> new ZombieSpawner(pos, context);
             case ID_FURNACE -> new FurnaceTilePart(pos);
@@ -107,6 +108,7 @@ public final class TilePartLoader {
             case ID_SCROLL_APPLIER -> new ScrollApplicationTilePart(pos);
             case ID_SPAWNER_GEMGOLEM -> new GemstoneGolemSpawner(pos, context);
             case ID_CHEST -> ChestTilePart.load(pos, obj);
+            case ID_GLOWING_MUSHROOM -> new GlowingMushroomTilePart(pos);
             default -> throw new RuntimeException("Unknown object: " + type);
         };
     }

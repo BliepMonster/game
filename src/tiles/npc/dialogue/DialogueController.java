@@ -17,6 +17,7 @@ public class DialogueController extends Component {
     }
     public void set(DialoguePiece[] pieces) {
         this.pieces = pieces;
+        pieces[0].start();
     }
 
     public void advance() {
@@ -24,7 +25,9 @@ public class DialogueController extends Component {
         if (position >= pieces.length) {
             GUI.scheduleClear(0);
             GUI.toggle(62);
+            return;
         }
+        pieces[position].start();
     }
 
     @Override

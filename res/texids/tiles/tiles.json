@@ -7,5 +7,6 @@
   "base:tiles:compost": "res/textures/tiles/compost_tile.png",
   "base:tiles:grass_dark": "res/textures/tiles/grass_dark_tile.png",
   "base:tiles:plank_floor": "res/textures/tiles/plank_floor.png",
-  "base:tiles:chest": "res/textures/tiles/chest.png"
+  "base:tiles:chest": "res/textures/tiles/chest.png",
+  "base:tiles:glowing_mushroom": "res/textures/tiles/glowing_mushroom.png"
 }

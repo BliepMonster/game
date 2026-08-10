@@ -12,14 +12,12 @@ import org.joml.Vector2f;
 import tiles.TilePart;
 import tiles.npc.dialogue.DialogueController;
 import tiles.npc.dialogue.DialoguePiece;
-import tiles.npc.ui.ShopPanel;
-import tiles.npc.ui.ShopWrapper;
 import tool.editor.TilePartLoader;
 
-public class ShopNPC extends TilePart {
-    private final ShopNpcDefinition definition;
+public class DialogueNPC extends TilePart {
+    private final NpcDefinition definition;
     private final Font font;
-    public ShopNPC(Vector2f position, ShopNpcDefinition definition, Font font) {
+    public DialogueNPC(Vector2f position, NpcDefinition definition, Font font) {
         super(position);
         this.definition = definition;
         this.font = font;
@@ -38,7 +36,12 @@ public class ShopNPC extends TilePart {
         if (GUI.getAll(0).isEmpty()) {
             var player = context.getPlayer();
             var controller = new DialogueController();
-            controller.set(new DialoguePiece[]{new ShopWrapper(definition, font, new FullItemStorage(player.items, player.inventory, player.currency), context, controller)});
+            var storage = new FullItemStorage(player.items, player.inventory, player.currency);
+            DialoguePiece[] pieces = new DialoguePiece[definition.pieces().length];
+            for (int i = 0; i < pieces.length; i++) {
+                pieces[i] = definition.pieces()[i].build(font, controller, context, storage);
+            }
+            controller.set(pieces);
             GUI.add(controller, 0);
             GUI.toggle(62);
         }

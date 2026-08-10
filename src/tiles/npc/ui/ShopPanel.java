@@ -4,17 +4,18 @@ import crafting.FullItemStorage;
 import engine.core.DrawManager;
 import engine.core.Screen;
 import engine.core.text.Font;
-import engine.gui.GUI;
 import engine.gui.components.Component;
 import engine.gui.constraints.position.CenterConstraint;
 import engine.gui.constraints.size.RelativeSizeConstraint;
 import main.GameContext;
 import tiles.npc.ShopEntry;
-import tiles.npc.ShopNpcDefinition;
+import tiles.npc.NpcDefinition;
+import tiles.npc.dialogue.ShopDefinition;
+
 import java.awt.Color;
 
 public class ShopPanel extends Component {
-    public final ShopNpcDefinition definition;
+    public final ShopDefinition definition;
     public final Font font;
     public final FullItemStorage storage;
     public final GameContext context;
@@ -25,7 +26,7 @@ public class ShopPanel extends Component {
     ShopDefinitionDisplayComponent display;
     private final ShopSellSelectButton select;
     private final ShopWrapper wrapper;
-    public ShopPanel(ShopNpcDefinition definition, Font font, FullItemStorage storage, GameContext context, ShopWrapper wrapper) {
+    public ShopPanel(ShopDefinition definition, Font font, FullItemStorage storage, GameContext context, ShopWrapper wrapper) {
         super(CenterConstraint.CENTER, CenterConstraint.CENTER, new RelativeSizeConstraint(1.5f), new RelativeSizeConstraint(1.1f));
         this.definition = definition;
         this.font = font;

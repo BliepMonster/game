@@ -29,12 +29,7 @@ public enum EditorToolState {
             case O1 -> {
                 map.put(x, y, new DefaultTile(TileType.get("FLOOR_PLANK")));
             }
-            case O2 -> tile.setPart(new EntranceTilePart(
-                    new Vector2f(x, y),
-                    "HOME_WORLD",
-                    new Vector2f(),
-                    new Texture("res/bred.png")
-            ));
+            case O2 -> tile.setPart(new GlowingMushroomTilePart(new Vector2f(x, y)));
             case O3 -> {
                 tile.setPart(new GemstoneGolemSpawner(new Vector2f(x, y), context));
             }

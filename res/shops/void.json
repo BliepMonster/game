@@ -3,58 +3,69 @@
   "id": "void",
   "texture": "res/npc_test.png",
   "height": 1.5,
-  "entries": [
+  "dialogue": [
     {
-      "requirements": [],
-      "ingredients": [],
-      "price": {
-        "currency": "COINS",
-        "amount": 500
-      },
-      "texture": "res/textures/broken/broken_pickaxe.png",
-      "result": {
-        "type": "item",
-        "id": "base:tools:broken_pickaxe"
-      }
+      "type": "text",
+      "tex": "base:placeholder",
+      "name": "Shopkeeper",
+      "message": "I'll show you my wares."
     },
     {
-      "requirements": [],
-      "ingredients": [],
-      "price": {
-        "currency": "COINS",
-        "amount": 500
-      },
-      "texture": "res/textures/broken/broken_axe.png",
-      "result": {
-        "type": "item",
-        "id": "base:tools:broken_axe"
-      }
-    },
-    {
-      "requirements": [],
-      "ingredients": [],
-      "price": {
-        "currency": "COINS",
-        "amount": 600
-      },
-      "texture": "res/textures/broken/broken_sword.png",
-      "result": {
-        "type": "item",
-        "id": "base:weapons:broken_sword"
-      }
-    },
-    {
-      "requirements": [],
-      "ingredients": [],
-      "price": {
-        "currency": "COINS",
-        "amount": 400
-      },
-      "texture": "res/textures/broken/broken_dagger.png",
-      "result": {
-        "type": "item",
-        "id": "base:weapons:broken_dagger"
-      }
+      "type": "shop",
+      "entries": [
+        {
+          "requirements": [],
+          "ingredients": [],
+          "price": {
+            "currency": "COINS",
+            "amount": 500
+          },
+          "texture": "res/textures/broken/broken_pickaxe.png",
+          "result": {
+            "type": "item",
+            "id": "base:tools:broken_pickaxe"
+          }
+        },
+        {
+          "requirements": [],
+          "ingredients": [],
+          "price": {
+            "currency": "COINS",
+            "amount": 500
+          },
+          "texture": "res/textures/broken/broken_axe.png",
+          "result": {
+            "type": "item",
+            "id": "base:tools:broken_axe"
+          }
+        },
+        {
+          "requirements": [],
+          "ingredients": [],
+          "price": {
+            "currency": "COINS",
+            "amount": 600
+          },
+          "texture": "res/textures/broken/broken_sword.png",
+          "result": {
+            "type": "item",
+            "id": "base:weapons:broken_sword"
+          }
+        },
+        {
+          "requirements": [],
+          "ingredients": [],
+          "price": {
+            "currency": "COINS",
+            "amount": 400
+          },
+          "texture": "res/textures/broken/broken_dagger.png",
+          "result": {
+            "type": "item",
+            "id": "base:weapons:broken_dagger"
+          }
+        }
+      ]
     }
   ]
 }

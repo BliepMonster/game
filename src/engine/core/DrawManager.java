@@ -36,9 +36,14 @@ public class DrawManager {
     protected String textVertexName = "src/engine/core/shaders/mainVertex.glsl";
     protected String textFragName = "src/engine/core/shaders/mainFragment.glsl";
     protected String colorFragName = "src/engine/core/shaders/untexturedFragment.glsl";
+    protected String litVertexName = "res/shaders/lighting_vertex.glsl";
+    protected String litFragName = "res/shaders/lighting_fragment.glsl";
+    protected String litColorFragName = "res/shaders/lighting_rfragment.glsl";
     protected Shader textured = new Shader(colorVertexName, texFragName);
     protected Shader text = new Shader(colorVertexName, textFragName);
     protected Shader plainColor = new Shader(texVertexName, colorFragName);
+    protected Shader litTextured = new Shader(litVertexName, litFragName);
+    protected Shader litColor = new Shader(litVertexName, litColorFragName);
     private int drawCalls = 0;
     private float nextLightLevel = -1;
 
@@ -94,7 +99,6 @@ public class DrawManager {
         glBindBuffer(GL_ARRAY_BUFFER, textTexCoordsVBO);
         glVertexAttribPointer(1, 2, GL_FLOAT, false, 0, 0);
 
-        glBindVertexArray(0);
         lastBoundVAO = -1;
     }
     public static void swapTexture(Texture texture) {
@@ -110,6 +114,8 @@ public class DrawManager {
         plainColor.destroy();
         textured.destroy();
         text.destroy();
+        litTextured.destroy();
+        litColor.destroy();
     }
     public static void destroyVAO() {
         glUseProgram(0);
@@ -219,6 +225,65 @@ public class DrawManager {
         CACHE_VEC2.set(width/screen.getAspectRatio(), height, 0);
         tintedImage(tex, c, Maths.loadTransform(CACHE_MAT, CACHE_VEC1, CACHE_VEC2));
     }
+    public void litRect(Color color, float x, float y, float width, float height, float topLeft, float topRight, float bottomRight, float bottomLeft) {
+        CACHE_VEC1.set(x/screen.getAspectRatio(), y, 0);
+        CACHE_VEC2.set(width/screen.getAspectRatio(), height, 0);
+        litRect(color, Maths.loadTransform(CACHE_MAT, CACHE_VEC1, CACHE_VEC2), topLeft, topRight, bottomRight, bottomLeft);
+    }
+    public void litRect(final @NotNull Color color, final @NotNull Matrix4f transform, float topLeft, float topRight, float bottomRight, float bottomLeft) {
+        bindShader(litColor);
+        litColor.loadColor(litColor.colorLocation, color);
+        litColor.loadMatrix(litColor.transformLocation, transform);
+        if (lastBoundVAO != rectVAO) {
+            glBindVertexArray(rectVAO);
+            lastBoundVAO = rectVAO;
+        }
+        swapTexture(null);
+        litColor.loadTexCoords(null, litColor.texCoordsLocation);
+        litColor.loadLightLevels(topLeft, topRight, bottomRight, bottomLeft);
+        glDrawArrays(GL_TRIANGLES, 0, 6);
+        ++drawCalls;
+    }
+    public void litImage(Texture tex, float x, float y, float width, float height, float topLeft, float topRight, float bottomRight, float bottomLeft) {
+        litTintedImage(tex, Color.white, x, y, width, height, topLeft, topRight, bottomRight, bottomLeft);
+    }
+    public void litTintedImage(Texture tex, Color col, float x, float y, float width, float height, float topLeft, float topRight, float bottomRight, float bottomLeft) {
+        CACHE_VEC1.set(x/screen.getAspectRatio(), y, 0);
+        CACHE_VEC2.set(width/screen.getAspectRatio(), height, 0);
+        litTintedImage(tex, col, Maths.loadTransform(CACHE_MAT, CACHE_VEC1, CACHE_VEC2), topLeft, topRight, bottomRight, bottomLeft);
+    }
+    public void litTintedImage(Texture tex, Color col, Matrix4f transform, float topLeft, float topRight, float bottomRight, float bottomLeft) {
+        bindShader(litTextured);
+        litTextured.loadColor(litTextured.colorLocation, col);
+        litTextured.loadMatrix(litTextured.transformLocation, transform);
+        if (lastBoundVAO != rectVAO) {
+            glBindVertexArray(rectVAO);
+            lastBoundVAO = rectVAO;
+        }
+        GL13.glActiveTexture(GL13.GL_TEXTURE0);
+        swapTexture(tex);
+        litTextured.loadTexCoords(tex, litTextured.texCoordsLocation);
+        litTextured.loadLightLevels(topLeft, topRight, bottomRight, bottomLeft);
+        glDrawArrays(GL_TRIANGLES, 0, 6);
+        ++drawCalls;
+    }
+    public void switchLitVertexShader(String currentAddress) {
+        litTextured.destroy();
+        litColor.destroy();
+        litVertexName = currentAddress;
+        litTextured = new Shader(litVertexName, litFragName);
+        litColor = new Shader(litVertexName, litColorFragName);
+    }
+    public void switchLitFragmentShader(String address) {
+        litTextured.destroy();
+        litFragName = address;
+        litTextured = new Shader(litVertexName, litFragName);
+    }
+    public void switchLitColorFragmentShader(String address) {
+        litColor.destroy();
+        litColorFragName = address;
+        litColor = new Shader(litVertexName, litColorFragName);
+    }
     public static final float SIZE_PER_FONT_SIZE = .01f;
     public static final float DEMO_WIDTH = 22;
     public static final float DEMO_HEIGHT = 54;
@@ -326,7 +391,7 @@ public class DrawManager {
             texCoords[12*i+10] = texWidth1;
             texCoords[12*i+11] = texHeight1;
             xPosition += xAdvance;
-            if (xPosition >= SIZE_PER_FONT_SIZE*paragraphWidthLimit) {
+            if (xPosition >= paragraphWidthLimit) {
                 xPosition = 0;
                 yPosition -= SIZE_PER_FONT_SIZE*size*NEW_LINE;
             }
@@ -387,6 +452,14 @@ public class DrawManager {
 
     public Shader getTextured() {
         return textured;
+    }
+
+    public Shader getLitTextured() {
+        return litTextured;
+    }
+
+    public Shader getLitColor() {
+        return litColor;
     }
 
     public static int getRectVAO() {

@@ -54,12 +54,8 @@ public class Camera {
     }
 
     public void rect(Color color, float x, float y, float w, float h) {
-        float bx = x + w/2, by = y + h/2;
-        rect(color, x, y, w, h, computeBrightness(bx, by));
-    }
-    public void rect(Color color, float x, float y, float w, float h, float brightness) {
-        draw.setLightLevel(brightness);
-        draw.rect(color, (x-player.getX())*tileSize, (y-player.getY())*tileSize, w*tileSize, h*tileSize);
+        draw.litRect(color, (x-player.getX())*tileSize, (y-player.getY())*tileSize, w*tileSize, h*tileSize,
+                computeBrightness(x, y+h), computeBrightness(x+w, y+h), computeBrightness(x+w, y), computeBrightness(x, y));
     }
     public void addRenderJob(Runnable function, float z) {
         renderJobs.add(new RenderJob(function, z));
@@ -72,19 +68,11 @@ public class Camera {
         renderJobs.clear();
     }
     public void image(Texture texture, float x, float y, float w, float h) {
-        float bx = x + w/2, by = y + h/2;
-        image(texture, x, y, w, h, computeBrightness(bx, by));
-    }
-    public void image(Texture texture, float x, float y, float w, float h, float brightness) {
-        draw.setLightLevel(brightness);
-        draw.image(texture, (x-player.getX())*tileSize, (y-player.getY())*tileSize, w*tileSize, h*tileSize);
+        draw.litImage(texture, (x-player.getX())*tileSize, (y-player.getY())*tileSize, w*tileSize, h*tileSize,
+                computeBrightness(x, y+h), computeBrightness(x+w, y+h), computeBrightness(x+w, y), computeBrightness(x, y));
     }
     public void tintedImage(Texture texture, Color color, float x, float y, float w, float h) {
-        float bx = x + w/2, by = y + h/2;
-        tintedImage(texture, color, x, y, w, h, computeBrightness(bx, by));
-    }
-    public void tintedImage(Texture texture, Color color, float x, float y, float w, float h, float brightness) {
-        draw.setLightLevel(brightness);
-        draw.tintedImage(texture, color, (x-player.getX())*tileSize, (y-player.getY())*tileSize, w*tileSize, h*tileSize);
+        draw.litTintedImage(texture, color, (x-player.getX())*tileSize, (y-player.getY())*tileSize, w*tileSize, h*tileSize,
+                computeBrightness(x, y+h), computeBrightness(x+w, y+h), computeBrightness(x+w, y), computeBrightness(x, y));
     }
 }

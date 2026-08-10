@@ -58,16 +58,16 @@ public class RubyGemstoneTilePart extends HittableResourceCreator implements Lig
 
     @Override
     public float getLightLevel() {
-        return this.isAlive() ? .8f : 0f;
+        return this.isAlive() ? 1.2f : 0f;
     }
     @Override
     public float getX() {
-        return position.x;
+        return position.x+.5f;
     }
 
     @Override
     public float getY() {
-        return position.y;
+        return position.y+.5f;
     }
     public JsonValue save() {
         return new JsonString(TilePartLoader.ID_RUBY);

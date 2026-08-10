@@ -3,11 +3,18 @@ package tiles.npc;
 import crafting.json.JsonRecipeLoader;
 import engine.core.Texture;
 import engine.json.*;
+import main.Main;
+import main.TextureIdMap;
 import stats.inventory.items.ItemDefinition;
+import tiles.npc.dialogue.DialoguePieceBuilder;
+import tiles.npc.dialogue.ShopDefinition;
+import tiles.npc.dialogue.TextDialogue;
+import tiles.npc.ui.ShopWrapper;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.function.Supplier;
 
 public class JsonShopDefinitionLoader {
     public static MoneyRequirement loadMReq(JsonObject object) {
@@ -63,13 +70,30 @@ public class JsonShopDefinitionLoader {
         }
         return entries;
     }
-    public static ShopNpcDefinition loadDefinition(JsonFile file) {
-        return new ShopNpcDefinition(
+    public static DialoguePieceBuilder loadPiece(JsonObject object) {
+        String s = ((JsonString) object.values.get("type")).value;
+        return switch (s) {
+            case "shop" -> (font, controller, context, storage) ->
+                    new ShopWrapper(new ShopDefinition(loadEntries((JsonArray) object.values.get("entries"))), font, storage, context, controller);
+            case "text" -> (font, controller, context, storage) ->
+                    new TextDialogue(controller, TextureIdMap.get(((JsonString) object.values.get("tex")).value), ((JsonString) object.values.get("name")).value, ((JsonString) object.values.get("message")).value, font);
+            default -> throw new RuntimeException();
+        };
+    }
+    public static DialoguePieceBuilder[] loadPieces(JsonArray array) {
+        DialoguePieceBuilder[] pieces = new DialoguePieceBuilder[array.values.size()];
+        for (int i = 0; i < pieces.length; ++i) {
+            pieces[i] = loadPiece((JsonObject) array.values.get(i));
+        }
+        return pieces;
+    }
+    public static NpcDefinition loadDefinition(JsonFile file) {
+        return new NpcDefinition(
                 ((JsonString) file.values.get("name")).value,
                 ((JsonString) file.values.get("id")).value,
                 new Texture(((JsonString) file.values.get("texture")).value),
                 ((JsonNumber) file.values.get("height")).num,
-                loadEntries((JsonArray) file.values.get("entries"))
+                loadPieces((JsonArray) file.values.get("dialogue"))
         );
     }
     public static void registerAll() {

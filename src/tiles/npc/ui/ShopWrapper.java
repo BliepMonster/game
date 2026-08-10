@@ -4,13 +4,13 @@ import crafting.FullItemStorage;
 import engine.core.DrawManager;
 import engine.core.Screen;
 import engine.core.text.Font;
-import engine.gui.components.Component;
 import engine.gui.constraints.position.CenterConstraint;
 import engine.gui.constraints.size.RelativeSizeConstraint;
 import main.GameContext;
-import tiles.npc.ShopNpcDefinition;
+import tiles.npc.NpcDefinition;
 import tiles.npc.dialogue.DialogueController;
 import tiles.npc.dialogue.DialoguePiece;
+import tiles.npc.dialogue.ShopDefinition;
 import tiles.npc.ui.sell.ShopSellPanel;
 
 public class ShopWrapper extends DialoguePiece {
@@ -23,7 +23,7 @@ public class ShopWrapper extends DialoguePiece {
     ShopSellPanel sell;
     final FullItemStorage storage;
     final Font font;
-    public ShopWrapper(ShopNpcDefinition definition, Font font, FullItemStorage storage, GameContext context, DialogueController controller) {
+    public ShopWrapper(ShopDefinition definition, Font font, FullItemStorage storage, GameContext context, DialogueController controller) {
         super(CenterConstraint.CENTER, CenterConstraint.CENTER, new RelativeSizeConstraint(100), new RelativeSizeConstraint(100), controller); // this doesn't matter here
         buy = new ShopPanel(definition, font, storage, context, this);
         sell = new ShopSellPanel(storage, font, this);
