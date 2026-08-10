@@ -229,4 +229,12 @@ public class Player implements Entity, LightSource {
         if (stats == null) return 0;
         return stats.get(StatHolder.Stat.GLOWING);
     }
+
+    @Override
+    public float getAttractionX() {
+        return position.x;
+    }
+    public float getAttractionY() {
+        return position.y;
+    }
 }

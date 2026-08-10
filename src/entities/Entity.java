@@ -27,4 +27,10 @@ public interface Entity extends Positioned {
         if (amount > 5) return new AcceleratedVelocityChange(direction, amount, timeInTicks);
         return new LinearVelocityChange(direction, amount, Game.getTickCount(), timeInTicks);
     }
+    default float getAttractionX() {
+        return getX();
+    }
+    default float getAttractionY() {
+        return getY();
+    }
 }

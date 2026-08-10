@@ -37,8 +37,8 @@ public abstract class MeleeDungeonEnemy extends DungeonEnemy {
     }
     public void moveSelf(Hitbox world) {
         var context = getContext();
-        var x = context.getPlayer().getX();
-        var y = context.getPlayer().getY();
+        var x = context.getPlayer().getAttractionX();
+        var y = context.getPlayer().getAttractionY();
         var diff = new Vector2f(x - position.x, y - position.y);
         var move = angry ? diff.normalize(new Vector2f()).mul(speed / Game.TICKS_PER_SECOND) : new Vector2f();
         if (diff.length() < aggroRadius) angry = true;

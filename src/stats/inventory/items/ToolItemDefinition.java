@@ -45,6 +45,7 @@ public class ToolItemDefinition extends ItemDefinition {
         if (tile.getPart() == null) return new ItemUseResult(Optional.of(item), false);
         if (!(tile.getPart() instanceof HittableResourceCreator creator)) return new ItemUseResult(Optional.of(item), false);
         var type = creator.getPowerType();
+        if (this.strengths[type.ordinal()] == 0) return new ItemUseResult(Optional.of(item), false);
         var power = context.getPlayer().stats.get(type.getStat()); // and later power buffs too
         creator.hit(context, (int) power);
         return new ItemUseResult(Optional.of(item), true);

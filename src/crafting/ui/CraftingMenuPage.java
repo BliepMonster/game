@@ -33,10 +33,11 @@ public class CraftingMenuPage extends Component {
     }
     public static final float UNIT_SIZE = .2f;
     public void display(DrawManager draw, float x, float y, float w, float h) {
-        var yy = y + h;
+        var yy = y + h - UNIT_SIZE*(recipes.length+1);
         draw.rect(Color.black, x, y, w, h);
-        for (var recipe : recipes) {
-            yy -= UNIT_SIZE;
+        for (int i = recipes.length-1; i >= 0; --i) {
+            var recipe = recipes[i];
+            yy += UNIT_SIZE;
             draw.rect(recipe.canCraft(storage, context) ? Color.gray : Color.black, x, yy, w, UNIT_SIZE);
             String name = recipe.getName();
             float fsize = Math.min(font.getSizeForWidth(name, w), font.getSizeForHeight(UNIT_SIZE));

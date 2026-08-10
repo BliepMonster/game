@@ -30,8 +30,8 @@ public class GoldenZombieEnemy extends RespawnableEnemy {
     }
     public void move(Hitbox world) {
         var context = getContext();
-        var x = context.getPlayer().getX();
-        var y = context.getPlayer().getY();
+        var x = context.getPlayer().getAttractionX();
+        var y = context.getPlayer().getAttractionY();
         var diff = new Vector2f(x - position.x, y - position.y);
         var move = angry ? diff.normalize(new Vector2f()).mul(2f / Game.TICKS_PER_SECOND) : new Vector2f();
         if (diff.length() < AGGRO_RADIUS) angry = true;
