@@ -1,0 +1,6 @@
+{
+  "base:item:pine_helmet": "res/textures/pine/pine_helmet.png",
+  "base:item:pine_boots": "res/textures/pine/pine_boots.png",
+  "base:item:pine_leggings": "res/textures/pine/pine_leggings.png",
+  "base:item:pine_chestplate": "res/textures/pine/pine_chestplate.png"
+}

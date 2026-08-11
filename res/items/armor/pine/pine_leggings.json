@@ -1,0 +1,21 @@
+{
+  "type": "equipment",
+  "id": "base:armor:pine_leggings",
+  "name": "Pine Boots",
+  "texture": "base:item:pine_leggings",
+  "stats": [
+    {
+      "type": "DEFENSE",
+      "count": 15
+    },
+    {
+      "type": "FORAGING_YIELD",
+      "count": 5
+    },
+    {
+      "type": "FORAGING_POWER",
+      "count": 15
+    }
+  ],
+  "slot": "LEGGINGS"
+}

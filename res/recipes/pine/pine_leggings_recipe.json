@@ -1,0 +1,36 @@
+{
+  "name": "Pine Leggings",
+
+  "inputs": [
+    {
+      "type": "resource",
+      "id": "Steel Bar",
+      "amount": 2
+    },
+    {
+      "type": "resource",
+      "id": "Compressed Pine Wood",
+      "amount": 32
+    }
+  ],
+
+  "outputs": [
+    {
+      "type": "item",
+      "id": "base:armor:pine_leggings",
+      "amount": 1
+    }
+  ],
+  "requirements": [
+    {
+      "type": "skill",
+      "skill": "MINING",
+      "level": 8
+    },
+    {
+      "type": "skill",
+      "skill": "FORAGING",
+      "level": 12
+    }
+  ]
+}

@@ -7,8 +7,6 @@
     "res/recipes/carrot_cake_recipe.json",
     "res/recipes/zombie_helmet_recipe.json",
     "res/recipes/golden_strawberry_recipe.json",
-    "res/recipes/scrolls/strength_scroll_recipe.json",
-    "res/recipes/scrolls/mining_power_scroll_recipe.json",
     "res/recipes/placers/crafting_table_recipe.json",
     "res/recipes/placers/deconstructor_recipe.json",
     "res/recipes/placers/chest_recipe.json",
@@ -16,6 +14,10 @@
     "res/recipes/smithing/glow_ring_recipe.json",
     "res/recipes/placers/crusher_recipe.json",
     "res/recipes/placers/scroll_table_recipe.json",
-    "res/recipes/placers/polisher_recipe.json"
+    "res/recipes/placers/polisher_recipe.json",
+    "res/recipes/pine/pine_boots_recipe.json",
+    "res/recipes/pine/pine_leggings_recipe.json",
+    "res/recipes/pine/pine_chestplate_recipe.json",
+    "res/recipes/pine/pine_helmet_recipe.json"
   ]
 }

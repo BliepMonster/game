@@ -1,0 +1,8 @@
+{
+  "type": "scroll",
+  "texture": "base:item:foraging_power_scroll",
+  "name": "Scroll of Foraging Power",
+  "id": "base:scrolls:scroll_foraging_power",
+  "stat": "FORAGING_POWER",
+  "scaling": 10
+}

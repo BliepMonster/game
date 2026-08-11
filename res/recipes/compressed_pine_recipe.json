@@ -1,0 +1,19 @@
+{
+  "name": "Compressed Pine Wood",
+
+  "inputs": [
+    {
+      "type": "resource",
+      "id": "Pine Wood",
+      "amount": 16
+    }
+  ],
+
+  "outputs": [
+    {
+      "type": "resource",
+      "id": "Compressed Pine Wood",
+      "amount": 1
+    }
+  ]
+}

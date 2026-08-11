@@ -1,6 +1,7 @@
 {
   "recipes": [
     "res/recipes/flour_recipe.json",
-    "res/recipes/paper_recipe.json"
+    "res/recipes/paper_recipe.json",
+    "res/recipes/compressed_pine_recipe.json"
   ]
 }

@@ -1,0 +1,34 @@
+{
+  "name": "Scroll of Foraging Power",
+  "inputs": [
+    {
+      "type": "resource",
+      "id": "Paper",
+      "amount": 5
+    },
+    {
+      "type": "resource",
+      "id": "Compressed Pine Wood",
+      "amount": 1
+    }
+  ],
+  "outputs": [
+    {
+      "type": "item",
+      "id": "base:scrolls:scroll_foraging_power",
+      "amount": 1
+    }
+  ],
+  "requirements": [
+    {
+      "type": "skill",
+      "skill": "MINING",
+      "level": 13
+    },
+    {
+      "type": "skill",
+      "skill": "FORAGING",
+      "level": 10
+    }
+  ]
+}
