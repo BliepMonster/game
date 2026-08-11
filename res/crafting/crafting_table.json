@@ -1,6 +1,5 @@
 {
   "recipes": [
-    "res/recipes/flour_recipe.json",
     "res/recipes/bread_recipe.json",
     "res/recipes/weapons/wooden_club_recipe.json",
     "res/recipes/bowl_recipe.json",
@@ -8,13 +7,15 @@
     "res/recipes/carrot_cake_recipe.json",
     "res/recipes/zombie_helmet_recipe.json",
     "res/recipes/golden_strawberry_recipe.json",
-    "res/recipes/paper_recipe.json",
     "res/recipes/scrolls/strength_scroll_recipe.json",
     "res/recipes/scrolls/mining_power_scroll_recipe.json",
-    "res/recipes/crafting_table_recipe.json",
-    "res/recipes/deconstructor_recipe.json",
-    "res/recipes/chest_recipe.json",
-    "res/recipes/furnace_recipe.json",
-    "res/recipes/smithing/glow_ring_recipe.json"
+    "res/recipes/placers/crafting_table_recipe.json",
+    "res/recipes/placers/deconstructor_recipe.json",
+    "res/recipes/placers/chest_recipe.json",
+    "res/recipes/placers/furnace_recipe.json",
+    "res/recipes/smithing/glow_ring_recipe.json",
+    "res/recipes/placers/crusher_recipe.json",
+    "res/recipes/placers/scroll_table_recipe.json",
+    "res/recipes/placers/polisher_recipe.json"
   ]
 }

@@ -1,0 +1,9 @@
+{
+  "type": "ability",
+  "id": "base:placers:polisher",
+  "name": "Polishing Machine",
+  "texture": "base:item:polishing_machine",
+  "ability": "polisher",
+  "cooldown": 1,
+  "stats": []
+}

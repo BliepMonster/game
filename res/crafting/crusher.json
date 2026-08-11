@@ -1,0 +1,6 @@
+{
+  "recipes": [
+    "res/recipes/flour_recipe.json",
+    "res/recipes/paper_recipe.json"
+  ]
+}

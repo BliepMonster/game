@@ -1,0 +1,9 @@
+{
+  "type": "ability",
+  "id": "base:placers:crusher",
+  "name": "Crusher",
+  "texture": "base:item:crusher",
+  "ability": "crusher",
+  "cooldown": 1,
+  "stats": []
+}

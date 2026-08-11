@@ -12,5 +12,8 @@ public class AbilityRegistry {
         registry.put("deconstructor", new DeconstructorPlacerAbility());
         registry.put("chest", new ChestPlacerAbility());
         registry.put("furnace", new FurnacePlacerAbility());
+        registry.put("crusher", new CrusherPlacerAbility());
+        registry.put("scroll_table", new ScrollTablePlacerAbility());
+        registry.put("polisher", new PolisherPlacerAbility());
     }
 }

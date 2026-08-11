@@ -21,6 +21,7 @@ public class GlowingMushroomTilePart extends ResourceCreator implements LightSou
             1600
     );
     public static final Texture TEXTURE = TextureIdMap.get("base:tiles:glowing_mushroom");
+    public static final Texture SHADOW = TextureIdMap.get("base:tiles:gm_shadow");
 
     public GlowingMushroomTilePart(Vector2f position) {
         super(DEFINITION, position);
@@ -29,7 +30,8 @@ public class GlowingMushroomTilePart extends ResourceCreator implements LightSou
 
     @Override
     public void renderReady(Camera camera, int x, int y) {
-        camera.addRenderJob(() -> camera.image(TEXTURE, x, y, 1, 1), -y);
+        camera.image(SHADOW, x, y, 1, 1);
+        camera.addRenderJob(() -> camera.image(TEXTURE, x, y+.5f, 1, 1), -y-.5f);
     }
     public boolean isStandable() {
         return true;

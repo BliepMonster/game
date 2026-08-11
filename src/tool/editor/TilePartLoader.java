@@ -9,9 +9,7 @@ import main.GameContext;
 import org.joml.Vector2f;
 import org.joml.Vector2i;
 import tiles.*;
-import tiles.crafting.CraftingStationTilePart;
-import tiles.crafting.DeconstructorTilePart;
-import tiles.crafting.FurnaceTilePart;
+import tiles.crafting.*;
 import tiles.crafting.scrolls.ScrollApplicationTilePart;
 import tiles.doors.DungeonExitTilePart;
 import tiles.doors.EntranceTilePart;
@@ -28,6 +26,9 @@ import java.util.HashMap;
 public final class TilePartLoader {
     public static final String ID_IRON_ORE = "iron_ore";
     public static final String ID_FURNACE = "furnace";
+    public static final String ID_CRUSHER = "crusher";
+    public static final String ID_SCROLL_TABLE = "scroll_crafter";
+    public static final String ID_POLISHING_MACHINE = "polishing_machine";
     public static final String ID_COAL_ORE = "coal_ore";
     public static final String ID_COPPER_ORE = "copper_ore";
     public static final String ID_WHEAT = "wheat";
@@ -49,6 +50,7 @@ public final class TilePartLoader {
     public static final String ID_SPAWNER_GEMGOLEM = "gg_spawner";
     public static final String ID_CHEST = "chest";
     public static final String ID_GLOWING_MUSHROOM = "glowing_mushroom";
+    public static final String ID_PINE_TREE = "pine_tree";
     public static Font font;
     public static final HashMap<String, Texture> tcache = new HashMap<>();
 
@@ -109,6 +111,10 @@ public final class TilePartLoader {
             case ID_SPAWNER_GEMGOLEM -> new GemstoneGolemSpawner(pos, context);
             case ID_CHEST -> ChestTilePart.load(pos, obj);
             case ID_GLOWING_MUSHROOM -> new GlowingMushroomTilePart(pos);
+            case ID_CRUSHER -> new CrusherTilePart(pos);
+            case ID_SCROLL_TABLE -> new ScrollCraftingTilePart(pos);
+            case ID_PINE_TREE -> new PineTreePart(pos);
+            case ID_POLISHING_MACHINE -> new PolishingMachineTilePart(pos);
             default -> throw new RuntimeException("Unknown object: " + type);
         };
     }

@@ -29,12 +29,14 @@ public enum EditorToolState {
             case O1 -> {
                 map.put(x, y, new DefaultTile(TileType.get("FLOOR_PLANK")));
             }
-            case O2 -> tile.setPart(new GlowingMushroomTilePart(new Vector2f(x, y)));
+            case O2 -> {
+                map.put(x, y, new DefaultTile(TileType.get("WATER")));
+            }
             case O3 -> {
-                tile.setPart(new GemstoneGolemSpawner(new Vector2f(x, y), context));
+                map.put(x, y, new DefaultTile(TileType.get("GRASS_TAIGA")));
             }
             case O4 -> map.put(x, y, new DefaultTile(TileType.get("ROAD")));
-            case O5 -> tile.setPart(new IronOrePart(new Vector2f(x, y)));
+            case O5 -> tile.setPart(new PineTreePart(new Vector2f(x, y)));
             case O6 -> tile.setPart(null);
             case O7 -> map.put(x, y, new DefaultTile(TileType.get("DIRT_PATH")));
             case O8 -> {

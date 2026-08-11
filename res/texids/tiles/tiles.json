@@ -8,5 +8,12 @@
   "base:tiles:grass_dark": "res/textures/tiles/grass_dark_tile.png",
   "base:tiles:plank_floor": "res/textures/tiles/plank_floor.png",
   "base:tiles:chest": "res/textures/tiles/chest.png",
-  "base:tiles:glowing_mushroom": "res/textures/tiles/glowing_mushroom.png"
+  "base:tiles:glowing_mushroom": "res/textures/tiles/glowing_mushroom.png",
+  "base:tiles:gm_shadow": "res/textures/tiles/gm_shadow.png",
+  "base:tiles:crusher": "res/textures/tiles/crusher.png",
+  "base:tiles:scroll_table": "res/textures/tiles/scroll_ctable.png",
+  "base:tiles:polishing_machine": "res/textures/tiles/gem_polisher.png",
+  "base:tiles:taiga_grass": "res/textures/tiles/taiga_grass.png",
+  "base:tiles:water": "res/textures/tiles/water.png",
+  "base:tiles:pine_tree": "res/textures/tiles/tree_taiga.png"
 }

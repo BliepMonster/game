@@ -1,0 +1,6 @@
+{
+  "recipes": [
+    "res/recipes/scrolls/strength_scroll_recipe.json",
+    "res/recipes/scrolls/mining_power_scroll_recipe.json"
+  ]
+}

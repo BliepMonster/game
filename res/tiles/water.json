@@ -1,0 +1,5 @@
+{
+  "id": "WATER",
+  "standable": false,
+  "texture": "base:tiles:water"
+}

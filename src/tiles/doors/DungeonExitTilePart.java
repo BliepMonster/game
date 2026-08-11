@@ -6,6 +6,7 @@ import engine.json.JsonObject;
 import engine.json.JsonString;
 import engine.json.JsonValue;
 import engine.notifications.NotificationSystem;
+import entities.Entity;
 import main.Camera;
 import main.GameContext;
 import main.WorldRegistry;
@@ -37,7 +38,12 @@ public class DungeonExitTilePart extends TilePart {
         return true;
     }
     public void onStand(GameContext context) {
-        if (!context.getEntities().isEmpty()) {
+        var entities = context.getEntities();
+        boolean allow = true;
+        for (Entity entity : entities) {
+            if (entity.isAttackable()) allow = false;
+        }
+        if (!allow) {
             NotificationSystem.add(
                     "You have not killed all enemies yet!",
                     Color.RED

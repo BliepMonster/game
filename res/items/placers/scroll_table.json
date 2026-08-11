@@ -1,0 +1,9 @@
+{
+  "type": "ability",
+  "id": "base:placers:scroll_table",
+  "name": "Scroll Crafting Table",
+  "texture": "base:item:scroll_table",
+  "ability": "scroll_table",
+  "cooldown": 1,
+  "stats": []
+}

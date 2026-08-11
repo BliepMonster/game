@@ -1,0 +1,33 @@
+{
+  "name": "Gemstone Polishing Machine",
+  "inputs": [
+    {
+      "type": "resource",
+      "id": "Copper Bar",
+      "amount": 5
+    },
+    {
+      "type": "resource",
+      "id": "Maple Wood",
+      "amount": 5
+    },
+    {
+      "type": "resource",
+      "id": "Ruby",
+      "amount": 12
+    },
+    {
+      "type": "resource",
+      "id": "Steel Bar",
+      "amount": 2
+    }
+  ],
+  "outputs": [
+    {
+      "type": "item",
+      "id": "base:placers:polisher",
+      "amount": 1
+    }
+  ],
+  "requirements": []
+}

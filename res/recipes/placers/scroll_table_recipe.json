@@ -1,0 +1,33 @@
+{
+  "name": "Scroll Table",
+  "inputs": [
+    {
+      "type": "resource",
+      "id": "Ruby",
+      "amount": 5
+    },
+    {
+      "type": "resource",
+      "id": "Gold Bar",
+      "amount": 2
+    },
+    {
+      "type": "resource",
+      "id": "Maple Wood",
+      "amount": 5
+    },
+    {
+      "type": "resource",
+      "id": "Copper Bar",
+      "amount": 5
+    }
+  ],
+  "outputs": [
+    {
+      "type": "item",
+      "id": "base:placers:scroll_table",
+      "amount": 1
+    }
+  ],
+  "requirements": []
+}
