@@ -1,0 +1,28 @@
+{
+  "name": "Garden Pot",
+  "inputs": [
+    {
+      "type": "resource",
+      "id": "Pine Wood",
+      "amount": 10
+    },
+    {
+      "type": "resource",
+      "id": "Copper Bar",
+      "amount": 4
+    },
+    {
+      "type": "resource",
+      "id": "Iron Bar",
+      "amount": 2
+    }
+  ],
+  "outputs": [
+    {
+      "type": "item",
+      "id": "base:placers:garden_pot",
+      "amount": 1
+    }
+  ],
+  "requirements": []
+}

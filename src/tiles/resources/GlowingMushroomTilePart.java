@@ -3,7 +3,7 @@ package tiles.resources;
 import engine.core.Texture;
 import engine.json.JsonString;
 import engine.json.JsonValue;
-import lighting.LightSource;
+import main.LightSource;
 import main.Camera;
 import main.TextureIdMap;
 import org.joml.Vector2f;

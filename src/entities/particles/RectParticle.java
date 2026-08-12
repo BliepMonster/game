@@ -1,4 +1,4 @@
-package particles;
+package entities.particles;
 
 import main.Camera;
 import org.joml.Vector2f;

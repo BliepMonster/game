@@ -1,4 +1,4 @@
-package particles;
+package entities.particles;
 
 import engine.hitboxes.Hitbox;
 import entities.DamageType;

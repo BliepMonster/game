@@ -1,4 +1,4 @@
-package particles;
+package entities.particles;
 
 import main.Game;
 import org.joml.Vector2f;

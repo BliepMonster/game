@@ -3,7 +3,6 @@ package main;
 import engine.core.DrawManager;
 import engine.core.Texture;
 import entities.Player;
-import lighting.LightSource;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -74,5 +73,12 @@ public class Camera {
     public void tintedImage(Texture texture, Color color, float x, float y, float w, float h) {
         draw.litTintedImage(texture, color, (x-player.getX())*tileSize, (y-player.getY())*tileSize, w*tileSize, h*tileSize,
                 computeBrightness(x, y+h), computeBrightness(x+w, y+h), computeBrightness(x+w, y), computeBrightness(x, y));
+    }
+    public void batchedImage(Texture texture, float x, float y, float w, float h) {
+        draw.batchLitImage(texture, (x-player.getX())*tileSize, (y-player.getY())*tileSize, w*tileSize, h*tileSize,
+                computeBrightness(x, y+h), computeBrightness(x+w, y+h), computeBrightness(x+w, y), computeBrightness(x, y));
+    }
+    public void flushBatch() {
+        draw.flushLitBatch();
     }
 }

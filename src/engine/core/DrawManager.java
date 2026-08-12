@@ -21,6 +21,8 @@ public class DrawManager {
     protected final Screen screen;
     protected static int rectVAO;
     protected static int textVAO;
+    protected static int batchVAO;
+    protected static int batchVBO;
     protected static int textPositionsVBO;
     protected static int textTexCoordsVBO;
     protected static int rectPositionVBO;
@@ -39,11 +41,29 @@ public class DrawManager {
     protected String litVertexName = "res/shaders/lighting_vertex.glsl";
     protected String litFragName = "res/shaders/lighting_fragment.glsl";
     protected String litColorFragName = "res/shaders/lighting_rfragment.glsl";
+    protected String batchVertexName = "res/shaders/batch_vertex.glsl";
+    protected String batchFragName = "res/shaders/batch_fragment.glsl";
     protected Shader textured = new Shader(colorVertexName, texFragName);
     protected Shader text = new Shader(colorVertexName, textFragName);
     protected Shader plainColor = new Shader(texVertexName, colorFragName);
     protected Shader litTextured = new Shader(litVertexName, litFragName);
     protected Shader litColor = new Shader(litVertexName, litColorFragName);
+    protected Shader batchTextured = new Shader(batchVertexName, batchFragName);
+    private static class BatchBuffer {
+        float[] data = new float[256];
+        int size = 0;
+        void add(float... values) {
+            if (size + values.length > data.length) {
+                data = Arrays.copyOf(data, java.lang.Math.max(size + values.length, data.length * 2));
+            }
+            System.arraycopy(values, 0, data, size, values.length);
+            size += values.length;
+        }
+        void clear() {
+            size = 0;
+        }
+    }
+    private final java.util.HashMap<Texture, BatchBuffer> batches = new java.util.HashMap<>();
     private int drawCalls = 0;
     private float nextLightLevel = -1;
 
@@ -99,6 +119,18 @@ public class DrawManager {
         glBindBuffer(GL_ARRAY_BUFFER, textTexCoordsVBO);
         glVertexAttribPointer(1, 2, GL_FLOAT, false, 0, 0);
 
+        batchVAO = glGenVertexArrays();
+        batchVBO = glGenBuffers();
+        glBindVertexArray(batchVAO);
+        glBindBuffer(GL_ARRAY_BUFFER, batchVBO);
+        glEnableVertexAttribArray(0);
+        glVertexAttribPointer(0, 2, GL_FLOAT, false, 5 * Float.BYTES, 0);
+        glEnableVertexAttribArray(1);
+        glVertexAttribPointer(1, 2, GL_FLOAT, false, 5 * Float.BYTES, 2 * Float.BYTES);
+        glEnableVertexAttribArray(2);
+        glVertexAttribPointer(2, 1, GL_FLOAT, false, 5 * Float.BYTES, 4 * Float.BYTES);
+        glBindVertexArray(0);
+
         lastBoundVAO = -1;
     }
     public static void swapTexture(Texture texture) {
@@ -116,6 +148,7 @@ public class DrawManager {
         text.destroy();
         litTextured.destroy();
         litColor.destroy();
+        batchTextured.destroy();
     }
     public static void destroyVAO() {
         glUseProgram(0);
@@ -125,7 +158,8 @@ public class DrawManager {
         glDeleteBuffers(rectTexCoordsVBO);
         glDeleteVertexArrays(textVAO);
         glDeleteBuffers(textTexCoordsVBO);
-        glDeleteBuffers(textPositionsVBO);
+        glDeleteVertexArrays(batchVAO);
+        glDeleteBuffers(batchVBO);
     }
     public static void storeDataInAttributeList(int attributeNumber, float[] data, int vboID) {
         GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, vboID);
@@ -138,6 +172,12 @@ public class DrawManager {
     protected static FloatBuffer storeDataInFloatBuffer(float[] data) {
         FloatBuffer buffer = BufferUtils.createFloatBuffer(data.length);
         buffer.put(data);
+        buffer.flip();
+        return buffer;
+    }
+    protected static FloatBuffer storeDataInFloatBuffer(float[] data, int size) {
+        FloatBuffer buffer = BufferUtils.createFloatBuffer(size);
+        buffer.put(data, 0, size);
         buffer.flip();
         return buffer;
     }
@@ -266,6 +306,56 @@ public class DrawManager {
         litTextured.loadLightLevels(topLeft, topRight, bottomRight, bottomLeft);
         glDrawArrays(GL_TRIANGLES, 0, 6);
         ++drawCalls;
+    }
+    public void batchLitImage(Texture tex, float x, float y, float width, float height,
+                              float topLeft, float topRight, float bottomRight, float bottomLeft) {
+        float ax = x/screen.getAspectRatio();
+        float aw = width/screen.getAspectRatio();
+        var buffer = batches.computeIfAbsent(tex, k -> new BatchBuffer());
+        buffer.add(
+                ax, y+height, 0, 0, topLeft,
+                ax+aw, y+height, 1, 0, topRight,
+                ax+aw, y, 1, 1, bottomRight,
+                ax, y, 0, 1, bottomLeft,
+                ax, y+height, 0, 0, topLeft,
+                ax+aw, y, 1, 1, bottomRight
+        );
+    }
+    public void flushLitBatch() {
+        for (var entry : batches.entrySet()) {
+            var buffer = entry.getValue();
+            if (buffer.size == 0) continue;
+            drawBatched(entry.getKey(), buffer.data, buffer.size);
+            buffer.clear();
+        }
+    }
+    private void drawBatched(Texture tex, float[] data, int size) {
+        bindShader(batchTextured);
+        CACHE_MAT.identity();
+        batchTextured.loadColor(batchTextured.colorLocation, Color.white);
+        batchTextured.loadMatrix(batchTextured.transformLocation, CACHE_MAT);
+        if (lastBoundVAO != batchVAO) {
+            glBindVertexArray(batchVAO);
+            lastBoundVAO = batchVAO;
+        }
+        GL13.glActiveTexture(GL13.GL_TEXTURE0);
+        swapTexture(tex);
+        batchTextured.loadTexCoords(tex, batchTextured.texCoordsLocation);
+        FloatBuffer buffer = storeDataInFloatBuffer(data, size);
+        glBindBuffer(GL_ARRAY_BUFFER, batchVBO);
+        glBufferData(GL_ARRAY_BUFFER, buffer, GL_DYNAMIC_DRAW);
+        glDrawArrays(GL_TRIANGLES, 0, size/5);
+        ++drawCalls;
+    }
+    public void switchBatchVertexShader(String currentAddress) {
+        batchTextured.destroy();
+        batchVertexName = currentAddress;
+        batchTextured = new Shader(batchVertexName, batchFragName);
+    }
+    public void switchBatchFragmentShader(String address) {
+        batchTextured.destroy();
+        batchFragName = address;
+        batchTextured = new Shader(batchVertexName, batchFragName);
     }
     public void switchLitVertexShader(String currentAddress) {
         litTextured.destroy();
@@ -503,7 +593,7 @@ public class DrawManager {
     }
     public void renderAsText(TextMesh mesh, Font font, Color color, float x, float y) {
         CACHE_VEC1.set(x/screen.getAspectRatio(),y,0);
-        CACHE_VEC2.set(.01f/screen.getAspectRatio(), .01f, .01f);
+        CACHE_VEC2.set(1f/screen.getAspectRatio(), 1, 1);
         mesh.render(font.getBitmap(), text, color, Maths.loadTransform(CACHE_MAT, CACHE_VEC1, CACHE_VEC2));
         // no draw call tracking for meshes
     }

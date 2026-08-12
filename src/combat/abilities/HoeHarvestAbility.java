@@ -44,6 +44,8 @@ public class HoeHarvestAbility extends ItemAbility {
     @Override
     public ItemUseResult use(Tile tile, Item item, Vector2f worldClickLocation, GameContext context) {
         int available = this.count;
+        var player = context.getPlayer();
+        worldClickLocation = player.getFacingPosition(worldClickLocation).add(.5f, .5f);
         if (available == 0) return new ItemUseResult(Optional.of(item), false);
         var vec = new Vector2i((int) Math.floor(worldClickLocation.x), (int) Math.floor(worldClickLocation.y));
         loop:

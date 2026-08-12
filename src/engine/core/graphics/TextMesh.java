@@ -21,7 +21,7 @@ public class TextMesh extends Mesh {
                 continue;
             }
             float[] positions = new float[12];
-            float[] texCoords = new float[12];
+            float[] texCoords;
             Glyph glyph;
             float glyphX;
             float glyphY;

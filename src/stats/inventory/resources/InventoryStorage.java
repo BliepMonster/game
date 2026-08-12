@@ -1,7 +1,6 @@
 package stats.inventory.resources;
 
 import org.jetbrains.annotations.NotNull;
-import saving.SavedItemInventory;
 import saving.SavedStorage;
 
 import java.util.*;
@@ -17,6 +16,9 @@ public final class InventoryStorage implements Iterable<Map.Entry<String, Intege
             keys.add(name);
             inventory.put(name, count);
         }
+    }
+    public void apply(HashMap<String, Integer> loot) {
+        this.inventory.putAll(loot);
     }
     public Optional<Integer> get(String name) {
         return Optional.ofNullable(inventory.get(name));

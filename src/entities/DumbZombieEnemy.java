@@ -25,7 +25,7 @@ public class DumbZombieEnemy extends MeleeDungeonEnemy {
                     )
             ),
             new LootPiece(
-                    LootType.EPIC,
+                    LootType.RARE,
                     new LootReward(
                             5,
                             new ItemDefinition[0],

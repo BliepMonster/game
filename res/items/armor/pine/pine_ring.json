@@ -1,0 +1,17 @@
+{
+  "type": "equipment",
+  "id": "base:armor:pine_ring",
+  "name": "Pine Ring",
+  "texture": "base:item:pine_ring",
+  "stats": [
+    {
+      "type": "FORAGING_YIELD",
+      "count": 5
+    },
+    {
+      "type": "FORAGING_POWER",
+      "count": 25
+    }
+  ],
+  "slot": "RING"
+}

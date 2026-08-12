@@ -33,6 +33,7 @@ import java.util.ArrayList;
 
 public class Main {
     public static boolean DEBUG_MODE = false;
+    public static final boolean ALLOW_DEBUG = false;
     public enum State {
         MAIN_MENU,
         LOAD_WORLD,
@@ -121,7 +122,7 @@ public class Main {
                 }
             } else if (event.type() == EventManager.MOUSE_DOWN && event.key() == GLFW.GLFW_MOUSE_BUTTON_1) {
                 pressed = true;
-            } else if (event.type() == EventManager.KEY_DOWN && event.key() == GLFW.GLFW_KEY_F3) DEBUG_MODE = !DEBUG_MODE;
+            } else if (event.type() == EventManager.KEY_DOWN && event.key() == GLFW.GLFW_KEY_F3 && ALLOW_DEBUG) DEBUG_MODE = !DEBUG_MODE;
         }
 
         Keybinds.manage(console);

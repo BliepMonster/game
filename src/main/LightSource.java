@@ -1,4 +1,4 @@
-package lighting;
+package main;
 
 import engine.hitboxes.Positioned;
 

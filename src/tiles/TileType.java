@@ -79,6 +79,9 @@ public class TileType {
     public void render(Camera camera, int x, int y) {
         camera.image(texture, x, y, 1, 1);
     }
+    public void renderBatched(Camera camera, int x, int y) {
+        camera.batchedImage(texture, x, y, 1, 1);
+    }
     public void renderPriority(Camera camera, int x, int y, float priority) {
         camera.addRenderJob(() -> camera.image(texture, x, y, 1, 1), priority);
     }

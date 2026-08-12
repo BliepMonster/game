@@ -4,7 +4,7 @@ import combat.equipment.EquipmentSlot;
 import engine.core.Texture;
 import engine.hitboxes.Hitbox;
 import engine.hitboxes.RectangularHitbox;
-import lighting.LightSource;
+import main.LightSource;
 import main.Camera;
 import main.Game;
 import main.GameContext;
@@ -41,6 +41,7 @@ public class Player implements Entity, LightSource {
     private int ticksTo = 0;
     private int ticksSinceLastDamage = 0;
     private boolean hitLastTick;
+    private Direction direction = Direction.DOWN;
     private float health = 100;
     public final CurrencyStorage currency;
     public final HashSet<StatusEffect> effects = new HashSet<>();
@@ -135,6 +136,9 @@ public class Player implements Entity, LightSource {
             movement.y -= 1f;
         }
         if (movement.x != 0 || movement.y != 0) {
+            if (movement.x != 0)
+                direction = movement.x > 0 ? Direction.RIGHT : Direction.LEFT;
+            else direction = movement.y > 0 ? Direction.UP : Direction.DOWN;
             movement.normalize();
             movement.mul(stats.get(StatHolder.Stat.SPEED) / TICKS_PER_SECOND);
         }
@@ -222,6 +226,24 @@ public class Player implements Entity, LightSource {
     }
     public Vector2f getPosition() {
         return position;
+    }
+    public Direction getDirection() {
+        return direction;
+    }
+    public Vector2f getFacingPosition(Vector2f mousePos) {
+        float x = getX();
+        float y = getY()-1;
+        var dx = mousePos.x - getX();
+        var dy = mousePos.y - getY();
+        Direction facing;
+        if (Math.abs(dx) >= Math.abs(dy)) facing = dx > 0 ? Direction.RIGHT : Direction.LEFT;
+        else facing = dy > 0 ? Direction.UP : Direction.DOWN;
+        return switch (facing) {
+            case UP -> new Vector2f(x, y+1);
+            case DOWN -> new Vector2f(x, y-1);
+            case LEFT -> new Vector2f(x-1.425f, y);
+            case RIGHT -> new Vector2f(x+1.425f, y);
+        };
     }
 
     @Override

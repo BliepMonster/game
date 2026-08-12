@@ -5,6 +5,11 @@ import engine.core.text.Font;
 import engine.json.JsonNumber;
 import engine.json.JsonObject;
 import engine.json.JsonString;
+import engine.json.JsonValue;
+import farming.CompostType;
+import farming.CropType;
+import farming.GardenPotTilePart;
+import farming.PlantedCrop;
 import main.GameContext;
 import org.joml.Vector2f;
 import org.joml.Vector2i;
@@ -51,6 +56,7 @@ public final class TilePartLoader {
     public static final String ID_CHEST = "chest";
     public static final String ID_GLOWING_MUSHROOM = "glowing_mushroom";
     public static final String ID_PINE_TREE = "pine_tree";
+    public static final String ID_GARDEN_POT = "garden_pot";
     public static Font font;
     public static final HashMap<String, Texture> tcache = new HashMap<>();
 
@@ -115,6 +121,22 @@ public final class TilePartLoader {
             case ID_SCROLL_TABLE -> new ScrollCraftingTilePart(pos);
             case ID_PINE_TREE -> new PineTreePart(pos);
             case ID_POLISHING_MACHINE -> new PolishingMachineTilePart(pos);
+            case ID_GARDEN_POT -> {
+                var cropV = obj.values.get("crop");
+                var nextCompostV = (JsonString) obj.values.get("nextCompost");
+                var currentCompostV = (JsonString) obj.values.get("compost");
+                yield new GardenPotTilePart(pos, cropV instanceof JsonString crop ?
+                        new PlantedCrop(CropType.get(crop.value),
+                                (long)((JsonNumber) obj.values.get("duration")).num,
+                                currentCompostV != null ?
+                                        CompostType.get((currentCompostV).value) :
+                                        null) :
+                        null,
+                        nextCompostV instanceof JsonString compost ?
+                                CompostType.get(compost.value) :
+                                null
+                );
+            }
             default -> throw new RuntimeException("Unknown object: " + type);
         };
     }

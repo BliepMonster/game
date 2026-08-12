@@ -1,0 +1,9 @@
+{
+  "type": "ability",
+  "id": "base:placers:garden_pot",
+  "name": "Garden Pot",
+  "texture": "base:item:garden_pot",
+  "ability": "garden_pot",
+  "cooldown": 1,
+  "stats": []
+}

@@ -3,31 +3,43 @@ package tiles.resources;
 import engine.core.Texture;
 import engine.json.JsonString;
 import engine.json.JsonValue;
+import entities.LootPiece;
+import entities.LootReward;
+import entities.LootTable;
+import entities.LootType;
 import main.Camera;
 import main.Game;
-import main.ItemConstants;
 import main.TextureIdMap;
 import org.joml.Vector2f;
 import stats.StatHolder;
+import stats.inventory.items.ItemDefinition;
 import stats.inventory.items.ToolItemDefinition;
 import stats.skills.SkillSet;
 import tool.editor.TilePartLoader;
 
 import java.awt.*;
+import java.util.HashMap;
 
 public class PineTreePart extends HittableResourceCreator {
-    public static final HittableResourceDescription DESCRIPTION = new HittableResourceDescription(
-            Game.TICKS_PER_SECOND*15,
-            "Pine Wood",
-            2,
-            SkillSet.SkillType.FORAGING,
-            90,
-            StatHolder.Stat.FORAGING_YIELD,
-            150,
-            7,
-            false,
-            ToolItemDefinition.PowerType.WOODCUTTING
-    );
+    static {
+        HashMap<String, Integer> map = new HashMap<>();
+        map.put("Pine Resin", 1);
+        var table = new LootTable(new LootPiece(LootType.UNCOMMON, new LootReward(0, new ItemDefinition[0], map)));
+        DESCRIPTION = new HittableResourceDescription(
+                Game.TICKS_PER_SECOND*15,
+                "Pine Wood",
+                2,
+                SkillSet.SkillType.FORAGING,
+                150,
+                StatHolder.Stat.FORAGING_YIELD,
+                250,
+                7,
+                false,
+                ToolItemDefinition.PowerType.WOODCUTTING,
+                table
+        );
+    }
+    public static final HittableResourceDescription DESCRIPTION;
     public PineTreePart(Vector2f position) {
         super(DESCRIPTION, position);
     }

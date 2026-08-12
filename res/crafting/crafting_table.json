@@ -18,6 +18,8 @@
     "res/recipes/pine/pine_boots_recipe.json",
     "res/recipes/pine/pine_leggings_recipe.json",
     "res/recipes/pine/pine_chestplate_recipe.json",
-    "res/recipes/pine/pine_helmet_recipe.json"
+    "res/recipes/pine/pine_helmet_recipe.json",
+    "res/recipes/pine/pine_ring_recipe.json",
+    "res/recipes/placers/garden_pot_recipe.json"
   ]
 }

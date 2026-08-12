@@ -9,13 +9,13 @@ import engine.json.JsonFile;
 import engine.json.JsonNumber;
 import engine.json.JsonString;
 import entities.Entity;
-import lighting.LightSource;
 import org.jetbrains.annotations.NotNull;
 import org.joml.Vector2f;
 import tiles.*;
 import tool.editor.EditorToolState;
 import tool.editor.JSONLoader;
 
+import java.awt.*;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
@@ -102,16 +102,15 @@ public class World {
             float y = Input.getMouseY(screen);
             float px = x/tsize+player.getX();
             float py = y/tsize+player.getY();
-            var v = map.get((int) Math.floor(px), (int) Math.floor(py));
-            var t = v.orElse(null);
+            var facing = player.getFacingPosition(new Vector2f(px, py));
+            var t = map.get((int) Math.floor(facing.x), (int) Math.floor(facing.y)).orElse(null);
             var used = game.player.useSelectedItem(game, t, new Vector2f(px, py));
-            if (v.isPresent()) {
-                if (!used) {
-                    t.onClick(game);
-                }
+            if (t != null && !used) {
+                t.onClick(game);
             }
         }
     }
+    public static final Color OVERLAY = new Color(0, 0, 0, .5f);
     public void render(Game game, Camera camera, float tsize) {
         var bounds = map.getBounds();
         var minX = bounds.x;
@@ -134,11 +133,28 @@ public class World {
                 var option = map.get(i, j);
                 if (option.isPresent()) {
                     var tile = option.get();
+                    if (tile instanceof DefaultTile && tile.getPart() == null) {
+                        ((DefaultTile) tile).renderBatched(camera, i, j);
+                    }
+                }
+            }
+        }
+        camera.flushBatch();
+        for (int i = minX; i <= minX + xSize; ++i) {
+            for (int j = minY+ySize; j >= minY; --j) {
+                var option = map.get(i, j);
+                if (option.isPresent()) {
+                    var tile = option.get();
+                    if (tile instanceof DefaultTile && tile.getPart() == null) continue;
                     tile.render(camera, i, j);
                 }
             }
         }
         entities.forEach(entity -> entity.render(camera));
+        var vec = player.getFacingPosition(new Vector2f(Input.getMouseX(screen)/tsize+player.getX(), Input.getMouseY(screen)/tsize+player.getY()));
+        vec.x = (int) Math.floor(vec.x);
+        vec.y = (int) Math.floor(vec.y);
+        camera.addRenderJob(() -> camera.rect(OVERLAY, vec.x, vec.y, 1, 1), 40000);
     }
     public void spawn(Entity entity) {
         this.toAdd.add(entity);

@@ -2,7 +2,7 @@ package tiles.resources;
 
 import engine.json.JsonString;
 import engine.json.JsonValue;
-import lighting.LightSource;
+import main.LightSource;
 import main.Camera;
 import main.Game;
 import main.ItemConstants;

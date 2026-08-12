@@ -4,5 +4,6 @@
   "base:item:furnace": "res/textures/placers/furnace.png",
   "base:item:crusher": "res/textures/placers/crusher.png",
   "base:item:scroll_table": "res/textures/placers/scroll_ctable.png",
-  "base:item:polishing_machine": "res/textures/placers/gem_polisher.png"
+  "base:item:polishing_machine": "res/textures/placers/gem_polisher.png",
+  "base:item:garden_pot": "res/textures/placers/garden_pot.png"
 }

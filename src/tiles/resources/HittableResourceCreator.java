@@ -1,16 +1,16 @@
 package tiles.resources;
 
+import crafting.FullItemStorage;
 import engine.jobs.Job;
 import engine.jobs.JobActor;
 import engine.jobs.JobSystem;
 import engine.notifications.NotificationSystem;
-import engine.saving.objects.SavedObject;
 import main.Camera;
 import main.Game;
 import main.GameContext;
 import main.YieldUtils;
 import org.joml.Vector2f;
-import particles.ChipBurst;
+import entities.particles.ChipBurst;
 import stats.inventory.items.ToolItemDefinition;
 import tiles.TilePart;
 
@@ -48,6 +48,7 @@ public abstract class HittableResourceCreator extends TilePart implements JobAct
         var player = context.getPlayer();
         int yield = YieldUtils.getYieldEffect(description.yield(), player.stats.get(description.modifier()));
         player.inventory.add(description.itemID(), yield);
+        description.table().apply(new FullItemStorage(player.items, player.inventory, player.currency));
         player.skills.giveXP(description.skill(), description.xp());
     }
     public void hit(GameContext context, int power) {

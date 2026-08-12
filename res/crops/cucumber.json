@@ -1,0 +1,13 @@
+{
+  "id": "base:cucumber",
+  "ready": "base:empty",
+  "unready": "base:empty",
+  "icon": "base:empty",
+  "duration": 300000,
+  "guaranteed": "base:cucumber_drops",
+  "optional": "base:no_drops",
+  "name": "Cucumber",
+  "seed": "Cucumber Seeds",
+  "destroyed": true,
+  "exp": 500
+}

@@ -13,6 +13,9 @@ public class DefaultTile extends Tile {
     public void renderSelf(Camera camera, int x, int y) {
         type.render(camera, x, y);
     }
+    public void renderBatched(Camera camera, int x, int y) {
+        type.renderBatched(camera, x, y);
+    }
     @Override
     protected boolean isSelfStandable() {
         return type.standable;

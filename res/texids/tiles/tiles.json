@@ -15,5 +15,7 @@
   "base:tiles:polishing_machine": "res/textures/tiles/gem_polisher.png",
   "base:tiles:taiga_grass": "res/textures/tiles/taiga_grass.png",
   "base:tiles:water": "res/textures/tiles/water.png",
-  "base:tiles:pine_tree": "res/textures/tiles/tree_taiga.png"
+  "base:tiles:pine_tree": "res/textures/tiles/tree_taiga.png",
+  "base:tiles:silver_ore": "res/textures/tiles/silver_ore.png",
+  "base:tiles:garden_pot": "res/textures/tiles/garden_pot.png"
 }
