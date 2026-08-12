@@ -38,7 +38,7 @@ public class MainMenu {
                     new SavedSkill(0, 0),
                     new SavedSkill(0, 0),
                     new SavedSkill(0, 0)
-            })), new SavedHome(WorldRegistry.get("HOUSE")));
+            })), new SavedHome(WorldRegistry.get("HOUSE")), SavedQuests.empty());
             MainMenu.initLoadWorldMenu();
             Main.open(game, "saves/save"+filenames.size()+".save");
             Main.state = Main.State.ONGOING;

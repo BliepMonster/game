@@ -7,6 +7,7 @@ import engine.saving.objects.SaveFile;
 import entities.Entity;
 import entities.Player;
 import org.joml.Vector2f;
+import quests.QuestTracker;
 import saving.PlayerSaver;
 import saving.SavedGame;
 import saving.SavedHome;
@@ -22,13 +23,18 @@ public class Game implements GameContext {
     }
     World world;
     final Player player;
+    public final QuestTracker quests;
     private final Camera camera;
     public Player getPlayer() {
         return player;
     }
+    public QuestTracker getQuests() {
+        return quests;
+    }
     public Game(DrawManager draw, float tsize, SaveFile file) {
         SavedGame save = new SavedGame(file, this);
         player = new Player(save.player());
+        quests = new QuestTracker(save.quests());
         AutoWorldRegisterer.registerAll(this);
         world = WorldRegistry.get("HOME_WORLD");
         camera = new Camera(player, tsize, draw);
@@ -38,6 +44,7 @@ public class Game implements GameContext {
     }
     public Game(DrawManager draw, float tsize, SavedGame save) {
         player = new Player(save.player());
+        quests = new QuestTracker(save.quests());
         AutoWorldRegisterer.registerAll(this);
         world = WorldRegistry.get("HOME_WORLD");
         camera = new Camera(player, tsize, draw);
@@ -53,6 +60,7 @@ public class Game implements GameContext {
         world.tick(this, pressed, screen, tsize, canClick);
         player.tick(this);
         player.move(world.getHitbox());
+        quests.update(this);
 
         JobSystem.tick(1f/Game.TICKS_PER_SECOND);
     }
@@ -79,7 +87,8 @@ public class Game implements GameContext {
     public SavedGame save() {
         return new SavedGame(
                 PlayerSaver.savePlayer(player),
-                new SavedHome(WorldRegistry.get("HOUSE"))
+                new SavedHome(WorldRegistry.get("HOUSE")),
+                quests.save()
         );
     }
     public void movePlayer(World world, Vector2f position) {

@@ -13,6 +13,8 @@ import engine.jobs.JobSystem;
 import engine.notifications.NotificationSystem;
 import engine.saving.objects.SaveFile;
 import org.lwjgl.glfw.GLFW;
+import quests.QuestRegistry;
+import quests.ui.QuestPanel;
 import saving.SavedGame;
 import stats.inventory.items.ui.HotbarComponent;
 import stats.inventory.items.ui.InventoryGridComponent;
@@ -109,6 +111,17 @@ public class Main {
                         GUI.toggle(62);
                     }
                 }
+            } else if (event.type() == EventManager.KEY_UP && event.key() == GLFW.GLFW_KEY_J) {
+                if (GUI.getAll(0).isEmpty()) {
+                    GUI.add(new QuestPanel(game.getQuests(), game, Main.font, 0), 0);
+                    GUI.toggle(62);
+                } else {
+                    var component = GUI.getAll(0).getFirst();
+                    if (component instanceof QuestPanel) {
+                        GUI.clear(0);
+                        GUI.toggle(62);
+                    }
+                }
             } else if (event.type() == EventManager.KEY_UP && event.key() == GLFW.GLFW_KEY_TAB) {
                 if (GUI.getAll(0).isEmpty()) {
                     GUI.add(new InventoryGridComponent(game.player), 0);
@@ -169,6 +182,7 @@ public class Main {
         screen.create(console, Screen.MAXIMIZED);
         StaticItemLoader.initAll();
         JsonShopDefinitionLoader.registerAll();
+        QuestRegistry.registerAll();
 
         final var draw = new DrawManager(screen);
         mapd = new DrawManager(screen);

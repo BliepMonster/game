@@ -1,0 +1,17 @@
+{
+  "id": "base:intro_6",
+  "name": "Intro 6",
+  "requires": "base:intro_5",
+  "reward": {
+    "type": "currency",
+    "amount": 30
+  },
+  "objectives": [
+    {
+      "type": "buy",
+      "item": "base:tools:broken_axe",
+      "amount": 1,
+      "name": "Buy a broken axe"
+    }
+  ]
+}

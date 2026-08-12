@@ -1,0 +1,18 @@
+{
+  "id": "base:intro_7",
+  "name": "Intro 7",
+  "requires": "base:intro_6",
+  "reward": {
+    "type": "item",
+    "item": "base:placers:crafting_table",
+    "amount": 1
+  },
+  "objectives": [
+    {
+      "type": "harvest",
+      "item": "Maple Wood",
+      "amount": 1,
+      "name": "Chop a maple tree"
+    }
+  ]
+}

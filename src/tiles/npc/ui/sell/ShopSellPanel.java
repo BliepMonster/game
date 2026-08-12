@@ -8,6 +8,7 @@ import engine.gui.components.Component;
 import engine.gui.constraints.position.CenterConstraint;
 import engine.gui.constraints.position.RelativeYConstraint;
 import engine.gui.constraints.size.RelativeSizeConstraint;
+import main.GameContext;
 import main.ResourceSellingRegistry;
 import tiles.npc.ui.ShopWrapper;
 
@@ -20,10 +21,11 @@ public class ShopSellPanel extends Component {
     final Font font;
     ShopSellPage page;
     private final FullItemStorage storage;
+    private final GameContext context;
     int lp = 0;
     private final ShopSellPageSelectorBar bar;
     private final ShopSellRevertButton close;
-    public ShopSellPanel(FullItemStorage storage, Font font, ShopWrapper owner) {
+    public ShopSellPanel(FullItemStorage storage, Font font, ShopWrapper owner, GameContext context) {
         super(CenterConstraint.CENTER, new RelativeYConstraint(-.6f), new RelativeSizeConstraint(1), new RelativeSizeConstraint(1.3f));
         this.sellable = new ArrayList<>();
         for (var entry : storage.storage) {
@@ -33,6 +35,7 @@ public class ShopSellPanel extends Component {
         }
         this.font = font;
         this.storage = storage;
+        this.context = context;
         selectPage(0);
         this.close = new ShopSellRevertButton(owner);
         this.bar = new ShopSellPageSelectorBar(font, this);
@@ -53,7 +56,8 @@ public class ShopSellPanel extends Component {
         this.page = new ShopSellPage(
                 entries,
                 font,
-                storage
+                storage,
+                context
         );
     }
     public void manage(DrawManager draw, boolean pressed) {

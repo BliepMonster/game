@@ -1,0 +1,17 @@
+{
+  "id": "base:intro_9",
+  "name": "Intro 9",
+  "requires": "base:intro_8",
+  "reward": {
+    "type": "currency",
+    "amount": 10
+  },
+  "objectives": [
+    {
+      "type": "kill",
+      "enemy": "ZombieEnemy",
+      "amount": 1,
+      "name": "Kill a zombie"
+    }
+  ]
+}

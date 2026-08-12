@@ -1,0 +1,18 @@
+{
+  "id": "base:intro_8",
+  "name": "Intro 8",
+  "requires": "base:intro_7",
+  "reward": {
+    "type": "item",
+    "item": "base:placers:furnace",
+    "amount": 1
+  },
+  "objectives": [
+    {
+      "type": "harvest",
+      "item": "Copper Ore",
+      "amount": 1,
+      "name": "Mine a copper ore"
+    }
+  ]
+}

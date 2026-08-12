@@ -1,0 +1,18 @@
+{
+  "id": "base:intro_5",
+  "name": "Intro 5",
+  "requires": "base:intro_4",
+  "reward": {
+    "type": "skill",
+    "skill": "MINING",
+    "amount": 40
+  },
+  "objectives": [
+    {
+      "type": "harvest",
+      "item": "Coal",
+      "amount": 1,
+      "name": "Mine a piece of coal"
+    }
+  ]
+}

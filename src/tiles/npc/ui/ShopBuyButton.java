@@ -44,6 +44,7 @@ public class ShopBuyButton extends Component {
                 req.consume(storage);
             }
             entry.item().grant(storage);
+            context.getQuests().onBuy(entry.item().getId());
         }
     }
     public void detectContinuousPress(Screen screen, float x, float y) {}

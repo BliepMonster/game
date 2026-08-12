@@ -8,6 +8,7 @@ import engine.hitboxes.*;
 import engine.json.JsonFile;
 import engine.json.JsonNumber;
 import engine.json.JsonString;
+import entities.Enemy;
 import entities.Entity;
 import org.jetbrains.annotations.NotNull;
 import org.joml.Vector2f;
@@ -83,7 +84,10 @@ public class World {
         entities.addAll(toAdd);
         toAdd.clear();
         for (var entity : entities) {
-            if (entity.shouldDie(game)) entity.die(game);
+            if (entity.shouldDie(game)) {
+                if (entity instanceof Enemy) game.getQuests().onKill(entity.getClass().getSimpleName());
+                entity.die(game);
+            }
         }
         entities.removeIf(entity -> entity.shouldDie(game));
         var player = game.player;

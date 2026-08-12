@@ -1,0 +1,15 @@
+{
+  "id": "base:intro_2",
+  "name": "Intro 2",
+  "requires": "base:intro_1",
+  "reward": {
+    "type": "currency",
+    "amount": 200
+  },
+  "objectives": [
+    {
+      "type": "currency",
+      "amount": 100
+    }
+  ]
+}

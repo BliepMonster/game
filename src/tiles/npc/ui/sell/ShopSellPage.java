@@ -9,9 +9,11 @@ import engine.gui.constraints.position.CenterConstraint;
 import engine.gui.constraints.position.RelativeYConstraint;
 import engine.gui.constraints.size.RelativeSizeConstraint;
 
+import main.GameContext;
+
 public class ShopSellPage extends Component {
     private final ShopSellEntry[] entries;
-    public ShopSellPage(ShopSellPanel.Entry[] entries, Font font, FullItemStorage storage) {
+    public ShopSellPage(ShopSellPanel.Entry[] entries, Font font, FullItemStorage storage, GameContext context) {
         super(new CenterConstraint(), new RelativeYConstraint(-.4f), new RelativeSizeConstraint(1), new RelativeSizeConstraint(1));
         this.entries = new ShopSellEntry[entries.length];
         for (int i = 0; i < entries.length; ++i) {
@@ -19,7 +21,8 @@ public class ShopSellPage extends Component {
                     entries[i],
                     font,
                     i,
-                    storage
+                    storage,
+                    context
             );
         }
     }

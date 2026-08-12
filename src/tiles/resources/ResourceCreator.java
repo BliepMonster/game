@@ -25,7 +25,9 @@ public abstract class ResourceCreator extends TilePart implements JobActor {
         if (ready) {
             ready = false;
             var player = context.getPlayer();
-            player.inventory.add(this.definition.itemID(), YieldUtils.getYieldEffect(this.definition.yield(), player.stats.get(this.definition.modifier())));
+            int yield = YieldUtils.getYieldEffect(this.definition.yield(), player.stats.get(this.definition.modifier()));
+            player.inventory.add(this.definition.itemID(), yield);
+            if (yield > 0) context.getQuests().onGather(this.definition.itemID());
             player.skills.giveXP(definition.skillID(), definition.xp());
             JobSystem.addJob(new ResourceJob(this, (float) definition.respawnTicks()/ Game.TICKS_PER_SECOND));
         }
@@ -34,7 +36,9 @@ public abstract class ResourceCreator extends TilePart implements JobActor {
         if (ready) {
             ready = false;
             var player = context.getPlayer();
-            player.inventory.add(this.definition.itemID(), YieldUtils.getYieldEffect(this.definition.yield(), player.stats.get(this.definition.modifier())*penalty));
+            int yield = YieldUtils.getYieldEffect(this.definition.yield(), player.stats.get(this.definition.modifier())*penalty);
+            player.inventory.add(this.definition.itemID(), yield);
+            if (yield > 0) context.getQuests().onGather(this.definition.itemID());
             player.skills.giveXP(definition.skillID(), definition.xp());
             JobSystem.addJob(new ResourceJob(this, (float) definition.respawnTicks()/ Game.TICKS_PER_SECOND));
         }

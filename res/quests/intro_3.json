@@ -1,0 +1,16 @@
+{
+  "id": "base:intro_3",
+  "name": "Intro 3",
+  "requires": "base:intro_1",
+  "reward": {
+    "type": "currency",
+    "amount": 20
+  },
+  "objectives": [
+    {
+      "type": "sell",
+      "amount": 1,
+      "name": "Sell an item"
+    }
+  ]
+}

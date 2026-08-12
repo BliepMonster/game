@@ -48,6 +48,7 @@ public abstract class HittableResourceCreator extends TilePart implements JobAct
         var player = context.getPlayer();
         int yield = YieldUtils.getYieldEffect(description.yield(), player.stats.get(description.modifier()));
         player.inventory.add(description.itemID(), yield);
+        if (yield > 0) context.getQuests().onGather(description.itemID());
         description.table().apply(new FullItemStorage(player.items, player.inventory, player.currency));
         player.skills.giveXP(description.skill(), description.xp());
     }

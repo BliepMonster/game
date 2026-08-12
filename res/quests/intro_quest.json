@@ -1,0 +1,16 @@
+{
+  "id": "base:intro_1",
+  "name": "Intro 1",
+  "reward": {
+    "type": "currency",
+    "amount": 40
+  },
+  "objectives": [
+    {
+      "type": "harvest",
+      "item": "Wheat",
+      "amount": 1,
+      "name": "Harvest a piece of wheat"
+    }
+  ]
+}

@@ -18,7 +18,7 @@ public final class InventoryStorage implements Iterable<Map.Entry<String, Intege
         }
     }
     public void apply(HashMap<String, Integer> loot) {
-        this.inventory.putAll(loot);
+        for (var entry : loot.entrySet()) this.add(entry.getKey(), entry.getValue());
     }
     public Optional<Integer> get(String name) {
         return Optional.ofNullable(inventory.get(name));

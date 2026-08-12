@@ -18,4 +18,7 @@ public class ResourceGiver implements ItemGiver {
     public String getName() {
         return id;
     }
+    public String getId() {
+        return id;
+    }
 }

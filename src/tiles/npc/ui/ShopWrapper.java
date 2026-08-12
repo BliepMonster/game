@@ -23,12 +23,14 @@ public class ShopWrapper extends DialoguePiece {
     ShopSellPanel sell;
     final FullItemStorage storage;
     final Font font;
+    final GameContext context;
     public ShopWrapper(ShopDefinition definition, Font font, FullItemStorage storage, GameContext context, DialogueController controller) {
         super(CenterConstraint.CENTER, CenterConstraint.CENTER, new RelativeSizeConstraint(100), new RelativeSizeConstraint(100), controller); // this doesn't matter here
         buy = new ShopPanel(definition, font, storage, context, this);
-        sell = new ShopSellPanel(storage, font, this);
+        sell = new ShopSellPanel(storage, font, this, context);
         this.storage = storage;
         this.font = font;
+        this.context = context;
     }
     public void manage(DrawManager draw, boolean pressed) {
         switch (state) {
@@ -38,7 +40,7 @@ public class ShopWrapper extends DialoguePiece {
     }
     public void gotoSell() {
         state = State.SELL;
-        sell = new ShopSellPanel(storage, font, this);
+        sell = new ShopSellPanel(storage, font, this, context);
     }
     public void gotoBuy() {
         state = State.BUY;

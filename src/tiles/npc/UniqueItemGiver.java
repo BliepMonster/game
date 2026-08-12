@@ -24,4 +24,9 @@ public class UniqueItemGiver implements ItemGiver {
     public String getName() {
         return definition.name;
     }
+
+    @Override
+    public String getId() {
+        return definition.id;
+    }
 }
