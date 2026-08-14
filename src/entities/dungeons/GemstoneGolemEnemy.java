@@ -48,6 +48,7 @@ public class GemstoneGolemEnemy extends MeleeDungeonEnemy {
     @Override
     public void die(GameContext context) {
         super.die(context);
+        spawner.onMobDeath();
     }
 
     public Hitbox getHitbox() {
