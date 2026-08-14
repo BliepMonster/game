@@ -15,7 +15,7 @@ import java.awt.*;
 
 public class IronOrePart extends HittableResourceCreator {
     public static final HittableResourceDescription DESC = new HittableResourceDescription(
-            Game.TICKS_PER_SECOND*15,
+            Game.TICKS_PER_SECOND*34,
             ItemConstants.ITEM_IRON_ORE,
             1,
             SkillSet.SkillType.MINING,

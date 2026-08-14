@@ -18,7 +18,7 @@ public class GlowingMushroomTilePart extends ResourceCreator implements LightSou
             1,
             SkillSet.SkillType.FORAGING,
             StatHolder.Stat.FORAGING_YIELD,
-            1600
+            3200
     );
     public static final Texture TEXTURE = TextureIdMap.get("base:tiles:glowing_mushroom");
     public static final Texture SHADOW = TextureIdMap.get("base:tiles:gm_shadow");

@@ -16,7 +16,7 @@ import java.awt.*;
 
 public class MapleTreePart extends HittableResourceCreator {
     public static final HittableResourceDescription DESCRIPTION = new HittableResourceDescription(
-            Game.TICKS_PER_SECOND*5,
+            Game.TICKS_PER_SECOND*25,
             ItemConstants.ITEM_MAPLE_WOOD,
             2,
             SkillSet.SkillType.FORAGING,
@@ -39,6 +39,12 @@ public class MapleTreePart extends HittableResourceCreator {
             camera.addRenderJob(() -> camera.image(TEXTURE, x, y, 1, 2), -y);
         }
     }
+
+    @Override
+    public boolean allowStandingOnEmpty() {
+        return true;
+    }
+
     public void renderUnready(int x, int y, Camera camera) {}
 
     @Override

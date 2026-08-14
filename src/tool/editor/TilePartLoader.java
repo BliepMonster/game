@@ -37,6 +37,7 @@ public final class TilePartLoader {
     public static final String ID_COAL_ORE = "coal_ore";
     public static final String ID_COPPER_ORE = "copper_ore";
     public static final String ID_WHEAT = "wheat";
+    public static final String ID__LEFT_WHEAT = "wheat_l";
     public static final String ID_MAPLE_TREE = "tree_maple";
     public static final String ID_CARROTS = "carrots";
     public static final String ID_POTATOES = "potatoes";
@@ -101,6 +102,7 @@ public final class TilePartLoader {
             case ID_POTATOES -> new PotatoTilePart(pos);
             case ID_MAPLE_TREE -> new MapleTreePart(pos);
             case ID_WHEAT -> new WheatTilePart(pos);
+            case ID__LEFT_WHEAT -> new LeftWheatTilePart(pos);
             case ID_COPPER_ORE -> new CopperOrePart(pos);
             case ID_COAL_ORE -> new CoalOrePart(pos);
             case ID_CRAFTING_STATION -> new CraftingStationTilePart(pos);

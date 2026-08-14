@@ -13,7 +13,7 @@ public final class ResourceSellingRegistry {
         return v == null ? -1 : v;
     }
     static {
-        register(ItemConstants.ITEM_CARROT, 5);
+        register(ItemConstants.ITEM_CARROT, 3);
         register(ItemConstants.ITEM_COAL, 8);
         register(ItemConstants.ITEM_COPPER_BAR, 30);
         register(ItemConstants.ITEM_COPPER_ORE, 10);
@@ -22,8 +22,8 @@ public final class ResourceSellingRegistry {
         register(ItemConstants.ITEM_IRON_ORE, 15);
         register(ItemConstants.ITEM_IRON_BAR, 40);
         register(ItemConstants.ITEM_STEEL_BAR, 110);
-        register(ItemConstants.ITEM_WHEAT, 3);
-        register(ItemConstants.ITEM_POTATO, 6);
+        register(ItemConstants.ITEM_WHEAT, 2);
+        register(ItemConstants.ITEM_POTATO, 4);
         register(ItemConstants.ITEM_FLOUR, 35);
         register(ItemConstants.ITEM_BOWL, 12);
         register(ItemConstants.ITEM_GOLD_ORE, 55);

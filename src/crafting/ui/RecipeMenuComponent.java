@@ -20,6 +20,7 @@ public class RecipeMenuComponent extends Component {
     private final GameContext context;
     private final FullItemStorage storage;
     private final Font font;
+    private long lastClicked = 0;
     public RecipeMenuComponent(CraftingRecipe recipe, GameContext context, FullItemStorage storage, Font font) {
         super(CenterConstraint.CENTER, new RelativeYConstraint(-.7f), new RelativeSizeConstraint(1f), new RelativeSizeConstraint(1.2f));
         this.recipe = recipe;
@@ -40,12 +41,14 @@ public class RecipeMenuComponent extends Component {
         for (int i = 0; i < ireqs.length; ++i) {
             draw.string(ireqs[i].getRequirementName(), ireqs[i].isMet(storage) ? Color.white : Color.red, x, y+h-(preqs.length+i+1)*hh, font, fsize);
         }
-        draw.rect(recipe.canCraft(storage, context) ? Color.orange : Color.gray, x, y, w, .2f);
+        draw.rect(System.currentTimeMillis() - lastClicked < 50 ? Color.red : recipe.canCraft(storage, context) ? Color.orange : Color.gray, x, y, w, .2f);
     }
     public void detectClick(Screen screen, float x, float y) {
         if (isInBounds(screen, x, y)) {
-            if (y < -.5f && recipe.canCraft(storage, context))
+            if (y < -.5f && recipe.canCraft(storage, context)) {
                 recipe.craft(storage, context);
+                lastClicked = System.currentTimeMillis();
+            }
         }
     }
     public void detectContinuousPress(Screen screen, float x, float y) {}

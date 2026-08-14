@@ -23,6 +23,8 @@ public class DrawManager {
     protected static int textVAO;
     protected static int batchVAO;
     protected static int batchVBO;
+    protected static int polygonVAO;
+    protected static int polygonVBO;
     protected static int textPositionsVBO;
     protected static int textTexCoordsVBO;
     protected static int rectPositionVBO;
@@ -131,6 +133,14 @@ public class DrawManager {
         glVertexAttribPointer(2, 1, GL_FLOAT, false, 5 * Float.BYTES, 4 * Float.BYTES);
         glBindVertexArray(0);
 
+        polygonVAO = glGenVertexArrays();
+        polygonVBO = glGenBuffers();
+        glBindVertexArray(polygonVAO);
+        glBindBuffer(GL_ARRAY_BUFFER, polygonVBO);
+        glEnableVertexAttribArray(0);
+        glVertexAttribPointer(0, 2, GL_FLOAT, false, 0, 0);
+        glBindVertexArray(0);
+
         lastBoundVAO = -1;
     }
     public static void swapTexture(Texture texture) {
@@ -160,6 +170,8 @@ public class DrawManager {
         glDeleteBuffers(textTexCoordsVBO);
         glDeleteVertexArrays(batchVAO);
         glDeleteBuffers(batchVBO);
+        glDeleteVertexArrays(polygonVAO);
+        glDeleteBuffers(polygonVBO);
     }
     public static void storeDataInAttributeList(int attributeNumber, float[] data, int vboID) {
         GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, vboID);
@@ -207,6 +219,23 @@ public class DrawManager {
         swapTexture(null);
         plainColor.loadTexCoords(null, plainColor.texCoordsLocation);
         glDrawArrays(GL_TRIANGLES, 0, 6);
+        ++drawCalls;
+    }
+    public void polygon(final @NotNull Color color, final float[] verts) {
+        bindShader(plainColor);
+        applyLightLevel();
+        plainColor.loadColor(plainColor.colorLocation, color);
+        CACHE_MAT.identity();
+        plainColor.loadMatrix(plainColor.transformLocation, CACHE_MAT);
+        if (lastBoundVAO != polygonVAO) {
+            glBindVertexArray(polygonVAO);
+            lastBoundVAO = polygonVAO;
+        }
+        swapTexture(null);
+        plainColor.loadTexCoords(null, plainColor.texCoordsLocation);
+        glBindBuffer(GL_ARRAY_BUFFER, polygonVBO);
+        glBufferData(GL_ARRAY_BUFFER, storeDataInFloatBuffer(verts), GL_DYNAMIC_DRAW);
+        glDrawArrays(GL_TRIANGLES, 0, verts.length/2);
         ++drawCalls;
     }
     public void image(final Texture tex, float x, float y, float width, float height) {

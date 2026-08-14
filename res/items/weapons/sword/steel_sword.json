@@ -4,7 +4,7 @@
   "name": "Steel Sword",
   "texture": "base:item:steel_sword",
 
-  "knockback": 1.5,
+  "knockback": 1.9,
   "damage_type": "NORMAL",
   "stats": [],
   "melee_type": "cone",

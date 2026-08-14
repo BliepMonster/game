@@ -27,7 +27,7 @@ public enum EditorToolState {
     public void apply(Tile tile, CoordinateMap<Tile> map, int x, int y, World world, GameContext context) {
         switch (this) {
             case O1 -> {
-                map.put(x, y, new DefaultTile(TileType.get("FLOOR_PLANK")));
+                System.out.println(new Vector2f(x, y));
             }
             case O2 -> {
                 map.put(x, y, new DefaultTile(TileType.get("WATER")));
@@ -36,7 +36,7 @@ public enum EditorToolState {
                 map.put(x, y, new DefaultTile(TileType.get("GRASS_TAIGA")));
             }
             case O4 -> map.put(x, y, new DefaultTile(TileType.get("ROAD")));
-            case O5 -> tile.setPart(new PineTreePart(new Vector2f(x, y)));
+            case O5 -> tile.setPart(new LeftWheatTilePart(new Vector2f(x, y)));
             case O6 -> tile.setPart(null);
             case O7 -> map.put(x, y, new DefaultTile(TileType.get("GRASS")));
             case O8 -> {

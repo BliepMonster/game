@@ -81,4 +81,23 @@ public class Camera {
     public void flushBatch() {
         draw.flushLitBatch();
     }
+    public void cone(Color color, float cx, float cy, float size, float aim, float sweep, int segments) {
+        var verts = new float[(segments+1)*6];
+        float sx = (cx-player.getX())*tileSize;
+        float sy = (cy-player.getY())*tileSize;
+        float ss = size*tileSize;
+        float start = aim - sweep/2;
+        int idx = 0;
+        for (int k = 0; k < segments; ++k) {
+            float a0 = start + (sweep/segments)*k;
+            float a1 = start + (sweep/segments)*(k+1);
+            verts[idx++] = sx;
+            verts[idx++] = sy;
+            verts[idx++] = sx + (float)Math.cos(a0)*ss;
+            verts[idx++] = sy + (float)Math.sin(a0)*ss;
+            verts[idx++] = sx + (float)Math.cos(a1)*ss;
+            verts[idx++] = sy + (float)Math.sin(a1)*ss;
+        }
+        draw.polygon(color, verts);
+    }
 }

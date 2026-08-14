@@ -4,10 +4,13 @@ import engine.core.Texture;
 import entities.DamageType;
 import entities.Entity;
 import entities.Player;
+import entities.particles.SwingConeEffect;
 import main.GameContext;
 import org.joml.Vector2f;
 import stats.StatHolder;
 import stats.inventory.items.Item;
+import stats.inventory.items.ItemUseResult;
+import tiles.Tile;
 
 public class ConeWeaponDefinition extends MeleeWeaponItemDefinition {
     private final StatHolder stats;
@@ -34,6 +37,14 @@ public class ConeWeaponDefinition extends MeleeWeaponItemDefinition {
                 || canHit(CACHE.set(entity.getX()+entity.getWidth(), entity.getY()), direction, player)
                 || canHit(CACHE.set(entity.getX(), entity.getY()+entity.getHeight()), direction, player)
                 || canHit(CACHE.set(entity.getX()+entity.getWidth(), entity.getY()+entity.getHeight()), direction, player);
+    }
+
+    @Override
+    public ItemUseResult use(Tile tile, Item item, GameContext context, Vector2f worldPos) {
+        var v = super.use(tile, item, context, worldPos);
+        var player = context.getPlayer();
+        context.spawn(new SwingConeEffect(new Vector2f(player.getX(), player.getY()), 6, this.size, (float)Math.atan2(worldPos.y-player.getY(), worldPos.x-player.getX()), this.angle));
+        return v;
     }
 
     @Override

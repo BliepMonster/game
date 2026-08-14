@@ -4,12 +4,12 @@
   "name": "Iron Sword",
   "texture": "base:item:iron_sword",
 
-  "knockback": 1.5,
+  "knockback": 1.8,
   "damage_type": "NORMAL",
   "stats": [],
   "melee_type": "cone",
   "damage": 40,
-  "cooldown": 28,
+  "cooldown": 30,
 
   "range": 5,
   "angle": 20

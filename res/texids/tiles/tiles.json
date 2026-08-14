@@ -16,8 +16,11 @@
   "base:tiles:taiga_grass": "res/textures/tiles/taiga_grass.png",
   "base:tiles:water": "res/textures/tiles/water.png",
   "base:tiles:pine_tree": "res/textures/tiles/tree_taiga.png",
+  "base:tiles:pine_tree_overlay": "res/textures/tiles/tree_taiga_white.png",
   "base:tiles:silver_ore": "res/textures/tiles/silver_ore.png",
   "base:tiles:garden_pot": "res/textures/tiles/garden_pot.png",
   "base:tiles:seed_maker": "res/textures/tiles/seed_maker.png",
-  "base:tiles:restaurant_empty": "res/textures/tiles/restaurant_empty.png"
+  "base:tiles:restaurant_empty": "res/textures/tiles/restaurant_empty.png",
+  "base:tiles:wheat": "res/textures/tiles/wheat.png",
+  "base:tiles:wheat_left": "res/textures/tiles/wheat_left.png"
 }

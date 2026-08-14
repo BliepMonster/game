@@ -81,11 +81,11 @@ public class MainMenu {
                 System.out.println("clicked");
                 var file = new TokenizedSaveFile();
                 try {
-                    file.readAndOverride(new FileReader(s+".save"));
+                    file.readAndOverride(new FileReader("saves/"+s+".save"));
                 } catch (FileNotFoundException e) {
                     throw new RuntimeException(e);
                 }
-                Main.open(file, s+".save");
+                Main.open(file, "saved/"+s+".save");
                 Main.state = Main.State.ONGOING;
             }
         }
@@ -95,8 +95,8 @@ public class MainMenu {
         filenames.clear();
         try (var paths = Files.walk(Path.of("saves"))) {
             paths.filter(Files::isRegularFile)
-                    .map(path -> path.toString().substring(0, path.toString().length() - 5))
-                    .forEach(str -> filenames.add(str));
+                    .map(path -> path.toString().substring(6, path.toString().length() - 5))
+                    .forEach(filenames::add);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

@@ -16,7 +16,7 @@ import java.awt.*;
 
 public class GoldOrePart extends HittableResourceCreator implements LightSource {
     public static final HittableResourceDescription DEFINITION = new HittableResourceDescription(
-            /*respawn*/ Game.TICKS_PER_SECOND*50,
+            /*respawn*/ Game.TICKS_PER_SECOND*70,
             /*id*/ ItemConstants.ITEM_GOLD_ORE,
             /*yield*/ 1,
             /*skill*/ SkillSet.SkillType.MINING,

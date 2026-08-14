@@ -15,7 +15,7 @@ import java.awt.*;
 
 public class RubyGemstoneTilePart extends HittableResourceCreator implements LightSource {
     public static final HittableResourceDescription DESC = new HittableResourceDescription(
-            Game.TICKS_PER_SECOND*120,
+            Game.TICKS_PER_SECOND*100,
             "Ruby",
             2,
             SkillSet.SkillType.MINING,

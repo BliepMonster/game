@@ -28,7 +28,7 @@ public class PineTreePart extends HittableResourceCreator {
         map2.put("Cucumber Seeds", 1);
         var table = new LootTable(new LootPiece(LootType.UNCOMMON, new LootReward(0, new ItemDefinition[0], map)), new LootPiece(LootType.RARE, new LootReward(0, new ItemDefinition[0], map2)));
         DESCRIPTION = new HittableResourceDescription(
-                Game.TICKS_PER_SECOND*15,
+                Game.TICKS_PER_SECOND*45,
                 "Pine Wood",
                 2,
                 SkillSet.SkillType.FORAGING,
@@ -46,13 +46,18 @@ public class PineTreePart extends HittableResourceCreator {
         super(DESCRIPTION, position);
     }
     public static final Texture TEXTURE = TextureIdMap.get("base:tiles:pine_tree");
-    public static final Texture OUTLINE = new Texture("res/maple_tree_outline.png");
+    public static final Texture OUTLINE = TextureIdMap.get("base:tiles:pine_tree_overlay");
     public void renderReady(int lastHitTick, boolean wasSuccessful, int x, int y, float remainingHealth, Camera camera) {
         if (Game.getTickCount() - lastHitTick <= 5) {
             camera.addRenderJob(() -> camera.tintedImage(OUTLINE, wasSuccessful ? Color.red : Color.orange, x, y, 1, 2), -y);
         } else {
             camera.addRenderJob(() -> camera.image(TEXTURE, x-.5f, y, 2, 4.5f), -y);
         }
+    }
+
+    @Override
+    public boolean allowStandingOnEmpty() {
+        return true;
     }
     public void renderUnready(int x, int y, Camera camera) {}
 

@@ -15,7 +15,7 @@ import java.awt.*;
 
 public class CopperOrePart extends HittableResourceCreator {
     public static final HittableResourceDescription DESC = new HittableResourceDescription(
-            Game.TICKS_PER_SECOND*12,
+            Game.TICKS_PER_SECOND*25,
             ItemConstants.ITEM_COPPER_ORE,
             1,
             SkillSet.SkillType.MINING,

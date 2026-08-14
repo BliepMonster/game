@@ -4,12 +4,12 @@
   "name": "Copper Sword",
   "texture": "base:item:copper_sword",
 
-  "knockback": 1.5,
+  "knockback": 1.7,
   "damage_type": "NORMAL",
   "stats": [],
   "melee_type": "cone",
   "damage": 35,
-  "cooldown": 26,
+  "cooldown": 30,
 
   "range": 5,
   "angle": 20

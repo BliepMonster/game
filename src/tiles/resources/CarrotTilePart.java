@@ -17,7 +17,11 @@ import static java.awt.Color.*;
 
 public class CarrotTilePart extends CropTilePart {
     public static final Color UNREADY = new Color(150, 240, 130);
-    public static final ResourceDefinition DEFINITION = new ResourceDefinition(ItemConstants.ITEM_CARROT, 5, 3, SkillSet.SkillType.FARMING, StatHolder.Stat.FARMING_YIELD, Game.TICKS_PER_SECOND*20);
+    public static final ResourceDefinition DEFINITION = new ResourceDefinition(
+            ItemConstants.ITEM_CARROT,
+            5,
+            2,
+            SkillSet.SkillType.FARMING, StatHolder.Stat.FARMING_YIELD, Game.TICKS_PER_SECOND*90);
     public CarrotTilePart(Vector2f position) {
         super(DEFINITION, position);
     }

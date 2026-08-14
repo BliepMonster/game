@@ -21,6 +21,7 @@ public abstract class HittableResourceCreator extends TilePart implements JobAct
     private int lastHitTick = -20;
     private boolean wasLastHitValid = true;
     private int health;
+    private int lastTickRespawned = -100;
     public HittableResourceCreator(HittableResourceDescription description, Vector2f position) {
         super(position);
         this.description = description;
@@ -35,10 +36,17 @@ public abstract class HittableResourceCreator extends TilePart implements JobAct
         else renderUnready(x, y, camera);
     }
     public boolean isStandable() {
-        return description.standable();
+        return (this.allowStandingOnEmpty() && health == 0) || description.standable();
     }
-    public void onStand(GameContext context) {}
+    public void onStand(GameContext context) {
+        if (!isStandable() && allowStandingOnEmpty() && Game.getTickCount()-lastTickRespawned < 5) {
+            context.movePlayer(context.getWorld(), new Vector2f(this.position.x, this.position.y+1));
+        }
+    }
 
+    public boolean allowStandingOnEmpty() {
+        return false;
+    }
     // logic lives in item definition
     public void onClick(GameContext context) {
         wasLastHitValid = false;
@@ -79,6 +87,7 @@ public abstract class HittableResourceCreator extends TilePart implements JobAct
     }
     public void notify(Job job) {
         health = description.health();
+        lastTickRespawned = Game.getTickCount();
     }
     private void spawnJob() {
         JobSystem.addJob(new ResourceJob(this, (float) description.respawnTicks()/Game.TICKS_PER_SECOND));

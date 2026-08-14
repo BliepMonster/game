@@ -13,6 +13,8 @@ import entities.Entity;
 import org.jetbrains.annotations.NotNull;
 import org.joml.Vector2f;
 import tiles.*;
+import tiles.resources.CoalOrePart;
+import tiles.resources.IronOrePart;
 import tool.editor.EditorToolState;
 import tool.editor.JSONLoader;
 
@@ -115,6 +117,7 @@ public class World {
         }
     }
     public static final Color OVERLAY = new Color(0, 0, 0, .5f);
+    public static final Color OVERLAY_RED = new Color(1, 0, 0, .5f);
     public void render(Game game, Camera camera, float tsize) {
         var bounds = map.getBounds();
         var minX = bounds.x;
@@ -158,7 +161,8 @@ public class World {
         var vec = player.getFacingPosition(new Vector2f(Input.getMouseX(screen)/tsize+player.getX(), Input.getMouseY(screen)/tsize+player.getY()));
         vec.x = (int) Math.floor(vec.x);
         vec.y = (int) Math.floor(vec.y);
-        camera.addRenderJob(() -> camera.rect(OVERLAY, vec.x, vec.y, 1, 1), 40000);
+        var part = map.get((int) vec.x, (int)vec.y).orElse(new DefaultTile(TileType.get("GRASS"))).getPart();
+        camera.addRenderJob(() -> camera.rect(part instanceof CoalOrePart || part instanceof IronOrePart ? OVERLAY_RED : OVERLAY, vec.x, vec.y, 1, 1), 40000);
     }
     public void spawn(Entity entity) {
         this.toAdd.add(entity);

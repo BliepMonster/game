@@ -4,12 +4,12 @@
   "name": "Broken Sword",
   "texture": "base:item:broken_sword",
 
-  "knockback": 1.5,
+  "knockback": 1.6,
   "damage_type": "NORMAL",
   "stats": [],
   "melee_type": "cone",
   "damage": 30,
-  "cooldown": 24,
+  "cooldown": 30,
 
   "range": 5,
   "angle": 20
