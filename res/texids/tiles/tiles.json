@@ -17,5 +17,7 @@
   "base:tiles:water": "res/textures/tiles/water.png",
   "base:tiles:pine_tree": "res/textures/tiles/tree_taiga.png",
   "base:tiles:silver_ore": "res/textures/tiles/silver_ore.png",
-  "base:tiles:garden_pot": "res/textures/tiles/garden_pot.png"
+  "base:tiles:garden_pot": "res/textures/tiles/garden_pot.png",
+  "base:tiles:seed_maker": "res/textures/tiles/seed_maker.png",
+  "base:tiles:restaurant_empty": "res/textures/tiles/restaurant_empty.png"
 }

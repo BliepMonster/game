@@ -16,5 +16,6 @@ public class AbilityRegistry {
         registry.put("scroll_table", new ScrollTablePlacerAbility());
         registry.put("polisher", new PolisherPlacerAbility());
         registry.put("garden_pot", new GardenPotPlacerAbility());
+        registry.put("seed_maker", new SeedMakerPlacerAbility());
     }
 }

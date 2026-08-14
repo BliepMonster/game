@@ -20,6 +20,10 @@ public class InventoryGridComponent extends Component {
             if (inventory) return player.items.get(slot);
             return player.items.getEquipment(EquipmentSlot.values()[slot]);
         }
+        public boolean canSet(Item item) {
+            if (!inventory && item != null) return item.definition.getEquipmentSlot().ordinal() == slot;
+            return true;
+        }
         public void set(Player player, Item item) {
             if (inventory) player.items.set(slot, item);
             else player.items.setEquipment(EquipmentSlot.values()[slot], item);
@@ -149,6 +153,10 @@ public class InventoryGridComponent extends Component {
         if (this.selectedSlot == null && player.items.get(index) != null) {
             selectedSlot = new SelectedItem(true, index);
         } else if (this.selectedSlot == null) {} else {
+            if (!selectedSlot.canSet(player.items.get(index))) {
+                selectedSlot = null;
+                return;
+            }
             var item = selectedSlot.get(player);
             selectedSlot.set(player, player.items.get(index));
             player.items.set(index, item);

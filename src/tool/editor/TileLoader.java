@@ -11,11 +11,17 @@ public class TileLoader {
         return switch (type) {
             case "default" -> loadDefault(obj);
             case "over" -> loadOver(obj);
+            case "wall" -> new WallTile(loadDefault(obj).type);
+            case "dual" -> new DualTile(
+                    load((JsonObject) obj.values.get("a")),
+                    load((JsonObject) obj.values.get("b")),
+                    ((JsonString) obj.values.get("attrib")).value
+            );
             default -> throw new RuntimeException("Unknown tile type: " + type);
         };
     }
 
-    private static Tile loadDefault(JsonObject obj) {
+    private static DefaultTile loadDefault(JsonObject obj) {
         String key = ((JsonString) obj.values.get("key")).value;
         return new DefaultTile(TileType.get(key)); // or however you instantiate
     }

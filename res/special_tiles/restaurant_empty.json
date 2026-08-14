@@ -1,0 +1,31 @@
+{
+  "type": "texture_adapt",
+  "standable": false,
+  "ids": [
+    "base:tiles:restaurant_empty11",
+    "base:tiles:restaurant_empty21",
+    "base:tiles:restaurant_empty31",
+    "base:tiles:restaurant_empty41",
+    "base:tiles:restaurant_empty51",
+    "base:tiles:restaurant_empty12",
+    "base:tiles:restaurant_empty22",
+    "base:tiles:restaurant_empty32",
+    "base:tiles:restaurant_empty42",
+    "base:tiles:restaurant_empty52",
+    "base:tiles:restaurant_empty13",
+    "base:tiles:restaurant_empty23",
+    "base:tiles:restaurant_empty33",
+    "base:tiles:restaurant_empty43",
+    "base:tiles:restaurant_empty53",
+    "base:tiles:restaurant_empty14",
+    "base:tiles:restaurant_empty24",
+    "base:tiles:restaurant_empty34",
+    "base:tiles:restaurant_empty44",
+    "base:tiles:restaurant_empty54",
+    "base:tiles:restaurant_empty15",
+    "base:tiles:restaurant_empty25",
+    "base:tiles:restaurant_empty35",
+    "base:tiles:restaurant_empty45",
+    "base:tiles:restaurant_empty55"
+  ]
+}

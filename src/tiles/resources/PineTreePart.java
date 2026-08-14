@@ -24,7 +24,9 @@ public class PineTreePart extends HittableResourceCreator {
     static {
         HashMap<String, Integer> map = new HashMap<>();
         map.put("Pine Resin", 1);
-        var table = new LootTable(new LootPiece(LootType.UNCOMMON, new LootReward(0, new ItemDefinition[0], map)));
+        HashMap<String, Integer> map2 = new HashMap<>();
+        map2.put("Cucumber Seeds", 1);
+        var table = new LootTable(new LootPiece(LootType.UNCOMMON, new LootReward(0, new ItemDefinition[0], map)), new LootPiece(LootType.RARE, new LootReward(0, new ItemDefinition[0], map2)));
         DESCRIPTION = new HittableResourceDescription(
                 Game.TICKS_PER_SECOND*15,
                 "Pine Wood",

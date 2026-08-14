@@ -45,7 +45,7 @@ public class GardenPotTilePart extends TilePart {
             player.items.add(new Item(item));
         }
         var map = (HashMap<String, Integer>) gdrops.loot.clone();
-        map.replaceAll((k, v) -> (int) (YieldUtils.getYieldEffect(v, player.stats.get(StatHolder.Stat.FARMING_YIELD)) * (crop.compost() == null ? 1 : crop.compost().yieldMultiplier())));
+        map.replaceAll((k, v) -> YieldUtils.getYieldEffect(YieldUtils.getYieldEffect(v, player.stats.get(StatHolder.Stat.FARMING_YIELD)), (crop.compost() == null ? 1 : crop.compost().yieldMultiplier()*100-100)));
         player.inventory.apply(map);
         player.currency.get(gdrops.coins);
         player.skills.get(SkillSet.SkillType.FARMING).getXP(crop.type().exp());

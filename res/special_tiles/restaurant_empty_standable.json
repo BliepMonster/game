@@ -1,0 +1,21 @@
+{
+  "type": "texture_adapt",
+  "ids": [
+    "base:tiles:restaurant_empty16",
+    "base:tiles:restaurant_empty26",
+    "base:tiles:restaurant_empty36",
+    "base:tiles:restaurant_empty46",
+    "base:tiles:restaurant_empty56",
+    "base:tiles:restaurant_empty17",
+    "base:tiles:restaurant_empty27",
+    "base:tiles:restaurant_empty37",
+    "base:tiles:restaurant_empty47",
+    "base:tiles:restaurant_empty57",
+    "base:tiles:restaurant_empty18",
+    "base:tiles:restaurant_empty28",
+    "base:tiles:restaurant_empty38",
+    "base:tiles:restaurant_empty48",
+    "base:tiles:restaurant_empty58"
+  ],
+  "standable": true
+}

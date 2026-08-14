@@ -38,7 +38,7 @@ public enum EditorToolState {
             case O4 -> map.put(x, y, new DefaultTile(TileType.get("ROAD")));
             case O5 -> tile.setPart(new PineTreePart(new Vector2f(x, y)));
             case O6 -> tile.setPart(null);
-            case O7 -> map.put(x, y, new DefaultTile(TileType.get("DIRT_PATH")));
+            case O7 -> map.put(x, y, new DefaultTile(TileType.get("GRASS")));
             case O8 -> {
                 if (Game.getTickCount()-lastTick < 20) return;
                 try {

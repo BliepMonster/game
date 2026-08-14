@@ -1,0 +1,9 @@
+{
+  "type": "ability",
+  "id": "base:placers:seed_maker",
+  "name": "Seed Maker",
+  "texture": "base:item:seed_maker",
+  "ability": "seed_maker",
+  "cooldown": 1,
+  "stats": []
+}

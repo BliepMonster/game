@@ -11,7 +11,7 @@ import engine.gui.constraints.size.RelativeSizeConstraint;
 import static java.awt.Color.*;
 
 public class ShopSellPageSelectorBar extends Component {
-    private final int max;
+    private int max;
     private int current;
     private final Font font;
     private final ShopSellPanel callback;
@@ -21,6 +21,9 @@ public class ShopSellPageSelectorBar extends Component {
         this.callback = callback;
         this.max = callback.sellable.size()/5;
         this.current = 0;
+    }
+    public void updateMax() {
+        this.max = callback.sellable.size()/5;
     }
     public void display(DrawManager draw, float x, float y, float w, float h) {
         var pos = -.4f;

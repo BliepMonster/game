@@ -18,8 +18,8 @@ public class CraftingMenuPage extends Component {
     public final FullItemStorage storage;
     public final GameContext context;
     public final Font font;
-    public final CraftingPanel callbackPanel;
-    public CraftingMenuPage(List<CraftingRecipe> recipes, int index, FullItemStorage storage, GameContext context, Font font, CraftingPanel panel) {
+    public final CraftingMenuComponent callbackPanel;
+    public CraftingMenuPage(List<CraftingRecipe> recipes, int index, FullItemStorage storage, GameContext context, Font font, CraftingMenuComponent panel) {
         super(CenterConstraint.CENTER, CenterConstraint.CENTER, new RelativeSizeConstraint(1), new RelativeSizeConstraint(1));
         var recipesA = new CraftingRecipe[Math.min(5, recipes.size() - index)];
         for (int i = 0; i < recipesA.length; ++i) {
@@ -45,11 +45,12 @@ public class CraftingMenuPage extends Component {
         }
     }
     public void detectClick(Screen screen, float x, float y) {
+        if (callbackPanel.opened > System.currentTimeMillis()-200) return;
         if (isInBounds(screen, x, y)) {
             int index = (int) ((0.5-y) / UNIT_SIZE);
             if (index >= recipes.length) return;
             var recipe = recipes[index];
-            callbackPanel.select(recipe);
+            callbackPanel.panel.select(recipe);
         }
     }
     public void detectContinuousPress(Screen screen, float x, float y) {}

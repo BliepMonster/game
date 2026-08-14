@@ -1,0 +1,19 @@
+{
+  "name": "Cucumber",
+
+  "inputs": [
+    {
+      "type": "resource",
+      "id": "Cucumber",
+      "amount": 1
+    }
+  ],
+
+  "outputs": [
+    {
+      "type": "resource",
+      "id": "Cucumber Seeds",
+      "amount": 2
+    }
+  ]
+}

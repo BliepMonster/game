@@ -13,7 +13,7 @@ import main.GameContext;
 
 public class ShopSellPage extends Component {
     private final ShopSellEntry[] entries;
-    public ShopSellPage(ShopSellPanel.Entry[] entries, Font font, FullItemStorage storage, GameContext context) {
+    public ShopSellPage(ShopSellPanel.Entry[] entries, Font font, FullItemStorage storage, GameContext context, ShopSellPanel owner) {
         super(new CenterConstraint(), new RelativeYConstraint(-.4f), new RelativeSizeConstraint(1), new RelativeSizeConstraint(1));
         this.entries = new ShopSellEntry[entries.length];
         for (int i = 0; i < entries.length; ++i) {
@@ -22,7 +22,8 @@ public class ShopSellPage extends Component {
                     font,
                     i,
                     storage,
-                    context
+                    context,
+                    owner
             );
         }
     }

@@ -5,7 +5,7 @@ import main.Camera;
 import main.GameContext;
 
 public class DefaultTile extends Tile {
-    private final TileType type;
+    public final TileType type;
     public DefaultTile(TileType type) {
         this.type = type;
     }

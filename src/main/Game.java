@@ -41,6 +41,7 @@ public class Game implements GameContext {
         if (save.home().home() != null)
             WorldRegistry.put("HOUSE", save.home().home());
         camera.addLight(player);
+        this.attributes = new AttributeData(save.attributes());
     }
     public Game(DrawManager draw, float tsize, SavedGame save) {
         player = new Player(save.player());
@@ -51,6 +52,7 @@ public class Game implements GameContext {
         if (save.home().home() != null)
             WorldRegistry.put("HOUSE", save.home().home());
         camera.addLight(player);
+        this.attributes = new AttributeData(save.attributes());
     }
     public void tick(boolean pressed, Screen screen, float tsize, boolean canClick) {
         ++ticks;
@@ -88,7 +90,8 @@ public class Game implements GameContext {
         return new SavedGame(
                 PlayerSaver.savePlayer(player),
                 new SavedHome(WorldRegistry.get("HOUSE")),
-                quests.save()
+                quests.save(),
+                attributes.save()
         );
     }
     public void movePlayer(World world, Vector2f position) {
@@ -96,9 +99,15 @@ public class Game implements GameContext {
         world.load(camera);
         player.getPosition().set(position);
     }
+    public final AttributeData attributes;
 
     @Override
     public World getWorld() {
         return world;
+    }
+
+    @Override
+    public AttributeData attributes() {
+        return attributes;
     }
 }

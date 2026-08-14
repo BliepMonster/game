@@ -105,14 +105,11 @@ public class TextMesh extends Mesh {
         if (other == null) return false;
         if (other == this) return true;
         if (!(other instanceof TextMesh)) return false;
-        if (!super.equals(other)) return false;
-        var otherCast = (TextMesh) other;
-        return true;
+        return super.equals(other);
     }
 
     @Override
     public int hashCode() {
-        int result = super.hashCode();
-        return result;
+        return super.hashCode();
     }
 }

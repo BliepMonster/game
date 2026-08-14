@@ -21,6 +21,7 @@ public class CraftingMenuComponent extends Component {
     public final CraftingPanel panel;
     public final Font font;
     public int lp = 0;
+    public final long opened;
     private final CraftingMenuSelectorBar selectorBar;
     private CraftingMenuPage page;
     public CraftingMenuComponent(List<CraftingRecipe> recipes, FullItemStorage storage, GameContext context, CraftingPanel panel, Font font) {
@@ -31,6 +32,7 @@ public class CraftingMenuComponent extends Component {
         this.panel = panel;
         this.font = font;
         this.selectorBar = new CraftingMenuSelectorBar(font, this);
+        this.opened = System.currentTimeMillis();
         switchPage(0);
     }
     public void manage(DrawManager draw, boolean pressed) {
@@ -46,6 +48,6 @@ public class CraftingMenuComponent extends Component {
     public void switchPage(int page) {
         if (page > recipes.size()/5 || page < 0) return;
         lp = page;
-        this.page = new CraftingMenuPage(recipes, lp * 5, storage, context, font, panel);
+        this.page = new CraftingMenuPage(recipes, lp * 5, storage, context, font, this);
     }
 }

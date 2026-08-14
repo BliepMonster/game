@@ -41,6 +41,8 @@ public class ShopSellPanel extends Component {
         this.bar = new ShopSellPageSelectorBar(font, this);
     }
     public void selectPage(int page) {
+        if (page > this.sellable.size()/5)
+            return;
         lp = page;
         this.sellable = new ArrayList<>();
         for (var entry : storage.storage) {
@@ -57,7 +59,8 @@ public class ShopSellPanel extends Component {
                 entries,
                 font,
                 storage,
-                context
+                context,
+                this
         );
     }
     public void manage(DrawManager draw, boolean pressed) {
@@ -65,6 +68,10 @@ public class ShopSellPanel extends Component {
         page.manage(draw, pressed);
         close.manage(draw, pressed);
         bar.manage(draw, pressed);
+    }
+    public void reload() {
+        selectPage(this.lp);
+        bar.updateMax();
     }
     public void display(DrawManager draw, float x, float y, float w, float h) {
         draw.rect(Color.gray, x, y, w, h);

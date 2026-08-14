@@ -81,7 +81,7 @@ public class CropSelectionComponent extends Component {
 
                     // Plant seed and deduct inventory
                     owner.owner.plant(selectedCrop);
-                    owner.context.getPlayer().inventory.add(selectedCrop.seedType(), -1);
+                    owner.context.getPlayer().inventory.spend(selectedCrop.seedType(), 1);
 
                     // Return to main pot UI
                     owner.isSelf = true;

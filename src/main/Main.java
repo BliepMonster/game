@@ -212,17 +212,25 @@ public class Main {
         CraftingStationTilePart.setDefaultFont(font);
 
         while (screen.update()) {
-            final var events = console.input.events.get();
+            try {
+                final var events = console.input.events.get();
 
-            if (state == State.ONGOING) {
-                if (!tick(events, screen, console, tickRate)) break;
-            } else if (state == State.MAIN_MENU) MainMenu.tick(draw);
-            else if (state == State.LOAD_WORLD) MainMenu.tickLoadingWorldMenu(draw, console);
+                if (state == State.ONGOING) {
+                    if (!tick(events, screen, console, tickRate)) break;
+                } else if (state == State.MAIN_MENU) MainMenu.tick(draw);
+                else if (state == State.LOAD_WORLD) MainMenu.tickLoadingWorldMenu(draw, console);
 
-            NotificationSystem.tick();
+                NotificationSystem.tick();
 
-            console.input.events.clear();
-            screen.display();
+                console.input.events.clear();
+                screen.display();
+            } catch (Throwable t) {
+                t.printStackTrace();
+                if (DEBUG_MODE)
+                    JSONSaver.save(game.world, game.world.map).write(new FileWriter(game.world.address));
+                game.save().save().writeToFile(new FileWriter(Main.filename.substring(0, Main.filename.length()-5)+"_crash.save"));
+                return;
+            }
         }
         if (DEBUG_MODE)
             JSONSaver.save(game.world, game.world.map).write(new FileWriter(game.world.address));
