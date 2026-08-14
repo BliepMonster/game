@@ -21,6 +21,7 @@
     "res/recipes/pine/pine_helmet_recipe.json",
     "res/recipes/pine/pine_ring_recipe.json",
     "res/recipes/placers/garden_pot_recipe.json",
-    "res/recipes/placers/seed_maker_recipe.json"
+    "res/recipes/placers/seed_maker_recipe.json",
+    "res/recipes/placers/anvil_recipe.json"
   ]
 }

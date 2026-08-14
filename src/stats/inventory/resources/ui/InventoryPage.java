@@ -29,7 +29,8 @@ public class InventoryPage extends Component {
     }
     public void manage(DrawManager draw, boolean pressed) {
         super.manage(draw, pressed);
-        for (InventoryItemComponent item : items) {
+        for (int i = items.length-1; i >= 0; --i) {
+            var item = items[i];
             if (item == null) continue;
             item.manage(draw, pressed);
         }

@@ -11,6 +11,6 @@
   "damage": 35,
   "cooldown": 30,
 
-  "range": 5,
-  "angle": 20
+  "range": 4.5,
+  "angle": 23
 }

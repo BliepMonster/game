@@ -404,10 +404,6 @@ public class DrawManager {
         litColor = new Shader(litVertexName, litColorFragName);
     }
     public static final float SIZE_PER_FONT_SIZE = .01f;
-    public static final float DEMO_WIDTH = 22;
-    public static final float DEMO_HEIGHT = 54;
-    public static final float DEMO_X_ADVANCE = 28;
-    public static final float NEW_LINE = 70;
 
     public void string(String text, Color color, float x, float y, Font font, float size) {
         paragraph(text, color, x, y, font, size, 1000000);
@@ -446,7 +442,7 @@ public class DrawManager {
             char c = text.charAt(i);
             if (c == '\n') {
                 xPosition = 0;
-                yPosition -= SIZE_PER_FONT_SIZE*size*NEW_LINE;
+                yPosition -= SIZE_PER_FONT_SIZE*size*font.getLineHeight();
                 continue;
             }
             float glyphX;
@@ -458,7 +454,7 @@ public class DrawManager {
             float xAdvance;
             float xOffset;
             float yOffset;
-            float demoHeight = DEMO_HEIGHT*SIZE_PER_FONT_SIZE*size;
+            float demoHeight = font.getBase()*SIZE_PER_FONT_SIZE*size;
             if ((glyph = font.get(c)) != null) {
                 glyphX = glyph.getX();
                 glyphY = glyph.getY();
@@ -474,9 +470,9 @@ public class DrawManager {
                 glyphY = 1000;
                 absoluteHeight = 2;
                 absoluteWidth = 2;
-                width = DEMO_WIDTH*SIZE_PER_FONT_SIZE*size;
+                width = font.getAverageWidth()*SIZE_PER_FONT_SIZE*size;
                 height = demoHeight;
-                xAdvance = DEMO_X_ADVANCE*SIZE_PER_FONT_SIZE*size;
+                xAdvance = font.getAverageXAdvance()*SIZE_PER_FONT_SIZE*size;
                 xOffset = 0;
                 yOffset = 0;
             }
@@ -512,7 +508,7 @@ public class DrawManager {
             xPosition += xAdvance;
             if (xPosition >= paragraphWidthLimit) {
                 xPosition = 0;
-                yPosition -= SIZE_PER_FONT_SIZE*size*NEW_LINE;
+                yPosition -= SIZE_PER_FONT_SIZE*size*font.getLineHeight();
             }
         }
         if (lastBoundVAO != textVAO) {

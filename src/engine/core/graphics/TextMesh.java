@@ -17,7 +17,7 @@ public class TextMesh extends Mesh {
         for (char c : text.toCharArray()) {
             if (c == '\n') {
                 xPosition = 0;
-                yPosition -= SIZE_PER_FONT_SIZE*size*NEW_LINE;
+                yPosition -= SIZE_PER_FONT_SIZE*size*font.getLineHeight();
                 continue;
             }
             float[] positions = new float[12];
@@ -32,7 +32,7 @@ public class TextMesh extends Mesh {
             float xAdvance;
             float xOffset;
             float yOffset;
-            float demoHeight = DEMO_HEIGHT*SIZE_PER_FONT_SIZE*size;
+            float demoHeight = font.getBase()*SIZE_PER_FONT_SIZE*size;
             if ((glyph = font.get(c)) != null) {
                 glyphX = glyph.getX();
                 glyphY = glyph.getY();
@@ -48,9 +48,9 @@ public class TextMesh extends Mesh {
                 glyphY = 1000;
                 absoluteHeight = 2;
                 absoluteWidth = 2;
-                width = DEMO_WIDTH*SIZE_PER_FONT_SIZE*size;
+                width = font.getAverageWidth()*SIZE_PER_FONT_SIZE*size;
                 height = demoHeight;
-                xAdvance = DEMO_X_ADVANCE*SIZE_PER_FONT_SIZE*size;
+                xAdvance = font.getAverageXAdvance()*SIZE_PER_FONT_SIZE*size;
                 xOffset = 0;
                 yOffset = 0;
             }
@@ -82,7 +82,7 @@ public class TextMesh extends Mesh {
             xPosition += xAdvance;
             if (xPosition >= 100*paragraphWidthLimit) {
                 xPosition = 0;
-                yPosition -= SIZE_PER_FONT_SIZE*size*NEW_LINE;
+                yPosition -= SIZE_PER_FONT_SIZE*size*font.getLineHeight();
             }
             quads.add(positions);
             texQuads.add(texCoords);

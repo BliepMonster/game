@@ -41,7 +41,6 @@ public abstract class MeleeWeaponItemDefinition extends ItemDefinition {
         if (ticks-lastUse < cooldownTicks) return new ItemUseResult(Optional.of(item), false);
         lastUse = ticks;
         var entities = context.getEntities();
-        boolean used = false;
         var stats = context.getPlayer().stats;
         for (var entity : entities) {
             if (entity.isAttackable() && canHit(entity, worldPos, context)) {
@@ -60,10 +59,9 @@ public abstract class MeleeWeaponItemDefinition extends ItemDefinition {
                         (float)Math.sin(angle)
                 );
                 entity.knock(result, stats.get(StatHolder.Stat.KNOCKBACK)*(float)(Math.random()/5+0.9));
-                used = true;
             }
         }
-        return new ItemUseResult(Optional.of(item), used);
+        return new ItemUseResult(Optional.of(item), true);
     }
 
     @Override
