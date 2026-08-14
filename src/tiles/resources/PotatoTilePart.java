@@ -1,10 +1,12 @@
 package tiles.resources;
 
 import engine.core.DrawManager;
+import engine.core.Texture;
 import engine.json.JsonString;
 import engine.json.JsonValue;
 import main.Camera;
 import main.Game;
+import main.TextureIdMap;
 import org.joml.Vector2f;
 import main.ItemConstants;
 import stats.StatHolder;
@@ -16,7 +18,8 @@ import java.awt.*;
 import static java.awt.Color.*;
 
 public class PotatoTilePart extends CropTilePart {
-    public static final Color UNREADY = new Color(150, 240, 130);
+    public static final Texture UNREADY = TextureIdMap.get("base:tiles:potato_unready");
+    public static final Texture TEX = TextureIdMap.get("base:tiles:potato");
     public static final ResourceDefinition DEFINITION = new ResourceDefinition(
             ItemConstants.ITEM_POTATO,
             7, 2,
@@ -29,11 +32,10 @@ public class PotatoTilePart extends CropTilePart {
         return true;
     }
     public void renderReady(Camera camera, int x, int y) {
-        camera.rect(yellow, x, y, 1, .8f);
-        camera.rect(UNREADY, x, y+.4f, 1, .4f);
+        camera.addRenderJob(() -> camera.image(TEX, x, y, 1, 1.5f), -y-.25f);
     }
     public void renderUnready(Camera camera, int x, int y) {
-        camera.rect(UNREADY, x, y, 1, .8f);
+        camera.addRenderJob(() -> camera.image(UNREADY, x, y, 1, 1.5f), -y-.25f);
     }
 
     @Override

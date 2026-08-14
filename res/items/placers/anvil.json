@@ -1,0 +1,9 @@
+{
+  "type": "ability",
+  "id": "base:placers:anvil",
+  "name": "anvil",
+  "texture": "base:item:anvil",
+  "ability": "anvil",
+  "cooldown": 1,
+  "stats": []
+}

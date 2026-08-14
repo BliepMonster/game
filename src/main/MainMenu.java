@@ -85,7 +85,7 @@ public class MainMenu {
                 } catch (FileNotFoundException e) {
                     throw new RuntimeException(e);
                 }
-                Main.open(file, "saved/"+s+".save");
+                Main.open(file, "saves/"+s+".save");
                 Main.state = Main.State.ONGOING;
             }
         }

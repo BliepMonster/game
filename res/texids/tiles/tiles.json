@@ -22,5 +22,12 @@
   "base:tiles:seed_maker": "res/textures/tiles/seed_maker.png",
   "base:tiles:restaurant_empty": "res/textures/tiles/restaurant_empty.png",
   "base:tiles:wheat": "res/textures/tiles/wheat.png",
-  "base:tiles:wheat_left": "res/textures/tiles/wheat_left.png"
+  "base:tiles:wheat_left": "res/textures/tiles/wheat_left.png",
+  "base:tiles:wheat_ungrown": "res/textures/tiles/wheat_ungrown.png",
+  "base:tiles:wheat_left_ungrown": "res/textures/tiles/wheat_ungrown_left.png",
+  "base:tiles:potato": "res/textures/tiles/potato.png",
+  "base:tiles:potato_unready": "res/textures/tiles/potato_sprout.png",
+  "base:tiles:carrot": "res/textures/tiles/carrot.png",
+  "base:tiles:carrot_unready": "res/textures/tiles/carrot_sprout.png",
+  "base:tiles:anvil": "res/textures/tiles/anvil.png"
 }

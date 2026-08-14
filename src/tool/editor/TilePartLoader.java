@@ -59,6 +59,7 @@ public final class TilePartLoader {
     public static final String ID_PINE_TREE = "pine_tree";
     public static final String ID_GARDEN_POT = "garden_pot";
     public static final String ID_SEED_MAKER = "seed_maker";
+    public static final String ID_ANVIL = "anvil";
     public static Font font;
     public static final HashMap<String, Texture> tcache = new HashMap<>();
 
@@ -140,6 +141,7 @@ public final class TilePartLoader {
                                 null
                 );
             }
+            case ID_ANVIL -> new AnvilTilePart(pos);
             case ID_SEED_MAKER -> new SeedMakerTilePart(pos);
             default -> throw new RuntimeException("Unknown object: " + type);
         };

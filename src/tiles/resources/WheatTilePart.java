@@ -17,7 +17,8 @@ import java.awt.*;
 import static java.awt.Color.*;
 
 public class WheatTilePart extends CropTilePart {
-    public static final Color UNREADY = new Color(128, 222, 117);
+    public static final Texture UNREADY = TextureIdMap.get("base:tiles:wheat_ungrown");
+    public static final Texture UNREADY_LEFT = TextureIdMap.get("base:tiles:wheat_left_ungrown");
     public static final ResourceDefinition DEFINITION = new ResourceDefinition(
             ItemConstants.ITEM_WHEAT,
             3, 1,
@@ -34,7 +35,7 @@ public class WheatTilePart extends CropTilePart {
         camera.addRenderJob(() -> camera.image(TEXTURE, x, y, 1, 1.5f), -y);
     }
     public void renderUnready(Camera camera, int x, int y) {
-        camera.rect(UNREADY, x, y, 1, .8f);
+        camera.image(UNREADY, x, y, 1, 1f);
     }
 
     @Override

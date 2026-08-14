@@ -4,8 +4,8 @@
   "inputs": [
     {
       "type": "resource",
-      "id": "Ruby",
-      "amount": 5
+      "id": "Polished Ruby",
+      "amount": 2
     },
     {
       "type": "upgrade",

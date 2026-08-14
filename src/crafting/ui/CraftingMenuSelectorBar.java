@@ -19,7 +19,7 @@ public class CraftingMenuSelectorBar extends Component {
         super(new CenterConstraint(), new RelativeYConstraint(-.7f), new RelativeSizeConstraint(1), new RelativeSizeConstraint(.2f));
         this.font = font;
         this.callback = callback;
-        this.max = callback.recipes.size()/5;
+        this.max = (callback.recipes.size()-1)/5;
         this.current = 0;
     }
     public void display(DrawManager draw, float x, float y, float w, float h) {
