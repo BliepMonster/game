@@ -3,11 +3,13 @@ package stats.inventory.items.ui;
 import combat.equipment.EquipmentSlot;
 import engine.core.DrawManager;
 import engine.core.Screen;
+import engine.core.Texture;
 import engine.gui.components.Component;
 import engine.gui.constraints.position.CenterConstraint;
 import engine.gui.constraints.position.RelativeYConstraint;
 import engine.gui.constraints.size.RelativeSizeConstraint;
 import entities.Player;
+import main.TextureIdMap;
 import stats.inventory.items.Item;
 
 import java.awt.*;
@@ -30,6 +32,11 @@ public class InventoryGridComponent extends Component {
         }
     }
     private final Player player;
+    public static final Texture ICON_HELMET = TextureIdMap.get("base:icon:helmet");
+    public static final Texture ICON_BOOTS = TextureIdMap.get("base:icon:boots");
+    public static final Texture ICON_CHESTPLATE = TextureIdMap.get("base:icon:chestplate");
+    public static final Texture ICON_LEGGINGS = TextureIdMap.get("base:icon:leggings");
+    public static final Texture ICON_RING = TextureIdMap.get("base:icon:ring");
     public static final float SPACING = .05f;
     public static final float ITEM_SIZE = .1f;
     public static final float WIDTH = SPACING*(NUM_ITEMS_PER_ROW+1)+NUM_ITEMS_PER_ROW*ITEM_SIZE;
@@ -61,26 +68,36 @@ public class InventoryGridComponent extends Component {
         var helmet = this.player.items.getEquipment(EquipmentSlot.HELMET);
         if (helmet != null) {
             draw.image(helmet.definition.texture, xx, y+SPACING*5+4*ITEM_SIZE, ITEM_SIZE, ITEM_SIZE);
+        } else {
+            draw.image(ICON_HELMET, xx, y+SPACING*5+4*ITEM_SIZE, ITEM_SIZE, ITEM_SIZE);
         }
         draw.rect(isSelected(false, EquipmentSlot.CHESTPLATE.ordinal()) ? Color.red : Color.white, xx, y+SPACING*4+3*ITEM_SIZE, ITEM_SIZE, ITEM_SIZE);
         var chestplate = this.player.items.getEquipment(EquipmentSlot.CHESTPLATE);
         if (chestplate != null) {
             draw.image(chestplate.definition.texture, xx, y+SPACING*4+3*ITEM_SIZE, ITEM_SIZE, ITEM_SIZE);
+        } else {
+            draw.image(ICON_CHESTPLATE, xx, y+SPACING*4+3*ITEM_SIZE, ITEM_SIZE, ITEM_SIZE);
         }
         draw.rect(isSelected(false, EquipmentSlot.RING.ordinal()) ? Color.red : Color.white, xx, y+SPACING*3+2*ITEM_SIZE, ITEM_SIZE, ITEM_SIZE);
         var ring = this.player.items.getEquipment(EquipmentSlot.RING);
         if (ring != null) {
             draw.image(ring.definition.texture, xx, y+SPACING*3+2*ITEM_SIZE, ITEM_SIZE, ITEM_SIZE);
+        } else {
+            draw.image(ICON_RING, xx, y+SPACING*3+2*ITEM_SIZE, ITEM_SIZE, ITEM_SIZE);
         }
         draw.rect(isSelected(false, EquipmentSlot.LEGGINGS.ordinal()) ? Color.red : Color.white, xx, y+SPACING*2+ITEM_SIZE, ITEM_SIZE, ITEM_SIZE);
         var leggings = this.player.items.getEquipment(EquipmentSlot.LEGGINGS);
         if (leggings != null) {
             draw.image(leggings.definition.texture, xx, y+SPACING*2+ITEM_SIZE, ITEM_SIZE, ITEM_SIZE);
+        } else {
+            draw.image(ICON_LEGGINGS, xx, y+SPACING*2+ITEM_SIZE, ITEM_SIZE, ITEM_SIZE);
         }
         draw.rect(isSelected(false, EquipmentSlot.BOOTS.ordinal()) ? Color.red : Color.white, xx, y+SPACING, ITEM_SIZE, ITEM_SIZE);
         var boots = this.player.items.getEquipment(EquipmentSlot.BOOTS);
         if (boots != null) {
             draw.image(boots.definition.texture, xx, y+SPACING, ITEM_SIZE, ITEM_SIZE);
+        } else {
+            draw.image(ICON_BOOTS, xx, y+SPACING, ITEM_SIZE, ITEM_SIZE);
         }
     }
     // should refactor later

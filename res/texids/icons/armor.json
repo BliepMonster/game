@@ -1,0 +1,7 @@
+{
+  "base:icon:chestplate": "res/textures/icons/icon_chestplate.png",
+  "base:icon:leggings": "res/textures/icons/icon_leggings.png",
+  "base:icon:boots": "res/textures/icons/icon_boots.png",
+  "base:icon:helmet": "res/textures/icons/icon_helmet.png",
+  "base:icon:ring": "res/textures/icons/icon_ring.png"
+}
