@@ -29,7 +29,8 @@ public class ShopSellPage extends Component {
     }
     public void manage(DrawManager draw, boolean pressed) {
         super.manage(draw, pressed);
-        for (var entry : entries) {
+        for (int i = entries.length-1; i >= 0; --i) {
+            var entry = entries[i];
             entry.manage(draw, pressed);
         }
     }

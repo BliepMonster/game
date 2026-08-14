@@ -41,7 +41,7 @@ public class ShopSellPanel extends Component {
         this.bar = new ShopSellPageSelectorBar(font, this);
     }
     public void selectPage(int page) {
-        if (page > this.sellable.size()/5)
+        if (page > this.sellable.size()/5 || page < 0)
             return;
         lp = page;
         this.sellable = new ArrayList<>();

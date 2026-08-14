@@ -39,6 +39,8 @@ public class InventoryGridComponent extends Component {
     public static final Texture ICON_RING = TextureIdMap.get("base:icon:ring");
     public static final float SPACING = .05f;
     public static final float ITEM_SIZE = .1f;
+    public static final float EQUIPMENT_ICON_SIZE = ITEM_SIZE*4/5;
+    public static final float EQUIPMENT_ICON_OFFSET = (ITEM_SIZE-EQUIPMENT_ICON_SIZE)/2;
     public static final float WIDTH = SPACING*(NUM_ITEMS_PER_ROW+1)+NUM_ITEMS_PER_ROW*ITEM_SIZE;
     public static final float EQUIPMENT_PANEL_WIDTH = 3*SPACING+ITEM_SIZE;
     private SelectedItem selectedSlot = null;
@@ -69,35 +71,35 @@ public class InventoryGridComponent extends Component {
         if (helmet != null) {
             draw.image(helmet.definition.texture, xx, y+SPACING*5+4*ITEM_SIZE, ITEM_SIZE, ITEM_SIZE);
         } else {
-            draw.image(ICON_HELMET, xx, y+SPACING*5+4*ITEM_SIZE, ITEM_SIZE, ITEM_SIZE);
+            draw.image(ICON_HELMET, xx+EQUIPMENT_ICON_OFFSET, y+SPACING*5+4*ITEM_SIZE+EQUIPMENT_ICON_OFFSET, EQUIPMENT_ICON_SIZE, EQUIPMENT_ICON_SIZE);
         }
         draw.rect(isSelected(false, EquipmentSlot.CHESTPLATE.ordinal()) ? Color.red : Color.white, xx, y+SPACING*4+3*ITEM_SIZE, ITEM_SIZE, ITEM_SIZE);
         var chestplate = this.player.items.getEquipment(EquipmentSlot.CHESTPLATE);
         if (chestplate != null) {
             draw.image(chestplate.definition.texture, xx, y+SPACING*4+3*ITEM_SIZE, ITEM_SIZE, ITEM_SIZE);
         } else {
-            draw.image(ICON_CHESTPLATE, xx, y+SPACING*4+3*ITEM_SIZE, ITEM_SIZE, ITEM_SIZE);
+            draw.image(ICON_CHESTPLATE, xx+EQUIPMENT_ICON_OFFSET, y+SPACING*4+3*ITEM_SIZE+EQUIPMENT_ICON_OFFSET, EQUIPMENT_ICON_SIZE, EQUIPMENT_ICON_SIZE);
         }
         draw.rect(isSelected(false, EquipmentSlot.RING.ordinal()) ? Color.red : Color.white, xx, y+SPACING*3+2*ITEM_SIZE, ITEM_SIZE, ITEM_SIZE);
         var ring = this.player.items.getEquipment(EquipmentSlot.RING);
         if (ring != null) {
             draw.image(ring.definition.texture, xx, y+SPACING*3+2*ITEM_SIZE, ITEM_SIZE, ITEM_SIZE);
         } else {
-            draw.image(ICON_RING, xx, y+SPACING*3+2*ITEM_SIZE, ITEM_SIZE, ITEM_SIZE);
+            draw.image(ICON_RING, xx+EQUIPMENT_ICON_OFFSET, y+SPACING*3+2*ITEM_SIZE+EQUIPMENT_ICON_OFFSET, EQUIPMENT_ICON_SIZE, EQUIPMENT_ICON_SIZE);
         }
         draw.rect(isSelected(false, EquipmentSlot.LEGGINGS.ordinal()) ? Color.red : Color.white, xx, y+SPACING*2+ITEM_SIZE, ITEM_SIZE, ITEM_SIZE);
         var leggings = this.player.items.getEquipment(EquipmentSlot.LEGGINGS);
         if (leggings != null) {
             draw.image(leggings.definition.texture, xx, y+SPACING*2+ITEM_SIZE, ITEM_SIZE, ITEM_SIZE);
         } else {
-            draw.image(ICON_LEGGINGS, xx, y+SPACING*2+ITEM_SIZE, ITEM_SIZE, ITEM_SIZE);
+            draw.image(ICON_LEGGINGS, xx+EQUIPMENT_ICON_OFFSET, y+SPACING*2+ITEM_SIZE+EQUIPMENT_ICON_OFFSET, EQUIPMENT_ICON_SIZE, EQUIPMENT_ICON_SIZE);
         }
         draw.rect(isSelected(false, EquipmentSlot.BOOTS.ordinal()) ? Color.red : Color.white, xx, y+SPACING, ITEM_SIZE, ITEM_SIZE);
         var boots = this.player.items.getEquipment(EquipmentSlot.BOOTS);
         if (boots != null) {
             draw.image(boots.definition.texture, xx, y+SPACING, ITEM_SIZE, ITEM_SIZE);
         } else {
-            draw.image(ICON_BOOTS, xx, y+SPACING, ITEM_SIZE, ITEM_SIZE);
+            draw.image(ICON_BOOTS, xx+EQUIPMENT_ICON_OFFSET, y+SPACING+EQUIPMENT_ICON_OFFSET, EQUIPMENT_ICON_SIZE, EQUIPMENT_ICON_SIZE);
         }
     }
     // should refactor later
@@ -155,7 +157,7 @@ public class InventoryGridComponent extends Component {
     void switchWithEquipment(EquipmentSlot slot) {
         if (this.selectedSlot == null && player.items.getEquipment(slot) != null) {
             selectedSlot = new SelectedItem(false, slot.ordinal());
-        } else if (this.selectedSlot == null) {} else {
+        } else if (this.selectedSlot != null) {
             var item = selectedSlot.get(player);
             if (item.definition.getEquipmentSlot() != slot) {
                 selectedSlot = null;
@@ -169,7 +171,7 @@ public class InventoryGridComponent extends Component {
     void switchWithItem(int index) {
         if (this.selectedSlot == null && player.items.get(index) != null) {
             selectedSlot = new SelectedItem(true, index);
-        } else if (this.selectedSlot == null) {} else {
+        } else if (this.selectedSlot != null) {
             if (!selectedSlot.canSet(player.items.get(index))) {
                 selectedSlot = null;
                 return;

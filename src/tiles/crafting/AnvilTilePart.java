@@ -29,7 +29,7 @@ public class AnvilTilePart extends TilePart {
     );
 
     public void render(int x, int y, Camera camera) {
-        camera.image(TEXTURE, x, y, 1, 1);
+        camera.addRenderJob(() -> camera.image(TEXTURE, x, y, 1, 1.5f), -y);
     }
 
     public boolean isStandable() {
