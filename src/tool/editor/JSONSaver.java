@@ -2,6 +2,7 @@ package tool.editor;
 
 import engine.CoordinateMap;
 import engine.json.*;
+import main.DungeonWorld;
 import main.EntityProducer;
 import main.World;
 import tiles.Tile;
@@ -61,6 +62,7 @@ public class JSONSaver {
         file.values.put("tiles", objects.o1());
         file.values.put("objects", objects.o2());
         file.values.put("id", new JsonString(world.getID()));
+        file.values.put("type", new JsonString(world instanceof DungeonWorld ? "dungeon" : "normal"));
         file.values.put("onLoad", saveOnLoadEntities(world.onLoadEntities));
         file.values.put("brightness", new JsonNumber(world.getBrightness()));
         return file;

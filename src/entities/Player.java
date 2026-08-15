@@ -204,6 +204,7 @@ public class Player implements Entity, LightSource {
     }
     public void respawn(GameContext context) {
         this.health = (int) this.stats.get(StatHolder.Stat.MAX_HEALTH);
+        context.getWorld().onPlayerRespawn(context);
         this.position.set(context.getPlayerRespawnPosition());
     }
     public void die(GameContext context) {

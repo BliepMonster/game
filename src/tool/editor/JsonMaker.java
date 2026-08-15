@@ -1,6 +1,7 @@
 package tool.editor;
 
 import engine.CoordinateMap;
+import main.DungeonWorld;
 import main.World;
 
 import java.io.FileWriter;
@@ -10,7 +11,9 @@ public class JsonMaker {
     void main() throws IOException {
         String filename = IO.readln("Filename?");
         String id = IO.readln("ID?");
+        String type = IO.readln("Type?");
         World world = new World(CoordinateMap.newDefaultPackedMap(), filename, id);
+        if (type.equals("dungeon")) world = new DungeonWorld(CoordinateMap.newDefaultPackedMap(), filename, id);
         float brightness = Float.parseFloat(IO.readln("Brightness?"));
         world.setBrightness(brightness);
         JSONSaver.save(world, world.map).write(new FileWriter(world.address));

@@ -167,10 +167,16 @@ public class World {
     public void spawn(Entity entity) {
         this.toAdd.add(entity);
     }
+    public void onPlayerRespawn(GameContext context) {
+    }
     public static @NotNull World of(JsonFile file, String address, GameContext context) {
         var map = new ArrayCoordinateMap<Tile>();
         JSONLoader.loadWorld(file, map, context);
-        var world = new World(map, address, ((JsonString) file.values.get("id")).value);
+        var id = ((JsonString) file.values.get("id")).value;
+        var type = file.values.get("type") instanceof JsonString ts ? ts.value : "normal";
+        World world;
+        if ("dungeon".equals(type)) world = new DungeonWorld(map, address, id);
+        else world = new World(map, address, id);
         var b = file.values.get("brightness");
         if (b instanceof JsonNumber bn) world.brightness = bn.num;
         try {
