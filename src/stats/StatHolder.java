@@ -21,21 +21,26 @@ public class StatHolder implements Cloneable {
     }
 
     public enum Stat {
-        SPEED,
-        FORAGING_YIELD,
-        FARMING_YIELD,
-        MAX_HEALTH,
-        STRENGTH,
-        MINING_YIELD,
-        DAMAGE,
-        MINING_POWER,
-        FORAGING_POWER,
-        KNOCKBACK,
-        DEFENSE,
-        CRIT_CHANCE,
-        CRIT_DAMAGE,
-        REGENERATION,
-        GLOWING,
+        SPEED("Speed"),
+        FORAGING_YIELD("Foraging Yield"),
+        FARMING_YIELD("Farming Yield"),
+        MAX_HEALTH("Health"),
+        STRENGTH("Strength"),
+        MINING_YIELD("Mining Yield"),
+        DAMAGE("Damage"),
+        MINING_POWER("Mining Power"),
+        FORAGING_POWER("Foraging Power"),
+        KNOCKBACK("Knockback"),
+        DEFENSE("Defense"),
+        CRIT_CHANCE("Crit Chance"),
+        CRIT_DAMAGE("Crit Damage"),
+        REGENERATION("Regeneration"),
+        GLOWING("Glowing"),
+        ;
+        public final String name;
+        Stat(String s) {
+            this.name = s;
+        }
     }
     public static final int NUM_STATS = Stat.values().length;
     public static final int SPEED_INDEX = Stat.SPEED.ordinal();

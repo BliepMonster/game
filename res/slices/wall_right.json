@@ -1,0 +1,9 @@
+{
+  "dimensions": [1, 3],
+  "ids": [
+    "base:tiles:wall_right:1",
+    "base:tiles:wall_right:2",
+    "base:tiles:wall_right:3"
+  ],
+  "texid": "base:tiles:wall_right"
+}

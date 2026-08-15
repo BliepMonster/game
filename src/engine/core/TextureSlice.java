@@ -12,25 +12,15 @@ public class TextureSlice extends Texture {
     public float[] getDimensions() {
         return dimensions;
     }
-    public static TextureSlice[] split(Texture tex, int count) {
-        TextureSlice[] slices = new TextureSlice[count*count];
-        float ic = 1f/count;
-        int index = 0;
-        for (float i = 0; i < 1; i += ic) {
-            for (float j = 0; j < 1; j += ic) {
-                slices[index++] = new TextureSlice(tex, i, j, ic, ic);
-            }
-        }
-        return slices;
-    }
     public static TextureSlice[] split(Texture tex, int x, int y) {
         TextureSlice[] slices = new TextureSlice[x*y];
         float ic = 1f/x;
         float jc = 1f/y;
         int index = 0;
-        for (float j = 1-jc; j >= 0; j -= jc) {
-            for (float i = 0; i < 1; i += ic) {
-                slices[index++] = new TextureSlice(tex, i, j, ic, jc);
+        for (int r = 0; r < y; ++r) {
+            float j = (y - 1 - r) * jc;
+            for (int c = 0; c < x; ++c) {
+                slices[index++] = new TextureSlice(tex, c*ic, j, ic, jc);
             }
         }
         return slices;

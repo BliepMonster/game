@@ -95,6 +95,7 @@ public class Font {
     public float getXAdvance(String s) {
         float xA = 0;
         for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) == '\n') continue;
             xA += get(s.charAt(i)).getXAdvance();
         }
         return xA;

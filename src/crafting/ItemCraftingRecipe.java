@@ -1,6 +1,7 @@
 package crafting;
 
 import main.GameContext;
+import stats.inventory.items.Item;
 
 public class ItemCraftingRecipe implements CraftingRecipe {
     public final ItemRequirement[] ingredients;
@@ -39,5 +40,9 @@ public class ItemCraftingRecipe implements CraftingRecipe {
     }
     public String getName() {
         return name;
+    }
+    public Item getResultItem() {
+        if (result.items.length != 1) return null;
+        return result.items[0].get();
     }
 }

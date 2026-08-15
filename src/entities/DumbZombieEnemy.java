@@ -40,7 +40,7 @@ public class DumbZombieEnemy extends MeleeDungeonEnemy {
                 100,
                 10,
                 TABLE,
-                5,
+                8,
                 12,
                 0,
                 5,

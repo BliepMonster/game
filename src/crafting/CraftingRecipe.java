@@ -1,6 +1,7 @@
 package crafting;
 
 import main.GameContext;
+import stats.inventory.items.Item;
 
 public interface CraftingRecipe {
     boolean canCraft(FullItemStorage storage, GameContext context);
@@ -8,4 +9,5 @@ public interface CraftingRecipe {
     ItemRequirement[] getRequirements();
     PreCraftRequirement[] getPreCraftRequirements();
     String getName();
+    Item getResultItem();
 }

@@ -10,6 +10,7 @@ import engine.gui.constraints.position.CenterConstraint;
 import engine.gui.constraints.position.RelativeYConstraint;
 import engine.gui.constraints.size.RelativeSizeConstraint;
 import entities.Player;
+import main.GameContext;
 import main.TextureIdMap;
 import stats.inventory.items.Item;
 
@@ -45,9 +46,11 @@ public class InventoryGridComponent extends Component {
     public static final float WIDTH = SPACING*(NUM_ITEMS_PER_ROW+1)+NUM_ITEMS_PER_ROW*ITEM_SIZE;
     public static final float EQUIPMENT_PANEL_WIDTH = 3*SPACING+ITEM_SIZE;
     private SelectedItem selectedSlot = null;
-    public InventoryGridComponent(Player player) {
+    private final GameContext context;
+    public InventoryGridComponent(GameContext context) {
         super(new RelativeYConstraint(-WIDTH/2), CenterConstraint.CENTER, new RelativeSizeConstraint(WIDTH+EQUIPMENT_PANEL_WIDTH), new RelativeSizeConstraint(SPACING*(NUM_ROWS+1)+NUM_ROWS*ITEM_SIZE));
-        this.player = player;
+        this.player = context.getPlayer();
+        this.context = context;
     }
     public boolean isSelected(boolean eq, int index) {
         if (this.selectedSlot == null) return false;
@@ -62,10 +65,10 @@ public class InventoryGridComponent extends Component {
         if (item == null) {
             tooltip = null;
         } else if (tooltip == null) {
-            tooltip = new ItemTooltipComponent(item);
+            tooltip = new ItemTooltipComponent(item, context);
         } else if (tooltip.item != item) {
             tooltip.text.close();
-            tooltip = new ItemTooltipComponent(item);
+            tooltip = new ItemTooltipComponent(item, context);
         }
         if (tooltip != null) tooltip.manage(draw, pressed);
     }

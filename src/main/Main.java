@@ -40,7 +40,7 @@ import java.util.ArrayList;
 
 public class Main {
     public static boolean DEBUG_MODE = false;
-    public static final boolean ALLOW_DEBUG = false;
+    public static final boolean ALLOW_DEBUG = true;
     public enum State {
         MAIN_MENU,
         LOAD_WORLD,
@@ -129,7 +129,7 @@ public class Main {
                 }
             } else if (event.type() == EventManager.KEY_UP && event.key() == GLFW.GLFW_KEY_TAB) {
                 if (GUI.getAll(0).isEmpty()) {
-                    GUI.add(new InventoryGridComponent(game.player), 0);
+                    GUI.add(new InventoryGridComponent(game), 0);
                     GUI.toggle(62);
                 } else {
                     var component = GUI.getAll(0).getFirst();

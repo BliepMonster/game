@@ -6,7 +6,10 @@
 
   "damage_type": "NORMAL",
   "stats": [],
-  "melee_type": "stab",
-  "damage": 10,
-  "cooldown": 8
+  "melee_type": "cone",
+  "damage": 5,
+  "cooldown": 4,
+
+  "range": 1.6,
+  "angle": 0.6
 }

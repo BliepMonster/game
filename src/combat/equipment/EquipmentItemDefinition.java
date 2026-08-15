@@ -36,6 +36,11 @@ public class EquipmentItemDefinition extends ItemDefinition {
         return new StatHolder();
     }
 
+    @Override
+    public StatHolder getHeldStats_(Item item, GameContext context) {
+        return new StatHolder();
+    }
+
     public StatHolder getWornStats(Item item, GameContext context) {
         return stats.clone();
     }

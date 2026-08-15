@@ -6,12 +6,14 @@ import crafting.ItemRequirement;
 import crafting.PreCraftRequirement;
 import engine.core.DrawManager;
 import engine.core.Screen;
+import engine.core.input.Input;
 import engine.core.text.Font;
 import engine.gui.components.Component;
 import engine.gui.constraints.position.CenterConstraint;
 import engine.gui.constraints.position.RelativeYConstraint;
 import engine.gui.constraints.size.RelativeSizeConstraint;
 import main.GameContext;
+import stats.inventory.items.ui.ItemTooltipComponent;
 
 import java.awt.*;
 
@@ -21,12 +23,29 @@ public class RecipeMenuComponent extends Component {
     private final FullItemStorage storage;
     private final Font font;
     private long lastClicked = 0;
+    private ItemTooltipComponent tooltip;
     public RecipeMenuComponent(CraftingRecipe recipe, GameContext context, FullItemStorage storage, Font font) {
         super(CenterConstraint.CENTER, new RelativeYConstraint(-.7f), new RelativeSizeConstraint(1f), new RelativeSizeConstraint(1.2f));
         this.recipe = recipe;
         this.context = context;
         this.storage = storage;
         this.font = font;
+    }
+    public void manage(DrawManager draw, boolean pressed) {
+        super.manage(draw, pressed);
+        var screen = draw.getScreen();
+        float mx = Input.getMouseX(screen);
+        float my = Input.getMouseY(screen);
+        if (!isInBounds(screen, mx, my) || my >= -.5f) {
+            if (tooltip != null) {
+                tooltip.text.close();
+                tooltip = null;
+            }
+        } else if (tooltip == null) {
+            var item = recipe.getResultItem();
+            if (item != null) tooltip = new ItemTooltipComponent(item, context);
+        }
+        if (tooltip != null) tooltip.manage(draw, pressed);
     }
     public void display(DrawManager draw, float x, float y, float w, float h) {
         draw.rect(Color.BLACK, x, y, w, h);

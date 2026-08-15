@@ -30,12 +30,12 @@ public enum EditorToolState {
                 System.out.println(new Vector2f(x, y));
             }
             case O2 -> {
-                map.put(x, y, new DefaultTile(TileType.get("WATER")));
+                map.put(x, y, new WallTile(TileType.get("base:tiles:wall_right:1")));
             }
             case O3 -> {
-                map.put(x, y, new DefaultTile(TileType.get("GRASS_TAIGA")));
+                map.put(x, y, new WallTile(TileType.get("base:tiles:wall_bottom")));
             }
-            case O4 -> map.put(x, y, new DefaultTile(TileType.get("ROAD")));
+            case O4 -> map.put(x, y, new WallTile(TileType.get("base:tiles:wall_right:3")));
             case O5 -> tile.setPart(new LeftWheatTilePart(new Vector2f(x, y)));
             case O6 -> tile.setPart(null);
             case O7 -> map.put(x, y, new DefaultTile(TileType.get("GRASS")));

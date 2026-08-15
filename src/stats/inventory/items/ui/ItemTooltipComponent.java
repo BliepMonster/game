@@ -9,7 +9,9 @@ import engine.gui.components.Component;
 import engine.gui.constraints.position.ToolTipConstraintX;
 import engine.gui.constraints.position.ToolTipConstraintY;
 import engine.gui.constraints.size.RelativeSizeConstraint;
+import main.GameContext;
 import main.Main;
+import stats.StatHolder;
 import stats.inventory.items.Item;
 
 import java.awt.*;
@@ -20,7 +22,7 @@ public class ItemTooltipComponent extends Component {
     public final Mesh text;
     public final Item item;
     public static final float FSIZE = .1f;
-    public ItemTooltipComponent(Item item) {
+    public ItemTooltipComponent(Item item, GameContext context) {
         String title = item.definition.name;
         String desc = item.definition.description;
         List<String> descs = new ArrayList<String>();
@@ -39,16 +41,64 @@ public class ItemTooltipComponent extends Component {
             }
         }
 
+        var held = item.definition.getHeldStats_(item, context);
+        String hs;
+        ArrayList<String> cache = new ArrayList<>();
+        if (held.isEmpty()) hs = "";
+        else {
+            var sb = new StringBuilder("\n\nWhen held:");
+            cache.add("When held: ");
+            for (int i = 0; i < StatHolder.Stat.values().length; i++) {
+                float f = held.get(StatHolder.Stat.values()[i]);
+                if (f == 0) continue;
+                String s = ("\n")+(StatHolder.Stat.values()[i].name)+(": ")+(f);
+                cache.add(s);
+                sb.append(s);
+            }
+            hs = sb.toString();
+        }
+        for (String s : cache) {
+            w = Math.max(w, Main.font.getWidthForSize(s, FSIZE));
+        }
+        int newlines = 0;
+        for (char c : hs.toCharArray()) {
+            if (c == '\n') newlines++;
+        }
+        var worn = item.definition.getWornStats_(item, context);
+        String ws;
+        cache = new ArrayList<>();
+        if (worn.isEmpty()) ws = "";
+        else {
+            var sb = new StringBuilder("\n\nWhen worn:");
+            cache.add("When worn: ");
+            for (int i = 0; i < StatHolder.Stat.values().length; i++) {
+                float f = worn.get(StatHolder.Stat.values()[i]);
+                if (f == 0) continue;
+                String s = ("\n")+(StatHolder.Stat.values()[i].name)+(": ")+(f);
+                cache.add(s);
+                sb.append(s);
+            }
+            ws = sb.toString();
+        }
+        for (String s : cache) {
+            w = Math.max(w, Main.font.getWidthForSize(s, FSIZE));
+        }
+        int newlines2 = 0;
+        for (char c : ws.toCharArray()) {
+            if (c == '\n') newlines2++;
+        }
+
         super(new ToolTipConstraintX(32f / GUI.getBoundDrawManager().getScreen().getHeight()),
                 new ToolTipConstraintY(32f / GUI.getBoundDrawManager().getScreen().getHeight()),
-                new RelativeSizeConstraint(w), new RelativeSizeConstraint(Main.font.getHeight(FSIZE) * (descs.size() + (descs.isEmpty() ? 1 : 3))));
+                new RelativeSizeConstraint(w), new RelativeSizeConstraint(Main.font.getHeight(FSIZE) * (descs.size() + (descs.isEmpty() ? 1 : 3) + (newlines == 0 ? 0 : newlines+1) + (newlines2 == 0 ? 0 : newlines2+1))));
         this.item = item;
         StringBuilder t = new StringBuilder();
         t.append(title).append(descs.isEmpty() ? "" : "\n");
-        System.out.println(descs.size());
         for (var d : descs) {
             t.append("\n").append(d);
         }
+        t.append(hs.isEmpty() ? "" : hs);
+        t.append(ws.isEmpty() ? "" : ws);
         this.text = new TextMesh(t.toString(), Main.font, FSIZE, 200).create();
     }
     public static final Color BG = new Color(0, 0, 0, 230);

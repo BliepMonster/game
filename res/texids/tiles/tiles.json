@@ -29,5 +29,9 @@
   "base:tiles:potato_unready": "res/textures/tiles/potato_sprout.png",
   "base:tiles:carrot": "res/textures/tiles/carrot.png",
   "base:tiles:carrot_unready": "res/textures/tiles/carrot_sprout.png",
-  "base:tiles:anvil": "res/textures/tiles/anvil.png"
+  "base:tiles:anvil": "res/textures/tiles/anvil.png",
+  "base:tiles:wall_back": "res/textures/tiles/wall_back.png",
+  "base:tiles:wall_left": "res/textures/tiles/wall_left.png",
+  "base:tiles:wall_right": "res/textures/tiles/wall_right.png",
+  "base:tiles:wall_bottom": "res/textures/tiles/wall_bottom.png"
 }

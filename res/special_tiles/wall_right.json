@@ -1,0 +1,9 @@
+{
+  "type": "texture_adapt",
+  "ids": [
+    "base:tiles:wall_right:1",
+    "base:tiles:wall_right:2",
+    "base:tiles:wall_right:3"
+  ],
+  "standable": false
+}

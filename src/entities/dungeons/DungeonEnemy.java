@@ -24,7 +24,9 @@ public abstract class DungeonEnemy extends Enemy {
     public abstract void moveSelf(Hitbox world);
     public void move(Hitbox world) {
         moveSelf(world);
-        position.add(getVelocityChange());
+        var vec = getVelocityChange();
+        position.add(vec);
+        if (this.getHitbox().collidesWith(world)) position.sub(vec);
     }
     public abstract float transformHealthLoss(float hpLoss, DamageType type);
     public boolean shouldDie(GameContext context) {
