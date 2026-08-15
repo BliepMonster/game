@@ -4,6 +4,7 @@ import combat.equipment.EquipmentSlot;
 import engine.core.DrawManager;
 import engine.core.Screen;
 import engine.core.Texture;
+import engine.core.input.Input;
 import engine.gui.components.Component;
 import engine.gui.constraints.position.CenterConstraint;
 import engine.gui.constraints.position.RelativeYConstraint;
@@ -52,6 +53,23 @@ public class InventoryGridComponent extends Component {
         if (this.selectedSlot == null) return false;
         return this.selectedSlot.equals(new SelectedItem(eq, index));
     }
+
+    @Override
+    public void manage(DrawManager draw, boolean pressed) {
+        super.manage(draw, pressed);
+        var hovered = getHoveredSlot(draw.getScreen());
+        var item = hovered == null ? null : hovered.get(player);
+        if (item == null) {
+            tooltip = null;
+        } else if (tooltip == null) {
+            tooltip = new ItemTooltipComponent(item);
+        } else if (tooltip.item != item) {
+            tooltip.text.close();
+            tooltip = new ItemTooltipComponent(item);
+        }
+        if (tooltip != null) tooltip.manage(draw, pressed);
+    }
+
     public void display(DrawManager draw, float x, float y, float w, float h) {
         draw.rect(Color.black, x, y, w, h);
         for (int i = 0; i < NUM_ITEMS; ++i) {
@@ -181,5 +199,27 @@ public class InventoryGridComponent extends Component {
             player.items.set(index, item);
             selectedSlot = null;
         }
+    }
+    private ItemTooltipComponent tooltip;
+    public SelectedItem getHoveredSlot(Screen screen) {
+        float x = Input.getMouseX(screen);
+        float y = Input.getMouseY(screen);
+        if (!isInBounds(screen, x, y)) return null;
+        int slot = getX(x);
+        if (slot == -1) return null;
+        int s2 = getY(screen, y);
+        if (s2 == -1) return null;
+        if (slot == -2) {
+            var enumV = switch (s2) {
+                case 0 -> EquipmentSlot.BOOTS;
+                case 1 -> EquipmentSlot.LEGGINGS;
+                case 2 -> EquipmentSlot.RING;
+                case 3 -> EquipmentSlot.CHESTPLATE;
+                case 4 -> EquipmentSlot.HELMET;
+                default -> throw new RuntimeException("this should never happen");
+            };
+            return new SelectedItem(false, enumV.ordinal());
+        }
+        return new SelectedItem(true, s2 * NUM_ITEMS_PER_ROW + slot);
     }
 }

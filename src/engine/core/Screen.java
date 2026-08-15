@@ -2,10 +2,17 @@ package engine.core;
 
 import engine.core.input.Console;
 import engine.core.input.Input;
+import org.joml.Vector2i;
+import org.lwjgl.BufferUtils;
+import org.lwjgl.PointerBuffer;
 import org.lwjgl.glfw.*;
 import org.lwjgl.opengl.*;
+import org.lwjgl.system.MemoryStack;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.nio.ByteBuffer;
+import java.nio.IntBuffer;
 
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
@@ -21,6 +28,9 @@ public class Screen {
     protected String title;
     protected long window;
     protected GLFWWindowSizeCallback sizeCallback;
+    protected GLFWMonitorCallback monitorCallback;
+    protected GLFWWindowPosCallback windowPosCallback;
+    protected boolean needsMonitorFit = true;
     protected boolean isResized;
     protected boolean isFullscreen;
     protected int windowPosX;
@@ -111,13 +121,33 @@ public class Screen {
         GLFW.glfwMakeContextCurrent(window);
         GL.createCapabilities();
         createCallbacks(console.input);
+        monitorCallback = new GLFWMonitorCallback() {
+            public void invoke(long monitor, int event) {
+                needsMonitorFit = true;
+            }
+        };
+        GLFW.glfwSetMonitorCallback(monitorCallback);
+        windowPosCallback = new GLFWWindowPosCallback() {
+            public void invoke(long window, int xpos, int ypos) {
+                needsMonitorFit = true;
+            }
+        };
+        GLFW.glfwSetWindowPosCallback(window, windowPosCallback);
         GLFW.glfwSwapInterval((flags & VSYNC) == 0 ? 0 : 1);
         active = true;
         DrawManager.init();
         if ((flags & MAXIMIZED) != 0) {
             glfwSetWindowAttrib(window, GLFW_DECORATED, GLFW_FALSE);
+            int mx = 0, my = 0;
+            try (MemoryStack stack = MemoryStack.stackPush()) {
+                IntBuffer x = stack.mallocInt(1);
+                IntBuffer y = stack.mallocInt(1);
+                GLFW.glfwGetMonitorPos(GLFW.glfwGetPrimaryMonitor(), x, y);
+                mx = x.get(0);
+                my = y.get(0);
+            }
             glfwSetWindowSize(window, videoMode.width(), videoMode.height());
-            glfwSetWindowPos(window, 0, 0);
+            glfwSetWindowPos(window, mx, my);
         } else if ((flags & FULLSCREEN) != 0) {
             setFullscreen(true);
         } else {
@@ -147,6 +177,7 @@ public class Screen {
                 Screen.this.width = width;
                 Screen.this.height = height;
                 isResized = true;
+                needsMonitorFit = true;
             }
         };
         GLFW.glfwSetWindowSizeCallback(window, sizeCallback);
@@ -159,6 +190,10 @@ public class Screen {
     public boolean update() {
         boolean succeed = true;
         if (active) {
+            if (needsMonitorFit) {
+                needsMonitorFit = false;
+                fitWindowToMonitor();
+            }
             if (isResized) {
                 GL11.glViewport(0, 0, width, height);
                 isResized = false;
@@ -235,6 +270,54 @@ public class Screen {
         else
             GLFW.glfwSetWindowMonitor(window, 0, windowPosX, windowPosY, width, height, 0);
     }
+
+    /**
+     * Resizes the window to fill whichever monitor its center is currently on,
+     * and moves it onto that monitor. Called whenever monitors are added/removed
+     * or the window changes position, so the window always matches the aspect
+     * ratio of the monitor it is displayed on.
+     */
+    public void fitWindowToMonitor() {
+        if (window == 0)
+            return;
+        PointerBuffer monitors = GLFW.glfwGetMonitors();
+        if (monitors.capacity() == 0)
+            return;
+        int cx, cy, wx, wy;
+        try (MemoryStack stack = MemoryStack.stackPush()) {
+            IntBuffer x = stack.mallocInt(1);
+            IntBuffer y = stack.mallocInt(1);
+            GLFW.glfwGetWindowPos(window, x, y);
+            wx = x.get(0);
+            wy = y.get(0);
+            cx = wx + width / 2;
+            cy = wy + height / 2;
+        }
+        for (int i = 0; i < monitors.capacity(); ++i) {
+            long monitor = monitors.get(i);
+            try (MemoryStack stack = MemoryStack.stackPush()) {
+                IntBuffer x = stack.mallocInt(1);
+                IntBuffer y = stack.mallocInt(1);
+                GLFW.glfwGetMonitorPos(monitor, x, y);
+                GLFWVidMode mode = GLFW.glfwGetVideoMode(monitor);
+                if (mode == null)
+                    continue;
+                if (cx < x.get(0) || cx >= x.get(0) + mode.width())
+                    continue;
+                if (cy < y.get(0) || cy >= y.get(0) + mode.height())
+                    continue;
+                if (wx != x.get(0) || wy != y.get(0))
+                    glfwSetWindowPos(window, x.get(0), y.get(0));
+                if (width != mode.width() || height != mode.height()) {
+                    glfwSetWindowSize(window, mode.width(), mode.height());
+                    width = mode.width();
+                    height = mode.height();
+                    isResized = true;
+                }
+                return;
+            }
+        }
+    }
     public boolean isResized() {
         return isResized;
     }
@@ -279,5 +362,40 @@ public class Screen {
     }
     public void maximize() {
         GLFW.glfwMaximizeWindow(window);
+    }
+    private static ByteBuffer convertToByteBuffer(BufferedImage image) {
+        int width = image.getWidth();
+        int height = image.getHeight();
+
+        int[] pixels = new int[width * height];
+        image.getRGB(0, 0, width, height, pixels, 0, width);
+
+        // Allocate 4 bytes per pixel (RGBA)
+        ByteBuffer buffer = BufferUtils.createByteBuffer(width * height * 4);
+
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                int pixel = pixels[y * width + x];
+
+                // Unpack ARGB into RGBA bytes
+                buffer.put((byte) ((pixel >> 16) & 0xFF)); // Red
+                buffer.put((byte) ((pixel >> 8) & 0xFF));  // Green
+                buffer.put((byte) (pixel & 0xFF));         // Blue
+                buffer.put((byte) ((pixel >> 24) & 0xFF)); // Alpha
+            }
+        }
+
+        // Reset position to 0 so it can be read from the start
+        buffer.flip();
+
+        return buffer;
+    }
+    public void setCursor(BufferedImage image, Vector2i hotspot) {
+        try (GLFWImage imageStruct = GLFWImage.malloc()) {
+            imageStruct.set(image.getWidth(), image.getHeight(), convertToByteBuffer(image));
+            long cursor = GLFW.glfwCreateCursor(imageStruct, hotspot.x, hotspot.y);
+            if (cursor != 0)
+                GLFW.glfwSetCursor(window, cursor);
+        }
     }
 }

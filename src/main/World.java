@@ -127,13 +127,13 @@ public class World {
         float py = -1/tsize+player.getY();
         float pw = 2*screen.getAspectRatio()/tsize;
         float ph = 2/tsize;
-        minX = Math.max((int) Math.floor(px), minX);
+        minX = Math.max((int) Math.floor(px), minX)-1;
         var xSize = bounds.y;
-        xSize = Math.min(xSize, (int) pw);
+        xSize = Math.min(xSize, (int) pw)+2;
         var minY = bounds.z;
-        minY = Math.max((int) Math.floor(py), minY);
+        minY = Math.max((int) Math.floor(py), minY)-1;
         var ySize = bounds.w;
-        ySize = Math.min(ySize, (int) ph);
+        ySize = Math.min(ySize, (int) ph)+2;
 
         for (int i = minX; i <= minX + xSize; ++i) {
             for (int j = minY+ySize; j >= minY; --j) {

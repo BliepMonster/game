@@ -12,6 +12,7 @@ import engine.gui.GUI;
 import engine.jobs.JobSystem;
 import engine.notifications.NotificationSystem;
 import engine.saving.objects.SaveFile;
+import org.joml.Vector2i;
 import org.lwjgl.glfw.GLFW;
 import quests.QuestRegistry;
 import quests.ui.QuestPanel;
@@ -29,6 +30,10 @@ import tool.editor.EditorToolState;
 import tool.editor.JSONSaver;
 import tool.editor.TilePartLoader;
 
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -175,11 +180,21 @@ public class Main {
             pressed = false;
         }
         return true;
+
+        
     }
+    public static final int CURSOR_W = 32, CURSOR_H = 32;
     static void main() throws IOException {
         final var screen = new Screen();
+        BufferedImage buffer = ImageIO.read(new File("res/textures/icons/cursor.png"));
+        BufferedImage scaled = new BufferedImage(CURSOR_H, CURSOR_H, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g = scaled.createGraphics();
+        g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+        g.drawImage(buffer, 0, 0, CURSOR_W, CURSOR_W, null);
+        g.dispose();
         final var console = new Console();
         screen.create(console, Screen.MAXIMIZED);
+        screen.setCursor(scaled, new Vector2i());
         StaticItemLoader.initAll();
         JsonShopDefinitionLoader.registerAll();
         QuestRegistry.registerAll();
