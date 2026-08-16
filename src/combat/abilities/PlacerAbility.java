@@ -13,7 +13,7 @@ import java.util.Optional;
 public abstract class PlacerAbility extends ItemAbility {
     @Override
     public ItemUseResult use(Tile tile, Item item, Vector2f worldClickLocation, GameContext context) {
-        if (!context.getWorld().getID().equals("HOUSE") || tile instanceof WallTile || tile.getPart() != null) {
+        if (!context.getWorld().getID().equals("HOUSE") || tile == null || tile instanceof WallTile || tile.getPart() != null) {
             return new ItemUseResult(Optional.of(item), false);
         }
         tile.setPart(getPart(new Vector2f((float) Math.floor(worldClickLocation.x), (float) Math.floor(worldClickLocation.y))));
