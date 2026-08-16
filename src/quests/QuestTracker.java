@@ -16,8 +16,6 @@ public class QuestTracker {
     private final HashMap<String, Integer> gathers = new HashMap<>();
     private int sells;
 
-    public QuestTracker() {}
-
     public QuestTracker(SavedQuests save) {
         this.selectedId = save.selectedId();
         if (save.completedIds() != null) completed.addAll(Arrays.asList(save.completedIds()));

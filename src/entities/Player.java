@@ -41,6 +41,7 @@ public class Player implements Entity, LightSource {
     private int ticksTo = 0;
     private int ticksSinceLastDamage = 0;
     private boolean hitLastTick;
+    private int lastRespawn = -100;
     private Direction direction = Direction.DOWN;
     private float health = 100;
     public final CurrencyStorage currency;
@@ -175,6 +176,7 @@ public class Player implements Entity, LightSource {
         this.health = health;
     }
     public void damage(int amount, DamageType type, GameContext context) {
+        if (Game.getTickCount()-lastRespawn < 80) return;
         float def = stats.get(StatHolder.Stat.DEFENSE);
         health -= (amount*(1-def/(def+100)));
         if (health <= 0) {
@@ -205,6 +207,7 @@ public class Player implements Entity, LightSource {
     public void respawn(GameContext context) {
         this.health = (int) this.stats.get(StatHolder.Stat.MAX_HEALTH);
         context.getWorld().onPlayerRespawn(context);
+        this.lastRespawn = Game.getTickCount();
         this.position.set(context.getPlayerRespawnPosition());
     }
     public void die(GameContext context) {

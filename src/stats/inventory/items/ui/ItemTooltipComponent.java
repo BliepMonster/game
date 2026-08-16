@@ -88,8 +88,8 @@ public class ItemTooltipComponent extends Component {
             if (c == '\n') newlines2++;
         }
 
-        super(new ToolTipConstraintX(32f / GUI.getBoundDrawManager().getScreen().getHeight()),
-                new ToolTipConstraintY(32f / GUI.getBoundDrawManager().getScreen().getHeight()),
+        super(new ToolTipConstraintX(Main.CURSOR_W / (float) GUI.getBoundDrawManager().getScreen().getHeight()),
+                new ToolTipConstraintY(Main.CURSOR_H / (float) GUI.getBoundDrawManager().getScreen().getHeight()),
                 new RelativeSizeConstraint(w), new RelativeSizeConstraint(Main.font.getHeight(FSIZE) * (descs.size() + (descs.isEmpty() ? 1 : 3) + (newlines == 0 ? 0 : newlines+1) + (newlines2 == 0 ? 0 : newlines2+1))));
         this.item = item;
         StringBuilder t = new StringBuilder();

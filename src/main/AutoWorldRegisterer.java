@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-import static main.WorldRegistry.get;
 import static main.WorldRegistry.put;
 
 record SP(String s, Path p) {}

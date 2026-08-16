@@ -14,13 +14,17 @@ public class QuestMenuSelectorBar extends Component {
     public final QuestMenuComponent callback;
     private int current = 0;
     public final Font font;
-    public final int max;
+    public int max;
     public QuestMenuSelectorBar(Font font, QuestMenuComponent callback) {
         super(new CenterConstraint(), new RelativeYConstraint(-.7f), new RelativeSizeConstraint(1), new RelativeSizeConstraint(.2f));
         this.font = font;
         this.callback = callback;
-        this.max = callback.quests.size()/5;
+        this.max = (callback.quests.size()-1)/5;
         this.current = 0;
+    }
+    public void recompute() {
+        max = (callback.quests.size()-1)/5;
+        current = 0;
     }
     public void display(DrawManager draw, float x, float y, float w, float h) {
         var pos = -.4f;

@@ -16,7 +16,7 @@ import java.awt.Color;
 import java.util.List;
 
 public class QuestMenuComponent extends Component {
-    public final List<Quest> quests;
+    public List<Quest> quests;
     public final QuestTracker tracker;
     public final GameContext context;
     public final QuestPanel panel;
@@ -26,7 +26,7 @@ public class QuestMenuComponent extends Component {
     private QuestMenuPage page;
     public QuestMenuComponent(QuestTracker tracker, GameContext context, QuestPanel panel, Font font) {
         super(CenterConstraint.CENTER, new RelativeYConstraint(-.7f), new RelativeSizeConstraint(1f), new RelativeSizeConstraint(1.2f));
-        this.quests = QuestRegistry.all().stream().filter(q -> q.isUnlocked(tracker)).toList();
+        this.quests = QuestRegistry.all().stream().filter(q -> q.isUnlocked(tracker) && !tracker.isClaimed(q.getId())).toList();
         this.tracker = tracker;
         this.context = context;
         this.panel = panel;
@@ -36,6 +36,12 @@ public class QuestMenuComponent extends Component {
     }
     public void manage(DrawManager draw, boolean pressed) {
         super.manage(draw, pressed);
+        List<Quest> active = QuestRegistry.all().stream().filter(q -> q.isUnlocked(tracker) && !tracker.isClaimed(q.getId())).toList();
+        if (!active.equals(quests)) {
+            quests = active;
+            selectorBar.recompute();
+            switchPage(0);
+        }
         selectorBar.manage(draw, pressed);
         page.manage(draw, pressed);
     }
@@ -45,7 +51,7 @@ public class QuestMenuComponent extends Component {
     public void detectClick(Screen screen, float x, float y) {}
     public void detectContinuousPress(Screen screen, float x, float y) {}
     public void switchPage(int page) {
-        if (page > quests.size()/5 || page < 0) return;
+        if (page > (quests.size()-1)/5 || page < 0) return;
         lp = page;
         this.page = new QuestMenuPage(quests, lp * 5, tracker, context, font, panel);
     }

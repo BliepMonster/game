@@ -49,7 +49,7 @@ public class PineTreePart extends HittableResourceCreator {
     public static final Texture OUTLINE = TextureIdMap.get("base:tiles:pine_tree_overlay");
     public void renderReady(int lastHitTick, boolean wasSuccessful, int x, int y, float remainingHealth, Camera camera) {
         if (Game.getTickCount() - lastHitTick <= 5) {
-            camera.addRenderJob(() -> camera.tintedImage(OUTLINE, wasSuccessful ? Color.red : Color.orange, x, y, 1, 2), -y);
+            camera.addRenderJob(() -> camera.tintedImage(OUTLINE, wasSuccessful ? Color.red : Color.orange, x-.5f, y, 2, 4.5f), -y);
         } else {
             camera.addRenderJob(() -> camera.image(TEXTURE, x-.5f, y, 2, 4.5f), -y);
         }

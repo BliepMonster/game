@@ -183,7 +183,7 @@ public class Main {
 
         
     }
-    public static final int CURSOR_W = 32, CURSOR_H = 32;
+    public static final int CURSOR_W = 32, CURSOR_H = 38;
     static void main() throws IOException {
         final var screen = new Screen();
         BufferedImage buffer = ImageIO.read(new File("res/textures/icons/cursor.png"));
