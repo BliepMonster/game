@@ -40,32 +40,24 @@ public class InventoryPageSelectorBar extends Component {
     }
     public void detectClick(Screen screen, float x, float y) {
         if (isInBounds(screen, x, y) && y < -.45f && y > -.55f && x > -.4f && x < .4f) {
-            switch (x) {
-                case float v when v < -.3f -> {
-                    if (current >= 2)
-                        callback.switchPage(current - 2);
-                }
-                case float v when v < -.225f -> {
-                    return;
-                }
-                case float v when v < -.125f -> {
-                    if (current >= 1)
-                        callback.switchPage(current - 1);
-                }
-                case float v when v < .125f -> {
-                    return;
-                }
-                case float v when v < .225f -> {
-                    if (current <= max-1)
-                        callback.switchPage(current + 1);
-                }
-                case float v when v < .3f -> {
-                    return;
-                }
-                default -> {
-                    if (current <= max-2)
-                        callback.switchPage(current + 2);
-                }
+            if (x < -.3f) {
+                if (current >= 2)
+                    callback.switchPage(current - 2);
+            } else if (x < -.225f) {
+                return;
+            } else if (x < -.125f) {
+                if (current >= 1)
+                    callback.switchPage(current - 1);
+            } else if (x < .125f) {
+                return;
+            } else if (x < .225f) {
+                if (current <= max-1)
+                    callback.switchPage(current + 1);
+            } else if (x < .3f) {
+                return;
+            } else {
+                if (current <= max-2)
+                    callback.switchPage(current + 2);
             }
             current = callback.lp;
         }

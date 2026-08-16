@@ -23,51 +23,45 @@ public class LootTable {
     }
     public void apply(FullItemStorage storage) {
         double value = Math.random();
-        switch (value) {
-            case double v1 when v1 < 0.5 -> {
-                var vv = map.get(LootType.COMMON);
-                if (vv == null) return;
-                int index = random.nextInt(0, vv.length);
-                var v = vv[index];
-                if (v != null) {
-                    v.apply(storage);
-                }
+        if (value < 0.5) {
+            var vv = map.get(LootType.COMMON);
+            if (vv == null) return;
+            int index = random.nextInt(0, vv.length);
+            var v = vv[index];
+            if (v != null) {
+                v.apply(storage);
             }
-            case double v1 when v1 < 0.8 -> {
-                var vv = map.get(LootType.UNCOMMON);
-                if (vv == null) return;
-                int index = random.nextInt(0, vv.length);
-                var v = vv[index];
-                if (v != null) {
-                    v.apply(storage);
-                }
+        } else if (value < 0.8) {
+            var vv = map.get(LootType.UNCOMMON);
+            if (vv == null) return;
+            int index = random.nextInt(0, vv.length);
+            var v = vv[index];
+            if (v != null) {
+                v.apply(storage);
             }
-            case double v1 when v1 < 0.92 -> {
-                var vv = map.get(LootType.RARE);
-                if (vv == null) return;
-                int index = random.nextInt(0, vv.length);
-                var v = vv[index];
-                if (v != null) {
-                    v.apply(storage);
-                }
+        } else if (value < 0.92) {
+            var vv = map.get(LootType.RARE);
+            if (vv == null) return;
+            int index = random.nextInt(0, vv.length);
+            var v = vv[index];
+            if (v != null) {
+                v.apply(storage);
             }
-            case double v1 when v1 < 0.98 -> {
-                var vv = map.get(LootType.EPIC);
-                if (vv == null) return;
-                int index = random.nextInt(0, vv.length);
-                var v = vv[index];
-                if (v != null) {
-                    v.apply(storage);
-                }
+        } else if (value < 0.98) {
+            var vv = map.get(LootType.EPIC);
+            if (vv == null) return;
+            int index = random.nextInt(0, vv.length);
+            var v = vv[index];
+            if (v != null) {
+                v.apply(storage);
             }
-            default -> {
-                var vv = map.get(LootType.LEGENDARY);
-                if (vv == null) return;
-                int index = random.nextInt(0, vv.length);
-                var v = vv[index];
-                if (v != null) {
-                    v.apply(storage);
-                }
+        } else {
+            var vv = map.get(LootType.LEGENDARY);
+            if (vv == null) return;
+            int index = random.nextInt(0, vv.length);
+            var v = vv[index];
+            if (v != null) {
+                v.apply(storage);
             }
         }
     }

@@ -40,20 +40,20 @@ public class SkillPageSelectorBar extends Component {
     }
     public void detectClick(Screen screen, float x, float y) {
         if (isInBounds(screen, x, y) && y < -.45f && y > -.55f && x > -.4f && x < .4f) {
-            switch (x) {
-                case float v when v < -.3f -> callback.switchPage(current - 2);
-                case float v when v < -.225f -> {
-                    return;
-                }
-                case float v when v < -.125f -> callback.switchPage(current - 1);
-                case float v when v < .125f -> {
-                    return;
-                }
-                case float v when v < .225f -> callback.switchPage(current + 1);
-                case float v when v < .3f -> {
-                    return;
-                }
-                default -> callback.switchPage(current + 2);
+            if (x < -.3f) {
+                callback.switchPage(current - 2);
+            } else if (x < -.225f) {
+                return;
+            } else if (x < -.125f) {
+                callback.switchPage(current - 1);
+            } else if (x < .125f) {
+                return;
+            } else if (x < .225f) {
+                callback.switchPage(current + 1);
+            } else if (x < .3f) {
+                return;
+            } else {
+                callback.switchPage(current + 2);
             }
             current = callback.lp;
         }

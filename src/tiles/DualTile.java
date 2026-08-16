@@ -10,10 +10,11 @@ public class DualTile extends Tile {
     public final Tile a, b;
     public final String attrib;
     private GameContext context;
-    public DualTile(Tile a, Tile b, String attrib) {
+    public DualTile(Tile a, Tile b, String attrib, GameContext context) {
         this.a = a;
         this.b = b;
         this.attrib = attrib;
+        this.context = context;
     }
 
     @Override
@@ -49,7 +50,10 @@ public class DualTile extends Tile {
 
     @Override
     public void render(Camera camera, int x, int y) {
-        if (context == null) return;
+        if (context == null) {
+            System.out.println("Context is null!");
+            return;
+        }
         if (context.attributes().contains(attrib)) a.render(camera, x, y);
         else b.render(camera, x, y);
     }

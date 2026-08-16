@@ -43,18 +43,15 @@ public class HotbarComponent extends Component {
     @Override
     public void detectClick(Screen screen, float x, float y) {
         if (isInBounds(screen, x, y) && y > -.95f && y < -.85f) {
-            switch (x) {
-                case float f when f < -.55f && f > -.65f -> player.selectItem(0);
-                case float f when f < -.4f && f > -.5f -> player.selectItem(1);
-                case float f when f < -.25f && f > -.35f -> player.selectItem(2);
-                case float f when f < -.1f && f > -.2f -> player.selectItem(3);
-                case float f when f < .05f && f > -.05f -> player.selectItem(4);
-                case float f when f < .2f && f > .1f -> player.selectItem(5);
-                case float f when f < .35f && f > .25f -> player.selectItem(6);
-                case float f when f < .5f && f > .4f -> player.selectItem(7);
-                case float f when f < .65f && f > .55f -> player.selectItem(8);
-                default -> {}
-            }
+            if (x < -.55f && x > -.65f) player.selectItem(0);
+            else if (x < -.4f && x > -.5f) player.selectItem(1);
+            else if (x < -.25f && x > -.35f) player.selectItem(2);
+            else if (x < -.1f && x > -.2f) player.selectItem(3);
+            else if (x < .05f && x > -.05f) player.selectItem(4);
+            else if (x < .2f && x > .1f) player.selectItem(5);
+            else if (x < .35f && x > .25f) player.selectItem(6);
+            else if (x < .5f && x > .4f) player.selectItem(7);
+            else if (x < .65f && x > .55f) player.selectItem(8);
         }
     }
     @Override

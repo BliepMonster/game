@@ -125,19 +125,17 @@ public class InventoryGridComponent extends Component {
     }
     // should refactor later
     private int getX(float x) {
-        return switch (x) {
-            case float f when f < -.55f && f > -.65f -> 0;
-            case float f when f < -.4f && f > -.5f -> 1;
-            case float f when f < -.25f && f > -.35f -> 2;
-            case float f when f < -.1f && f > -.2f -> 3;
-            case float f when f < .05f && f > -.05f -> 4;
-            case float f when f < .2f && f > .1f -> 5;
-            case float f when f < .35f && f > .25f -> 6;
-            case float f when f < .5f && f > .4f -> 7;
-            case float f when f < .65f && f > .55f -> 8;
-            case float f when f < WIDTH/2+2*SPACING+ITEM_SIZE && f > WIDTH/2+2*SPACING -> -2;
-            default -> -1;
-        };
+        if (x < -.55f && x > -.65f) return 0;
+        if (x < -.4f && x > -.5f) return 1;
+        if (x < -.25f && x > -.35f) return 2;
+        if (x < -.1f && x > -.2f) return 3;
+        if (x < .05f && x > -.05f) return 4;
+        if (x < .2f && x > .1f) return 5;
+        if (x < .35f && x > .25f) return 6;
+        if (x < .5f && x > .4f) return 7;
+        if (x < .65f && x > .55f) return 8;
+        if (x < WIDTH/2+2*SPACING+ITEM_SIZE && x > WIDTH/2+2*SPACING) return -2;
+        return -1;
     }
     private int getY(Screen screen, float r) {
         float h  = -this.getHeightConstraint().evaluate(screen)/2;
@@ -160,14 +158,13 @@ public class InventoryGridComponent extends Component {
                 return;
             }
             if (slot == -2) {
-                var enumV = switch (s2) {
-                    case 0 -> EquipmentSlot.BOOTS;
-                    case 1 -> EquipmentSlot.LEGGINGS;
-                    case 2 -> EquipmentSlot.RING;
-                    case 3 -> EquipmentSlot.CHESTPLATE;
-                    case 4 -> EquipmentSlot.HELMET;
-                    default -> throw new RuntimeException("this should never happen");
-                };
+                EquipmentSlot enumV;
+                if (s2 == 0) enumV = EquipmentSlot.BOOTS;
+                else if (s2 == 1) enumV = EquipmentSlot.LEGGINGS;
+                else if (s2 == 2) enumV = EquipmentSlot.RING;
+                else if (s2 == 3) enumV = EquipmentSlot.CHESTPLATE;
+                else if (s2 == 4) enumV = EquipmentSlot.HELMET;
+                else throw new RuntimeException("this should never happen");
                 switchWithEquipment(enumV);
             } else {
                 switchWithItem(s2*NUM_ITEMS_PER_ROW+slot);
@@ -213,14 +210,13 @@ public class InventoryGridComponent extends Component {
         int s2 = getY(screen, y);
         if (s2 == -1) return null;
         if (slot == -2) {
-            var enumV = switch (s2) {
-                case 0 -> EquipmentSlot.BOOTS;
-                case 1 -> EquipmentSlot.LEGGINGS;
-                case 2 -> EquipmentSlot.RING;
-                case 3 -> EquipmentSlot.CHESTPLATE;
-                case 4 -> EquipmentSlot.HELMET;
-                default -> throw new RuntimeException("this should never happen");
-            };
+            EquipmentSlot enumV;
+            if (s2 == 0) enumV = EquipmentSlot.BOOTS;
+            else if (s2 == 1) enumV = EquipmentSlot.LEGGINGS;
+            else if (s2 == 2) enumV = EquipmentSlot.RING;
+            else if (s2 == 3) enumV = EquipmentSlot.CHESTPLATE;
+            else if (s2 == 4) enumV = EquipmentSlot.HELMET;
+            else throw new RuntimeException("this should never happen");
             return new SelectedItem(false, enumV.ordinal());
         }
         return new SelectedItem(true, s2 * NUM_ITEMS_PER_ROW + slot);

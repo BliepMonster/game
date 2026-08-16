@@ -16,7 +16,7 @@ public abstract class EnemySpawner extends TilePart implements JobActor {
         this.context = context;
         this.ticksToRespawn = ticksToRespawn;
         this.worldToSpawn = worldID;
-        applyRespawnJob();
+        JobSystem.addJob(new ResourceJob(this, 5));
     }
     public void onMobDeath() {
         applyRespawnJob();

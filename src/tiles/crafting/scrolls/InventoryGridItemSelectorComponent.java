@@ -46,18 +46,16 @@ public class InventoryGridItemSelectorComponent extends Component {
     }
 
     private int getCol(float x) {
-        return switch (x) {
-            case float f when f < -.55f && f > -.65f -> 0;
-            case float f when f < -.4f && f > -.5f -> 1;
-            case float f when f < -.25f && f > -.35f -> 2;
-            case float f when f < -.1f && f > -.2f -> 3;
-            case float f when f < .05f && f > -.05f -> 4;
-            case float f when f < .2f && f > .1f -> 5;
-            case float f when f < .35f && f > .25f -> 6;
-            case float f when f < .5f && f > .4f -> 7;
-            case float f when f < .65f && f > .55f -> 8;
-            default -> -1;
-        };
+        if (x < -.55f && x > -.65f) return 0;
+        if (x < -.4f && x > -.5f) return 1;
+        if (x < -.25f && x > -.35f) return 2;
+        if (x < -.1f && x > -.2f) return 3;
+        if (x < .05f && x > -.05f) return 4;
+        if (x < .2f && x > .1f) return 5;
+        if (x < .35f && x > .25f) return 6;
+        if (x < .5f && x > .4f) return 7;
+        if (x < .65f && x > .55f) return 8;
+        return -1;
     }
 
     private int getRow(Screen screen, float r) {

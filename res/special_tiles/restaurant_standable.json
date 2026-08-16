@@ -1,0 +1,21 @@
+{
+  "type": "texture_adapt",
+  "ids": [
+    "base:tiles:restaurant16",
+    "base:tiles:restaurant26",
+    "base:tiles:restaurant36",
+    "base:tiles:restaurant46",
+    "base:tiles:restaurant56",
+    "base:tiles:restaurant17",
+    "base:tiles:restaurant27",
+    "base:tiles:restaurant37",
+    "base:tiles:restaurant47",
+    "base:tiles:restaurant57",
+    "base:tiles:restaurant18",
+    "base:tiles:restaurant28",
+    "base:tiles:restaurant38",
+    "base:tiles:restaurant48",
+    "base:tiles:restaurant58"
+  ],
+  "standable": true
+}

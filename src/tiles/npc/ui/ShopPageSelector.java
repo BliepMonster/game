@@ -40,20 +40,20 @@ public class ShopPageSelector extends Component {
     }
     public void detectClick(Screen screen, float x, float y) {
         if (isInBounds(screen, x, y) && y < -.6f && y > -.7f && x > -.7f && x < 1.2f) {
-            switch (x) {
-                case float v when v < -.6f -> callback.switchPage(current - 2);
-                case float v when v < -.525f -> {
-                    return;
-                }
-                case float v when v < -.425f -> callback.switchPage(current - 1);
-                case float v when v < -.175f -> {
-                    return;
-                }
-                case float v when v < -.075f -> callback.switchPage(current + 1);
-                case float v when v < 0f -> {
-                    return;
-                }
-                default -> callback.switchPage(current + 2);
+            if (x < -.6f) {
+                callback.switchPage(current - 2);
+            } else if (x < -.525f) {
+                return;
+            } else if (x < -.425f) {
+                callback.switchPage(current - 1);
+            } else if (x < -.175f) {
+                return;
+            } else if (x < -.075f) {
+                callback.switchPage(current + 1);
+            } else if (x < 0f) {
+                return;
+            } else {
+                callback.switchPage(current + 2);
             }
             current = callback.lp;
         }

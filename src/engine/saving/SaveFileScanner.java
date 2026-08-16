@@ -27,55 +27,51 @@ public final class SaveFileScanner {
             return makeToken(EOF);
         start = index;
         char c = advance();
-        switch (c) {
-            case '{' -> {
-                return makeToken(LBRACE);
-            }
-            case '}' -> {
-                return makeToken(RBRACE);
-            }
-            case '"' -> {
-                return string();
-            }
-            case 'T' -> {
-                return makeToken(TRUE);
-            }
-            case 'F' -> {
-                return makeToken(FALSE);
-            }
-            case 'N' -> {
-                return makeToken(NULL);
-            }
-            case '%' -> {
-                return makeToken(PERCENT);
-            }
-            case '*' -> {
-                return makeToken(STAR);
-            }
-            case '/' -> {
-                return makeToken(SLASH);
-            }
-            case '_' -> {
-                return makeToken(UNDERSCORE);
-            }
-            case '[' -> {
-                return makeToken(LBRACKET);
-            }
-            case ']' -> {
-                return makeToken(RBRACKET);
-            }
-            case ';' -> {
-                return makeToken(SEMICOLON);
-            }
-            // negative numbers
-            case '-' -> {
-                return number();
-            }
-            default -> {
-                if (isNumber(c))
-                    return number();
-            }
+        if (c == '{') {
+            return makeToken(LBRACE);
         }
+        if (c == '}') {
+            return makeToken(RBRACE);
+        }
+        if (c == '"') {
+            return string();
+        }
+        if (c == 'T') {
+            return makeToken(TRUE);
+        }
+        if (c == 'F') {
+            return makeToken(FALSE);
+        }
+        if (c == 'N') {
+            return makeToken(NULL);
+        }
+        if (c == '%') {
+            return makeToken(PERCENT);
+        }
+        if (c == '*') {
+            return makeToken(STAR);
+        }
+        if (c == '/') {
+            return makeToken(SLASH);
+        }
+        if (c == '_') {
+            return makeToken(UNDERSCORE);
+        }
+        if (c == '[') {
+            return makeToken(LBRACKET);
+        }
+        if (c == ']') {
+            return makeToken(RBRACKET);
+        }
+        if (c == ';') {
+            return makeToken(SEMICOLON);
+        }
+        // negative numbers
+        if (c == '-') {
+            return number();
+        }
+        if (isNumber(c))
+            return number();
         throw new RuntimeException("Invalid token: "+c);
     }
     boolean isAtEnd() {
@@ -92,11 +88,10 @@ public final class SaveFileScanner {
     private void skipWhiteSpace() {
         while (true) {
             char c = peek();
-            switch (c) {
-                case ' ', '\t', '\n' -> advance();
-                default -> {
-                    return;
-                }
+            if (c == ' ' || c == '\t' || c == '\n') {
+                advance();
+            } else {
+                return;
             }
         }
     }

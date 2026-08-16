@@ -21,46 +21,44 @@ public class JsonScanner {
     JsonToken scanOnce() {
         skipWhitespace();
         char c = advance();
-        return switch (c) {
-            case '{' -> makeToken(LBRACE);
-            case '}' -> makeToken(RBRACE);
-            case '[' -> makeToken(LBRACKET);
-            case ']' -> makeToken(RBRACKET);
-            case ',' -> makeToken(COMMA);
-            case ':' -> makeToken(COLON);
-            case '"' -> string();
-            case '-' -> number(c);
-            default -> {
-                if (Character.isDigit(c)) {
-                    yield number(c);
-                } else if (c == 't') {
-                    if (advance() != 'r' || advance() != 'u' || advance() != 'e')
-                        throw new RuntimeException("Invalid token");
-                    yield makeToken(TRUE);
-                } else if (c == 'f') {
-                    if (advance() != 'a' || advance() != 'l' || advance() != 's' || advance() != 'e')
-                        throw new RuntimeException("Invalid token");
-                    yield makeToken(FALSE);
-                } else if (c == 'n') {
-                    if (advance() != 'u' || advance() != 'l' || advance() != 'l')
-                        throw new RuntimeException("Invalid token");
-                    yield makeToken(NULL);
-                }
+        if (c == '{') return makeToken(LBRACE);
+        if (c == '}') return makeToken(RBRACE);
+        if (c == '[') return makeToken(LBRACKET);
+        if (c == ']') return makeToken(RBRACKET);
+        if (c == ',') return makeToken(COMMA);
+        if (c == ':') return makeToken(COLON);
+        if (c == '"') return string();
+        if (c == '-') return number(c);
+        if (Character.isDigit(c)) {
+            return number(c);
+        }
+        if (c == 't') {
+            if (advance() != 'r' || advance() != 'u' || advance() != 'e')
                 throw new RuntimeException("Invalid token");
-            }
-        };
+            return makeToken(TRUE);
+        }
+        if (c == 'f') {
+            if (advance() != 'a' || advance() != 'l' || advance() != 's' || advance() != 'e')
+                throw new RuntimeException("Invalid token");
+            return makeToken(FALSE);
+        }
+        if (c == 'n') {
+            if (advance() != 'u' || advance() != 'l' || advance() != 'l')
+                throw new RuntimeException("Invalid token");
+            return makeToken(NULL);
+        }
+        throw new RuntimeException("Invalid token");
     }
     char parseBackspace() {
         advance(); // consume \
-        return switch (advance()) {
-            case '\\' -> '\\';
-            case '\'' -> '\'';
-            case 't' -> '\t';
-            case 'r' -> '\r';
-            case 'n' -> '\n';
-            case '"' -> '"';
-            default -> throw new RuntimeException("Invalid escape sequence");
-        };
+        char c = advance();
+        if (c == '\\') return '\\';
+        if (c == '\'') return '\'';
+        if (c == 't') return '\t';
+        if (c == 'r') return '\r';
+        if (c == 'n') return '\n';
+        if (c == '"') return '"';
+        throw new RuntimeException("Invalid escape sequence");
     }
     JsonToken string() {
         StringBuilder sb = new StringBuilder();

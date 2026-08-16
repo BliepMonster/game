@@ -14,7 +14,7 @@ import tiles.TilePart;
 import java.lang.reflect.Constructor;
 
 public class JSONLoader {
-    private static void loadTiles(JsonArray array, CoordinateMap<Tile> map) {
+    private static void loadTiles(JsonArray array, CoordinateMap<Tile> map, GameContext context) {
         for (var v : array.values) {
             JsonObject obj = (JsonObject) v;
 
@@ -22,7 +22,8 @@ public class JSONLoader {
             int y = (int) ((JsonNumber) obj.values.get("y")).num;
 
             JsonObject tileData = (JsonObject) obj.values.get("tile");
-            Tile tile = TileLoader.load(tileData); // IMPORTANT
+            Tile tile = TileLoader.load(tileData,
+                    context); // IMPORTANT
 
             map.put(x, y, tile);
         }
@@ -50,7 +51,7 @@ public class JSONLoader {
         JsonArray tiles = (JsonArray) file.values.get("tiles");
         JsonArray objects = (JsonArray) file.values.get("objects");
 
-        loadTiles(tiles, map);
+        loadTiles(tiles, map, context);
         loadObjects(objects, map, context);
     }
     public static void loadWorld(JsonObject file, CoordinateMap<Tile> map, GameContext context) {
@@ -58,7 +59,7 @@ public class JSONLoader {
         JsonArray tiles = (JsonArray) file.values.get("tiles");
         JsonArray objects = (JsonArray) file.values.get("objects");
 
-        loadTiles(tiles, map);
+        loadTiles(tiles, map, context);
         loadObjects(objects, map, context);
     }
     public static void loadOnSpawn(World world, JsonFile file) throws ClassNotFoundException, NoSuchMethodException {

@@ -23,7 +23,7 @@ public class StrawberryTilePart extends ResourceCreator {
     public static final Texture READY = TextureIdMap.get("base:tiles:strawberry"), UNREADY = TextureIdMap.get("base:tiles:strawberry2");
     public static final ResourceDefinition DEFINITION = new ResourceDefinition(
             ItemConstants.ITEM_STRAWBERRY,
-            4, 1,
+            4, 2,
             SkillSet.SkillType.FORAGING, StatHolder.Stat.FORAGING_YIELD, Game.TICKS_PER_SECOND*9);
     public StrawberryTilePart(Vector2f position) {
         super(DEFINITION, position);

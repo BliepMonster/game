@@ -30,6 +30,7 @@ public class World {
     private float brightness = 1f;
     public final List<Entity> toAdd = new ArrayList<>();
     public final ArrayList<EntityProducer> onLoadEntities = new ArrayList<>();
+    private final List<Entity> onLoadSpawnedEnemies = new ArrayList<>();
     public final List<Entity> entities = new ArrayList<>();
     public float getBrightness() {
         return brightness;
@@ -41,15 +42,18 @@ public class World {
         WorldRegistry.put(id, this);
     }
     public void load(Camera camera) {
+        onLoadSpawnedEnemies.clear();
         onLoadEntities.forEach(
                 (constructor) -> {
                     try {
-                        entities.add(constructor.constructor().newInstance(
+                        var entity = constructor.constructor().newInstance(
                                 new Vector2f(
                                         constructor.x(),
                                         constructor.y()
                                 )
-                        ));
+                        );
+                        if (entity instanceof Enemy) onLoadSpawnedEnemies.add(entity);
+                        entities.add(entity);
                     } catch (InstantiationException | InvocationTargetException | IllegalAccessException e) {
                         throw new RuntimeException(e);
                     }
@@ -166,6 +170,10 @@ public class World {
     }
     public void spawn(Entity entity) {
         this.toAdd.add(entity);
+    }
+    public void killOnLoadEnemies() {
+        entities.removeAll(onLoadSpawnedEnemies);
+        onLoadSpawnedEnemies.clear();
     }
     public void onPlayerRespawn(GameContext context) {
     }

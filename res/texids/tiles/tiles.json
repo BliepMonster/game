@@ -21,6 +21,7 @@
   "base:tiles:garden_pot": "res/textures/tiles/garden_pot.png",
   "base:tiles:seed_maker": "res/textures/tiles/seed_maker.png",
   "base:tiles:restaurant_empty": "res/textures/tiles/restaurant_empty.png",
+  "base:tiles:restaurant": "res/textures/tiles/restaurant.png",
   "base:tiles:wheat": "res/textures/tiles/wheat.png",
   "base:tiles:wheat_left": "res/textures/tiles/wheat_left.png",
   "base:tiles:wheat_ungrown": "res/textures/tiles/wheat_ungrown.png",

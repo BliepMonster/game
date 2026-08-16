@@ -95,6 +95,7 @@ public class Game implements GameContext {
         );
     }
     public void movePlayer(World world, Vector2f position) {
+        if (this.world != world) this.world.killOnLoadEnemies();
         this.world = world;
         world.load(camera);
         player.getPosition().set(position);

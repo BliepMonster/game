@@ -74,7 +74,6 @@ public class TileType {
         }
     }
     public static TileType get(String key) {
-        if (types.get(key) == null) throw new RuntimeException();
         return types.get(key);
     }
     public void render(Camera camera, int x, int y) {

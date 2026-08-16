@@ -10,7 +10,7 @@ import org.joml.Vector2f;
 import tool.editor.TilePartLoader;
 
 public class GemstoneGolemSpawner extends EnemySpawner {
-    public static final int TICKS = Game.TICKS_PER_SECOND*40;
+    public static final int TICKS = Game.TICKS_PER_SECOND*180;
 
     public GemstoneGolemSpawner(Vector2f position, GameContext context) {
         super(position, context, TICKS, "GEMSTONE_CAVE");
