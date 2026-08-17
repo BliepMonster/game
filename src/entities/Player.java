@@ -32,7 +32,7 @@ import static org.lwjgl.glfw.GLFW.*;
 public class Player implements Entity, LightSource {
     private final ArrayList<VelocityChange> velocityChanges = new ArrayList<>();
     private final Vector2f position = new Vector2f();
-    private final Hitbox step = new RectangularHitbox(-.425f, -1f, .85f, .2f, this);
+    private final Hitbox step = new RectangularHitbox(-.35f-1f/16f, -1.01f, .7f+2f/16f, .2f, this);
     public StatHolder stats;
     private int selectedHotbarSlot = 0;
     public final ItemInventory items;
@@ -236,7 +236,7 @@ public class Player implements Entity, LightSource {
     }
     public Vector2f getFacingPosition(Vector2f mousePos) {
         float x = getX();
-        float y = getY()-1;
+        float y = getY()-.8f;
         var dx = mousePos.x - getX();
         var dy = mousePos.y - getY();
         Direction facing;
@@ -245,8 +245,8 @@ public class Player implements Entity, LightSource {
         return switch (facing) {
             case UP -> new Vector2f(x, y+1);
             case DOWN -> new Vector2f(x, y-1);
-            case LEFT -> new Vector2f(x-1.425f, y);
-            case RIGHT -> new Vector2f(x+1.425f, y);
+            case LEFT -> new Vector2f(x-1.35f, y);
+            case RIGHT -> new Vector2f(x+1.35f, y);
         };
     }
 

@@ -7,10 +7,10 @@
   "damage_type": "NORMAL",
   "stats": [],
   "melee_type": "cone",
-  "damage": 5,
-  "cooldown": 6,
+  "damage": 7,
+  "cooldown": 5,
 
-  "range": 1.5,
-  "angle": 0.6,
-  "knockback": 0.35
+  "range": 1.6,
+  "angle": 0.3,
+  "knockback": 0.4
 }

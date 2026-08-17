@@ -31,10 +31,8 @@ public class ConeWeaponDefinition extends MeleeWeaponItemDefinition {
     @Override
     public ItemUseResult use(Tile tile, Item item, GameContext context, Vector2f worldPos) {
         var v = super.use(tile, item, context, worldPos);
-        if (v.handled()) {
-            var player = context.getPlayer();
-            context.spawn(new SwingConeEffect(new Vector2f(player.getX(), player.getY()), 6, this.size, (float)Math.atan2(worldPos.y-player.getY(), worldPos.x-player.getX()), this.angle*2));
-        }
+        var player = context.getPlayer();
+        context.spawn(new SwingConeEffect(new Vector2f(player.getX(), player.getY()), 6, this.size, (float)Math.atan2(worldPos.y-player.getY(), worldPos.x-player.getX()), this.angle*2));
         return v;
     }
 
