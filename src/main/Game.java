@@ -9,6 +9,7 @@ import entities.Player;
 import org.joml.Vector2f;
 import quests.QuestTracker;
 import saving.PlayerSaver;
+import saving.SavedAttributeData;
 import saving.SavedGame;
 import saving.SavedHome;
 import tiles.Tile;
@@ -71,6 +72,7 @@ public class Game implements GameContext {
         world.render(this, camera, camera.getTileSize());
         player.render(camera);
         camera.renderAllJobs();
+        camera.renderEffects(this);
     }
 
     @Override

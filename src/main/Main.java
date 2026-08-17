@@ -40,7 +40,7 @@ import java.util.ArrayList;
 
 public class Main {
     public static boolean DEBUG_MODE = false;
-    public static final boolean ALLOW_DEBUG = false;
+    public static final boolean ALLOW_DEBUG = true;
     public enum State {
         MAIN_MENU,
         LOAD_WORLD,
@@ -173,11 +173,18 @@ public class Main {
                     deadLastFrame = false;
                 }
                 game.tick(pressed, screen, TILE_SIZE, !b);
+                double scroll = Input.getScrollY();
+                if (scroll != 0) {
+                    int slot = game.player.getSelectedHotbarSlot();
+                    slot = (slot - (int) Math.signum(scroll) + 9) % 9;
+                    game.player.selectItem(slot);
+                }
             } else {
                 deadLastFrame = true;
                 Game.ticks++;
             }
             pressed = false;
+            Input.clearScroll();
         }
         return true;
 

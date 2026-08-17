@@ -63,9 +63,14 @@ public class DualTile extends Tile {
     public JsonValue save() {
         JsonObject object = new JsonObject();
         object.values.put("type", new JsonString("dual"));
-        object.values.put("a", a.save());
-        object.values.put("b", b.save());
+        object.values.put("a", a.saveWithPart());
+        object.values.put("b", b.saveWithPart());
         object.values.put("attrib", new JsonString(attrib));
         return object;
+    }
+
+    @Override
+    public JsonValue saveWithPart() {
+        return save();
     }
 }

@@ -42,7 +42,7 @@ public class RenderOverTile extends Tile {
         JsonObject object = new JsonObject();
         object.values.put("type", new JsonString("over"));
         object.values.put("key", new JsonString(keys.get(type)));
-        object.values.put("over", bottom.save());
+        object.values.put("over", bottom.saveWithPart());
         priority.ifPresent(aFloat -> object.values.put("prio", new JsonNumber(aFloat)));
         return object;
     }

@@ -1,5 +1,7 @@
 package tool.editor;
 
+import buildings.RepairTask;
+import buildings.RepairTaskNPC;
 import engine.CoordinateMap;
 import engine.core.Texture;
 import entities.dungeons.ShooterEnemy;
@@ -8,6 +10,8 @@ import org.joml.Vector2f;
 import tiles.*;
 import tiles.doors.DungeonExitTilePart;
 import tiles.doors.EntranceTilePart;
+import tiles.npc.NpcDefinition;
+import tiles.npc.ShopDefinitionRegistry;
 import tiles.resources.*;
 import tiles.spawner.GemstoneGolemSpawner;
 
@@ -27,18 +31,21 @@ public enum EditorToolState {
     public void apply(Tile tile, CoordinateMap<Tile> map, int x, int y, World world, GameContext context) {
         switch (this) {
             case O1 -> {
-                int xx = 2, yy = -9;
+                int xx = -5, yy = -2;
                 int tx = x-xx, ty = y-yy;
-                var type = TileType.get("base:tiles:restaurant_empty"+tx+ty);
-                if (type == null) return;
-                var type2 = TileType.get("base:tiles:restaurant"+tx+ty);
-                var road = TileType.get("ROAD");
-                var compost = TileType.get("COMPOST");
-                if (ty > 5) map.put(x, y, new DualTile(new RenderOverTile(new DefaultTile(road), type2, 8000), new RenderOverTile(new DefaultTile(road), type), "base:restaurant_unlocked", context));
-                else map.put(x, y, new DualTile(new RenderOverTile(new DefaultTile(road), type2), new RenderOverTile(new DefaultTile(compost), type), "base:restaurant_unlocked", context));
+                var type2 = TileType.get("base:scenes:restaurant:"+tx+":"+ty);
+                if (type2 == null) return;
+                var t = new DefaultTile(type2);
+                t.setPart(new EntranceTilePart(new Vector2f(x, y), "HOME_WORLD", new Vector2f(4, -9), TextureIdMap.get("base:empty")));
+                map.put(x, y, t);
             }
             case O2 -> {
-                map.put(x, y, new WallTile(TileType.get("ROAD")));
+                var t = new DefaultTile(TileType.get("ROAD"));
+                t.setPart(new RepairTaskNPC(new Vector2f(x, y), ShopDefinitionRegistry.get("base:empty"), RepairTask.get("base:restaurant")));
+                map.put(x, y, new DualTile(
+                        new DefaultTile(TileType.get("ROAD")),
+                        t, "base:restaurant_unlocked", context
+                ));
             }
             case O3 -> {
                 map.put(x, y, new WallTile(TileType.get("base:tiles:wall_bottom")));

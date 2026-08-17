@@ -1,0 +1,8 @@
+{
+  "name": "Void",
+  "id": "base:empty",
+  "texture": "res/textures/npc/chef.png",
+  "height": 3,
+  "dialogue": [
+  ]
+}

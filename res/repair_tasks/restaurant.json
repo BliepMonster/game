@@ -1,0 +1,11 @@
+{
+  "id": "base:restaurant",
+  "resources": {
+    "Copper Bar": 8,
+    "Maple Wood": 30,
+    "Steel Bar": 3,
+    "Paper": 2
+  },
+  "coins": 0,
+  "attrib": "base:restaurant_unlocked"
+}

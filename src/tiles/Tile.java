@@ -1,5 +1,7 @@
 package tiles;
 
+import engine.json.JsonObject;
+import engine.json.JsonString;
 import engine.json.JsonValue;
 import engine.saving.ObjectSaveable;
 import main.Camera;
@@ -31,4 +33,18 @@ public abstract class Tile {
         onSelfStand(context);
     }
     public abstract JsonValue save();
+
+    public JsonValue saveWithPart() {
+        JsonValue tileData = save();
+        if (part != null && tileData instanceof JsonObject obj) {
+            JsonValue partData = part.save();
+            if (partData instanceof JsonString s) {
+                var wrapped = new JsonObject();
+                wrapped.values.put("type", s);
+                partData = wrapped;
+            }
+            obj.values.put("part", partData);
+        }
+        return tileData;
+    }
 }

@@ -35,6 +35,9 @@ public final class InventoryStorage implements Iterable<Map.Entry<String, Intege
             add(pair.key(), pair.value());
         }
     }
+    public InventoryStorage(Map<String, Integer> map) {
+        this.inventory.putAll(map);
+    }
 
     // This method does not care whether you have enough. Please check before using this method.
     public void spend(String name, int amount) {

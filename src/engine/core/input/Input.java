@@ -203,4 +203,7 @@ public final class Input {
     public static void clearDeltas() {
         deltaX = deltaY = 0;
     }
+    public static void clearScroll() {
+        scrollX = scrollY = 0;
+    }
 }

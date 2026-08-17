@@ -21,6 +21,8 @@ import tiles.doors.EntranceTilePart;
 import tiles.house.ChestTilePart;
 import tiles.npc.ShopDefinitionRegistry;
 import tiles.npc.DialogueNPC;
+import buildings.RepairTask;
+import buildings.RepairTaskNPC;
 import tiles.resources.*;
 import tiles.spawner.GemstoneGolemSpawner;
 import tiles.spawner.GoldenZombieSpawner;
@@ -36,6 +38,7 @@ public final class TilePartLoader {
     public static final String ID_POLISHING_MACHINE = "polishing_machine";
     public static final String ID_COAL_ORE = "coal_ore";
     public static final String ID_COPPER_ORE = "copper_ore";
+    public static final String ID_REPAIRER = "repairer";
     public static final String ID_WHEAT = "wheat";
     public static final String ID__LEFT_WHEAT = "wheat_l";
     public static final String ID_MAPLE_TREE = "tree_maple";
@@ -108,6 +111,7 @@ public final class TilePartLoader {
             case ID_COAL_ORE -> new CoalOrePart(pos);
             case ID_CRAFTING_STATION -> new CraftingStationTilePart(pos);
             case ID_SHOP_NPC -> new DialogueNPC(pos, ShopDefinitionRegistry.get(((JsonString)obj.values.get("id")).value), font);
+            case ID_REPAIRER -> new RepairTaskNPC(pos, ShopDefinitionRegistry.get(((JsonString)obj.values.get("id")).value), RepairTask.get(((JsonString)obj.values.get("task")).value));
             case ID_TOMBSTONE -> new TombstoneTilePart(pos);
             case ID_ZOMBIE_SPAWNER -> new ZombieSpawner(pos, context);
             case ID_FURNACE -> new FurnaceTilePart(pos);

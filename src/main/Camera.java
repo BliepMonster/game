@@ -7,12 +7,15 @@ import entities.Player;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
 
 public class Camera {
     record RenderJob(Runnable function, float z) {}
     private final Player player;
     private float tileSize;
     private final DrawManager draw;
+    private final List<CameraEffect> effects = new ArrayList<>();
     private final ArrayList<RenderJob> renderJobs = new ArrayList<>();
     private final HashSet<LightSource> light = new HashSet<>();
     public float defaultBrightness = 1f;
@@ -81,6 +84,11 @@ public class Camera {
     public void flushBatch() {
         draw.flushLitBatch();
     }
+    public void renderEffects(GameContext context) {
+        effects.replaceAll(effect -> effect.getTimeLeft() < 0 ? effect.getSuccessor(context).orElse(null) : effect);
+        effects.removeIf(Objects::isNull);
+        effects.forEach(effect ->effect.draw(draw));
+    }
     public void cone(Color color, float cx, float cy, float size, float aim, float sweep, int segments) {
         var verts = new float[(segments+1)*6];
         float invAspect = 1f/draw.getScreen().getAspectRatio();
@@ -100,5 +108,8 @@ public class Camera {
             verts[idx++] = sy + (float)Math.sin(a1)*ss;
         }
         draw.polygon(color, verts);
+    }
+    public void addEffect(CameraEffect effect) {
+        effects.add(effect);
     }
 }

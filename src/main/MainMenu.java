@@ -78,7 +78,6 @@ public class MainMenu {
                     font, size
             );
             if (clicked && x >= -.2f && x <= .2f && y >= yy && y <= yy+.2f) {
-                System.out.println("clicked");
                 var file = new TokenizedSaveFile();
                 try {
                     file.readAndOverride(new FileReader("saves/"+s+".save"));

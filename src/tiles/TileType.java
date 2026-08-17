@@ -66,6 +66,14 @@ public class TileType {
                                         types.put(s, t);
                                         keys.put(t, s);
                                     }
+                                } else if (type.equals("prefix_adapt")) {
+                                    boolean b = ((JsonBoolean) file.values.get("standable")).bool;
+                                    String prefix = ((JsonString) file.values.get("prefix")).value;
+                                    for (var entry : TextureIdMap.getByPrefix(prefix).entrySet()) {
+                                        TileType t = new TileType(b, entry.getValue());
+                                        types.put(entry.getKey(), t);
+                                        keys.put(t, entry.getKey());
+                                    }
                                 }
                             }
                     );

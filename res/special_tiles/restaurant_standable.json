@@ -15,7 +15,8 @@
     "base:tiles:restaurant28",
     "base:tiles:restaurant38",
     "base:tiles:restaurant48",
-    "base:tiles:restaurant58"
+    "base:tiles:restaurant58",
+    "base:tiles:restaurant21"
   ],
   "standable": true
 }

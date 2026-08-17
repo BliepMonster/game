@@ -1,0 +1,7 @@
+{
+  "dimensions": [11,11],
+  "type": "algo",
+  "prefix": "base:scenes:restaurant:",
+  "between": ":",
+  "texid": "base:scenes:restaurant"
+}

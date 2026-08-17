@@ -8,8 +8,8 @@ import engine.gui.constraints.position.CenterConstraint;
 import engine.gui.constraints.size.RelativeSizeConstraint;
 
 public class DialogueController extends Component {
-    private int position;
-    private DialoguePiece[] pieces;
+    protected int position;
+    protected DialoguePiece[] pieces;
     public DialogueController() {
         super(CenterConstraint.CENTER, CenterConstraint.CENTER, new RelativeSizeConstraint(0), new RelativeSizeConstraint(0));
         this.pieces = null;
@@ -17,7 +17,9 @@ public class DialogueController extends Component {
     }
     public void set(DialoguePiece[] pieces) {
         this.pieces = pieces;
-        pieces[0].start();
+        if (pieces.length > 0)
+            pieces[0].start();
+        else advance();
     }
 
     public void advance() {
@@ -32,7 +34,8 @@ public class DialogueController extends Component {
 
     @Override
     public void manage(DrawManager draw, boolean pressed) {
-        pieces[position].manage(draw, pressed);
+        if (pieces.length > 0)
+            pieces[position].manage(draw, pressed);
     }
 
     @Override

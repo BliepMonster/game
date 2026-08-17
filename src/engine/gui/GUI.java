@@ -105,7 +105,16 @@ public class GUI {
             enable(i);
         }
     }
-
+    public static void disableAll() {
+        for (int i = 0; i < components.length; i++) {
+            disable(i);
+        }
+    }
+    public static void enableAll() {
+        for (int i = 0; i < components.length; i++) {
+            enable(i);
+        }
+    }
     public static void toggleAll() {
         for (int i = 0; i < components.length; i++) {
             toggle(i);

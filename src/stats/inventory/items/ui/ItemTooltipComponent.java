@@ -51,7 +51,7 @@ public class ItemTooltipComponent extends Component {
             for (int i = 0; i < StatHolder.Stat.values().length; i++) {
                 float f = held.get(StatHolder.Stat.values()[i]);
                 if (f == 0) continue;
-                String s = ("\n")+(StatHolder.Stat.values()[i].name)+(": ")+(f);
+                String s = ("\n")+(StatHolder.Stat.values()[i].name)+(": ")+(f == (int) f ? Integer.toString((int) f) : f);
                 cache.add(s);
                 sb.append(s);
             }
@@ -74,7 +74,7 @@ public class ItemTooltipComponent extends Component {
             for (int i = 0; i < StatHolder.Stat.values().length; i++) {
                 float f = worn.get(StatHolder.Stat.values()[i]);
                 if (f == 0) continue;
-                String s = ("\n")+(StatHolder.Stat.values()[i].name)+(": ")+(f);
+                String s = ("\n")+(StatHolder.Stat.values()[i].name)+(": ")+(f == (int) f ? Integer.toString((int) f) : f);
                 cache.add(s);
                 sb.append(s);
             }

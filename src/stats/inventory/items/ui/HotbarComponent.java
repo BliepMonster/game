@@ -2,11 +2,14 @@ package stats.inventory.items.ui;
 
 import engine.core.DrawManager;
 import engine.core.Screen;
+import engine.core.graphics.Mesh;
+import engine.core.graphics.TextMesh;
 import engine.gui.components.Component;
 import engine.gui.constraints.position.CenterConstraint;
 import engine.gui.constraints.position.EdgeAlignmentConstraint;
 import engine.gui.constraints.size.RelativeSizeConstraint;
 import entities.Player;
+import main.Main;
 import stats.inventory.items.Item;
 
 import java.awt.*;
@@ -18,6 +21,17 @@ public class HotbarComponent extends Component {
         super(new CenterConstraint(), new EdgeAlignmentConstraint(EdgeAlignmentConstraint.BOTTOM), new RelativeSizeConstraint(1.4f), new RelativeSizeConstraint(.2f));
         this.player = player;
     }
+    public static final Mesh[] MESHES = new Mesh[] {
+            new TextMesh("1", Main.font, .1f, 1000).create(),
+            new TextMesh("2", Main.font, .1f, 1000).create(),
+            new TextMesh("3", Main.font, .1f, 1000).create(),
+            new TextMesh("4", Main.font, .1f, 1000).create(),
+            new TextMesh("5", Main.font, .1f, 1000).create(),
+            new TextMesh("6", Main.font, .1f, 1000).create(),
+            new TextMesh("7", Main.font, .1f, 1000).create(),
+            new TextMesh("8", Main.font, .1f, 1000).create(),
+            new TextMesh("9", Main.font, .1f, 1000).create()
+    };
 
     public static final Color COOLDOWN_BG = new Color(128, 128, 128, 128);
 
@@ -29,7 +43,10 @@ public class HotbarComponent extends Component {
             Item item = player.items.get(i);
             float xx = x+.05f*(i+1)+.1f*(i);
             draw.rect(s == i ? Color.cyan : Color.green, xx, y+.05f, .1f, .1f);
-            if (item == null) continue;
+            if (item == null) {
+                draw.renderAsText((TextMesh) MESHES[i], Main.font, Color.black, xx, y+.05f);
+                continue;
+            }
             float cooldown = item.getRatioTimeUntilReady();
             if (cooldown != 1) {
                 draw.rect(COOLDOWN_BG, xx, y+.05f, .1f, .1f);
@@ -37,6 +54,8 @@ public class HotbarComponent extends Component {
             draw.image(item.definition.texture, xx, y+.05f, .1f, .1f);
             if (cooldown != 1) {
                 draw.rect(Color.red, xx, y+.05f, .1f*cooldown, .02f);
+            } else {
+                draw.renderAsText((TextMesh) MESHES[i], Main.font, Color.black, xx, y+.05f);
             }
         }
     }

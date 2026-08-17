@@ -1,0 +1,14 @@
+{
+  "type": "texture_adapt",
+  "ids": [
+    "base:tiles:roadlb",
+    "base:tiles:roadmb",
+    "base:tiles:roadrb",
+    "base:tiles:roadlm",
+    "base:tiles:roadrm",
+    "base:tiles:roadlu",
+    "base:tiles:roadmu",
+    "base:tiles:roadru"
+  ],
+  "standable": true
+}

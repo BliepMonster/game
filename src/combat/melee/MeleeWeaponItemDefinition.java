@@ -42,6 +42,7 @@ public abstract class MeleeWeaponItemDefinition extends ItemDefinition {
         lastUse = ticks;
         var entities = context.getEntities();
         var stats = context.getPlayer().stats;
+        boolean hit = false;
         for (var entity : entities) {
             if (entity.isAttackable() && canHit(entity, worldPos, context)) {
                 var cc = stats.get(StatHolder.Stat.CRIT_CHANCE);
@@ -59,9 +60,10 @@ public abstract class MeleeWeaponItemDefinition extends ItemDefinition {
                         (float)Math.sin(angle)
                 );
                 entity.knock(result, stats.get(StatHolder.Stat.KNOCKBACK)*(float)(Math.random()/5+0.9));
+                hit = true;
             }
         }
-        return new ItemUseResult(Optional.of(item), true);
+        return new ItemUseResult(Optional.of(item), hit);
     }
 
     @Override

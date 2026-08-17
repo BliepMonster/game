@@ -8,6 +8,7 @@ import main.GameContext;
 import main.World;
 import org.joml.Vector2f;
 import org.joml.Vector2i;
+import tiles.DualTile;
 import tiles.Tile;
 import tiles.TilePart;
 
@@ -22,8 +23,7 @@ public class JSONLoader {
             int y = (int) ((JsonNumber) obj.values.get("y")).num;
 
             JsonObject tileData = (JsonObject) obj.values.get("tile");
-            Tile tile = TileLoader.load(tileData,
-                    context); // IMPORTANT
+            Tile tile = TileLoader.load(tileData, context, x, y);
 
             map.put(x, y, tile);
         }
@@ -41,6 +41,8 @@ public class JSONLoader {
             Tile tile = map.get(x, y)
                     .orElseThrow(() -> new RuntimeException("No tile at " + x + "," + y));
 
+            if (tile instanceof DualTile) continue;
+
             TilePart part = TilePartLoader.load(new Vector2i(x, y), data, context);
 
             tile.setPart(part);
@@ -49,18 +51,18 @@ public class JSONLoader {
     public static void loadWorld(JsonFile file, CoordinateMap<Tile> map, GameContext context) {
 
         JsonArray tiles = (JsonArray) file.values.get("tiles");
-        JsonArray objects = (JsonArray) file.values.get("objects");
 
         loadTiles(tiles, map, context);
-        loadObjects(objects, map, context);
+        if (file.values.containsKey("objects"))
+            loadObjects((JsonArray) file.values.get("objects"), map, context);
     }
     public static void loadWorld(JsonObject file, CoordinateMap<Tile> map, GameContext context) {
 
         JsonArray tiles = (JsonArray) file.values.get("tiles");
-        JsonArray objects = (JsonArray) file.values.get("objects");
 
         loadTiles(tiles, map, context);
-        loadObjects(objects, map, context);
+        if (file.values.containsKey("objects"))
+            loadObjects((JsonArray) file.values.get("objects"), map, context);
     }
     public static void loadOnSpawn(World world, JsonFile file) throws ClassNotFoundException, NoSuchMethodException {
         if (!file.values.containsKey("onLoad")) return;

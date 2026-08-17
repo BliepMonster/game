@@ -172,6 +172,7 @@ public class Screen {
         GLFW.glfwSetKeyCallback(window, input.getKeyboard());
         GLFW.glfwSetMouseButtonCallback(window, input.getMouseButtons());
         GLFW.glfwSetCursorPosCallback(window, input.getMouseMove());
+        GLFW.glfwSetScrollCallback(window, input.getMouseScroll());
         sizeCallback = new GLFWWindowSizeCallback() {
             public void invoke(long window, int width, int height) {
                 Screen.this.width = width;
