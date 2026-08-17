@@ -30,7 +30,7 @@ public class TileLoader {
             default -> throw new RuntimeException("Unknown tile type: " + type);
         };
 
-        if (obj.values.containsKey("part")) {
+        if (obj.values.containsKey("part") && !(obj.values.get("part") instanceof JsonNull)) {
             tile.setPart(TilePartLoader.load(new Vector2i(x, y), (JsonObject) obj.values.get("part"), context));
         }
 

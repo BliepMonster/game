@@ -2,10 +2,7 @@ package tool.editor;
 
 import engine.core.Texture;
 import engine.core.text.Font;
-import engine.json.JsonNumber;
-import engine.json.JsonObject;
-import engine.json.JsonString;
-import engine.json.JsonValue;
+import engine.json.*;
 import farming.CompostType;
 import farming.CropType;
 import farming.GardenPotTilePart;
@@ -32,6 +29,7 @@ import java.util.HashMap;
 
 public final class TilePartLoader {
     public static final String ID_IRON_ORE = "iron_ore";
+    public static final String ID_UNSTANDABLE = "unstandable";
     public static final String ID_FURNACE = "furnace";
     public static final String ID_CRUSHER = "crusher";
     public static final String ID_SCROLL_TABLE = "scroll_crafter";
@@ -63,6 +61,7 @@ public final class TilePartLoader {
     public static final String ID_GARDEN_POT = "garden_pot";
     public static final String ID_SEED_MAKER = "seed_maker";
     public static final String ID_ANVIL = "anvil";
+    public static final String ID_TEXTURE = "texture_adapt";
     public static Font font;
     public static final HashMap<String, Texture> tcache = new HashMap<>();
 
@@ -116,6 +115,7 @@ public final class TilePartLoader {
             case ID_ZOMBIE_SPAWNER -> new ZombieSpawner(pos, context);
             case ID_FURNACE -> new FurnaceTilePart(pos);
             case ID_ENTRANCE -> loadEntrance(pos, obj);
+            case ID_TEXTURE -> new TextureAdaptTilePart(pos, ((JsonString) obj.values.get("tex")).value, ((JsonBoolean) obj.values.get("standable")).bool);
             case ID_DUNGEON_EXIT -> loadExit(pos, obj);
             case ID_GOLD_ORE -> new GoldOrePart(pos);
             case ID_GOLDEN_ZOMBIE_SPAWNER -> new GoldenZombieSpawner(pos, context);
@@ -128,6 +128,7 @@ public final class TilePartLoader {
             case ID_CRUSHER -> new CrusherTilePart(pos);
             case ID_SCROLL_TABLE -> new ScrollCraftingTilePart(pos);
             case ID_PINE_TREE -> new PineTreePart(pos);
+            case ID_UNSTANDABLE -> new UnstandableTilePart(pos);
             case ID_POLISHING_MACHINE -> new PolishingMachineTilePart(pos);
             case ID_GARDEN_POT -> {
                 var cropV = obj.values.get("crop");

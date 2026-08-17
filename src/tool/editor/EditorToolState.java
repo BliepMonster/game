@@ -51,8 +51,8 @@ public enum EditorToolState {
                 map.put(x, y, new WallTile(TileType.get("base:tiles:wall_bottom")));
             }
             case O4 -> map.put(x, y, new WallTile(TileType.get("base:tiles:wall_right:3")));
-            case O5 -> tile.setPart(new LeftWheatTilePart(new Vector2f(x, y)));
-            case O6 -> tile.setPart(null);
+            case O5 -> tile.setPart(new TextureAdaptTilePart(new Vector2f(x, y), "base:tiles:res_bb:3", true));
+            case O6 -> tile.setPart(new UnstandableTilePart(new Vector2f(x, y)));
             case O7 -> map.put(x, y, new DefaultTile(TileType.get("GRASS")));
             case O8 -> {
                 if (Game.getTickCount()-lastTick < 20) return;
