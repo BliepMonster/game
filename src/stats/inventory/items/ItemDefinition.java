@@ -33,6 +33,9 @@ public abstract class ItemDefinition {
         if (!definitions.containsKey(id)) throw new RuntimeException("Invalid ID: "+id);
         return definitions.get(id);
     }
+    public StatHolder getOnConsumeStats() {
+        return new StatHolder();
+    }
     public static void register(ItemDefinition definition) {
         definitions.put(definition.id, definition);
     }

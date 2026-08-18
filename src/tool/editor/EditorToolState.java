@@ -10,6 +10,7 @@ import org.joml.Vector2f;
 import tiles.*;
 import tiles.doors.DungeonExitTilePart;
 import tiles.doors.EntranceTilePart;
+import tiles.npc.DialogueNPC;
 import tiles.npc.NpcDefinition;
 import tiles.npc.ShopDefinitionRegistry;
 import tiles.resources.*;
@@ -31,13 +32,6 @@ public enum EditorToolState {
     public void apply(Tile tile, CoordinateMap<Tile> map, int x, int y, World world, GameContext context) {
         switch (this) {
             case O1 -> {
-                int xx = -5, yy = -2;
-                int tx = x-xx, ty = y-yy;
-                var type2 = TileType.get("base:scenes:restaurant:"+tx+":"+ty);
-                if (type2 == null) return;
-                var t = new DefaultTile(type2);
-                t.setPart(new EntranceTilePart(new Vector2f(x, y), "HOME_WORLD", new Vector2f(4, -9), TextureIdMap.get("base:empty")));
-                map.put(x, y, t);
             }
             case O2 -> {
                 var t = new DefaultTile(TileType.get("ROAD"));
@@ -51,7 +45,7 @@ public enum EditorToolState {
                 map.put(x, y, new WallTile(TileType.get("base:tiles:wall_bottom")));
             }
             case O4 -> map.put(x, y, new WallTile(TileType.get("base:tiles:wall_right:3")));
-            case O5 -> tile.setPart(new TextureAdaptTilePart(new Vector2f(x, y), "base:tiles:res_bb:3", true));
+            case O5 -> ((TextureAdaptTilePart) tile.getPart()).setPart(new DialogueNPC(new Vector2f(x, y), ShopDefinitionRegistry.get("chef"), Main.font));
             case O6 -> tile.setPart(new UnstandableTilePart(new Vector2f(x, y)));
             case O7 -> map.put(x, y, new DefaultTile(TileType.get("GRASS")));
             case O8 -> {

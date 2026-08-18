@@ -30,6 +30,11 @@ public class EffectConsumableItemDefinition extends ItemDefinition {
     }
 
     @Override
+    public StatHolder getOnConsumeStats() {
+        return this.stats.clone();
+    }
+
+    @Override
     public StatHolder getHeldStats(Item item, GameContext context) {
         return new StatHolder();
     }

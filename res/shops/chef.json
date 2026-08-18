@@ -1,0 +1,27 @@
+{
+  "name": "Chef",
+  "id": "chef",
+  "texture": "res/textures/npc/chef.png",
+  "height": 3,
+  "z_offset": 0.5,
+  "dialogue": [
+    {
+      "type": "shop",
+      "entries": [
+        {
+          "requirements": [],
+          "ingredients": [],
+          "price": {
+            "currency": "COINS",
+            "amount": 700
+          },
+          "texture": "res/textures/food/pizza.png",
+          "result": {
+            "type": "item",
+            "id": "base:food:pizza"
+          }
+        }
+      ]
+    }
+  ]
+}

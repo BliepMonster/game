@@ -1,7 +1,7 @@
 {
   "type": "ability",
   "id": "base:tools:iron_hoe",
-  "name": "Iron Hoe",
+  "name": "Iron Scythe",
   "texture": "base:item:iron_hoe",
   "ability": "iron_hoe",
   "cooldown": 1,

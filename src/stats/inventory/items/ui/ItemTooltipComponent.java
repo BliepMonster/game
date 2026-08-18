@@ -88,9 +88,33 @@ public class ItemTooltipComponent extends Component {
             if (c == '\n') newlines2++;
         }
 
+        var consumed = item.definition.getOnConsumeStats();
+        String cs;
+        cache = new ArrayList<>();
+        if (consumed.isEmpty()) cs = "";
+        else {
+            var sb = new StringBuilder("\n\nWhen consumed:");
+            cache.add("When consumed: ");
+            for (int i = 0; i < StatHolder.Stat.values().length; i++) {
+                float f = consumed.get(StatHolder.Stat.values()[i]);
+                if (f == 0) continue;
+                String s = ("\n")+(StatHolder.Stat.values()[i].name)+(": ")+(f == (int) f ? Integer.toString((int) f) : f);
+                cache.add(s);
+                sb.append(s);
+            }
+            cs = sb.toString();
+        }
+        for (String s : cache) {
+            w = Math.max(w, Main.font.getWidthForSize(s, FSIZE));
+        }
+        int newlines3 = 0;
+        for (char c : cs.toCharArray()) {
+            if (c == '\n') newlines3++;
+        }
+
         super(new ToolTipConstraintX(Main.CURSOR_W / (float) GUI.getBoundDrawManager().getScreen().getHeight()),
                 new ToolTipConstraintY(Main.CURSOR_H / (float) GUI.getBoundDrawManager().getScreen().getHeight()),
-                new RelativeSizeConstraint(w), new RelativeSizeConstraint(Main.font.getHeight(FSIZE) * (descs.size() + (descs.isEmpty() ? 1 : 3) + (newlines == 0 ? 0 : newlines+1) + (newlines2 == 0 ? 0 : newlines2+1))));
+                new RelativeSizeConstraint(w), new RelativeSizeConstraint(Main.font.getHeight(FSIZE) * (descs.size() + (descs.isEmpty() ? 1 : 3) + (newlines == 0 ? 0 : newlines+1) + (newlines2 == 0 ? 0 : newlines2+1) + (newlines3 == 0 ? 0 : newlines3+1))));
         this.item = item;
         StringBuilder t = new StringBuilder();
         t.append(title).append(descs.isEmpty() ? "" : "\n");
@@ -99,6 +123,7 @@ public class ItemTooltipComponent extends Component {
         }
         t.append(hs.isEmpty() ? "" : hs);
         t.append(ws.isEmpty() ? "" : ws);
+        t.append(cs.isEmpty() ? "" : cs);
         this.text = new TextMesh(t.toString(), Main.font, FSIZE, 200).create();
     }
     public static final Color BG = new Color(0, 0, 0, 230);

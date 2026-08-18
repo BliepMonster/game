@@ -25,7 +25,7 @@ public class DialogueNPC extends TilePart {
     public void render(int x, int y, Camera camera) {
         camera.addRenderJob(
                 () -> camera.image(definition.texture(), x, y, 1, definition.height()),
-                -y
+                -y - definition.zOffset()
         );
     }
     public boolean isStandable() {

@@ -115,7 +115,7 @@ public final class TilePartLoader {
             case ID_ZOMBIE_SPAWNER -> new ZombieSpawner(pos, context);
             case ID_FURNACE -> new FurnaceTilePart(pos);
             case ID_ENTRANCE -> loadEntrance(pos, obj);
-            case ID_TEXTURE -> new TextureAdaptTilePart(pos, ((JsonString) obj.values.get("tex")).value, ((JsonBoolean) obj.values.get("standable")).bool);
+            case ID_TEXTURE -> new TextureAdaptTilePart(pos, ((JsonString) obj.values.get("tex")).value, ((JsonBoolean) obj.values.get("standable")).bool, obj.values.containsKey("part") ? load(position, (JsonObject) obj.values.get("part"), context) : null);
             case ID_DUNGEON_EXIT -> loadExit(pos, obj);
             case ID_GOLD_ORE -> new GoldOrePart(pos);
             case ID_GOLDEN_ZOMBIE_SPAWNER -> new GoldenZombieSpawner(pos, context);

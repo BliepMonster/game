@@ -1,0 +1,7 @@
+{
+  "dimensions": [2, 3],
+  "type": "algo",
+  "prefix": "base:tiles:table:",
+  "between": ":",
+  "texid": "base:tiles:table"
+}

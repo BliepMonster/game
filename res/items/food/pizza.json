@@ -1,0 +1,14 @@
+{
+  "type": "consumable",
+  "id": "base:food:pizza",
+  "name": "Pizza",
+  "texture": "base:item:pizza",
+  "stats": [
+    {
+      "type": "SPEED",
+      "count": 1
+    }
+  ],
+  "duration": 4000,
+  "eid": "pizza"
+}

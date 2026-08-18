@@ -3,6 +3,7 @@
   "id": "void",
   "texture": "res/npc_test.png",
   "height": 1.5,
+  "z_offset": 0,
   "dialogue": [
     {
       "type": "text",

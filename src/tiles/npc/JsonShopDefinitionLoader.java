@@ -93,6 +93,7 @@ public class JsonShopDefinitionLoader {
                 ((JsonString) file.values.get("id")).value,
                 new Texture(((JsonString) file.values.get("texture")).value),
                 ((JsonNumber) file.values.get("height")).num,
+                file.values.containsKey("z_offset") ? ((JsonNumber) file.values.get("z_offset")).num : 0f,
                 loadPieces((JsonArray) file.values.get("dialogue"))
         );
     }
