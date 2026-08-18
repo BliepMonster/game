@@ -49,6 +49,10 @@ public class ChestTilePart extends TilePart {
         return false;
     }
 
+    public boolean canBreak() {
+        for (Item item : items) if (item != null) return false;
+        return true;
+    }
     @Override
     public void render(int x, int y, Camera camera) {
         camera.addRenderJob(

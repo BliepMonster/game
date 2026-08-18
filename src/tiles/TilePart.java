@@ -16,4 +16,7 @@ public abstract class TilePart {
     public abstract void onStand(GameContext context);
     public abstract void onClick(GameContext context);
     public abstract JsonValue save();
+    public boolean canBreak() {
+        return true;
+    }
 }

@@ -35,6 +35,12 @@ public class GardenPotTilePart extends TilePart {
     public boolean canHarvest(GameContext context) {
         return crop != null && System.currentTimeMillis() > crop.endTime();
     }
+
+    @Override
+    public boolean canBreak() {
+        return crop == null;
+    }
+
     public void harvest(GameContext context) {
         if (!canHarvest(context)) return;
         var player = context.getPlayer();

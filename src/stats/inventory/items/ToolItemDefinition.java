@@ -2,11 +2,14 @@ package stats.inventory.items;
 
 import combat.equipment.EquipmentSlot;
 import engine.core.Texture;
+import engine.core.input.Input;
 import main.Game;
 import main.GameContext;
 import org.joml.Vector2f;
+import org.lwjgl.glfw.GLFW;
 import stats.StatHolder;
 import tiles.Tile;
+import tiles.TilePart;
 import tiles.resources.HittableResourceCreator;
 
 import java.util.Optional;
@@ -37,6 +40,14 @@ public class ToolItemDefinition extends ItemDefinition {
         this.stats = stats;
     }
     public ItemUseResult use(Tile tile, Item item, GameContext context, Vector2f worldPos) {
+        if (Input.isKeyDown(GLFW.GLFW_KEY_LEFT_SHIFT) && context.getWorld().getID().equals("HOUSE")) {
+            TilePart part = tile.getPart();
+            if (part == null) return new ItemUseResult(Optional.of(item), false);
+            if (part.canBreak()) {
+                tile.setPart(null);
+                return new ItemUseResult(Optional.of(item), true);
+            }
+        }
         if (Game.getTickCount() - lastUse < cooldown) {
             return new ItemUseResult(Optional.of(item), false);
         }
