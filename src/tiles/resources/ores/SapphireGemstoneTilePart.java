@@ -1,41 +1,46 @@
-package tiles.resources;
+package tiles.resources.ores;
 
 import engine.json.JsonString;
 import engine.json.JsonValue;
-import main.LightSource;
 import main.Camera;
 import main.Game;
+import main.LightSource;
 import org.joml.Vector2f;
 import stats.StatHolder;
 import stats.inventory.items.ToolItemDefinition;
 import stats.skills.SkillSet;
-import tool.editor.TilePartLoader;
+import tiles.resources.HittableResourceCreator;
+import tiles.resources.HittableResourceDescription;
 
 import java.awt.*;
 
-public class RubyGemstoneTilePart extends HittableResourceCreator implements LightSource {
+import static tool.editor.TilePartLoader.ID_SAPPHIRE;
+
+public class SapphireGemstoneTilePart extends HittableResourceCreator implements LightSource {
     public static final HittableResourceDescription DESC = new HittableResourceDescription(
-            Game.TICKS_PER_SECOND*100,
-            "Ruby",
+            Game.TICKS_PER_SECOND*150,
+            "Sapphire",
             2,
             SkillSet.SkillType.MINING,
-            150,
+            300,
             StatHolder.Stat.MINING_YIELD,
-            900,
-            12,
+            1500,
+            14,
             false,
             ToolItemDefinition.PowerType.MINING
     );
-    public RubyGemstoneTilePart(Vector2f position) {
+
+    public SapphireGemstoneTilePart(Vector2f position) {
         super(DESC, position);
     }
+
     public void renderReady(int lastHit, boolean lastHitRight, int x, int y, float health, Camera camera) {
         float size = health/2+.5f;
         camera.addRenderJob(
                 () -> camera.rect(
                         Game.getTickCount()-lastHit < 5 ?
                                 lastHitRight ? Color.black : Color.orange
-                                : Color.red,
+                                : Color.blue,
                         x+.5f-size/2,
                         y+.5f-size/2,
                         size,
@@ -53,12 +58,16 @@ public class RubyGemstoneTilePart extends HittableResourceCreator implements Lig
 
     @Override
     public Color[] getChipColors() {
-        return new Color[] { Color.RED, new Color(180, 0, 0), new Color(120, 0, 0) };
+        return new Color[]{Color.blue, new Color(0, 0, 180), new Color(0, 0, 120)};
     }
 
     @Override
+    public JsonValue save() {
+        return new JsonString(ID_SAPPHIRE);
+    }
+    @Override
     public float getLightLevel() {
-        return this.isAlive() ? 1.2f : 0f;
+        return this.isAlive() ? .7f : 0f;
     }
     @Override
     public float getX() {
@@ -68,8 +77,5 @@ public class RubyGemstoneTilePart extends HittableResourceCreator implements Lig
     @Override
     public float getY() {
         return position.y+.5f;
-    }
-    public JsonValue save() {
-        return new JsonString(TilePartLoader.ID_RUBY);
     }
 }

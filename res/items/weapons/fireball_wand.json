@@ -1,0 +1,9 @@
+{
+  "type": "ability",
+  "id": "base:weapons:fireball_wand",
+  "name": "Fireball Wand",
+  "texture": "base:item:fireball_wand",
+  "ability": "fireball",
+  "cooldown": 120,
+  "stats": []
+}

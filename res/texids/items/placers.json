@@ -7,5 +7,6 @@
   "base:item:polishing_machine": "res/textures/placers/gem_polisher.png",
   "base:item:garden_pot": "res/textures/placers/garden_pot.png",
   "base:item:seed_maker": "res/textures/placers/seed_maker.png",
-  "base:item:anvil": "res/textures/placers/anvil.png"
+  "base:item:anvil": "res/textures/placers/anvil.png",
+  "base:item:crafting_station": "res/textures/placers/crafting_table.png"
 }

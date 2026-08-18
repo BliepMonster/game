@@ -1,0 +1,25 @@
+{
+  "type": "equipment",
+  "id": "base:armor:miner_hat",
+  "name": "Miner's Hat",
+  "texture": "base:item:miner_hat",
+  "stats": [
+    {
+      "type": "DEFENSE",
+      "count": 20
+    },
+    {
+      "type": "GLOWING",
+      "count": 1
+    },
+    {
+      "type": "MINING_YIELD",
+      "count": 10
+    },
+    {
+      "type": "MINING_POWER",
+      "count": 50
+    }
+  ],
+  "slot": "HELMET"
+}

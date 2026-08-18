@@ -1,5 +1,6 @@
 {
   "recipes": [
-    "res/recipes/polishing/polished_ruby_recipe.json"
+    "res/recipes/polishing/polished_ruby_recipe.json",
+    "res/recipes/polishing/polished_sapphire_recipe.json"
   ]
 }

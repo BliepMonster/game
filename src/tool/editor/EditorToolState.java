@@ -14,6 +14,7 @@ import tiles.npc.DialogueNPC;
 import tiles.npc.NpcDefinition;
 import tiles.npc.ShopDefinitionRegistry;
 import tiles.resources.*;
+import tiles.resources.ores.SapphireGemstoneTilePart;
 import tiles.spawner.GemstoneGolemSpawner;
 
 
@@ -32,19 +33,15 @@ public enum EditorToolState {
     public void apply(Tile tile, CoordinateMap<Tile> map, int x, int y, World world, GameContext context) {
         switch (this) {
             case O1 -> {
+                System.out.println(new Vector2f(x, y));
             }
             case O2 -> {
-                var t = new DefaultTile(TileType.get("ROAD"));
-                t.setPart(new RepairTaskNPC(new Vector2f(x, y), ShopDefinitionRegistry.get("base:empty"), RepairTask.get("base:restaurant")));
-                map.put(x, y, new DualTile(
-                        new DefaultTile(TileType.get("ROAD")),
-                        t, "base:restaurant_unlocked", context
-                ));
+                tile.setPart(new EntranceTilePart(new Vector2f(x, y), "GEMSTONE_CAVE", new Vector2f(-29, 3), TextureIdMap.get("base:empty")));
             }
             case O3 -> {
-                map.put(x, y, new WallTile(TileType.get("base:tiles:wall_bottom")));
+                map.put(x, y, new WallTile(TileType.get("ROAD")));
             }
-            case O4 -> map.put(x, y, new WallTile(TileType.get("base:tiles:wall_right:3")));
+            case O4 -> tile.setPart(new SapphireGemstoneTilePart(new Vector2f(x, y)));
             case O5 -> ((TextureAdaptTilePart) tile.getPart()).setPart(new DialogueNPC(new Vector2f(x, y), ShopDefinitionRegistry.get("chef"), Main.font));
             case O6 -> tile.setPart(new UnstandableTilePart(new Vector2f(x, y)));
             case O7 -> map.put(x, y, new DefaultTile(TileType.get("GRASS")));

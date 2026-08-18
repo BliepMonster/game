@@ -9,7 +9,6 @@ import entities.Player;
 import org.joml.Vector2f;
 import quests.QuestTracker;
 import saving.PlayerSaver;
-import saving.SavedAttributeData;
 import saving.SavedGame;
 import saving.SavedHome;
 import tiles.Tile;
@@ -99,7 +98,7 @@ public class Game implements GameContext {
     public void movePlayer(World world, Vector2f position) {
         if (this.world != world) this.world.killOnLoadEnemies();
         this.world = world;
-        world.load(camera);
+        world.load(camera, player);
         player.getPosition().set(position);
     }
     public final AttributeData attributes;

@@ -10,11 +10,12 @@ import engine.json.JsonNumber;
 import engine.json.JsonString;
 import entities.Enemy;
 import entities.Entity;
+import entities.Player;
 import org.jetbrains.annotations.NotNull;
 import org.joml.Vector2f;
 import tiles.*;
-import tiles.resources.CoalOrePart;
-import tiles.resources.IronOrePart;
+import tiles.resources.ores.CoalOrePart;
+import tiles.resources.ores.IronOrePart;
 import tool.editor.EditorToolState;
 import tool.editor.JSONLoader;
 
@@ -41,7 +42,7 @@ public class World {
         this.id = id;
         WorldRegistry.put(id, this);
     }
-    public void load(Camera camera) {
+    public void load(Camera camera, Player player) {
         onLoadSpawnedEnemies.clear();
         onLoadEntities.forEach(
                 (constructor) -> {
@@ -60,6 +61,7 @@ public class World {
                 }
         );
         camera.clearLights();
+        camera.addLight(player);
         var mapBounds = map.getBounds();
         var minX = mapBounds.x;
         var xSize = mapBounds.y;

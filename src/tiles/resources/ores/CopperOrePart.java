@@ -1,4 +1,4 @@
-package tiles.resources;
+package tiles.resources.ores;
 
 import engine.json.JsonString;
 import engine.json.JsonValue;
@@ -9,6 +9,8 @@ import org.joml.Vector2f;
 import stats.StatHolder;
 import stats.inventory.items.ToolItemDefinition;
 import stats.skills.SkillSet;
+import tiles.resources.HittableResourceCreator;
+import tiles.resources.HittableResourceDescription;
 import tool.editor.TilePartLoader;
 
 import java.awt.*;

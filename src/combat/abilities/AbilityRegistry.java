@@ -18,5 +18,6 @@ public class AbilityRegistry {
         registry.put("garden_pot", new GardenPotPlacerAbility());
         registry.put("seed_maker", new SeedMakerPlacerAbility());
         registry.put("anvil", new AnvilPlacerAbility());
+        registry.put("fireball", new FireBallAbility());
     }
 }

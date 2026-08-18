@@ -2,7 +2,7 @@
   "type": "ability",
   "id": "base:placers:crafting_table",
   "name": "Crafting Station",
-  "texture": "base:item:copper_hoe",
+  "texture": "base:item:crafting_station",
   "ability": "crafting_station",
   "cooldown": 1,
   "stats": []

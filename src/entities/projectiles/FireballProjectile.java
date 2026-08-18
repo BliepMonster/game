@@ -1,0 +1,42 @@
+package entities.projectiles;
+
+import engine.hitboxes.Hitbox;
+import engine.hitboxes.RectangularHitbox;
+import entities.DamageType;
+import entities.Entity;
+import main.Camera;
+import main.GameContext;
+import org.joml.Vector2f;
+
+import java.awt.*;
+
+public class FireballProjectile extends SimpleProjectile {
+    private final int damage;
+    private final Entity sender;
+    public void damage(Entity entity, GameContext context) {
+        if (entity == sender) return;
+        entity.damage(damage, DamageType.FIRE, context);
+        entity.knock(new Vector2f(entity.getX(), entity.getY()).sub(position), 5f);
+    }
+    public void render(Camera camera) {
+        camera.addRenderJob(() -> camera.rect(Color.red, position.x-.25f, position.y-.25f, .5f, .5f), -position.y+.25f);
+    }
+    public final Hitbox hitbox = new RectangularHitbox(-.25f, -.25f, .5f, .5f, this);
+
+    @Override
+    public Hitbox getHitbox() {
+        return hitbox;
+    }
+    public float getWidth() {
+        return .5f;
+    }
+    public float getHeight() {
+        return .5f;
+    }
+
+    public FireballProjectile(Vector2f position, Vector2f movement, int damage, Entity sender) {
+        super(position, movement);
+        this.damage = damage;
+        this.sender = sender;
+    }
+}

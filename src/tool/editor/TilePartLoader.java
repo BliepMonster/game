@@ -21,6 +21,7 @@ import tiles.npc.DialogueNPC;
 import buildings.RepairTask;
 import buildings.RepairTaskNPC;
 import tiles.resources.*;
+import tiles.resources.ores.*;
 import tiles.spawner.GemstoneGolemSpawner;
 import tiles.spawner.GoldenZombieSpawner;
 import tiles.spawner.ZombieSpawner;
@@ -36,6 +37,7 @@ public final class TilePartLoader {
     public static final String ID_POLISHING_MACHINE = "polishing_machine";
     public static final String ID_COAL_ORE = "coal_ore";
     public static final String ID_COPPER_ORE = "copper_ore";
+    public static final String ID_SAPPHIRE = "sapphire";
     public static final String ID_REPAIRER = "repairer";
     public static final String ID_WHEAT = "wheat";
     public static final String ID__LEFT_WHEAT = "wheat_l";
@@ -147,6 +149,7 @@ public final class TilePartLoader {
                 );
             }
             case ID_ANVIL -> new AnvilTilePart(pos);
+            case ID_SAPPHIRE -> new SapphireGemstoneTilePart(pos);
             case ID_SEED_MAKER -> new SeedMakerTilePart(pos);
             default -> throw new RuntimeException("Unknown object: " + type);
         };

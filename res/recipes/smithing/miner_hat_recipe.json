@@ -1,0 +1,36 @@
+{
+  "name": "Miner's Hat",
+
+  "inputs": [
+    {
+      "type": "resource",
+      "id": "Glowing Mushroom",
+      "amount": 12
+    },
+    {
+      "type": "resource",
+      "id": "Polished Sapphire",
+      "amount": 1
+    },
+    {
+      "type": "upgrade",
+      "id": "base:armor:steel_helmet",
+      "amount": 1
+    }
+  ],
+
+  "outputs": [
+    {
+      "type": "item",
+      "id": "base:armor:miner_hat",
+      "amount": 1
+    }
+  ],
+  "requirements": [
+    {
+      "type": "skill",
+      "skill": "MINING",
+      "level": 14
+    }
+  ]
+}
