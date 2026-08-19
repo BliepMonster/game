@@ -32,6 +32,7 @@ public class Game implements GameContext {
         return quests;
     }
     public Game(DrawManager draw, float tsize, SaveFile file) {
+        ticks = 0;
         SavedGame save = new SavedGame(file, this);
         player = new Player(save.player());
         quests = new QuestTracker(save.quests());
@@ -44,6 +45,7 @@ public class Game implements GameContext {
         this.attributes = new AttributeData(save.attributes());
     }
     public Game(DrawManager draw, float tsize, SavedGame save) {
+        ticks = 0;
         player = new Player(save.player());
         quests = new QuestTracker(save.quests());
         AutoWorldRegisterer.registerAll(this);
@@ -68,6 +70,7 @@ public class Game implements GameContext {
     }
     public void render() {
         camera.defaultBrightness = world.getBrightness();
+        camera.rebuildLightmap(camera.getDraw().getScreen());
         world.render(this, camera, camera.getTileSize());
         player.render(camera);
         camera.renderAllJobs();
@@ -96,7 +99,10 @@ public class Game implements GameContext {
         );
     }
     public void movePlayer(World world, Vector2f position) {
-        if (this.world != world) this.world.killOnLoadEnemies();
+        if (this.world != world) {
+            this.world.unloadLoopingSources();
+            this.world.killOnLoadEnemies();
+        }
         this.world = world;
         world.load(camera, player);
         player.getPosition().set(position);

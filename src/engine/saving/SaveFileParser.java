@@ -77,7 +77,7 @@ public class SaveFileParser {
                 return dictionary();
             }
             case NUMBER -> {
-                return new SavedFloat(HexConverter.decodeFloat(t.s()));
+                return new SavedDouble(HexConverter.decodeDouble(t.s()));
             }
             case RBRACKET -> throw new SaveFileParserException("Unexpected RBRACKET");
             case LBRACKET -> {

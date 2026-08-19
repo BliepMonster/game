@@ -2,7 +2,7 @@ package saving;
 
 import engine.saving.objects.SavedArray;
 import engine.saving.objects.SavedDictionary;
-import engine.saving.objects.SavedFloat;
+import engine.saving.objects.SavedDouble;
 import engine.saving.objects.SavedNull;
 import engine.saving.objects.SavedObject;
 import engine.saving.objects.SavedString;
@@ -57,7 +57,7 @@ public record SavedQuests(String selectedId, String[] completedIds, String[] cla
         SavedObject object = dict.get("kills");
         if (object instanceof SavedDictionary killsDict) {
             for (var entry : ((HashMap<String, SavedObject>) killsDict.get()).entrySet()) {
-                kills.put(entry.getKey(), (int) ((SavedFloat) entry.getValue()).getCore());
+                kills.put(entry.getKey(), (int) ((SavedDouble) entry.getValue()).getCore());
             }
         }
         return kills;
@@ -68,7 +68,7 @@ public record SavedQuests(String selectedId, String[] completedIds, String[] cla
         SavedObject object = dict.get("buys");
         if (object instanceof SavedDictionary buysDict) {
             for (var entry : ((HashMap<String, SavedObject>) buysDict.get()).entrySet()) {
-                buys.put(entry.getKey(), (int) ((SavedFloat) entry.getValue()).getCore());
+                buys.put(entry.getKey(), (int) ((SavedDouble) entry.getValue()).getCore());
             }
         }
         return buys;
@@ -79,7 +79,7 @@ public record SavedQuests(String selectedId, String[] completedIds, String[] cla
         SavedObject object = dict.get("gathers");
         if (object instanceof SavedDictionary gathersDict) {
             for (var entry : ((HashMap<String, SavedObject>) gathersDict.get()).entrySet()) {
-                gathers.put(entry.getKey(), (int) ((SavedFloat) entry.getValue()).getCore());
+                gathers.put(entry.getKey(), (int) ((SavedDouble) entry.getValue()).getCore());
             }
         }
         return gathers;
@@ -87,7 +87,7 @@ public record SavedQuests(String selectedId, String[] completedIds, String[] cla
 
     private static int decodeSells(SavedDictionary dict) {
         SavedObject object = dict.get("sells");
-        return object instanceof SavedFloat number ? (int) number.getCore() : 0;
+        return object instanceof SavedDouble number ? (int) number.getCore() : 0;
     }
 
     public SavedObject save() {
@@ -102,14 +102,14 @@ public record SavedQuests(String selectedId, String[] completedIds, String[] cla
         map.put("kills", encodeCounts(kills));
         map.put("buys", encodeCounts(buys));
         map.put("gathers", encodeCounts(gathers));
-        map.put("sells", new SavedFloat(sells));
+        map.put("sells", new SavedDouble(sells));
         return new SavedDictionary(map);
     }
 
     private static SavedDictionary encodeCounts(HashMap<String, Integer> counts) {
         HashMap<String, SavedObject> map = new HashMap<>();
         for (var entry : counts.entrySet()) {
-            map.put(entry.getKey(), new SavedFloat(entry.getValue()));
+            map.put(entry.getKey(), new SavedDouble(entry.getValue()));
         }
         return new SavedDictionary(map);
     }

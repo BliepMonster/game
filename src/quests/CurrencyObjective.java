@@ -18,7 +18,7 @@ public class CurrencyObjective extends Objective {
 
     @Override
     public int getProgress(GameContext context) {
-        return Math.min(context.getPlayer().currency.getCoins(), coins);
+        return (int) Math.min(context.getPlayer().currency.getCoins(), coins);
     }
 
     @Override

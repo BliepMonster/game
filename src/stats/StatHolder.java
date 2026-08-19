@@ -36,6 +36,7 @@ public class StatHolder implements Cloneable {
         CRIT_DAMAGE("Crit Damage"),
         REGENERATION("Regeneration"),
         GLOWING("Glowing"),
+        MAGIC_POWER("Magic Power"),
         ;
         public final String name;
         Stat(String s) {

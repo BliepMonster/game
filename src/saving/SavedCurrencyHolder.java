@@ -1,13 +1,13 @@
 package saving;
 
-import engine.saving.objects.SavedFloat;
+import engine.saving.objects.SavedDouble;
 import engine.saving.objects.SavedObject;
 
-public record SavedCurrencyHolder(int coins) {
+public record SavedCurrencyHolder(long coins) {
     public SavedCurrencyHolder(SavedObject object) {
-        this((int) (float) object.get());
+        this((long) (double) object.get());
     }
     public SavedObject save() {
-        return new SavedFloat(coins);
+        return new SavedDouble(coins);
     }
 }

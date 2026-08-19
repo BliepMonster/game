@@ -1,17 +1,17 @@
 package engine.json;
 
-import engine.saving.objects.SavedFloat;
+import engine.saving.objects.SavedDouble;
 import engine.saving.objects.SavedObject;
 
 public final class JsonNumber extends JsonValue {
-    public final float num;
-    public JsonNumber(float f) {
-        this.num = f;
+    public final double num;
+    public JsonNumber(double d) {
+        this.num = d;
     }
     public String toString() {
-        return Float.toString(num);
+        return Double.toString(num);
     }
     public SavedObject toSavedObject() {
-        return new SavedFloat(num);
+        return new SavedDouble(num);
     }
 }

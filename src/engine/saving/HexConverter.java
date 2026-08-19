@@ -5,11 +5,11 @@ import java.nio.ByteBuffer;
 
 public class HexConverter {
 
-    public static String encodeFloat(float value) {
-        return Float.toString(value);
+    public static String encodeDouble(double value) {
+        return Double.toString(value);
     }
 
-    public static float decodeFloat(String str) {
-        return Float.parseFloat(str);
+    public static double decodeDouble(String str) {
+        return Double.parseDouble(str);
     }
 }

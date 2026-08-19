@@ -10,7 +10,7 @@ public record SavedStorage(Entry[] entries) {
         public Entry(SavedDictionary dict) {
             this(
                     (String) dict.get("key").get(),
-                    (int) (float) dict.get("value").get()
+                    (int) (double) dict.get("value").get()
             );
         }
     }
@@ -27,7 +27,7 @@ public record SavedStorage(Entry[] entries) {
         for (Entry entry : entries) {
             var map = new HashMap<String, SavedObject>();
             map.put("key", new SavedString(entry.key));
-            map.put("value", new SavedFloat(entry.value));
+            map.put("value", new SavedDouble(entry.value));
             array.add(new SavedDictionary(map));
         }
         return array;

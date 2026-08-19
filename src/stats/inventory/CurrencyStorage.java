@@ -4,28 +4,28 @@ import saving.SavedCurrencyHolder;
 import tiles.npc.Currency;
 
 public class CurrencyStorage {
-    private int coins;
-    public CurrencyStorage(int coins) {
+    private long coins;
+    public CurrencyStorage(long coins) {
         this.coins = coins;
     }
     public CurrencyStorage(SavedCurrencyHolder holder) {
         this.coins = holder.coins();
     }
-    public boolean hasCoins(int coins) {
+    public boolean hasCoins(long coins) {
         return this.coins >= coins;
     }
-    public void spend(int coins) {
+    public void spend(long coins) {
         if (coins > this.coins) throw new RuntimeException("Spent too much");
         this.coins -= coins;
     }
-    public void get(int coins) {
+    public void get(long coins) {
         if (coins < 0) throw new RuntimeException("Use 'spend' instead");
         this.coins += coins;
     }
-    public int getCoins() {
+    public long getCoins() {
         return this.coins;
     }
-    public int get(Currency currency) {
+    public long get(Currency currency) {
         return switch (currency) {
             case COINS -> coins;
         };

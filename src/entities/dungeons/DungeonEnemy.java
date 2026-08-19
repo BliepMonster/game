@@ -30,7 +30,7 @@ public abstract class DungeonEnemy extends Enemy {
     }
     public abstract float transformHealthLoss(float hpLoss, DamageType type);
     public boolean shouldDie(GameContext context) {
-        return hp < 0;
+        return hp <= 0;
     }
     public void die(GameContext context) {
         var player = context.getPlayer();

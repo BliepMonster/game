@@ -15,8 +15,9 @@ public class FireballProjectile extends SimpleProjectile {
     private final Entity sender;
     public void damage(Entity entity, GameContext context) {
         if (entity == sender) return;
+        this.dead = true;
         entity.damage(damage, DamageType.FIRE, context);
-        entity.knock(new Vector2f(entity.getX(), entity.getY()).sub(position), 5f);
+        entity.knock(this.movement.normalize(new Vector2f()), 5f);
     }
     public void render(Camera camera) {
         camera.addRenderJob(() -> camera.rect(Color.red, position.x-.25f, position.y-.25f, .5f, .5f), -position.y+.25f);

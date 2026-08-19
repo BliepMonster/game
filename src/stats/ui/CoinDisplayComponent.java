@@ -23,7 +23,7 @@ public class CoinDisplayComponent extends Component {
     }
     public void display(DrawManager draw, float x, float y, float w, float h) {
         draw.image(currency.getTexture(), x+w-h, y, h, h);
-        var s = Integer.toString(player.currency.get(currency));
+        var s = Long.toString(player.currency.get(currency));
         float fsize = Math.min(font.getSizeForHeight(h), font.getSizeForWidth(s, w-h));
         draw.string(s, Color.white, x, y, font, fsize);
     }

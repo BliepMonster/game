@@ -78,6 +78,7 @@ public class PlayerSaver {
                 saveStorage(player.inventory),
                 saveStatusEffects(player.effects),
                 player.getHealth(),
+                player.getMana(),
                 saveSkills(player.skills)
         );
     }

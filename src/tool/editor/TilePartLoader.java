@@ -75,8 +75,8 @@ public final class TilePartLoader {
                 tilePos,
                 wid.value,
                 new Vector2f(
-                        ((JsonNumber) object.values.get("x")).num,
-                        ((JsonNumber) object.values.get("y")).num
+                        (float) ((JsonNumber) object.values.get("x")).num,
+                        (float) ((JsonNumber) object.values.get("y")).num
                 ),
                 tcache.get(tid)
         );
@@ -89,8 +89,8 @@ public final class TilePartLoader {
                 tilePos,
                 wid.value,
                 new Vector2f(
-                        ((JsonNumber) object.values.get("x")).num,
-                        ((JsonNumber) object.values.get("y")).num
+                        (float) ((JsonNumber) object.values.get("x")).num,
+                        (float) ((JsonNumber) object.values.get("y")).num
                 ),
                 tcache.get(tid)
         );

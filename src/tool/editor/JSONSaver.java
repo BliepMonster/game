@@ -4,6 +4,7 @@ import engine.CoordinateMap;
 import engine.json.*;
 import main.DungeonWorld;
 import main.EntityProducer;
+import main.LoopingAudioData;
 import main.World;
 import tiles.Tile;
 
@@ -40,6 +41,23 @@ public class JSONSaver {
         }
         return array;
     }
+    public static JsonArray saveLoopingAudio(ArrayList<LoopingAudioData> data) {
+        JsonArray array = new JsonArray();
+        for (var entry : data) {
+            JsonObject object = new JsonObject();
+            object.values.put("file", new JsonString(entry.file()));
+            object.values.put("volume", new JsonNumber(entry.volume()));
+            object.values.put("pitch", new JsonNumber(entry.pitch()));
+            object.values.put("x", new JsonNumber(entry.x()));
+            object.values.put("y", new JsonNumber(entry.y()));
+            object.values.put("relative", new engine.json.JsonBoolean(entry.relative()));
+            object.values.put("rolloff", new JsonNumber(entry.rolloff()));
+            object.values.put("referenceDistance", new JsonNumber(entry.referenceDistance()));
+            object.values.put("maxDistance", new JsonNumber(entry.maxDistance()));
+            array.values.add(object);
+        }
+        return array;
+    }
     public static JsonFile save(World world, CoordinateMap<Tile> tiles) {
         var file = new JsonFile();
         var objects = saveTiles(tiles);
@@ -48,6 +66,8 @@ public class JSONSaver {
         file.values.put("type", new JsonString(world instanceof DungeonWorld ? "dungeon" : "normal"));
         file.values.put("onLoad", saveOnLoadEntities(world.onLoadEntities));
         file.values.put("brightness", new JsonNumber(world.getBrightness()));
+        var audio = saveLoopingAudio(world.loopingAudioData);
+        if (!audio.values.isEmpty()) file.values.put("loopingAudio", audio);
         return file;
     }
 }

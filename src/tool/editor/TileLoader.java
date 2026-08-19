@@ -45,7 +45,7 @@ public class TileLoader {
         String key = ((JsonString) obj.values.get("key")).value;
         if (obj.values.containsKey("prio"))
             return new RenderOverTile(load((JsonObject) obj.values.get("over"),
-                    context, x, y), TileType.get(key), ((JsonNumber) obj.values.get("prio")).num);
+                    context, x, y), TileType.get(key), (float) ((JsonNumber) obj.values.get("prio")).num);
         return new RenderOverTile(load((JsonObject) obj.values.get("over"),
                 context, x, y), TileType.get(key));
     }

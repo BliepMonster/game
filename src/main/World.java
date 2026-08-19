@@ -1,5 +1,6 @@
 package main;
 
+import combat.melee.EmptyHitbox;
 import engine.ArrayCoordinateMap;
 import engine.CoordinateMap;
 import engine.core.Screen;
@@ -19,6 +20,8 @@ import tiles.resources.ores.IronOrePart;
 import tool.editor.EditorToolState;
 import tool.editor.JSONLoader;
 
+import engine.core.audio.AudioSource;
+
 import java.awt.*;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -31,8 +34,11 @@ public class World {
     private float brightness = 1f;
     public final List<Entity> toAdd = new ArrayList<>();
     public final ArrayList<EntityProducer> onLoadEntities = new ArrayList<>();
+    public final ArrayList<LoopingAudioData> loopingAudioData = new ArrayList<>();
     private final List<Entity> onLoadSpawnedEnemies = new ArrayList<>();
+    public final List<AudioSource> loopingSources = new ArrayList<>();
     public final List<Entity> entities = new ArrayList<>();
+    private Hitbox hitbox = EmptyHitbox.INSTANCE;
     public float getBrightness() {
         return brightness;
     }
@@ -60,6 +66,7 @@ public class World {
                     }
                 }
         );
+        entities.forEach(Entity::onLoad);
         camera.clearLights();
         camera.addLight(player);
         var mapBounds = map.getBounds();
@@ -75,13 +82,24 @@ public class World {
                 });
             }
         }
+        for (var data : loopingAudioData) {
+            loopingSources.add(data.createSource());
+        }
     }
-    public Hitbox getHitbox() {
+    public void reloadHitbox() {
         var hitbox = new CompoundHitbox();
         for (var tile : map) {
             if (!tile.element().isStandable()) {
                 hitbox.add(new RectangularHitbox(tile.x(), tile.y(), 1, 1, Unpositioned.INSTANCE));
             }
+        }
+        this.hitbox = hitbox;
+    }
+    int lastHitboxReload = 0;
+    public Hitbox getHitbox() {
+        if (Game.getTickCount()-lastHitboxReload > 10) {
+            lastHitboxReload = Game.getTickCount();
+            reloadHitbox();
         }
         return hitbox;
     }
@@ -174,8 +192,16 @@ public class World {
         this.toAdd.add(entity);
     }
     public void killOnLoadEnemies() {
+        entities.forEach(Entity::onUnload);
         entities.removeAll(onLoadSpawnedEnemies);
         onLoadSpawnedEnemies.clear();
+    }
+    public void unloadLoopingSources() {
+        for (var source : loopingSources) {
+            source.stop();
+            source.delete();
+        }
+        loopingSources.clear();
     }
     public void onPlayerRespawn(GameContext context) {
     }
@@ -188,12 +214,13 @@ public class World {
         if ("dungeon".equals(type)) world = new DungeonWorld(map, address, id);
         else world = new World(map, address, id);
         var b = file.values.get("brightness");
-        if (b instanceof JsonNumber bn) world.brightness = bn.num;
+        if (b instanceof JsonNumber bn) world.brightness = (float) bn.num;
         try {
             JSONLoader.loadOnSpawn(world, file);
         } catch (Exception _) {
             throw new RuntimeException();
         }
+        JSONLoader.loadLoopingAudio(world, file);
         return world;
     }
     public void apply(EditorToolState mode, float sx, float sy, Game game, float tsize) {

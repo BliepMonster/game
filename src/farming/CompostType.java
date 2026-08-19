@@ -44,7 +44,7 @@ public record CompostType(String id, Texture overlay, String name, float growthB
                     .forEach((str) -> {
                         JsonFile file = new JsonParser().parse(str);
                         var id = ((JsonString) file.values.get("id")).value;
-                        map.put(id, new CompostType(id, TextureIdMap.get(((JsonString) file.values.get("overlay")).value), ((JsonString) file.values.get("name")).value, ((JsonNumber) file.values.get("growth")).num, ((JsonNumber) file.values.get("yield")).num));
+                        map.put(id, new CompostType(id, TextureIdMap.get(((JsonString) file.values.get("overlay")).value), ((JsonString) file.values.get("name")).value, (float) ((JsonNumber) file.values.get("growth")).num, (float) ((JsonNumber) file.values.get("yield")).num));
                     });
         } catch (Exception e) {
             throw new RuntimeException(e);

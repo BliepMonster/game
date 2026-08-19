@@ -6,6 +6,8 @@ import crafting.ItemRequirement;
 import crafting.PreCraftRequirement;
 import engine.core.DrawManager;
 import engine.core.Screen;
+import engine.core.audio.AudioMaster;
+import engine.core.audio.AudioSource;
 import engine.core.input.Input;
 import engine.core.text.Font;
 import engine.gui.components.Component;
@@ -24,6 +26,8 @@ public class RecipeMenuComponent extends Component {
     private final Font font;
     private long lastClicked = 0;
     private ItemTooltipComponent tooltip;
+    public static final int buffer = AudioMaster.loadSound("res/audio/mixkit-cool-interface-click-tone-2568.wav");
+    public static final AudioSource source = new AudioSource().withRelativePositioning(true);
     public RecipeMenuComponent(CraftingRecipe recipe, GameContext context, FullItemStorage storage, Font font) {
         super(CenterConstraint.CENTER, new RelativeYConstraint(-.7f), new RelativeSizeConstraint(1f), new RelativeSizeConstraint(1.2f));
         this.recipe = recipe;
@@ -65,6 +69,7 @@ public class RecipeMenuComponent extends Component {
     public void detectClick(Screen screen, float x, float y) {
         if (isInBounds(screen, x, y)) {
             if (y < -.5f && recipe.canCraft(storage, context)) {
+                source.play(buffer);
                 recipe.craft(storage, context);
                 lastClicked = System.currentTimeMillis();
             }

@@ -15,7 +15,7 @@ public class StatHolderSaver {
             if (stat == 0) continue;
             HashMap<String, SavedObject> o = new HashMap<>();
             o.put("type", new SavedString(s.name()));
-            o.put("amount", new SavedFloat(stat));
+            o.put("amount", new SavedDouble(stat));
             objects.add(new SavedDictionary(o));
         }
         return new SavedArray(objects);
@@ -26,7 +26,7 @@ public class StatHolderSaver {
             SavedDictionary dict = (SavedDictionary) object;
             String s = (String) dict.get("type").get();
             StatHolder.Stat stat = StatHolder.Stat.valueOf(s);
-            float amount = (float) dict.get("amount").get();
+            float amount = (float) (double) dict.get("amount").get();
             holder.with(stat, amount);
         }
         return holder;

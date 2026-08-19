@@ -30,7 +30,7 @@ public class JsonParser {
         JsonToken token = advance();
         return switch (token.type()) {
             case STRING -> new JsonString(token.token().toString());
-            case NUMBER -> new JsonNumber((float) (double) token.token());
+            case NUMBER -> new JsonNumber((double) token.token());
             case TRUE -> new JsonBoolean(true);
             case FALSE -> new JsonBoolean(false);
             case NULL -> JsonNull.INSTANCE;

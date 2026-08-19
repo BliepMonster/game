@@ -36,7 +36,7 @@ public final class InventoryStorage implements Iterable<Map.Entry<String, Intege
         }
     }
     public InventoryStorage(Map<String, Integer> map) {
-        this.inventory.putAll(map);
+        for (var entry : map.entrySet()) this.add(entry.getKey(), entry.getValue());
     }
 
     // This method does not care whether you have enough. Please check before using this method.
@@ -62,12 +62,5 @@ public final class InventoryStorage implements Iterable<Map.Entry<String, Intege
 
     public int size() {
         return inventory.size();
-    }
-    public void subtractAll(InventoryStorage storage) {
-        for (String key : storage.inventory.keySet()) {
-            var v = inventory.get(key);
-            if (v != null)
-                inventory.put(key, v - storage.inventory.get(key));
-        }
     }
 }

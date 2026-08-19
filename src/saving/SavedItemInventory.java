@@ -23,7 +23,7 @@ public record SavedItemInventory(SavedItem[] items, SavedItem[] equipment, Equip
             SavedObject o = dict.get("item");
             eq[i] = SavedItem.from(o);
             slots[i] = EquipmentSlot.values()[
-                    (int) ((SavedFloat) dict.get("slot")).getCore()
+                    (int) ((SavedDouble) dict.get("slot")).getCore()
                     ];
         }
         this(it, eq, slots);
@@ -40,7 +40,7 @@ public record SavedItemInventory(SavedItem[] items, SavedItem[] equipment, Equip
         for (int i = 0; i < equipment.length; ++i) {
             var map = new HashMap<String, SavedObject>();
             map.put("item", equipment[i].save());
-            map.put("slot", new SavedFloat(slots[i].ordinal()));
+            map.put("slot", new SavedDouble(slots[i].ordinal()));
             objects.add(new SavedDictionary(map));
         }
         var map = new HashMap<String, SavedObject>();

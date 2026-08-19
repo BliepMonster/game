@@ -2,7 +2,7 @@ package saving;
 
 import engine.saving.objects.SavedArray;
 import engine.saving.objects.SavedDictionary;
-import engine.saving.objects.SavedFloat;
+import engine.saving.objects.SavedDouble;
 import engine.saving.objects.SavedObject;
 
 import java.util.ArrayList;
@@ -14,6 +14,7 @@ public record SavedPlayer(
         SavedStorage storage,
         SavedStatusEffect[] statusEffects,
         float health,
+        float mana,
         SavedSkillSet skills
 ) {
     static SavedStatusEffect[] decodeStatuses(SavedArray array) {
@@ -25,12 +26,14 @@ public record SavedPlayer(
     }
     public SavedPlayer(SavedObject object) {
         SavedDictionary dict = (SavedDictionary) object;
+        var manaObj = dict.get("mana");
         this(
                 new SavedCurrencyHolder(dict.get("currency")),
                 new SavedItemInventory((SavedDictionary) dict.get("items")),
                 new SavedStorage(dict.get("storage")),
                 decodeStatuses((SavedArray) dict.get("status")),
-                (float) dict.get("hp").get(),
+                (float) (double) dict.get("hp").get(),
+                manaObj != null ? (float) (double) manaObj.get() : 100f,
                 new SavedSkillSet(dict.get("skills"))
         );
     }
@@ -44,7 +47,8 @@ public record SavedPlayer(
             array.add(effect.save());
         }
         map.put("status", array);
-        map.put("hp", new SavedFloat(health));
+        map.put("hp", new SavedDouble(health));
+        map.put("mana", new SavedDouble(mana));
         map.put("skills", skills.save());
         return new SavedDictionary(map);
     }

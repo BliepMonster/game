@@ -5,5 +5,10 @@
   "texture": "base:item:fireball_wand",
   "ability": "fireball",
   "cooldown": 120,
-  "stats": []
+  "stats": [
+    {
+      "type": "MAGIC_POWER",
+      "count": 50
+    }
+  ]
 }

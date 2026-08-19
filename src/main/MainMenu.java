@@ -33,7 +33,7 @@ public class MainMenu {
         ) {
             SavedGame game = new SavedGame(new SavedPlayer(new SavedCurrencyHolder(0),
                     new SavedItemInventory(new SavedItem[]{}, new SavedItem[]{}, new EquipmentSlot[]{}),
-                    new SavedStorage(new SavedStorage.Entry[]{}), new SavedStatusEffect[]{}, 100, new SavedSkillSet(new SavedSkill[]{
+                    new SavedStorage(new SavedStorage.Entry[]{}), new SavedStatusEffect[]{}, 100, 100, new SavedSkillSet(new SavedSkill[]{
                     new SavedSkill(0, 0),
                     new SavedSkill(0, 0),
                     new SavedSkill(0, 0),

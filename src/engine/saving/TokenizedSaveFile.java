@@ -44,9 +44,9 @@ public class TokenizedSaveFile extends SaveFile {
             case SavedNull n -> {
                 return TYPES[2];
             }
-            case SavedFloat f -> {
-                float fl = f.getCore();
-                return new StringBuilder(Float.toString(fl));
+            case SavedDouble f -> {
+                double fl = f.getCore();
+                return new StringBuilder(Double.toString(fl));
             }
             case SavedDictionary d -> {
                 StringBuilder sb = new StringBuilder(map.size() * 3);
@@ -70,7 +70,7 @@ public class TokenizedSaveFile extends SaveFile {
                     if (repeats > 1) sb.append(encodeRepeat(repeats-1));
                     i += repeats-1;
                     sb.append(parse(o));
-                    if (o instanceof SavedFloat && i != array.size()-1 && array.get(i+1) instanceof SavedFloat && (float)array.get(i+1).get() >= 0) sb.append(";");
+                    if (o instanceof SavedDouble && i != array.size()-1 && array.get(i+1) instanceof SavedDouble && (double)array.get(i+1).get() >= 0) sb.append(";");
                 }
                 return sb.append("]");
             }

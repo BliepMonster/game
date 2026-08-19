@@ -22,7 +22,7 @@ public class CompoundHitbox implements Hitbox, Serializable {
                         return true;
                     }
                 }
-            }
+            } else if (hitbox.collidesWith(thisPart)) return true;
         }
         return false;
     } public void add(Hitbox r) {

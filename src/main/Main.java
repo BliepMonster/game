@@ -3,6 +3,7 @@ package main;
 import engine.abstraction.Keybinds;
 import engine.core.DrawManager;
 import engine.core.Screen;
+import engine.core.audio.AudioMaster;
 import engine.core.input.Console;
 import engine.core.input.Event;
 import engine.core.input.EventManager;
@@ -23,6 +24,7 @@ import stats.inventory.resources.ui.InventoryPanel;
 import stats.skills.ui.SkillPanel;
 import stats.ui.CoinDisplayComponent;
 import stats.ui.HealthBar;
+import stats.ui.ManaBar;
 import tiles.crafting.CraftingStationTilePart;
 import tiles.npc.Currency;
 import tiles.npc.JsonShopDefinitionLoader;
@@ -40,7 +42,7 @@ import java.util.ArrayList;
 
 public class Main {
     public static boolean DEBUG_MODE = false;
-    public static final boolean ALLOW_DEBUG = true;
+    public static final boolean ALLOW_DEBUG = false;
     public enum State {
         MAIN_MENU,
         LOAD_WORLD,
@@ -72,6 +74,7 @@ public class Main {
         GUI.add(new CoinDisplayComponent(game.player, font, Currency.COINS), 61);
 
         GUI.add(new HealthBar(game.player), 62);
+        GUI.add(new ManaBar(game.player), 62);
     }
 
     public static void open(SavedGame gamme, String filename) {
@@ -86,6 +89,7 @@ public class Main {
         GUI.add(new CoinDisplayComponent(game.player, font, Currency.COINS), 61);
 
         GUI.add(new HealthBar(game.player), 62);
+        GUI.add(new ManaBar(game.player), 62);
     }
 
     public static boolean tick(ArrayList<Event> events, Screen screen, Console console, double tickRate) throws IOException {
@@ -165,8 +169,8 @@ public class Main {
                 JSONSaver.save(game.world, game.world.map).write(new FileWriter(game.world.address));
             if (Input.isMouseDown(GLFW.GLFW_MOUSE_BUTTON_1))
                 game.world.apply(mode, Input.getMouseX(screen), Input.getMouseY(screen), game, Main.TILE_SIZE);
-        } if (framestamp - lastTick >= tickRate) {
-            lastTick += tickRate;
+        } while (framestamp - lastTick >= tickRate) {
+            lastTick = framestamp;
             if (!game.player.isDead()) {
                 if (deadLastFrame) {
                     game.player.respawn(game);
@@ -201,6 +205,7 @@ public class Main {
         g.dispose();
         final var console = new Console();
         screen.create(console, Screen.MAXIMIZED);
+        AudioMaster.init();
         screen.setCursor(scaled, new Vector2i());
         StaticItemLoader.initAll();
         JsonShopDefinitionLoader.registerAll();
@@ -238,6 +243,7 @@ public class Main {
                 final var events = console.input.events.get();
 
                 if (state == State.ONGOING) {
+                    AudioMaster.setListenerData(game.player.getPosition());
                     if (!tick(events, screen, console, tickRate)) break;
                 } else if (state == State.MAIN_MENU) MainMenu.tick(draw);
                 else if (state == State.LOAD_WORLD) MainMenu.tickLoadingWorldMenu(draw, console);
@@ -257,5 +263,6 @@ public class Main {
         if (DEBUG_MODE)
             JSONSaver.save(game.world, game.world.map).write(new FileWriter(game.world.address));
         game.save().save().writeToFile(new FileWriter(Main.filename));
+        AudioMaster.cleanup();
     }
 }

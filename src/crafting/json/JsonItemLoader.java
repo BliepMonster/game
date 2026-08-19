@@ -68,7 +68,7 @@ public class JsonItemLoader {
     private static MeleeWeaponItemDefinition loadMelee(JsonFile file, String id, String name, String description, Texture texture) {
         float knockback = 1;
         if (file.values.containsKey("knockback"))
-            knockback = ((JsonNumber) file.values.get("knockback")).num;
+            knockback = (float) ((JsonNumber) file.values.get("knockback")).num;
         String dmgType = ((JsonString) file.values.get("damage_type")).value;
         StatHolder holder = JsonStatLoader.load((JsonArray) file.values.get("stats"));
         String meleeType = ((JsonString) file.values.get("melee_type")).value;
@@ -76,8 +76,8 @@ public class JsonItemLoader {
         int cooldown = (int) ((JsonNumber) file.values.get("cooldown")).num;
         switch (meleeType) {
             case "cone" -> {
-                float range = ((JsonNumber) file.values.get("range")).num;
-                float degrees = ((JsonNumber) file.values.get("angle")).num;
+                float range = (float) ((JsonNumber) file.values.get("range")).num;
+                float degrees = (float) ((JsonNumber) file.values.get("angle")).num;
                 return new ConeWeaponDefinition(
                         knockback,
                         DamageType.valueOf(dmgType),
@@ -115,7 +115,7 @@ public class JsonItemLoader {
     private static ScrollItemDefinition loadScroll(JsonFile file, String id, String name, String description, Texture texture) {
         var stat = StatHolder.Stat.valueOf(((JsonString) file.values.get("stat")).value);
         var scaling = ((JsonNumber) file.values.get("scaling")).num;
-        return new ScrollItemDefinition(id, name, description, texture, stat, scaling);
+        return new ScrollItemDefinition(id, name, description, texture, stat, (float) scaling);
     }
     public static ItemDefinition load(JsonFile file) {
         String id = ((JsonString) file.values.get("id")).value;

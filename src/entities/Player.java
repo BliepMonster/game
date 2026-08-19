@@ -44,6 +44,7 @@ public class Player implements Entity, LightSource {
     private int lastRespawn = -100;
     private Direction direction = Direction.DOWN;
     private float health = 100;
+    private float mana = 100;
     public final CurrencyStorage currency;
     public final HashSet<StatusEffect> effects = new HashSet<>();
     public Player() {
@@ -60,6 +61,7 @@ public class Player implements Entity, LightSource {
             effects.add(new StatusEffect(effect));
         }
         this.health = player.health();
+        this.mana = player.mana();
         this.items = new ItemInventory(player.items());
     }
 
@@ -67,10 +69,15 @@ public class Player implements Entity, LightSource {
         return new StatHolder().withSpeed(5).with(StatHolder.Stat.MAX_HEALTH, 100)
                 .with(StatHolder.Stat.STRENGTH, 100)
                 .with(StatHolder.Stat.CRIT_CHANCE, 30)
-                .with(StatHolder.Stat.CRIT_DAMAGE, 150);
+                .with(StatHolder.Stat.CRIT_DAMAGE, 150)
+                .with(StatHolder.Stat.MAGIC_POWER, 100);
     }
 
     private void updateStats(GameContext context) {
+        float oldMaxHealth = stats == null ? health : stats.get(StatHolder.Stat.MAX_HEALTH);
+        float oldMaxMana = stats == null ? mana : stats.get(StatHolder.Stat.MAGIC_POWER);
+        boolean atMaxHealth = health >= oldMaxHealth;
+        boolean atMaxMana = mana >= oldMaxMana;
         var i = items.get(selectedHotbarSlot);
         var helmet = items.getEquipment(EquipmentSlot.HELMET);
         var cp = items.getEquipment(EquipmentSlot.CHESTPLATE);
@@ -88,6 +95,8 @@ public class Player implements Entity, LightSource {
         for (var effect : effects) {
             stats.merge(effect.stats);
         }
+        if (atMaxHealth) health = stats.get(StatHolder.Stat.MAX_HEALTH);
+        if (atMaxMana) mana = stats.get(StatHolder.Stat.MAGIC_POWER);
     }
 
     @Override
@@ -98,6 +107,9 @@ public class Player implements Entity, LightSource {
         }
         if (ticksSinceLastDamage > 5)
             heal(stats.get(StatHolder.Stat.MAX_HEALTH)/(100*TICKS_PER_SECOND)); // heal 1% per second
+        float maxMana = stats.get(StatHolder.Stat.MAGIC_POWER);
+        mana += maxMana * 0.03f / TICKS_PER_SECOND;
+        if (mana > maxMana) mana = maxMana;
         velocityChanges.removeIf(VelocityChange::canBeRemoved);
         ticksSinceLastDamage++;
     }
@@ -163,7 +175,7 @@ public class Player implements Entity, LightSource {
         }
     }
     public void selectItem(int i) {
-        if (i < 0 || i > 9) throw new UnsupportedOperationException("Invalid slot");
+        if (i < 0 || i >= 9) throw new UnsupportedOperationException("Invalid slot");
         this.selectedHotbarSlot = i;
     }
     public int getSelectedHotbarSlot() {
@@ -172,13 +184,23 @@ public class Player implements Entity, LightSource {
     public float getHealth() {
         return health;
     }
+    public float getMana() {
+        return mana;
+    }
+    public boolean useMana(float amount) {
+        if (mana < amount) return false;
+        mana -= amount;
+        return true;
+    }
     public void setHealth(float health) {
         this.health = health;
     }
     public void damage(int amount, DamageType type, GameContext context) {
+        boolean defense = type == DamageType.NORMAL;
         if (Game.getTickCount()-lastRespawn < 80) return;
         float def = stats.get(StatHolder.Stat.DEFENSE);
-        health -= (amount*(1-def/(def+100)));
+        if (defense) health -= (amount*(1-def/(def+100)));
+        else health -= amount;
         if (health <= 0) {
             health = 0;
         }
@@ -205,7 +227,8 @@ public class Player implements Entity, LightSource {
         return Game.getTickCount() - deathTick < Game.TICKS_PER_SECOND;
     }
     public void respawn(GameContext context) {
-        this.health = (int) this.stats.get(StatHolder.Stat.MAX_HEALTH);
+        this.health = this.stats.get(StatHolder.Stat.MAX_HEALTH);
+        this.mana = this.stats.get(StatHolder.Stat.MAGIC_POWER);
         context.getWorld().onPlayerRespawn(context);
         this.lastRespawn = Game.getTickCount();
         this.position.set(context.getPlayerRespawnPosition());
@@ -214,7 +237,7 @@ public class Player implements Entity, LightSource {
         deathTick = Game.getTickCount();
     }
     public boolean isAttackable() {
-        return false;
+        return true;
     }
     public void knock(Vector2f direction, float amount) {
         velocityChanges.add(Entity.getVelocityChange(direction, amount, (int) ((float) Game.TICKS_PER_SECOND/10*Math.max(amount/5, 1))));

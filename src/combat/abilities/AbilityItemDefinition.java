@@ -28,8 +28,10 @@ public class AbilityItemDefinition extends ItemDefinition {
     @Override
     public ItemUseResult use(Tile tile, Item item, GameContext context, Vector2f worldPos) {
         if (Game.getTickCount() - cooldownTicks > lastUse) {
-            lastUse = Game.getTickCount();
-            return ability.use(tile, item, worldPos, context);
+            var v = ability.use(tile, item, worldPos, context);
+            if (v.handled())
+                lastUse = Game.getTickCount();
+            return v;
         }
         return new ItemUseResult(Optional.of(item), false);
     }
@@ -52,5 +54,10 @@ public class AbilityItemDefinition extends ItemDefinition {
     @Override
     public boolean canApplyScrolls() {
         return true;
+    }
+
+    @Override
+    public int getCooldownTime() {
+        return cooldownTicks;
     }
 }

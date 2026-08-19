@@ -33,4 +33,6 @@ public interface Entity extends Positioned {
     default float getAttractionY() {
         return getY();
     }
+    default void onLoad() {}
+    default void onUnload() {}
 }

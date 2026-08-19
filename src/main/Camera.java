@@ -1,12 +1,12 @@
 package main;
 
 import engine.core.DrawManager;
+import engine.core.Screen;
 import engine.core.Texture;
 import entities.Player;
 
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.*;
 import java.util.List;
 import java.util.Objects;
 
@@ -16,8 +16,11 @@ public class Camera {
     private float tileSize;
     private final DrawManager draw;
     private final List<CameraEffect> effects = new ArrayList<>();
-    private final ArrayList<RenderJob> renderJobs = new ArrayList<>();
+    private final PriorityQueue<RenderJob> renderJobs = new PriorityQueue<>((a, b) -> Float.compare(a.z, b.z));
     private final HashSet<LightSource> light = new HashSet<>();
+    private float[][] lightmap;
+    private int lightmapW, lightmapH;
+    private float lightmapOriginX, lightmapOriginY;
     public float defaultBrightness = 1f;
     public Camera(Player player, float tileSize, DrawManager draw) {
         this.player = player;
@@ -43,16 +46,66 @@ public class Camera {
     public void addLight(LightSource ls) {
         light.add(ls);
     }
-    private float computeBrightness(float x, float y) {
-        float b = defaultBrightness;
-        for (LightSource ls : light) {
-            float dx = x - ls.getX();
-            float dy = y - ls.getY();
-            float dist = (float) Math.sqrt(dx * dx + dy * dy);
-            float contribution = ls.getLightLevel() / (1f + dist);
-            if (contribution > b) b = contribution;
+    public void rebuildLightmap(Screen screen) {
+        float halfW = screen.getAspectRatio() / tileSize;
+        float halfH = 1f / tileSize;
+        float px = player.getX();
+        float py = player.getY();
+        float minX = px - halfW - 2;
+        float minY = py - halfH - 2;
+        float maxX = px + halfW + 2;
+        float maxY = py + halfH + 2;
+        int w = (int) Math.ceil(maxX - minX) + 1;
+        int h = (int) Math.ceil(maxY - minY) + 1;
+        lightmapW = w;
+        lightmapH = h;
+        lightmapOriginX = minX;
+        lightmapOriginY = minY;
+        if (lightmap == null || lightmap.length < h || lightmap[0].length < w) {
+            lightmap = new float[h][w];
         }
-        return b;
+        for (int y = 0; y < h; y++) {
+            for (int x = 0; x < w; x++) {
+                float wx = minX + x;
+                float wy = minY + y;
+                float b = defaultBrightness;
+                for (LightSource ls : light) {
+                    float dx = wx - ls.getX();
+                    float dy = wy - ls.getY();
+                    float dist = (float) Math.sqrt(dx * dx + dy * dy);
+                    float contribution = ls.getLightLevel() / (1f + dist);
+                    if (contribution > b) b = contribution;
+                }
+                lightmap[y][x] = b;
+            }
+        }
+    }
+    private float computeBrightness(float x, float y) {
+        float fx = x - lightmapOriginX;
+        float fy = y - lightmapOriginY;
+        int ix = (int) Math.floor(fx);
+        int iy = (int) Math.floor(fy);
+        if (ix < 0 || iy < 0 || ix >= lightmapW - 1 || iy >= lightmapH - 1) {
+            float b = defaultBrightness;
+            for (LightSource ls : light) {
+                float dx = x - ls.getX();
+                float dy = y - ls.getY();
+                float dist = (float) Math.sqrt(dx * dx + dy * dy);
+                float contribution = ls.getLightLevel() / (1f + dist);
+                if (contribution > b) b = contribution;
+            }
+            return b;
+        }
+        float fracX = fx - ix;
+        float fracY = fy - iy;
+        float b00 = lightmap[iy][ix];
+        float b10 = lightmap[iy][ix + 1];
+        float b01 = lightmap[iy + 1][ix];
+        float b11 = lightmap[iy + 1][ix + 1];
+        return b00 * (1 - fracX) * (1 - fracY)
+             + b10 * fracX * (1 - fracY)
+             + b01 * (1 - fracX) * fracY
+             + b11 * fracX * fracY;
     }
 
     public void rect(Color color, float x, float y, float w, float h) {
@@ -63,11 +116,9 @@ public class Camera {
         renderJobs.add(new RenderJob(function, z));
     }
     public void renderAllJobs() {
-        renderJobs.sort((a, b) -> Float.compare(a.z, b.z));
-        for (RenderJob job : renderJobs) {
-            job.function.run();
+        while (!renderJobs.isEmpty()) {
+            renderJobs.poll().function.run();
         }
-        renderJobs.clear();
     }
     public void image(Texture texture, float x, float y, float w, float h) {
         draw.litImage(texture, (x-player.getX())*tileSize, (y-player.getY())*tileSize, w*tileSize, h*tileSize,
