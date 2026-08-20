@@ -4,7 +4,7 @@
   "name": "Fireball Wand",
   "texture": "base:item:fireball_wand",
   "ability": "fireball",
-  "cooldown": 120,
+  "cooldown": 40,
   "stats": [
     {
       "type": "MAGIC_POWER",

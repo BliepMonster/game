@@ -67,7 +67,7 @@ public class SapphireGemstoneTilePart extends HittableResourceCreator implements
     }
     @Override
     public float getLightLevel() {
-        return this.isAlive() ? .7f : 0f;
+        return this.isAlive() ? .4f : 0f;
     }
     @Override
     public float getX() {

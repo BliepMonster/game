@@ -2,7 +2,7 @@
   "id": "base:cucumber",
   "ready": "base:empty",
   "unready": "base:empty",
-  "icon": "base:empty",
+  "icon": "base:crops:cucumber_icon",
   "duration": 300000,
   "guaranteed": "base:cucumber_drops",
   "optional": "base:no_drops",

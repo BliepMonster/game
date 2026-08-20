@@ -11,7 +11,7 @@ import tiles.Tile;
 import java.util.Optional;
 
 public class FireBallAbility extends ItemAbility {
-    private static final float MANA_COST = 80;
+    private static final float MANA_COST = 35;
     @Override
     public ItemUseResult use(Tile tile, Item item, Vector2f worldClickLocation, GameContext context) {
         var player = context.getPlayer();
