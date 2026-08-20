@@ -11,6 +11,7 @@ import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.*;
 
 import java.awt.Color;
+import java.lang.Math;
 import java.nio.FloatBuffer;
 import java.util.Arrays;
 import java.util.Objects;
@@ -220,6 +221,28 @@ public class DrawManager {
         plainColor.loadTexCoords(null, plainColor.texCoordsLocation);
         glDrawArrays(GL_TRIANGLES, 0, 6);
         ++drawCalls;
+    }
+    public void circle(final @NotNull Color color, final float cx, final float cy, final float r, final int segments) {
+        float invAspect = 1f / screen.getAspectRatio();
+        float sx = cx * invAspect;
+        float sy = cy;
+        float sr = r * invAspect;
+        float[] verts = new float[segments * 6];
+        int idx = 0;
+        for (int i = 0; i < segments; i++) {
+            float a0 = (float) (2.0 * Math.PI * i / segments);
+            float a1 = (float) (2.0 * Math.PI * (i + 1) / segments);
+            verts[idx++] = sx;
+            verts[idx++] = sy;
+            verts[idx++] = sx + (float) Math.cos(a0) * sr;
+            verts[idx++] = sy + (float) Math.sin(a0) * r;
+            verts[idx++] = sx + (float) Math.cos(a1) * sr;
+            verts[idx++] = sy + (float) Math.sin(a1) * r;
+        }
+        polygon(color, verts);
+    }
+    public void circle(final @NotNull Color color, final float cx, final float cy, final float r) {
+        circle(color, cx, cy, r, 32);
     }
     public void polygon(final @NotNull Color color, final float[] verts) {
         bindShader(plainColor);

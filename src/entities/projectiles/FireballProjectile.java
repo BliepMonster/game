@@ -4,9 +4,12 @@ import engine.hitboxes.Hitbox;
 import engine.hitboxes.RectangularHitbox;
 import entities.DamageType;
 import entities.Entity;
+import entities.ExplosionEntity;
 import main.Camera;
+import main.Game;
 import main.GameContext;
 import org.joml.Vector2f;
+import stats.StatHolder;
 
 import java.awt.*;
 
@@ -39,5 +42,13 @@ public class FireballProjectile extends SimpleProjectile {
         super(position, movement);
         this.damage = damage;
         this.sender = sender;
+    }
+
+    @Override
+    public void die(GameContext context) {
+        context.spawn(new ExplosionEntity(
+                (int)(60*context.getPlayer().stats.get(StatHolder.Stat.MAGIC_POWER)/100f),
+                4, Game.getTickCount(), 4, this.position, context
+        ));
     }
 }

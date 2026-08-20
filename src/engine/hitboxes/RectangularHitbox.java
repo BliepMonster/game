@@ -12,11 +12,14 @@ public class RectangularHitbox implements Hitbox, Serializable {
         this.y = y;
         this.height = height;
         this.owner = movingTarget;
-    } public boolean collidesWith(Hitbox h) {
+    }     public boolean collidesWith(Hitbox h) {
         if (h == this) return true;
         switch (h) {
             case null -> {
                 return false;
+            }
+            case CircularHitbox circular -> {
+                return circleIntersectsRect(circular);
             }
             case RectangularHitbox hitbox -> {
                 return x + owner.getX() < hitbox.x + hitbox.owner.getX() + hitbox.width &&
@@ -35,6 +38,24 @@ public class RectangularHitbox implements Hitbox, Serializable {
             }
         }
         return false;
+    }
+
+    private boolean circleIntersectsRect(CircularHitbox c) {
+        float rx = x + owner.getX();
+        float ry = y + owner.getY();
+        float minX = Math.min(rx, rx + width);
+        float maxX = Math.max(rx, rx + width);
+        float minY = Math.min(ry, ry + height);
+        float maxY = Math.max(ry, ry + height);
+        float cx = c.getCenterX();
+        float cy = c.getCenterY();
+        float cr = c.getRadius();
+
+        float closestX = Math.max(minX, Math.min(cx, maxX));
+        float closestY = Math.max(minY, Math.min(cy, maxY));
+        float dx = cx - closestX;
+        float dy = cy - closestY;
+        return dx * dx + dy * dy <= cr * cr;
     }
 
     public float getX() {

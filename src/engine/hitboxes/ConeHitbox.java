@@ -35,6 +35,9 @@ public class ConeHitbox implements Hitbox, Serializable {
             case null -> {
                 return false;
             }
+            case CircularHitbox circular -> {
+                return intersectsCircle(circular);
+            }
             case RectangularHitbox rectangular -> {
                 return intersectsRect(rectangular);
             }
@@ -48,6 +51,58 @@ public class ConeHitbox implements Hitbox, Serializable {
             default -> {
             }
         }
+        return false;
+    }
+
+    private boolean intersectsCircle(CircularHitbox c) {
+        float cx = c.getCenterX();
+        float cy = c.getCenterY();
+        float cr = c.getRadius();
+        float ox = getOriginX();
+        float oy = getOriginY();
+
+        if (pointInCone(cx, cy)) return true;
+
+        float dx = ox - cx;
+        float dy = oy - cy;
+        if (dx * dx + dy * dy <= cr * cr) return true;
+
+        float left = direction - halfAngle;
+        float right = direction + halfAngle;
+        if (segmentIntersectsCircle(ox, oy, ox + (float) Math.cos(left) * radius, oy + (float) Math.sin(left) * radius, cx, cy, cr))
+            return true;
+        if (segmentIntersectsCircle(ox, oy, ox + (float) Math.cos(right) * radius, oy + (float) Math.sin(right) * radius, cx, cy, cr))
+            return true;
+
+        int segments = 16;
+        float prevX = ox + (float) Math.cos(left) * radius;
+        float prevY = oy + (float) Math.sin(left) * radius;
+        for (int i = 1; i <= segments; i++) {
+            float t = left + (right - left) * i / segments;
+            float curX = ox + (float) Math.cos(t) * radius;
+            float curY = oy + (float) Math.sin(t) * radius;
+            if (segmentIntersectsCircle(prevX, prevY, curX, curY, cx, cy, cr)) return true;
+            prevX = curX;
+            prevY = curY;
+        }
+        return false;
+    }
+
+    private static boolean segmentIntersectsCircle(float x1, float y1, float x2, float y2, float cx, float cy, float cr) {
+        float dx = x2 - x1;
+        float dy = y2 - y1;
+        float fx = x1 - cx;
+        float fy = y1 - cy;
+        float a = dx * dx + dy * dy;
+        float b = 2 * (fx * dx + fy * dy);
+        float c = fx * fx + fy * fy - cr * cr;
+        float discriminant = b * b - 4 * a * c;
+        if (discriminant < 0) return false;
+        discriminant = (float) Math.sqrt(discriminant);
+        float t1 = (-b - discriminant) / (2 * a);
+        float t2 = (-b + discriminant) / (2 * a);
+        if (t1 >= 0 && t1 <= 1) return true;
+        if (t2 >= 0 && t2 <= 1) return true;
         return false;
     }
 

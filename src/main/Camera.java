@@ -112,6 +112,9 @@ public class Camera {
         draw.litRect(color, (x-player.getX())*tileSize, (y-player.getY())*tileSize, w*tileSize, h*tileSize,
                 computeBrightness(x, y+h), computeBrightness(x+w, y+h), computeBrightness(x+w, y), computeBrightness(x, y));
     }
+    public void circle(Color color, float x, float y, float r) {
+        draw.circle(color, (x-player.getX())*tileSize, (y-player.getY())*tileSize, r*tileSize);
+    }
     public void addRenderJob(Runnable function, float z) {
         renderJobs.add(new RenderJob(function, z));
     }
