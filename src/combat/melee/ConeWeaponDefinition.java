@@ -5,12 +5,15 @@ import engine.hitboxes.ConeHitbox;
 import entities.DamageType;
 import entities.Entity;
 import entities.particles.SwingConeEffect;
+import main.Game;
 import main.GameContext;
 import org.joml.Vector2f;
 import stats.StatHolder;
 import stats.inventory.items.Item;
 import stats.inventory.items.ItemUseResult;
 import tiles.Tile;
+
+import java.util.Optional;
 
 public class ConeWeaponDefinition extends MeleeWeaponItemDefinition {
     private final StatHolder stats;
@@ -30,6 +33,8 @@ public class ConeWeaponDefinition extends MeleeWeaponItemDefinition {
 
     @Override
     public ItemUseResult use(Tile tile, Item item, GameContext context, Vector2f worldPos) {
+        int ticks = Game.getTickCount();
+        if (ticks-lastUse < cooldownTicks) return new ItemUseResult(Optional.of(item), false);
         var v = super.use(tile, item, context, worldPos);
         var player = context.getPlayer();
         context.spawn(new SwingConeEffect(new Vector2f(player.getX(), player.getY()), 6, this.size, (float)Math.atan2(worldPos.y-player.getY(), worldPos.x-player.getX()), this.angle*2));

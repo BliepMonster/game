@@ -16,6 +16,7 @@ import tiles.crafting.scrolls.ScrollApplicationTilePart;
 import tiles.doors.DungeonExitTilePart;
 import tiles.doors.EntranceTilePart;
 import tiles.house.ChestTilePart;
+import tiles.house.WardrobeTilePart;
 import tiles.npc.ShopDefinitionRegistry;
 import tiles.npc.DialogueNPC;
 import buildings.RepairTask;
@@ -58,6 +59,7 @@ public final class TilePartLoader {
     public static final String ID_SCROLL_APPLIER = "scroll_applier";
     public static final String ID_SPAWNER_GEMGOLEM = "gg_spawner";
     public static final String ID_CHEST = "chest";
+    public static final String ID_WARDROBE = "wardrobe";
     public static final String ID_GLOWING_MUSHROOM = "glowing_mushroom";
     public static final String ID_PINE_TREE = "pine_tree";
     public static final String ID_GARDEN_POT = "garden_pot";
@@ -126,6 +128,7 @@ public final class TilePartLoader {
             case ID_SCROLL_APPLIER -> new ScrollApplicationTilePart(pos);
             case ID_SPAWNER_GEMGOLEM -> new GemstoneGolemSpawner(pos, context);
             case ID_CHEST -> ChestTilePart.load(pos, obj);
+            case ID_WARDROBE -> WardrobeTilePart.load(pos, obj);
             case ID_GLOWING_MUSHROOM -> new GlowingMushroomTilePart(pos);
             case ID_CRUSHER -> new CrusherTilePart(pos);
             case ID_SCROLL_TABLE -> new ScrollCraftingTilePart(pos);

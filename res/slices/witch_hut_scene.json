@@ -1,0 +1,7 @@
+{
+  "dimensions": [8, 9],
+  "type": "algo",
+  "prefix": "base:scenes:witch_hut:",
+  "between": ":",
+  "texid": "base:scenes:witch_hut"
+}

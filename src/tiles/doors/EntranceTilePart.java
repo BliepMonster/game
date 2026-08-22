@@ -48,4 +48,9 @@ public class EntranceTilePart extends TilePart {
         map.values.put("texture_id", new JsonString(texture.getAddress()));
         return map;
     }
+
+    @Override
+    public boolean canBreak() {
+        return false;
+    }
 }

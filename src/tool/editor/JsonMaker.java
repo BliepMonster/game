@@ -9,16 +9,13 @@ import java.io.IOException;
 
 public class JsonMaker {
     void main() throws IOException {
-        while (true) {
-            String filename = IO.readln("Filename?");
-            if ("quit".equals(filename)) break;
-            String id = IO.readln("ID?");
-            String type = IO.readln("Type?");
-            World world = new World(CoordinateMap.newDefaultPackedMap(), filename, id);
-            if (type.equals("dungeon")) world = new DungeonWorld(CoordinateMap.newDefaultPackedMap(), filename, id);
-            float brightness = Float.parseFloat(IO.readln("Brightness?"));
-            world.setBrightness(brightness);
-            JSONSaver.save(world, world.map).write(new FileWriter(world.address));
-        }
+        String filename = IO.readln("Filename?");
+        String id = IO.readln("ID?");
+        String type = IO.readln("Type?");
+        World world = new World(CoordinateMap.newDefaultPackedMap(), filename, id);
+        if (type.equals("dungeon")) world = new DungeonWorld(CoordinateMap.newDefaultPackedMap(), filename, id);
+        float brightness = Float.parseFloat(IO.readln("Brightness?"));
+        world.setBrightness(brightness);
+        JSONSaver.save(world, world.map).write(new FileWriter(world.address));
     }
 }

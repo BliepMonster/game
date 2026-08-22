@@ -18,7 +18,7 @@ import java.util.ArrayList;
 
 public class GoldenZombieEnemy extends RespawnableEnemy {
     public static final float AGGRO_RADIUS = 5, DEAGGRO_RADIUS = 12;
-    private int health = 200;
+    private int health = 120;
     private int lastHitTick = 0, lastHurtTick = 0;
     private static final int HIT_INTERVAL = 10;
     private boolean angry = false;
@@ -75,8 +75,7 @@ public class GoldenZombieEnemy extends RespawnableEnemy {
     }
     public void damage(int damage, DamageType type, GameContext context) {
         final int defense = 100;
-        if (type == DamageType.NORMAL)
-            health = health - (int) (damage * (1 - defense /(float)(defense + 100)));
+        health = health - (int) (damage * (1 - defense /(float)(defense + 100)));
         angry = true;
         lastHurtTick = Game.getTickCount();
     }

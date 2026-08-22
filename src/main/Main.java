@@ -42,7 +42,7 @@ import java.util.ArrayList;
 
 public class Main {
     public static boolean DEBUG_MODE = false;
-    public static final boolean ALLOW_DEBUG = false;
+    public static final boolean ALLOW_DEBUG = true;
     public enum State {
         MAIN_MENU,
         LOAD_WORLD,

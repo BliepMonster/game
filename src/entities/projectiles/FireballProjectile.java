@@ -47,7 +47,7 @@ public class FireballProjectile extends SimpleProjectile {
     @Override
     public void die(GameContext context) {
         context.spawn(new ExplosionEntity(
-                (int)(60*context.getPlayer().stats.get(StatHolder.Stat.MAGIC_POWER)/100f),
+                (int)(120*context.getPlayer().stats.get(StatHolder.Stat.MAGIC_POWER)/100f),
                 4, Game.getTickCount(), 4, this.position, context
         ));
     }

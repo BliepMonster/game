@@ -1,0 +1,9 @@
+{
+  "type": "ability",
+  "id": "base:placers:wardrobe",
+  "name": "Wardrobe",
+  "texture": "base:item:wardrobe",
+  "ability": "wardrobe",
+  "cooldown": 1,
+  "stats": []
+}

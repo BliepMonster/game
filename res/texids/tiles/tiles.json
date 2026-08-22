@@ -38,5 +38,7 @@
   "base:tiles:strawberry": "res/textures/tiles/strawberry.png",
   "base:tiles:strawberry2": "res/textures/tiles/strawberry_bush.png",
   "base:tiles:res_bb": "res/textures/tiles/restaurant_backbar.png",
-  "base:tiles:table": "res/textures/tiles/table.png"
+  "base:tiles:table": "res/textures/tiles/table.png",
+  "base:tiles:witch_hut_empty": "res/textures/tiles/witch_hut_empty.png",
+  "base:tiles:witch_hut": "res/textures/tiles/witch_hut.png"
 }

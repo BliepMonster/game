@@ -1,0 +1,12 @@
+{
+  "id": "base:witch_hut",
+  "resources": {
+    "Copper Bar": 12,
+    "Compressed Pine Wood": 10,
+    "Steel Bar": 6,
+    "Polished Sapphire": 3,
+    "Zombie Fragment": 1
+  },
+  "coins": 10000,
+  "attrib": "base:witch_hut_unlocked"
+}

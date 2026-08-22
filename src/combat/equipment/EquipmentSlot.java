@@ -2,9 +2,9 @@ package combat.equipment;
 
 public enum EquipmentSlot {
     NONE,
-    CHESTPLATE,
     HELMET,
+    CHESTPLATE,
+    RING,
     LEGGINGS,
     BOOTS,
-    RING,
 }

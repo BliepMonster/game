@@ -1,0 +1,7 @@
+{
+  "dimensions": [6, 5],
+  "type": "algo",
+  "prefix": "base:tiles:witch_hut_empty:",
+  "between": ":",
+  "texid": "base:tiles:witch_hut_empty"
+}

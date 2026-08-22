@@ -45,6 +45,8 @@ public class Player implements Entity, LightSource {
     private Direction direction = Direction.DOWN;
     private float health = 100;
     private float mana = 100;
+    private float overflowHealth = 0;
+    private float overflowMana = 0;
     public final CurrencyStorage currency;
     public final HashSet<StatusEffect> effects = new HashSet<>();
     public Player() {
@@ -66,7 +68,7 @@ public class Player implements Entity, LightSource {
     }
 
     private StatHolder getBaseStats() {
-        return new StatHolder().withSpeed(5).with(StatHolder.Stat.MAX_HEALTH, 100)
+        return new StatHolder().withSpeed(6).with(StatHolder.Stat.MAX_HEALTH, 100)
                 .with(StatHolder.Stat.STRENGTH, 100)
                 .with(StatHolder.Stat.CRIT_CHANCE, 30)
                 .with(StatHolder.Stat.CRIT_DAMAGE, 150)
@@ -95,8 +97,30 @@ public class Player implements Entity, LightSource {
         for (var effect : effects) {
             stats.merge(effect.stats);
         }
-        if (atMaxHealth) health = stats.get(StatHolder.Stat.MAX_HEALTH);
-        if (atMaxMana) mana = stats.get(StatHolder.Stat.MAGIC_POWER);
+        float newMaxHealth = stats.get(StatHolder.Stat.MAX_HEALTH);
+        float newMaxMana = stats.get(StatHolder.Stat.MAGIC_POWER);
+
+        if (health > newMaxHealth) {
+            overflowHealth += health - newMaxHealth;
+            health = newMaxHealth;
+        } else if (overflowHealth > 0) {
+            float restore = Math.min(overflowHealth, newMaxHealth - health);
+            overflowHealth -= restore;
+            health += restore;
+        } else if (atMaxHealth) {
+            health = newMaxHealth;
+        }
+
+        if (mana > newMaxMana) {
+            overflowMana += mana - newMaxMana;
+            mana = newMaxMana;
+        } else if (overflowMana > 0) {
+            float restore = Math.min(overflowMana, newMaxMana - mana);
+            overflowMana -= restore;
+            mana += restore;
+        } else if (atMaxMana) {
+            mana = newMaxMana;
+        }
     }
 
     @Override
@@ -168,11 +192,6 @@ public class Player implements Entity, LightSource {
         if (movement.y != 0)
             m = true;
         if (step.collidesWith(world)) position.y -= movement.y;
-
-        if (!m) {
-            position.x = Math.round(position.x * 16) / 16f;
-            position.y = Math.round(position.y * 16) / 16f;
-        }
     }
     public void selectItem(int i) {
         if (i < 0 || i >= 9) throw new UnsupportedOperationException("Invalid slot");
@@ -229,6 +248,8 @@ public class Player implements Entity, LightSource {
     public void respawn(GameContext context) {
         this.health = this.stats.get(StatHolder.Stat.MAX_HEALTH);
         this.mana = this.stats.get(StatHolder.Stat.MAGIC_POWER);
+        this.overflowHealth = 0;
+        this.overflowMana = 0;
         context.getWorld().onPlayerRespawn(context);
         this.lastRespawn = Game.getTickCount();
         this.position.set(context.getPlayerRespawnPosition());

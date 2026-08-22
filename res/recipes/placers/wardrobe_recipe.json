@@ -1,0 +1,23 @@
+{
+  "name": "Wardrobe",
+  "inputs": [
+    {
+      "type": "resource",
+      "id": "Copper Bar",
+      "amount": 3
+    },
+    {
+      "type": "resource",
+      "id": "Compressed Pine Wood",
+      "amount": 3
+    }
+  ],
+  "outputs": [
+    {
+      "type": "item",
+      "id": "base:placers:wardrobe",
+      "amount": 1
+    }
+  ],
+  "requirements": []
+}
