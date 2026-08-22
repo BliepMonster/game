@@ -167,7 +167,7 @@ public class Main {
             else if (Input.isKeyDown(GLFW.GLFW_KEY_9)) mode = EditorToolState.O9;
             else if (Input.isKeyDown(GLFW.GLFW_KEY_S))
                 JSONSaver.save(game.world, game.world.map).write(new FileWriter(game.world.address));
-            if (Input.isMouseDown(GLFW.GLFW_MOUSE_BUTTON_1))
+            if (Input.isMouseDown(GLFW.GLFW_MOUSE_BUTTON_LEFT))
                 game.world.apply(mode, Input.getMouseX(screen), Input.getMouseY(screen), game, Main.TILE_SIZE);
         } while (framestamp - lastTick >= tickRate) {
             lastTick = framestamp;

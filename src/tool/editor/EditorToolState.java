@@ -36,12 +36,12 @@ public enum EditorToolState {
                 System.out.println(new Vector2f(x, y));
             }
             case O2 -> {
-                var type = TileType.get("base:scenes:witch_hut"+x+":"+y);
+                var type = TileType.get("base:scenes:witch_hut:"+x+":"+y);
                 if (type == null) return;
                 map.put(x, y, new DefaultTile(type));
             }
             case O3 -> {
-                tile.setPart(new EntranceTilePart(new Vector2f(x, y), "WITCH_HUT", new Vector2f(4, 1), TextureIdMap.get("base:empty")));
+                tile.setPart(new UnstandableTilePart(new Vector2f(x, y)));
             }
             case O4 -> tile.setPart(new SapphireGemstoneTilePart(new Vector2f(x, y)));
             case O5 -> ((TextureAdaptTilePart) tile.getPart()).setPart(new DialogueNPC(new Vector2f(x, y), ShopDefinitionRegistry.get("chef"), Main.font));
