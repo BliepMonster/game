@@ -1,0 +1,19 @@
+{
+  "name": "Refined Ruby",
+
+  "inputs": [
+    {
+      "type": "resource",
+      "id": "Polished Ruby",
+      "amount": 10
+    }
+  ],
+
+  "outputs": [
+    {
+      "type": "resource",
+      "id": "Refined Ruby",
+      "amount": 1
+    }
+  ]
+}

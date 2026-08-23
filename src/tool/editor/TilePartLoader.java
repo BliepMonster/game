@@ -3,6 +3,8 @@ package tool.editor;
 import engine.core.Texture;
 import engine.core.text.Font;
 import engine.json.*;
+import alchemy.AlchemyCraftingRecipe;
+import alchemy.AlchemyStationTilePart;
 import farming.CompostType;
 import farming.CropType;
 import farming.GardenPotTilePart;
@@ -65,6 +67,7 @@ public final class TilePartLoader {
     public static final String ID_GARDEN_POT = "garden_pot";
     public static final String ID_SEED_MAKER = "seed_maker";
     public static final String ID_ANVIL = "anvil";
+    public static final String ID_ALCHEMY_STATION = "alchemy_station";
     public static final String ID_TEXTURE = "texture_adapt";
     public static Font font;
     public static final HashMap<String, Texture> tcache = new HashMap<>();
@@ -154,6 +157,12 @@ public final class TilePartLoader {
             case ID_ANVIL -> new AnvilTilePart(pos);
             case ID_SAPPHIRE -> new SapphireGemstoneTilePart(pos);
             case ID_SEED_MAKER -> new SeedMakerTilePart(pos);
+            case ID_ALCHEMY_STATION -> {
+                var recipeV = (JsonString) obj.values.get("recipe");
+                yield new AlchemyStationTilePart(pos,
+                        recipeV == null ? null : AlchemyCraftingRecipe.get(recipeV.value),
+                        recipeV == null ? 0 : (long) ((JsonNumber) obj.values.get("end")).num);
+            }
             default -> throw new RuntimeException("Unknown object: " + type);
         };
     }

@@ -19,6 +19,11 @@ public class Maths {
     public static int nearestPowerOfTwo(int value) {
         return (int) Math.pow(2, Math.round(Math.log(value) / Math.log(2)));
     }
+    public static String countdownString(long millisRemaining) {
+        long totalSeconds = Math.max(0, (millisRemaining+999)/1000);
+        if (totalSeconds >= 3600) return String.format("%d:%02d:%02d", totalSeconds/3600, totalSeconds%3600/60, totalSeconds%60);
+        return String.format("%d:%02d", totalSeconds/60, totalSeconds%60);
+    }
     public static int toScreenPixels(Screen screen, float GLWidth) {
         return (int) (GLWidth*screen.getHeight()/2);
     }

@@ -1,0 +1,19 @@
+{
+  "name": "Purest Gold",
+
+  "inputs": [
+    {
+      "type": "resource",
+      "id": "Gold Bar",
+      "amount": 12
+    }
+  ],
+
+  "outputs": [
+    {
+      "type": "resource",
+      "id": "Purest Gold",
+      "amount": 1
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "recipe": "res/recipes/alchemy_back/purest_gold_recipe.json",
+  "xp": 100,
+  "time": 5000,
+  "tex": "base:empty"
+}

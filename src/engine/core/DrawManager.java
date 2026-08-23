@@ -268,6 +268,7 @@ public class DrawManager {
         tintedImage(tex, Color.white, transform);
     }
     public void tintedImage(Texture tex, Color col, Matrix4f transform) {
+        if (tex == null) return;
         bindShader(textured);
         applyLightLevel();
         textured.loadColor(textured.colorLocation, col);

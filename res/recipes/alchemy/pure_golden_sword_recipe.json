@@ -1,0 +1,6 @@
+{
+  "recipe": "res/recipes/alchemy_back/pure_golden_sword_recipe.json",
+  "xp": 25000,
+  "time": 3600000,
+  "tex": "base:item:pure_golden_sword"
+}

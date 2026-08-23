@@ -1,0 +1,19 @@
+{
+  "name": "Refined Sapphire",
+
+  "inputs": [
+    {
+      "type": "resource",
+      "id": "Polished Sapphire",
+      "amount": 10
+    }
+  ],
+
+  "outputs": [
+    {
+      "type": "resource",
+      "id": "Refined Sapphire",
+      "amount": 1
+    }
+  ]
+}

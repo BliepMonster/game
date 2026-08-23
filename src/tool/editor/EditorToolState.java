@@ -1,5 +1,6 @@
 package tool.editor;
 
+import alchemy.AlchemyStationTilePart;
 import buildings.RepairTask;
 import buildings.RepairTaskNPC;
 import engine.CoordinateMap;
@@ -36,9 +37,7 @@ public enum EditorToolState {
                 System.out.println(new Vector2f(x, y));
             }
             case O2 -> {
-                var type = TileType.get("base:scenes:witch_hut:"+x+":"+y);
-                if (type == null) return;
-                map.put(x, y, new DefaultTile(type));
+                tile.setPart(new DialogueNPC(new Vector2f(x, y), ShopDefinitionRegistry.get("witch"), Main.font));
             }
             case O3 -> {
                 tile.setPart(new UnstandableTilePart(new Vector2f(x, y)));

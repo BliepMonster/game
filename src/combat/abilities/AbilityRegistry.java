@@ -1,5 +1,9 @@
 package combat.abilities;
 
+import alchemy.AlchemyStationTilePart;
+import org.joml.Vector2f;
+import tiles.TilePart;
+
 import java.util.HashMap;
 
 public class AbilityRegistry {
@@ -20,5 +24,11 @@ public class AbilityRegistry {
         registry.put("wardrobe", new WardrobePlacerAbility());
         registry.put("anvil", new AnvilPlacerAbility());
         registry.put("fireball", new FireBallAbility());
+        registry.put("alchemy_station", new PlacerAbility() {
+            @Override
+            public TilePart getPart(Vector2f position) {
+                return new AlchemyStationTilePart(position);
+            }
+        });
     }
 }

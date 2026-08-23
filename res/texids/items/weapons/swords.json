@@ -2,5 +2,6 @@
   "base:item:broken_sword": "res/textures/broken/broken_sword.png",
   "base:item:copper_sword": "res/textures/copper/copper_sword.png",
   "base:item:iron_sword": "res/textures/iron/iron_sword.png",
-  "base:item:steel_sword": "res/textures/steel/steel_sword.png"
+  "base:item:steel_sword": "res/textures/steel/steel_sword.png",
+  "base:item:pure_golden_sword": "res/textures/steel/gilded/pure_golden_sword.png"
 }

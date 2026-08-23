@@ -9,5 +9,6 @@
   "base:item:seed_maker": "res/textures/placers/seed_maker.png",
   "base:item:anvil": "res/textures/placers/anvil.png",
   "base:item:crafting_station": "res/textures/placers/crafting_table.png",
-  "base:item:wardrobe": "res/textures/placers/wardrobe.png"
+  "base:item:wardrobe": "res/textures/placers/wardrobe.png",
+  "base:item:alchemy_station": "res/textures/placers/alchemy_station.png"
 }

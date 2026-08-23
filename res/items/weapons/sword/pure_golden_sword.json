@@ -1,0 +1,16 @@
+{
+  "type": "melee",
+  "id": "base:weapons:pure_golden_sword",
+  "name": "Pure Golden Blade",
+  "texture": "base:item:pure_golden_sword",
+
+  "knockback": 2,
+  "damage_type": "NORMAL",
+  "stats": [],
+  "melee_type": "cone",
+  "damage": 90,
+  "cooldown": 28,
+
+  "range": 4.4,
+  "angle": 26
+}

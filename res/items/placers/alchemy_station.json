@@ -1,0 +1,9 @@
+{
+  "type": "ability",
+  "id": "base:placers:alchemy_station",
+  "name": "Alchemy Station",
+  "texture": "base:item:alchemy_station",
+  "ability": "alchemy_station",
+  "cooldown": 1,
+  "stats": []
+}

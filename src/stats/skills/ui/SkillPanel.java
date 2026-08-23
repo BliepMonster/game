@@ -31,7 +31,7 @@ public class SkillPanel extends Component {
         super(new CenterConstraint(), new CenterConstraint(), new RelativeSizeConstraint(1), new RelativeSizeConstraint(1.2f));
         this.lp = 0;
         this.set = set;
-        this.selector = new SkillPageSelectorBar(this, set.size()/5, font);
+        this.selector = new SkillPageSelectorBar(this, (set.size()-1)/5, font);
         this.font = font;
         this.page = loadSkillPage(set, 0);
     }

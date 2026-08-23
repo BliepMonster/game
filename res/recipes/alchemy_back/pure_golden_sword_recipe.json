@@ -1,0 +1,46 @@
+{
+  "name": "Pure Golden Blade",
+
+  "inputs": [
+    {
+      "type": "resource",
+      "id": "Polished Pine Wood",
+      "amount": 1
+    },
+    {
+      "type": "resource",
+      "id": "Refined Ruby",
+      "amount": 2
+    },
+    {
+      "type": "resource",
+      "id": "Refined Sapphire",
+      "amount": 1
+    },
+    {
+      "type": "resource",
+      "id": "Purest Gold",
+      "amount": 6
+    }
+  ],
+
+  "outputs": [
+    {
+      "type": "item",
+      "id": "base:weapons:pure_golden_sword",
+      "amount": 1
+    }
+  ],
+  "requirements": [
+    {
+      "type": "skill",
+      "skill": "COMBAT",
+      "level": 12
+    },
+    {
+      "type": "skill",
+      "skill": "ALCHEMY",
+      "level": 8
+    }
+  ]
+}

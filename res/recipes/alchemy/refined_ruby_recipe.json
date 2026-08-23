@@ -1,0 +1,6 @@
+{
+  "recipe": "res/recipes/alchemy_back/refined_ruby_recipe.json",
+  "xp": 160,
+  "time": 10000,
+  "tex": "base:empty"
+}

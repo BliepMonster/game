@@ -26,11 +26,17 @@ public class ItemCraftingRecipe implements CraftingRecipe {
     public void craft(FullItemStorage storage, GameContext context) {
         // double check for safety
         if (canCraft(storage, context)) {
-            for (ItemRequirement requirement : ingredients) {
-                requirement.consume(storage);
-            }
-            result.produce(storage);
+            consume(storage);
+            produce(storage);
         }
+    }
+    public void consume(FullItemStorage storage) {
+        for (ItemRequirement requirement : ingredients) {
+            requirement.consume(storage);
+        }
+    }
+    public void produce(FullItemStorage storage) {
+        result.produce(storage);
     }
     public ItemRequirement[] getRequirements() {
         return ingredients;

@@ -37,6 +37,7 @@ public class MainMenu {
                     new SavedSkill(0, 0),
                     new SavedSkill(0, 0),
                     new SavedSkill(0, 0),
+                    new SavedSkill(0, 0),
                     new SavedSkill(0, 0)
             })), new SavedHome(WorldRegistry.get("HOUSE")), SavedQuests.empty(), new SavedAttributeData(new String[0]));
             MainMenu.initLoadWorldMenu();

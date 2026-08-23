@@ -1,0 +1,27 @@
+{
+  "name": "Witch",
+  "id": "witch",
+  "texture": "res/textures/npc/witch.png",
+  "height": 3,
+  "z_offset": 0.5,
+  "dialogue": [
+    {
+      "type": "shop",
+      "entries": [
+        {
+          "requirements": [],
+          "ingredients": [],
+          "price": {
+            "currency": "COINS",
+            "amount": 15000
+          },
+          "texture": "res/textures/placers/alchemy_station.png",
+          "result": {
+            "type": "item",
+            "id": "base:placers:alchemy_station"
+          }
+        }
+      ]
+    }
+  ]
+}
