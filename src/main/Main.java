@@ -50,6 +50,7 @@ public class Main {
     }
     public static State state = State.MAIN_MENU;
     public static Font font;
+    public static Object[] fund = new Object[2500000];
 
     static String filename;
 
@@ -253,6 +254,8 @@ public class Main {
                 console.input.events.clear();
                 screen.display();
             } catch (Throwable t) {
+                fund = null;
+                System.gc();
                 t.printStackTrace();
                 if (DEBUG_MODE)
                     JSONSaver.save(game.world, game.world.map).write(new FileWriter(game.world.address));

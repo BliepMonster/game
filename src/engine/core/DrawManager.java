@@ -13,7 +13,6 @@ import org.lwjgl.opengl.*;
 import java.awt.Color;
 import java.lang.Math;
 import java.nio.FloatBuffer;
-import java.util.Arrays;
 import java.util.Objects;
 
 import static org.lwjgl.opengl.GL46.*;
@@ -24,13 +23,15 @@ public class DrawManager {
     protected static int textVAO;
     protected static int batchVAO;
     protected static int batchVBO;
+    private static int batchVBOCapacity;
     protected static int polygonVAO;
     protected static int polygonVBO;
     protected static int textPositionsVBO;
     protected static int textTexCoordsVBO;
     protected static int rectPositionVBO;
     protected static int rectTexCoordsVBO;
-    private final Vector3f CACHE_VEC1 = new Vector3f(), CACHE_VEC2 = new Vector3f();
+    private static final Vector3f CACHE_VEC1 = new Vector3f();
+    private static final Vector3f CACHE_VEC2 = new Vector3f();
     private final Matrix4f CACHE_MAT = new Matrix4f();
     protected static int lastBoundVAO;
     private static Texture lastBoundTexture;
@@ -53,17 +54,29 @@ public class DrawManager {
     protected Shader litColor = new Shader(litVertexName, litColorFragName);
     protected Shader batchTextured = new Shader(batchVertexName, batchFragName);
     private static class BatchBuffer {
-        float[] data = new float[256];
-        int size = 0;
-        void add(float... values) {
-            if (size + values.length > data.length) {
-                data = Arrays.copyOf(data, java.lang.Math.max(size + values.length, data.length * 2));
+        private static final int INITIAL_FLOATS = 4096;
+        private static final int FLOATS_PER_QUAD = 30;
+        private FloatBuffer data = BufferUtils.createFloatBuffer(INITIAL_FLOATS);
+        void beginQuad() {
+            if (data.remaining() < FLOATS_PER_QUAD) {
+                FloatBuffer grown = BufferUtils.createFloatBuffer(
+                        java.lang.Math.max(data.capacity() * 2, data.capacity() + FLOATS_PER_QUAD));
+                data.flip();
+                grown.put(data);
+                data = grown;
             }
-            System.arraycopy(values, 0, data, size, values.length);
-            size += values.length;
+        }
+        void vertex(float x, float y, float u, float v, float light) {
+            data.put(x).put(y).put(u).put(v).put(light);
+        }
+        boolean isEmpty() {
+            return data.position() == 0;
+        }
+        FloatBuffer flipForUpload() {
+            return data.flip();
         }
         void clear() {
-            size = 0;
+            data.clear();
         }
     }
     private final java.util.HashMap<Texture, BatchBuffer> batches = new java.util.HashMap<>();
@@ -143,6 +156,7 @@ public class DrawManager {
         glBindVertexArray(0);
 
         lastBoundVAO = -1;
+        batchVBOCapacity = 0;
     }
     public static void swapTexture(Texture texture) {
         if (lastBoundTexture == texture)
@@ -188,14 +202,6 @@ public class DrawManager {
         buffer.flip();
         return buffer;
     }
-    protected static FloatBuffer storeDataInFloatBuffer(float[] data, int size) {
-        FloatBuffer buffer = BufferUtils.createFloatBuffer(size);
-        buffer.put(data, 0, size);
-        buffer.flip();
-        return buffer;
-    }
-
-    /// RENDERING
 
     public void rect(Color color, float x, float y, float width, float height) {
         CACHE_VEC1.set(x/screen.getAspectRatio(),y,0);
@@ -365,24 +371,25 @@ public class DrawManager {
         float ax = x/screen.getAspectRatio();
         float aw = width/screen.getAspectRatio();
         var buffer = batches.computeIfAbsent(tex, k -> new BatchBuffer());
-        buffer.add(
-                ax, y+height, 0, 0, topLeft,
-                ax+aw, y+height, 1, 0, topRight,
-                ax+aw, y, 1, 1, bottomRight,
-                ax, y, 0, 1, bottomLeft,
-                ax, y+height, 0, 0, topLeft,
-                ax+aw, y, 1, 1, bottomRight
-        );
+        buffer.beginQuad();
+        float x1 = ax + aw;
+        float y1 = y + height;
+        buffer.vertex(ax,  y1, 0, 0, topLeft);
+        buffer.vertex(x1,  y1, 1, 0, topRight);
+        buffer.vertex(x1,  y,  1, 1, bottomRight);
+        buffer.vertex(ax,  y,  0, 1, bottomLeft);
+        buffer.vertex(ax,  y1, 0, 0, topLeft);
+        buffer.vertex(x1,  y,  1, 1, bottomRight);
     }
     public void flushLitBatch() {
         for (var entry : batches.entrySet()) {
             var buffer = entry.getValue();
-            if (buffer.size == 0) continue;
-            drawBatched(entry.getKey(), buffer.data, buffer.size);
+            if (buffer.isEmpty()) continue;
+            drawBatched(entry.getKey(), buffer);
             buffer.clear();
         }
     }
-    private void drawBatched(Texture tex, float[] data, int size) {
+    private void drawBatched(Texture tex, BatchBuffer batch) {
         bindShader(batchTextured);
         CACHE_MAT.identity();
         batchTextured.loadColor(batchTextured.colorLocation, Color.white);
@@ -394,10 +401,17 @@ public class DrawManager {
         GL13.glActiveTexture(GL13.GL_TEXTURE0);
         swapTexture(tex);
         batchTextured.loadTexCoords(tex, batchTextured.texCoordsLocation);
-        FloatBuffer buffer = storeDataInFloatBuffer(data, size);
+        FloatBuffer data = batch.flipForUpload();
+        int floats = data.remaining();
         glBindBuffer(GL_ARRAY_BUFFER, batchVBO);
-        glBufferData(GL_ARRAY_BUFFER, buffer, GL_DYNAMIC_DRAW);
-        glDrawArrays(GL_TRIANGLES, 0, size/5);
+        if (floats > batchVBOCapacity) {
+            glBufferData(GL_ARRAY_BUFFER, data, GL_DYNAMIC_DRAW);
+            batchVBOCapacity = floats;
+        } else {
+            glBufferData(GL_ARRAY_BUFFER, (long) floats * Float.BYTES, GL_STREAM_DRAW);
+            glBufferSubData(GL_ARRAY_BUFFER, 0, data);
+        }
+        glDrawArrays(GL_TRIANGLES, 0, floats/5);
         ++drawCalls;
     }
     public void switchBatchVertexShader(String currentAddress) {
