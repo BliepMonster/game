@@ -42,6 +42,9 @@ public class GUI {
         components[location].add(component);
     }
     public static void clear(int location) {
+        for (int i = 0; i < components[location].size(); i++) {
+            components[location].get(i).free();
+        }
         components[location].clear();
     }
     public static boolean manage(Console console) {

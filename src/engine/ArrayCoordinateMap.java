@@ -14,15 +14,15 @@ public class ArrayCoordinateMap<E> implements CoordinateMap<E> {
             positive = new Object[16];
             negative = new Object[16];
         }
-        Optional<E> get(int pos) {
+        E getRaw(int pos) {
             if (pos >= 0) {
                 if (positive.length <= pos)
-                    return Optional.empty();
-                return Optional.ofNullable((E) positive[pos]);
+                    return null;
+                return (E) positive[pos];
             }
             if (negative.length <= -pos - 1)
-                return Optional.empty();
-            return Optional.ofNullable((E) negative[-pos - 1]);
+                return null;
+            return (E) negative[-pos - 1];
         }
         void put(int pos, E e) {
             if (pos >= 0) {
@@ -62,19 +62,26 @@ public class ArrayCoordinateMap<E> implements CoordinateMap<E> {
     }
     private final Space<Space<E>> map = new Space<>();
     public Optional<E> get(int x, int y) {
-        return map.get(x).flatMap(s -> s.get(y));
+        return Optional.ofNullable(getUnsafe(x, y));
+    }
+    @Override
+    @SuppressWarnings("unchecked")
+    public E getUnsafe(int x, int y) {
+        Space<E> space = map.getRaw(x);
+        return space == null ? null : space.getRaw(y);
     }
     public Optional<E> remove(int x, int y) {
         changed = true;
         var e = get(x, y);
-        map.get(x).ifPresent(s -> s.remove(y));
+        Space<E> s = map.getRaw(x);
+        if (s != null) s.remove(y);
         return e;
     }
     public void put(int x, int y, @NotNull E e) {
         changed = true;
-        Optional<Space<E>> space = map.get(x);
-        if (space.isPresent()) {
-            space.get().put(y, e);
+        Space<E> space = map.getRaw(x);
+        if (space != null) {
+            space.put(y, e);
         } else {
             var a = new Space<E>();
             map.put(x, a);

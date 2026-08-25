@@ -18,6 +18,7 @@ public abstract class MeleeEnemy extends Enemy {
     private final float w, h;
     private final int cooldown;
     private int lastHit = 0;
+    private final Vector2f diff = new Vector2f(), move = new Vector2f();
     public MeleeEnemy(Vector2f vec, float hp, float aggro, float deaggro, int xpGain, int damage, float w, float h, int cooldown) {
         super(vec);
         this.xp = xpGain;
@@ -42,8 +43,8 @@ public abstract class MeleeEnemy extends Enemy {
         var context = getContext();
         var x = context.getPlayer().getX();
         var y = context.getPlayer().getY();
-        var diff = new Vector2f(x - position.x, y - position.y);
-        var move = angry ? diff.normalize(new Vector2f()).mul(2f / Game.TICKS_PER_SECOND) : new Vector2f();
+        diff.set(x - position.x, y - position.y);
+        if (angry) move.set(diff).normalize().mul(2f / Game.TICKS_PER_SECOND); else move.set(0, 0);
         if (diff.length() < aggroRadius) angry = true;
         else if (Game.getTickCount() - lastHurtTick < Game.TICKS_PER_SECOND*5) angry = true;
         else if (diff.length() >= deaggroRadius) angry = false;

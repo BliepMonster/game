@@ -99,6 +99,7 @@ public class FixedFontSizeLabel extends Component {
         this.mesh = new TextMesh(text, font, size, 1000000);
         this.mesh.create();
     }
+    @Override
     public void free() {
         mesh.close();
     }

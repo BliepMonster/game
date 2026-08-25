@@ -1,0 +1,7 @@
+{
+  "dimensions": [5, 8],
+  "type": "algo",
+  "prefix": "base:tiles:seed_store_empty:",
+  "between": ":",
+  "texid": "base:tiles:seed_store_empty"
+}

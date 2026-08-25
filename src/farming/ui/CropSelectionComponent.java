@@ -12,6 +12,7 @@ import java.awt.*;
 import java.util.Collection;
 
 public class CropSelectionComponent extends Component {
+    private static final Color SLOT_BG = new Color(60, 60, 60);
     public static final Collection<CropType> crops = CropType.getAll();
     public final FarmingPotComponent owner;
     public final CropType[] allowed;
@@ -36,7 +37,7 @@ public class CropSelectionComponent extends Component {
             float itemY = y + height - .2f - (i + 1) * slotHeight;
 
             // Slot background card
-            draw.rect(new Color(60, 60, 60), x + .05f, itemY, width - .1f, slotHeight - .02f);
+            draw.rect(SLOT_BG, x + .05f, itemY, width - .1f, slotHeight - .02f);
 
             // Crop Icon & Name
             if (crop.icon() != null) {

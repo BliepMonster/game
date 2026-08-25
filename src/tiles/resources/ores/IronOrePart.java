@@ -28,6 +28,8 @@ public class IronOrePart extends HittableResourceCreator {
             false,
             ToolItemDefinition.PowerType.MINING
     );
+    private static final Color HIT_FLASH = new Color(230, 230, 255);
+    private static final Color BASE = new Color(150, 150, 160);
     public IronOrePart(Vector2f position) {
         super(DESC, position);
     }
@@ -35,7 +37,7 @@ public class IronOrePart extends HittableResourceCreator {
         camera.addRenderJob(() ->
                 camera.rect(
                         Game.getTickCount()-ticksSinceLastHit < 5 ?
-                                wasLastHitSuccessFul ? new Color(230, 230, 255) : new Color(150, 150, 160)
+                                wasLastHitSuccessFul ? HIT_FLASH : BASE
                                 : Color.WHITE,
                         x, y, 1, 1), -y);
     }

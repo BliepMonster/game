@@ -1,0 +1,9 @@
+{
+  "name": "Void",
+  "id": "base:seed_build",
+  "texture": "res/textures/npc/guy.png",
+  "height": 3,
+  "z_offset": 0.23,
+  "dialogue": [
+  ]
+}

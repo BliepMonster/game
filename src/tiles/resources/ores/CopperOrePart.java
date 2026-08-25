@@ -16,6 +16,7 @@ import tool.editor.TilePartLoader;
 import java.awt.*;
 
 public class CopperOrePart extends HittableResourceCreator {
+    private static final Color HIT_FLASH = new Color(255, 190, 130);
     public static final HittableResourceDescription DESC = new HittableResourceDescription(
             Game.TICKS_PER_SECOND*25,
             ItemConstants.ITEM_COPPER_ORE,
@@ -35,7 +36,7 @@ public class CopperOrePart extends HittableResourceCreator {
         camera.addRenderJob(() ->
                 camera.rect(
                         Game.getTickCount()-ticksSinceLastHit < 5 ?
-                                wasLastHitSuccessFul ? new Color(255, 190, 130) : Color.ORANGE
+                                wasLastHitSuccessFul ? HIT_FLASH : Color.ORANGE
                                 : Color.ORANGE,
                         x, y, 1, 1), -y);
     }

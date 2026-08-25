@@ -159,8 +159,10 @@ public class Player implements Entity, LightSource {
     public Hitbox getHitbox() {
         return step;
     }
+    private final Vector2f movementScratch = new Vector2f();
     public void move(Hitbox world) {
-        var movement = new Vector2f(0, 0);
+        Vector2f movement = movementScratch;
+        movement.set(0, 0);
         if (isKeyDown(GLFW_KEY_LEFT)) {
             movement.x -= 1f;
         }
@@ -279,6 +281,9 @@ public class Player implements Entity, LightSource {
         return direction;
     }
     public Vector2f getFacingPosition(Vector2f mousePos) {
+        return getFacingPosition(mousePos, new Vector2f());
+    }
+    public Vector2f getFacingPosition(Vector2f mousePos, Vector2f dest) {
         float x = getX();
         float y = getY()-.8f;
         var dx = mousePos.x - getX();
@@ -287,10 +292,10 @@ public class Player implements Entity, LightSource {
         if (Math.abs(dx) >= Math.abs(dy)) facing = dx > 0 ? Direction.RIGHT : Direction.LEFT;
         else facing = dy > 0 ? Direction.UP : Direction.DOWN;
         return switch (facing) {
-            case UP -> new Vector2f(x, y+1);
-            case DOWN -> new Vector2f(x, y-1);
-            case LEFT -> new Vector2f(x-1.35f, y);
-            case RIGHT -> new Vector2f(x+1.35f, y);
+            case UP -> dest.set(x, y+1);
+            case DOWN -> dest.set(x, y-1);
+            case LEFT -> dest.set(x-1.35f, y);
+            case RIGHT -> dest.set(x+1.35f, y);
         };
     }
 

@@ -64,6 +64,7 @@ public abstract class Component {
     public abstract void display(DrawManager draw, float x, float y, float width, float height);
     public abstract void detectClick(Screen screen, float x, float y);
     public abstract void detectContinuousPress(Screen screen, float x, float y);
+    public void free() {}
     public boolean isInBounds(Screen screen, float x, float y) {
         float widthVal = width.evaluate(screen);
         float heightVal = height.evaluate(screen);

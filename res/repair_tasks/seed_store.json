@@ -1,0 +1,12 @@
+{
+  "id": "base:seed_store",
+  "resources": {
+    "Copper Bar": 6,
+    "Compressed Pine Wood": 4,
+    "Steel Bar": 1,
+    "Pine Resin": 16,
+    "Iron Bar": 4
+  },
+  "coins": 1500,
+  "attrib": "base:seed_store_unlocked"
+}

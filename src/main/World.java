@@ -28,6 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class World {
+    private static final Tile EMPTY_TILE = new DefaultTile(TileType.get("GRASS"));
     public final CoordinateMap<Tile> map;
     public final String address;
     final String id;
@@ -38,6 +39,7 @@ public class World {
     private final List<Entity> onLoadSpawnedEnemies = new ArrayList<>();
     public final List<AudioSource> loopingSources = new ArrayList<>();
     public final List<Entity> entities = new ArrayList<>();
+    private final Vector2f facingScratch = new Vector2f();
     private Hitbox hitbox = EmptyHitbox.INSTANCE;
     public float getBrightness() {
         return brightness;
@@ -124,7 +126,8 @@ public class World {
         int bottom = (int)Math.floor((player.getY() - .8));
         for (int tx = left; tx <= right; tx++) {
             for (int ty = bottom; ty <= top; ty++) {
-                map.get(tx, ty).ifPresent(tile -> tile.onStand(game));
+                var tile = map.getUnsafe(tx, ty);
+                if (tile != null) tile.onStand(game);
             }
         }
         if (pressed && canClick) {
@@ -133,7 +136,7 @@ public class World {
             float px = x/tsize+player.getX();
             float py = y/tsize+player.getY();
             var facing = player.getFacingPosition(new Vector2f(px, py));
-            var t = map.get((int) Math.floor(facing.x), (int) Math.floor(facing.y)).orElse(null);
+            var t = map.getUnsafe((int) Math.floor(facing.x), (int) Math.floor(facing.y));
             var used = game.player.useSelectedItem(game, t, new Vector2f(px, py));
             if (t != null && !used) {
                 t.onClick(game);
@@ -161,31 +164,28 @@ public class World {
 
         for (int i = minX; i <= minX + xSize; ++i) {
             for (int j = minY+ySize; j >= minY; --j) {
-                var option = map.get(i, j);
-                if (option.isPresent()) {
-                    var tile = option.get();
-                    if (tile instanceof DefaultTile && tile.getPart() == null) {
-                        ((DefaultTile) tile).renderBatched(camera, i, j);
-                    }
+                var tile = map.getUnsafe(i, j);
+                if (tile == null) continue;
+                if (tile instanceof DefaultTile && tile.getPart() == null) {
+                    ((DefaultTile) tile).renderBatched(camera, i, j);
                 }
             }
         }
         camera.flushBatch();
         for (int i = minX; i <= minX + xSize; ++i) {
             for (int j = minY+ySize; j >= minY; --j) {
-                var option = map.get(i, j);
-                if (option.isPresent()) {
-                    var tile = option.get();
-                    if (tile instanceof DefaultTile && tile.getPart() == null) continue;
-                    tile.render(camera, i, j);
-                }
+                var tile = map.getUnsafe(i, j);
+                if (tile == null) continue;
+                if (tile instanceof DefaultTile && tile.getPart() == null) continue;
+                tile.render(camera, i, j);
             }
         }
         entities.forEach(entity -> entity.render(camera));
-        var vec = player.getFacingPosition(new Vector2f(Input.getMouseX(screen)/tsize+player.getX(), Input.getMouseY(screen)/tsize+player.getY()));
+        var vec = player.getFacingPosition(facingScratch.set(Input.getMouseX(screen)/tsize+player.getX(), Input.getMouseY(screen)/tsize+player.getY()));
         vec.x = (int) Math.floor(vec.x);
         vec.y = (int) Math.floor(vec.y);
-        var part = map.get((int) vec.x, (int)vec.y).orElse(new DefaultTile(TileType.get("GRASS"))).getPart();
+        var facingTile = map.getUnsafe((int) vec.x, (int)vec.y);
+        var part = (facingTile == null ? EMPTY_TILE : facingTile).getPart();
         camera.addRenderJob(() -> camera.rect(part instanceof CoalOrePart || part instanceof IronOrePart ? OVERLAY_RED : OVERLAY, vec.x, vec.y, 1, 1), 40000);
     }
     public void spawn(Entity entity) {

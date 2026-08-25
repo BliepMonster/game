@@ -26,6 +26,9 @@ public class DrawManager {
     private static int batchVBOCapacity;
     protected static int polygonVAO;
     protected static int polygonVBO;
+    private static int polygonVBOCapacity;
+    private static FloatBuffer polygonBuffer = BufferUtils.createFloatBuffer(512);
+    private static float[] circleScratch = new float[32 * 6];
     protected static int textPositionsVBO;
     protected static int textTexCoordsVBO;
     protected static int rectPositionVBO;
@@ -157,6 +160,7 @@ public class DrawManager {
 
         lastBoundVAO = -1;
         batchVBOCapacity = 0;
+        polygonVBOCapacity = 0;
     }
     public static void swapTexture(Texture texture) {
         if (lastBoundTexture == texture)
@@ -233,7 +237,8 @@ public class DrawManager {
         float sx = cx * invAspect;
         float sy = cy;
         float sr = r * invAspect;
-        float[] verts = new float[segments * 6];
+        if (circleScratch.length < segments * 6) circleScratch = new float[segments * 6];
+        float[] verts = circleScratch;
         int idx = 0;
         for (int i = 0; i < segments; i++) {
             float a0 = (float) (2.0 * Math.PI * i / segments);
@@ -245,12 +250,15 @@ public class DrawManager {
             verts[idx++] = sx + (float) Math.cos(a1) * sr;
             verts[idx++] = sy + (float) Math.sin(a1) * r;
         }
-        polygon(color, verts);
+        polygon(color, verts, segments * 6);
     }
     public void circle(final @NotNull Color color, final float cx, final float cy, final float r) {
         circle(color, cx, cy, r, 32);
     }
     public void polygon(final @NotNull Color color, final float[] verts) {
+        polygon(color, verts, verts.length);
+    }
+    public void polygon(final @NotNull Color color, final float[] verts, final int floatCount) {
         bindShader(plainColor);
         applyLightLevel();
         plainColor.loadColor(plainColor.colorLocation, color);
@@ -263,8 +271,21 @@ public class DrawManager {
         swapTexture(null);
         plainColor.loadTexCoords(null, plainColor.texCoordsLocation);
         glBindBuffer(GL_ARRAY_BUFFER, polygonVBO);
-        glBufferData(GL_ARRAY_BUFFER, storeDataInFloatBuffer(verts), GL_DYNAMIC_DRAW);
-        glDrawArrays(GL_TRIANGLES, 0, verts.length/2);
+        if (polygonBuffer.capacity() < floatCount) {
+            polygonBuffer = BufferUtils.createFloatBuffer(floatCount);
+            polygonVBOCapacity = 0;
+        }
+        polygonBuffer.clear();
+        polygonBuffer.put(verts, 0, floatCount);
+        polygonBuffer.flip();
+        if (floatCount > polygonVBOCapacity) {
+            glBufferData(GL_ARRAY_BUFFER, polygonBuffer, GL_DYNAMIC_DRAW);
+            polygonVBOCapacity = floatCount;
+        } else {
+            glBufferData(GL_ARRAY_BUFFER, (long) floatCount * Float.BYTES, GL_STREAM_DRAW);
+            glBufferSubData(GL_ARRAY_BUFFER, 0, polygonBuffer);
+        }
+        glDrawArrays(GL_TRIANGLES, 0, floatCount/2);
         ++drawCalls;
     }
     public void image(final Texture tex, float x, float y, float width, float height) {

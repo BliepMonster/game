@@ -42,7 +42,7 @@ import java.util.ArrayList;
 
 public class Main {
     public static boolean DEBUG_MODE = false;
-    public static final boolean ALLOW_DEBUG = false;
+    public static final boolean ALLOW_DEBUG = true;
     public enum State {
         MAIN_MENU,
         LOAD_WORLD,
@@ -50,7 +50,7 @@ public class Main {
     }
     public static State state = State.MAIN_MENU;
     public static Font font;
-    public static Object[] fund = new Object[2500000];
+    public static Object[] fund = new Object[1000000];
 
     static String filename;
 

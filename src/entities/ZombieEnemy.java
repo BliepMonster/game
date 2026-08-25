@@ -15,6 +15,7 @@ public class ZombieEnemy extends RespawnableEnemy {
     private int lastHitTick = 0, lastHurtTick = 0;
     private static final int HIT_INTERVAL = 10;
     private boolean angry = false;
+    private final Vector2f diff = new Vector2f(), move = new Vector2f();
     public ZombieEnemy(Vector2f position, EnemySpawner spawner) {
         super(position, spawner);
     }
@@ -22,8 +23,8 @@ public class ZombieEnemy extends RespawnableEnemy {
         var context = getContext();
         var x = context.getPlayer().getAttractionX();
         var y = context.getPlayer().getAttractionY();
-        var diff = new Vector2f(x - position.x, y - position.y);
-        var move = angry ? diff.normalize(new Vector2f()).mul(2f / Game.TICKS_PER_SECOND) : new Vector2f();
+        diff.set(x - position.x, y - position.y);
+        if (angry) move.set(diff).normalize().mul(2f / Game.TICKS_PER_SECOND); else move.set(0, 0);
         if (diff.length() < AGGRO_RADIUS) angry = true;
         else if (Game.getTickCount() - lastHurtTick < Game.TICKS_PER_SECOND*5) angry = true;
         else if (diff.length() >= DEAGGRO_RADIUS) angry = false;

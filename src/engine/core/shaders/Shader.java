@@ -4,7 +4,6 @@ import engine.core.Texture;
 import org.joml.Matrix4f;
 import org.joml.Vector2f;
 import org.joml.Vector2i;
-import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.GL30;
@@ -14,7 +13,6 @@ import java.awt.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.nio.FloatBuffer;
 
 public class Shader {
     protected final int programID;
@@ -26,7 +24,7 @@ public class Shader {
     public final int colorLocation;
     public final int lightLevelLocation;
     public final int lightLevelsLocation;
-    private static final FloatBuffer matrixBuffer = BufferUtils.createFloatBuffer(16);
+    private static final float[] matrixData = new float[16];
 
     public Shader(String vertexFile, String fragmentFile) {
         System.out.println("Compiling " + vertexFile);
@@ -90,8 +88,8 @@ public class Shader {
     }
 
     public void loadMatrix(int location, Matrix4f matrix) {
-        matrix.get(matrixBuffer);
-        GL46.glUniformMatrix4fv(location, false, matrixBuffer);
+        matrix.get(matrixData);
+        GL46.glUniformMatrix4fv(location, false, matrixData);
     }
 
     public void loadColor(int location, Color color) {

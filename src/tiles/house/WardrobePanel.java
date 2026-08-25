@@ -25,6 +25,9 @@ public class WardrobePanel extends Component {
     private static final float SPACING = .03f;
     private static final float BUTTON_WIDTH = .25f;
     private static final float BUTTON_HEIGHT = .07f;
+    private static final Color PANEL_BG = new Color(40, 40, 40);
+    private static final Color SWAP_ON = new Color(80, 180, 80);
+    private static final Color SWAP_OFF = new Color(120, 120, 120);
 
     private final WardrobeTilePart part;
     private final Player player;
@@ -53,7 +56,7 @@ public class WardrobePanel extends Component {
 
     @Override
     public void display(DrawManager draw, float x, float y, float w, float h) {
-        draw.rect(new Color(40, 40, 40), x, y, w, h);
+        draw.rect(PANEL_BG, x, y, w, h);
         draw.rect(Color.red, x + w - .1f, y + h - .1f, .1f, .1f);
 
         float titleSize = Math.min(Main.font.getSizeForWidth("Wardrobe", w * .5f), Main.font.getSizeForHeight(h * .08f));
@@ -91,7 +94,7 @@ public class WardrobePanel extends Component {
                 btnY + BUTTON_HEIGHT * .15f, Main.font, btnFontSize);
 
         float togY = btnY + BUTTON_HEIGHT + SPACING;
-        draw.rect(swapEmpty ? new Color(80, 180, 80) : new Color(120, 120, 120), btnX, togY, BUTTON_WIDTH, BUTTON_HEIGHT);
+        draw.rect(swapEmpty ? SWAP_ON : SWAP_OFF, btnX, togY, BUTTON_WIDTH, BUTTON_HEIGHT);
         String toggleText = swapEmpty ? "Include Empty: ON" : "Include Empty: OFF";
         float togFontSize = Math.min(Main.font.getSizeForWidth(toggleText, BUTTON_WIDTH - .02f), Main.font.getSizeForHeight(BUTTON_HEIGHT * .7f));
         draw.string(toggleText, Color.white,

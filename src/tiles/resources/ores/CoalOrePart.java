@@ -28,6 +28,7 @@ public class CoalOrePart extends HittableResourceCreator {
             false,
             ToolItemDefinition.PowerType.MINING
     );
+    private static final Color HIT_FLASH = new Color(30, 30, 30);
     public CoalOrePart(Vector2f position) {
         super(DESC, position);
     }
@@ -35,7 +36,7 @@ public class CoalOrePart extends HittableResourceCreator {
         camera.addRenderJob(() ->
                 camera.rect(
                         Game.getTickCount()-ticksSinceLastHit < 5 ?
-                                wasLastHitSuccessFul ? Color.GRAY : new Color(30, 30, 30)
+                                wasLastHitSuccessFul ? Color.GRAY : HIT_FLASH
                                 : Color.BLACK,
                         x, y, 1, 1), -y);
     }

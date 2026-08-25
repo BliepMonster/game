@@ -11,12 +11,17 @@ import java.util.List;
 import java.util.Objects;
 
 public class Camera {
-    record RenderJob(Runnable function, float z) {}
+    private static final class RenderJob {
+        Runnable function;
+        float z;
+    }
+    private static final Comparator<RenderJob> JOB_ORDER = (a, b) -> Float.compare(a.z, b.z);
     private final Player player;
     private float tileSize;
     private final DrawManager draw;
     private final List<CameraEffect> effects = new ArrayList<>();
-    private final PriorityQueue<RenderJob> renderJobs = new PriorityQueue<>((a, b) -> Float.compare(a.z, b.z));
+    private final ArrayList<RenderJob> renderJobs = new ArrayList<>();
+    private final ArrayList<RenderJob> jobPool = new ArrayList<>();
     private final HashSet<LightSource> light = new HashSet<>();
     private float[][] lightmap;
     private int lightmapW, lightmapH;
@@ -116,12 +121,21 @@ public class Camera {
         draw.circle(color, (x-player.getX())*tileSize, (y-player.getY())*tileSize, r*tileSize);
     }
     public void addRenderJob(Runnable function, float z) {
-        renderJobs.add(new RenderJob(function, z));
+        RenderJob job = jobPool.isEmpty() ? new RenderJob() : jobPool.remove(jobPool.size() - 1);
+        job.function = function;
+        job.z = z;
+        renderJobs.add(job);
     }
     public void renderAllJobs() {
-        while (!renderJobs.isEmpty()) {
-            renderJobs.poll().function.run();
+        if (renderJobs.isEmpty()) return;
+        renderJobs.sort(JOB_ORDER);
+        for (int i = 0; i < renderJobs.size(); ++i) {
+            RenderJob job = renderJobs.get(i);
+            job.function.run();
+            job.function = null;
         }
+        jobPool.addAll(renderJobs);
+        renderJobs.clear();
     }
     public void image(Texture texture, float x, float y, float w, float h) {
         draw.litImage(texture, (x-player.getX())*tileSize, (y-player.getY())*tileSize, w*tileSize, h*tileSize,
@@ -143,8 +157,10 @@ public class Camera {
         effects.removeIf(Objects::isNull);
         effects.forEach(effect ->effect.draw(draw));
     }
+    private float[] coneScratch = new float[20 * 6];
     public void cone(Color color, float cx, float cy, float size, float aim, float sweep, int segments) {
-        var verts = new float[(segments+1)*6];
+        if (coneScratch.length < segments * 6) coneScratch = new float[segments * 6];
+        float[] verts = coneScratch;
         float invAspect = 1f/draw.getScreen().getAspectRatio();
         float sx = (cx-player.getX())*tileSize*invAspect;
         float sy = (cy-player.getY())*tileSize;
@@ -161,7 +177,7 @@ public class Camera {
             verts[idx++] = sx + (float)Math.cos(a1)*ss*invAspect;
             verts[idx++] = sy + (float)Math.sin(a1)*ss;
         }
-        draw.polygon(color, verts);
+        draw.polygon(color, verts, segments * 6);
     }
     public void addEffect(CameraEffect effect) {
         effects.add(effect);

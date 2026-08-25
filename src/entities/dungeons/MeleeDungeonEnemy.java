@@ -26,6 +26,7 @@ public abstract class MeleeDungeonEnemy extends DungeonEnemy {
     }
 
     private int lastHitTick = 0;
+    private final Vector2f diff = new Vector2f(), move = new Vector2f();
     public void tickSelf(GameContext context) {
         if (context.getPlayer().getHitbox().collidesWith(getHitbox())) {
             if (Game.getTickCount() - lastHitTick >= hitInterval) {
@@ -39,8 +40,8 @@ public abstract class MeleeDungeonEnemy extends DungeonEnemy {
         var context = getContext();
         var x = context.getPlayer().getAttractionX();
         var y = context.getPlayer().getAttractionY();
-        var diff = new Vector2f(x - position.x, y - position.y);
-        var move = angry ? diff.normalize(new Vector2f()).mul(speed / Game.TICKS_PER_SECOND) : new Vector2f();
+        diff.set(x - position.x, y - position.y);
+        if (angry) move.set(diff).normalize().mul(speed / Game.TICKS_PER_SECOND); else move.set(0, 0);
         if (diff.length() < aggroRadius) angry = true;
         else if (Game.getTickCount() - lastHurtTick < Game.TICKS_PER_SECOND*5) angry = true;
         else if (diff.length() >= deaggroRadius) angry = false;

@@ -15,16 +15,17 @@ public abstract class Enemy implements Entity {
     }
     public abstract float getKnockbackResistance();
     private GameContext context;
+    private final Vector2f velocityScratch = new Vector2f();
     protected GameContext getContext() {
         return context;
     }
     public Vector2f getVelocityChange() {
-        var vec = new Vector2f();
+        velocityScratch.set(0, 0);
         changes.removeIf(VelocityChange::canBeRemoved);
         for (var change : changes) {
-            vec.add(change.getVelocityChange());
+            velocityScratch.add(change.getVelocityChange());
         }
-        return vec;
+        return velocityScratch;
     }
     public void tick(GameContext context) {
         this.context = context;

@@ -20,8 +20,6 @@
   "base:tiles:silver_ore": "res/textures/tiles/silver_ore.png",
   "base:tiles:garden_pot": "res/textures/tiles/garden_pot.png",
   "base:tiles:seed_maker": "res/textures/tiles/seed_maker.png",
-  "base:tiles:restaurant_empty": "res/textures/tiles/restaurant_empty.png",
-  "base:tiles:restaurant": "res/textures/tiles/restaurant.png",
   "base:tiles:wheat": "res/textures/tiles/wheat.png",
   "base:tiles:wheat_left": "res/textures/tiles/wheat_left.png",
   "base:tiles:wheat_ungrown": "res/textures/tiles/wheat_ungrown.png",
@@ -39,7 +37,5 @@
   "base:tiles:strawberry2": "res/textures/tiles/strawberry_bush.png",
   "base:tiles:res_bb": "res/textures/tiles/restaurant_backbar.png",
   "base:tiles:table": "res/textures/tiles/table.png",
-  "base:tiles:witch_hut_empty": "res/textures/tiles/witch_hut_empty.png",
-  "base:tiles:witch_hut": "res/textures/tiles/witch_hut.png",
   "base:tiles:alchemy_station": "res/textures/tiles/alchemy_station.png"
 }
