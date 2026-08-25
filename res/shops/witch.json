@@ -20,6 +20,34 @@
             "type": "item",
             "id": "base:placers:alchemy_station"
           }
+        },
+        {
+          "requirements": [],
+          "ingredients": [],
+          "price": {
+            "currency": "COINS",
+            "amount": 100
+          },
+          "texture": "res/textures/empty.png",
+          "result": {
+            "type": "resource",
+            "id": "Water Bottle",
+            "amount": 1
+          }
+        },
+        {
+          "requirements": [],
+          "ingredients": [],
+          "price": {
+            "currency": "COINS",
+            "amount": 10000
+          },
+          "texture": "res/textures/crops/potionberry.png",
+          "result": {
+            "type": "resource",
+            "id": "Potionberry Seeds",
+            "amount": 1
+          }
         }
       ]
     }

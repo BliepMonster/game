@@ -3,5 +3,6 @@
   "base:item:copper_pickaxe": "res/textures/copper/copper_pickaxe.png",
   "base:item:iron_pickaxe": "res/textures/iron/iron_pickaxe.png",
   "base:item:steel_pickaxe": "res/textures/steel/steel_pickaxe.png",
-  "base:item:ruby_pickaxe": "res/textures/ruby/ruby_pickaxe.png"
+  "base:item:ruby_pickaxe": "res/textures/ruby/ruby_pickaxe.png",
+  "base:item:sapphire_pickaxe": "res/textures/ruby/sapphire_pickaxe.png"
 }

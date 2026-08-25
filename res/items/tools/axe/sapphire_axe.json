@@ -1,0 +1,14 @@
+{
+  "type": "tool",
+  "texture": "base:item:sapphire_axe",
+  "name": "Sapphire Axe",
+  "id": "base:tools:sapphire_axe",
+  "stats": [],
+  "power": [
+    {
+      "type": "WOODCUTTING",
+      "amount": 150
+    }
+  ],
+  "cooldown": 35
+}

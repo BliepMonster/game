@@ -1,6 +1,5 @@
 {
   "name": "Pure Golden Blade",
-
   "inputs": [
     {
       "type": "resource",
@@ -23,7 +22,6 @@
       "amount": 6
     }
   ],
-
   "outputs": [
     {
       "type": "item",

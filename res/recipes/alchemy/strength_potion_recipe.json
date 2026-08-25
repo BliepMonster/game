@@ -1,0 +1,6 @@
+{
+  "recipe": "res/recipes/alchemy_back/strength_potion_recipe.json",
+  "xp": 2000,
+  "time": 1200000,
+  "tex": "base:item:strength_potion"
+}

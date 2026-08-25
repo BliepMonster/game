@@ -1,7 +1,7 @@
 {
   "type": "equipment",
   "id": "base:armor:pine_leggings",
-  "name": "Pine Boots",
+  "name": "Pine Leggings",
   "texture": "base:item:pine_leggings",
   "stats": [
     {

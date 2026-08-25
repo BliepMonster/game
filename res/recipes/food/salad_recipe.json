@@ -15,6 +15,11 @@
       "type": "resource",
       "id": "Lettuce",
       "amount": 5
+    },
+    {
+      "type": "resource",
+      "id": "Bowl",
+      "amount": 1
     }
   ],
   "outputs": [

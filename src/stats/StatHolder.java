@@ -52,6 +52,7 @@ public class StatHolder implements Cloneable {
         REGENERATION("Regeneration"),
         GLOWING("Glowing"),
         MAGIC_POWER("Magic Power"),
+        LUCK("Luck")
         ;
         public final String name;
         Stat(String s) {

@@ -44,8 +44,7 @@ public class GardenPotTilePart extends TilePart {
     public void harvest(GameContext context) {
         if (!canHarvest(context)) return;
         var player = context.getPlayer();
-        var inv = new FullItemStorage(player.items, player.inventory, player.currency);
-        crop.type().bonus().apply(inv);
+        crop.type().bonus().apply(context);
         var gdrops = crop.type().guaranteed();
         for (var item : gdrops.items) {
             player.items.add(new Item(item));

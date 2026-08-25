@@ -1,0 +1,13 @@
+{
+  "id": "base:cucumber",
+  "ready": "base:empty",
+  "unready": "base:empty",
+  "icon": "base:crops:potionberry_icon",
+  "duration": 43200000,
+  "guaranteed": "base:potionberry_drops",
+  "optional": "base:no_drops",
+  "name": "Potionberry",
+  "seed": "Potionberry Seeds",
+  "destroyed": true,
+  "exp": 18000
+}

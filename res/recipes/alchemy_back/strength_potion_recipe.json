@@ -1,0 +1,36 @@
+{
+  "name": "Potion of Strength",
+
+  "inputs": [
+    {
+      "type": "resource",
+      "id": "Water Bottle",
+      "amount": 1
+    },
+    {
+      "type": "resource",
+      "id": "Potionberry",
+      "amount": 1
+    },
+    {
+      "type": "resource",
+      "id": "Strawberry",
+      "amount": 16
+    }
+  ],
+
+  "outputs": [
+    {
+      "type": "item",
+      "id": "base:potions:strength_potion",
+      "amount": 1
+    }
+  ],
+  "requirements": [
+    {
+      "type": "skill",
+      "skill": "ALCHEMY",
+      "level": 5
+    }
+  ]
+}

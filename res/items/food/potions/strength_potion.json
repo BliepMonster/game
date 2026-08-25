@@ -1,0 +1,14 @@
+{
+  "type": "consumable",
+  "id": "base:potions:strength_potion",
+  "name": "Potion of Strength",
+  "texture": "base:item:strength_potion",
+  "stats": [
+    {
+      "type": "STRENGTH",
+      "count": 50
+    }
+  ],
+  "duration": 4800,
+  "eid": "potion_strength"
+}

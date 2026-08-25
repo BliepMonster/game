@@ -1,0 +1,44 @@
+{
+  "name": "Mushroom Stew",
+  "inputs": [
+    {
+      "type": "resource",
+      "id": "Potato",
+      "amount": 20
+    },
+    {
+      "type": "resource",
+      "id": "Glowing Mushroom",
+      "amount": 2
+    },
+    {
+      "type": "resource",
+      "id": "Bowl",
+      "amount": 1
+    }
+  ],
+  "outputs": [
+    {
+      "type": "item",
+      "id": "base:food:mushroom_stew",
+      "amount": 1
+    }
+  ],
+  "requirements": [
+    {
+      "type": "skill",
+      "skill": "FARMING",
+      "level": 6
+    },
+    {
+      "type": "skill",
+      "skill": "FORAGING",
+      "level": 7
+    },
+    {
+      "type": "skill",
+      "skill": "MINING",
+      "level": 13
+    }
+  ]
+}

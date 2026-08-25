@@ -1,0 +1,36 @@
+{
+  "name": "Sapphire Axe",
+
+  "inputs": [
+    {
+      "type": "resource",
+      "id": "Polished Sapphire",
+      "amount": 4
+    },
+    {
+      "type": "upgrade",
+      "id": "base:tools:ruby_axe",
+      "amount": 1
+    }
+  ],
+
+  "outputs": [
+    {
+      "type": "item",
+      "id": "base:tools:sapphire_axe",
+      "amount": 1
+    }
+  ],
+  "requirements": [
+    {
+      "type": "skill",
+      "skill": "MINING",
+      "level": 14
+    },
+    {
+      "type": "skill",
+      "skill": "FORAGING",
+      "level": 12
+    }
+  ]
+}

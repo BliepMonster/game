@@ -1,0 +1,8 @@
+{
+  "type": "scroll",
+  "texture": "base:item:luck_scroll",
+  "name": "Scroll of Luck",
+  "id": "base:scrolls:scroll_luck",
+  "stat": "LUCK",
+  "scaling": 0.1
+}

@@ -1,0 +1,29 @@
+{
+  "name": "Scroll of Magic Power",
+  "inputs": [
+    {
+      "type": "resource",
+      "id": "Paper",
+      "amount": 5
+    },
+    {
+      "type": "resource",
+      "id": "Polished Sapphire",
+      "amount": 1
+    }
+  ],
+  "outputs": [
+    {
+      "type": "item",
+      "id": "base:scrolls:scroll_magic_power",
+      "amount": 1
+    }
+  ],
+  "requirements": [
+    {
+      "type": "skill",
+      "skill": "MINING",
+      "level": 15
+    }
+  ]
+}

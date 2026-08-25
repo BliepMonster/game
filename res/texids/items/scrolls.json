@@ -1,5 +1,7 @@
 {
   "base:item:mining_power_scroll": "res/textures/scrolls/mining_power_scroll.png",
   "base:item:strength_scroll": "res/textures/scrolls/strength_scroll.png",
-  "base:item:foraging_power_scroll": "res/textures/scrolls/foraging_power_scroll.png"
+  "base:item:foraging_power_scroll": "res/textures/scrolls/foraging_power_scroll.png",
+  "base:item:magic_power_scroll": "res/textures/scrolls/magic_power_scroll.png",
+  "base:item:luck_scroll": "res/textures/scrolls/luck_scroll.png"
 }

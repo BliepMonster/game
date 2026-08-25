@@ -1,6 +1,9 @@
 package entities;
 
 import crafting.FullItemStorage;
+import main.GameContext;
+import main.YieldUtils;
+import stats.StatHolder;
 
 import java.util.EnumMap;
 import java.util.Random;
@@ -21,47 +24,51 @@ public class LootTable {
             }
         }
     }
-    public void apply(FullItemStorage storage) {
-        double value = Math.random();
-        if (value < 0.5) {
-            var vv = map.get(LootType.COMMON);
-            if (vv == null) return;
-            int index = random.nextInt(0, vv.length);
-            var v = vv[index];
-            if (v != null) {
-                v.apply(storage);
-            }
-        } else if (value < 0.8) {
-            var vv = map.get(LootType.UNCOMMON);
-            if (vv == null) return;
-            int index = random.nextInt(0, vv.length);
-            var v = vv[index];
-            if (v != null) {
-                v.apply(storage);
-            }
-        } else if (value < 0.92) {
-            var vv = map.get(LootType.RARE);
-            if (vv == null) return;
-            int index = random.nextInt(0, vv.length);
-            var v = vv[index];
-            if (v != null) {
-                v.apply(storage);
-            }
-        } else if (value < 0.98) {
-            var vv = map.get(LootType.EPIC);
-            if (vv == null) return;
-            int index = random.nextInt(0, vv.length);
-            var v = vv[index];
-            if (v != null) {
-                v.apply(storage);
-            }
-        } else {
-            var vv = map.get(LootType.LEGENDARY);
-            if (vv == null) return;
-            int index = random.nextInt(0, vv.length);
-            var v = vv[index];
-            if (v != null) {
-                v.apply(storage);
+    public void apply(GameContext context) {
+        var storage = new FullItemStorage(context.getPlayer().items, context.getPlayer().inventory, context.getPlayer().currency);
+        int loots = YieldUtils.getYieldEffect(1, context.getPlayer().stats.get(StatHolder.Stat.LUCK));
+        for (int i = 0; i < loots; ++i) {
+            double value = Math.random();
+            if (value < 0.5) {
+                var vv = map.get(LootType.COMMON);
+                if (vv == null) return;
+                int index = random.nextInt(0, vv.length);
+                var v = vv[index];
+                if (v != null) {
+                    v.apply(storage);
+                }
+            } else if (value < 0.8) {
+                var vv = map.get(LootType.UNCOMMON);
+                if (vv == null) return;
+                int index = random.nextInt(0, vv.length);
+                var v = vv[index];
+                if (v != null) {
+                    v.apply(storage);
+                }
+            } else if (value < 0.92) {
+                var vv = map.get(LootType.RARE);
+                if (vv == null) return;
+                int index = random.nextInt(0, vv.length);
+                var v = vv[index];
+                if (v != null) {
+                    v.apply(storage);
+                }
+            } else if (value < 0.98) {
+                var vv = map.get(LootType.EPIC);
+                if (vv == null) return;
+                int index = random.nextInt(0, vv.length);
+                var v = vv[index];
+                if (v != null) {
+                    v.apply(storage);
+                }
+            } else {
+                var vv = map.get(LootType.LEGENDARY);
+                if (vv == null) return;
+                int index = random.nextInt(0, vv.length);
+                var v = vv[index];
+                if (v != null) {
+                    v.apply(storage);
+                }
             }
         }
     }

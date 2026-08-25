@@ -1,0 +1,14 @@
+{
+  "type": "tool",
+  "texture": "base:item:sapphire_pickaxe",
+  "name": "Sapphire Pickaxe",
+  "id": "base:tools:sapphire_pickaxe",
+  "stats": [],
+  "power": [
+    {
+      "type": "MINING",
+      "amount": 500
+    }
+  ],
+  "cooldown": 35
+}

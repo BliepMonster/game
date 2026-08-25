@@ -35,11 +35,7 @@ public abstract class DungeonEnemy extends Enemy {
     public void die(GameContext context) {
         var player = context.getPlayer();
         player.skills.giveXP(SkillSet.SkillType.COMBAT, xp);
-        loot.apply(new FullItemStorage(
-                player.items,
-                player.inventory,
-                player.currency
-        ));
+        loot.apply(context);
     }
 
     @Override

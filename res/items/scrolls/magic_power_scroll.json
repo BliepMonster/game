@@ -1,0 +1,8 @@
+{
+  "type": "scroll",
+  "texture": "base:item:magic_power_scroll",
+  "name": "Scroll of Magic Power",
+  "id": "base:scrolls:scroll_magic_power",
+  "stat": "MAGIC_POWER",
+  "scaling": 3
+}

@@ -1,0 +1,19 @@
+{
+  "name": "Potionberry",
+
+  "inputs": [
+    {
+      "type": "resource",
+      "id": "Potionberry",
+      "amount": 1
+    }
+  ],
+
+  "outputs": [
+    {
+      "type": "resource",
+      "id": "Potionberry Seeds",
+      "amount": 2
+    }
+  ]
+}
