@@ -49,6 +49,7 @@ public final class TilePartLoader {
     public static final String ID_POTATOES = "potatoes";
     public static final String ID_STRAWBERRIES = "strawberries";
     public static final String ID_CRAFTING_STATION = "crafting_station";
+    public static final String ID_COOKING_STATION = "cooking_station";
     public static final String ID_SHOP_NPC = "shop_npc";
     public static final String ID_TOMBSTONE = "tombstone";
     public static final String ID_ZOMBIE_SPAWNER = "zombie_spawner";
@@ -116,6 +117,7 @@ public final class TilePartLoader {
             case ID_COPPER_ORE -> new CopperOrePart(pos);
             case ID_COAL_ORE -> new CoalOrePart(pos);
             case ID_CRAFTING_STATION -> new CraftingStationTilePart(pos);
+            case ID_COOKING_STATION -> new CookingStationTilePart(pos);
             case ID_SHOP_NPC -> new DialogueNPC(pos, ShopDefinitionRegistry.get(((JsonString)obj.values.get("id")).value), font);
             case ID_REPAIRER -> new RepairTaskNPC(pos, ShopDefinitionRegistry.get(((JsonString)obj.values.get("id")).value), RepairTask.get(((JsonString)obj.values.get("task")).value));
             case ID_TOMBSTONE -> new TombstoneTilePart(pos);

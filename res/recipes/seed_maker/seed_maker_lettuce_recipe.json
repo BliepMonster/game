@@ -1,0 +1,19 @@
+{
+  "name": "Lettuce",
+
+  "inputs": [
+    {
+      "type": "resource",
+      "id": "Lettuce",
+      "amount": 1
+    }
+  ],
+
+  "outputs": [
+    {
+      "type": "resource",
+      "id": "Lettuce Seeds",
+      "amount": 2
+    }
+  ]
+}

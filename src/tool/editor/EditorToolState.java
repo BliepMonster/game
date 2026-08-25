@@ -41,7 +41,7 @@ public enum EditorToolState {
                 map.put(x, y, a);
             }
             case O3 -> {
-                tile.setPart(new UnstandableTilePart(new Vector2f(x, y)));
+                tile.setPart(new DialogueNPC(new Vector2f(x, y), ShopDefinitionRegistry.get("seed_guy"), Main.font));
             }
             case O4 -> tile.setPart(new SapphireGemstoneTilePart(new Vector2f(x, y)));
             case O5 -> ((TextureAdaptTilePart) tile.getPart()).setPart(new DialogueNPC(new Vector2f(x, y), ShopDefinitionRegistry.get("chef"), Main.font));

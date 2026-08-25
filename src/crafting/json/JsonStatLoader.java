@@ -22,6 +22,14 @@ public class JsonStatLoader {
             var type = StatHolder.Stat.valueOf(((JsonString) obj.values.get("type")).value);
             var num = (float) ((JsonNumber) obj.values.get("count")).num;
             holder.with(type, num);
+            var additiveVal = obj.values.get("additive");
+            if (additiveVal != null) {
+                holder.withAdditive(type, (float) ((JsonNumber) additiveVal).num);
+            }
+            var multiplicativeVal = obj.values.get("multiplicative");
+            if (multiplicativeVal != null) {
+                holder.withMultiplicative(type, (float) ((JsonNumber) multiplicativeVal).num);
+            }
         }
         return holder;
     }
@@ -32,6 +40,14 @@ public class JsonStatLoader {
             var type = StatHolder.Stat.valueOf((String) obj.get("type").get());
             var num = (float) (double) obj.get("count").get();
             holder.with(type, num);
+            var additiveObj = obj.get("additive");
+            if (additiveObj != null) {
+                holder.withAdditive(type, (float) (double) additiveObj.get());
+            }
+            var multiplicativeObj = obj.get("multiplicative");
+            if (multiplicativeObj != null) {
+                holder.withMultiplicative(type, (float) (double) multiplicativeObj.get());
+            }
         }
         return holder;
     }
@@ -43,7 +59,13 @@ public class JsonStatLoader {
             if (v == 0) continue;
             var map = new HashMap<String, SavedObject>();
             map.put("type", new SavedString(stat.name()));
-            map.put("count", new SavedDouble(v));
+            map.put("count", new SavedDouble(stats.getBase(stat)));
+            if (stats.getAdditive(stat) != 0) {
+                map.put("additive", new SavedDouble(stats.getAdditive(stat)));
+            }
+            if (stats.getMultiplicative(stat) != 1) {
+                map.put("multiplicative", new SavedDouble(stats.getMultiplicative(stat)));
+            }
             entries.add(new SavedDictionary(map));
         }
         return new SavedArray(entries);

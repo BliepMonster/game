@@ -1,0 +1,9 @@
+{
+  "type": "ability",
+  "id": "base:placers:cooking_station",
+  "name": "Cooking Station",
+  "texture": "base:item:cooking_station",
+  "ability": "cooking_station",
+  "cooldown": 1,
+  "stats": []
+}

@@ -1,5 +1,6 @@
 package farming.ui;
 
+import engine.Maths;
 import engine.core.DrawManager;
 import engine.core.Screen;
 import engine.core.graphics.Mesh;
@@ -22,6 +23,7 @@ public class FarmingPotComponent extends Component {
     public static final Mesh READY = new TextMesh("Harvest", Main.font, Main.font.getSizeForWidth("Harvest", .4f), 1000).create();
     public static final Mesh COMPOST = new TextMesh("Apply Compost", Main.font, Main.font.getSizeForWidth("Apply Compost", .4f), 1000).create();
     public static final Mesh PLANT = new TextMesh("Plant", Main.font, Main.font.getSizeForWidth("Plant", .4f), 1000).create();
+    public static final Mesh DESTROY = new TextMesh("Destroy", Main.font, Main.font.getSizeForWidth("Destroy", .3f), 1000).create();
     public FarmingPotComponent(GardenPotTilePart owner, GameContext context) {
         super(CenterConstraint.CENTER, CenterConstraint.CENTER, new RelativeSizeConstraint(1.2f), new RelativeSizeConstraint(1f));
         this.owner = owner;
@@ -40,6 +42,11 @@ public class FarmingPotComponent extends Component {
         draw.rect(Color.red, x+width-.1f, y+height-.1f, .1f, .1f);
         if (owner.crop != null) {
             draw.image(owner.crop.type().icon(), x, y, .8f, .8f);
+            long remaining = owner.crop.endTime() - System.currentTimeMillis();
+            String timer = Maths.countdownString(remaining);
+            draw.string(timer, remaining > 0 ? Color.orange : Color.green, .2f, y+.8f, Main.font, Main.font.getSizeForWidth(timer, .4f));
+            draw.rect(Color.pink, .2f, y+.6f, .4f, .2f);
+            draw.renderAsText((TextMesh) DESTROY, Main.font, Color.black, .2f, y+.6f);
             if (owner.canHarvest(context)) {
                 draw.rect(Color.orange, .2f, y, .4f, .2f);
                 draw.renderAsText((TextMesh) READY, Main.font, Color.black, .2f, y);
@@ -68,6 +75,7 @@ public class FarmingPotComponent extends Component {
             isSelf = false;
             state = new CropSelectionComponent(this);
         }
+        else if (owner.crop != null && x > .0f && y < .3f) owner.destroyCrop();
     }
     public void close() {
         GUI.toggle(62);

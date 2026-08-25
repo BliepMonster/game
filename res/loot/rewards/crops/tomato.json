@@ -1,0 +1,8 @@
+{
+  "id": "base:tomato_drops",
+  "items": [],
+  "resources": {
+    "Tomato": 1
+  },
+  "coins": 0
+}

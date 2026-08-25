@@ -1,0 +1,23 @@
+{
+  "name": "Cooking Station",
+  "inputs": [
+    {
+      "type": "resource",
+      "id": "Maple Wood",
+      "amount": 4
+    },
+    {
+      "type": "resource",
+      "id": "Copper Bar",
+      "amount": 1
+    }
+  ],
+  "outputs": [
+    {
+      "type": "item",
+      "id": "base:placers:cooking_station",
+      "amount": 1
+    }
+  ],
+  "requirements": []
+}

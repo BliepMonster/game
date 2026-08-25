@@ -68,7 +68,7 @@ public class Player implements Entity, LightSource {
     }
 
     private StatHolder getBaseStats() {
-        return new StatHolder().withSpeed(6).with(StatHolder.Stat.MAX_HEALTH, 100)
+        return new StatHolder().with(StatHolder.Stat.SPEED, 5).with(StatHolder.Stat.MAX_HEALTH, 100)
                 .with(StatHolder.Stat.STRENGTH, 100)
                 .with(StatHolder.Stat.CRIT_CHANCE, 30)
                 .with(StatHolder.Stat.CRIT_DAMAGE, 150)

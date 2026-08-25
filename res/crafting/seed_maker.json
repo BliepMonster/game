@@ -1,5 +1,7 @@
 {
   "recipes": [
-    "res/recipes/seed_maker/seed_maker_cucumber_recipe.json"
+    "res/recipes/seed_maker/seed_maker_cucumber_recipe.json",
+    "res/recipes/seed_maker/seed_maker_tomato_recipe.json",
+    "res/recipes/seed_maker/seed_maker_lettuce_recipe.json"
   ]
 }

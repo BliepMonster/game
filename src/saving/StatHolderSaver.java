@@ -15,7 +15,13 @@ public class StatHolderSaver {
             if (stat == 0) continue;
             HashMap<String, SavedObject> o = new HashMap<>();
             o.put("type", new SavedString(s.name()));
-            o.put("amount", new SavedDouble(stat));
+            o.put("amount", new SavedDouble(holder.getBase(s)));
+            if (holder.getAdditive(s) != 0) {
+                o.put("additive", new SavedDouble(holder.getAdditive(s)));
+            }
+            if (holder.getMultiplicative(s) != 1) {
+                o.put("multiplicative", new SavedDouble(holder.getMultiplicative(s)));
+            }
             objects.add(new SavedDictionary(o));
         }
         return new SavedArray(objects);
@@ -28,6 +34,14 @@ public class StatHolderSaver {
             StatHolder.Stat stat = StatHolder.Stat.valueOf(s);
             float amount = (float) (double) dict.get("amount").get();
             holder.with(stat, amount);
+            var additiveObj = dict.get("additive");
+            if (additiveObj != null) {
+                holder.withAdditive(stat, (float) (double) additiveObj.get());
+            }
+            var multiplicativeObj = dict.get("multiplicative");
+            if (multiplicativeObj != null) {
+                holder.withMultiplicative(stat, (float) (double) multiplicativeObj.get());
+            }
         }
         return holder;
     }

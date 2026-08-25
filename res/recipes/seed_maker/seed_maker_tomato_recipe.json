@@ -1,0 +1,19 @@
+{
+  "name": "Tomato",
+
+  "inputs": [
+    {
+      "type": "resource",
+      "id": "Tomato",
+      "amount": 1
+    }
+  ],
+
+  "outputs": [
+    {
+      "type": "resource",
+      "id": "Tomato Seeds",
+      "amount": 2
+    }
+  ]
+}

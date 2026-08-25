@@ -19,6 +19,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ItemTooltipComponent extends Component {
+    private static String formatStatLine(StatHolder.Stat stat, StatHolder holder) {
+        float base = holder.getBase(stat);
+        float additive = holder.getAdditive(stat);
+        float multiplicative = holder.getMultiplicative(stat);
+        if (base == 0 && additive == 0 && multiplicative == 1) return null;
+        var sb = new StringBuilder("\n").append(stat.name).append(": ");
+        boolean hasBase = base != 0;
+        boolean hasAdditive = additive != 0;
+        boolean hasMultiplicative = multiplicative != 1;
+        if (hasBase) sb.append(base == (int) base ? Integer.toString((int) base) : base);
+        if (hasAdditive) {
+            if (hasBase) sb.append(" ");
+            float pct = additive * 100;
+            sb.append("+").append(pct == (int) pct ? Integer.toString((int) pct) : pct).append("%");
+        }
+        if (hasMultiplicative) {
+            if (hasBase || hasAdditive) sb.append(" ");
+            sb.append(multiplicative == (int) multiplicative ? Integer.toString((int) multiplicative) : multiplicative).append("x");
+        }
+        return sb.toString();
+    }
     public final Mesh text;
     public final Item item;
     public static final float FSIZE = .1f;
@@ -49,9 +70,8 @@ public class ItemTooltipComponent extends Component {
             var sb = new StringBuilder("\n\nWhen held:");
             cache.add("When held: ");
             for (int i = 0; i < StatHolder.Stat.values().length; i++) {
-                float f = held.get(StatHolder.Stat.values()[i]);
-                if (f == 0) continue;
-                String s = ("\n")+(StatHolder.Stat.values()[i].name)+(": ")+(f == (int) f ? Integer.toString((int) f) : f);
+                String s = formatStatLine(StatHolder.Stat.values()[i], held);
+                if (s == null) continue;
                 cache.add(s);
                 sb.append(s);
             }
@@ -72,9 +92,8 @@ public class ItemTooltipComponent extends Component {
             var sb = new StringBuilder("\n\nWhen worn:");
             cache.add("When worn: ");
             for (int i = 0; i < StatHolder.Stat.values().length; i++) {
-                float f = worn.get(StatHolder.Stat.values()[i]);
-                if (f == 0) continue;
-                String s = ("\n")+(StatHolder.Stat.values()[i].name)+(": ")+(f == (int) f ? Integer.toString((int) f) : f);
+                String s = formatStatLine(StatHolder.Stat.values()[i], worn);
+                if (s == null) continue;
                 cache.add(s);
                 sb.append(s);
             }
@@ -96,9 +115,8 @@ public class ItemTooltipComponent extends Component {
             var sb = new StringBuilder("\n\nWhen consumed:");
             cache.add("When consumed: ");
             for (int i = 0; i < StatHolder.Stat.values().length; i++) {
-                float f = consumed.get(StatHolder.Stat.values()[i]);
-                if (f == 0) continue;
-                String s = ("\n")+(StatHolder.Stat.values()[i].name)+(": ")+(f == (int) f ? Integer.toString((int) f) : f);
+                String s = formatStatLine(StatHolder.Stat.values()[i], consumed);
+                if (s == null) continue;
                 cache.add(s);
                 sb.append(s);
             }

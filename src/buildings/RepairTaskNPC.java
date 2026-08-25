@@ -38,7 +38,7 @@ public class RepairTaskNPC extends TilePart {
 
     @Override
     public boolean isStandable() {
-        return true;
+        return definition.standable();
     }
 
     @Override

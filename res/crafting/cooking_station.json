@@ -1,0 +1,9 @@
+{
+  "recipes": [
+    "res/recipes/food/bread_recipe.json",
+    "res/recipes/food/farmer_stew_recipe.json",
+    "res/recipes/food/carrot_cake_recipe.json",
+    "res/recipes/food/golden_strawberry_recipe.json",
+    "res/recipes/food/salad_recipe.json"
+  ]
+}

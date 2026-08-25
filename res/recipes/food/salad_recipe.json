@@ -1,0 +1,34 @@
+{
+  "name": "Salad",
+  "inputs": [
+    {
+      "type": "resource",
+      "id": "Cucumber",
+      "amount": 2
+    },
+    {
+      "type": "resource",
+      "id": "Tomato",
+      "amount": 3
+    },
+    {
+      "type": "resource",
+      "id": "Lettuce",
+      "amount": 5
+    }
+  ],
+  "outputs": [
+    {
+      "type": "item",
+      "id": "base:food:salad",
+      "amount": 1
+    }
+  ],
+  "requirements": [
+    {
+      "type": "skill",
+      "skill": "FARMING",
+      "level": 14
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "type": "consumable",
+  "id": "base:food:salad",
+  "name": "Salad",
+  "texture": "base:item:salad",
+  "stats": [
+    {
+      "type": "MAX_HEALTH",
+      "count": 0,
+      "additive": 0.5
+    }
+  ],
+  "duration": 24000,
+  "eid": "golden_strawberry"
+}

@@ -26,6 +26,7 @@ import stats.ui.CoinDisplayComponent;
 import stats.ui.HealthBar;
 import stats.ui.ManaBar;
 import tiles.crafting.CraftingStationTilePart;
+import tiles.crafting.CookingStationTilePart;
 import tiles.npc.Currency;
 import tiles.npc.JsonShopDefinitionLoader;
 import tool.editor.EditorToolState;
@@ -238,6 +239,7 @@ public class Main {
         Keybinds.addKeybind(GLFW.GLFW_KEY_9, () -> game.player.selectItem(8));
 
         CraftingStationTilePart.setDefaultFont(font);
+        CookingStationTilePart.setDefaultFont(font);
 
         while (screen.update()) {
             try {

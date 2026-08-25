@@ -1,0 +1,13 @@
+{
+  "id": "base:lettuce",
+  "ready": "base:empty",
+  "unready": "base:empty",
+  "icon": "base:crops:lettuce_icon",
+  "duration": 1200000,
+  "guaranteed": "base:lettuce_drops",
+  "optional": "base:no_drops",
+  "name": "Lettuce",
+  "seed": "Lettuce Seeds",
+  "destroyed": true,
+  "exp": 1500
+}

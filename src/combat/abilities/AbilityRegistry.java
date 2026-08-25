@@ -3,6 +3,7 @@ package combat.abilities;
 import alchemy.AlchemyStationTilePart;
 import org.joml.Vector2f;
 import tiles.TilePart;
+import tiles.crafting.CookingStationTilePart;
 
 import java.util.HashMap;
 
@@ -28,6 +29,12 @@ public class AbilityRegistry {
             @Override
             public TilePart getPart(Vector2f position) {
                 return new AlchemyStationTilePart(position);
+            }
+        });
+        registry.put("cooking_station", new PlacerAbility() {
+            @Override
+            public TilePart getPart(Vector2f position) {
+                return new CookingStationTilePart(position);
             }
         });
     }

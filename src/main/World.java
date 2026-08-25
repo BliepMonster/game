@@ -17,6 +17,7 @@ import org.joml.Vector2f;
 import tiles.*;
 import tiles.resources.ores.CoalOrePart;
 import tiles.resources.ores.IronOrePart;
+import engine.gui.GUI;
 import tool.editor.EditorToolState;
 import tool.editor.JSONLoader;
 
@@ -130,7 +131,7 @@ public class World {
                 if (tile != null) tile.onStand(game);
             }
         }
-        if (pressed && canClick) {
+        if (pressed && canClick && GUI.getAll(0).isEmpty()) {
             float x = Input.getMouseX(screen);
             float y = Input.getMouseY(screen);
             float px = x/tsize+player.getX();

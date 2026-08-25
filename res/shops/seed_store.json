@@ -1,0 +1,43 @@
+{
+  "name": "Seed Guy",
+  "id": "seed_guy",
+  "texture": "res/textures/empty.png",
+  "height": 3,
+  "z_offset": 0,
+  "standable": false,
+  "dialogue": [
+    {
+      "type": "shop",
+      "entries": [
+        {
+          "requirements": [],
+          "ingredients": [],
+          "price": {
+            "currency": "COINS",
+            "amount": 2000
+          },
+          "texture": "res/textures/crops/tomato.png",
+          "result": {
+            "type": "resource",
+            "id": "Tomato Seeds",
+            "amount": 1
+          }
+        },
+        {
+          "requirements": [],
+          "ingredients": [],
+          "price": {
+            "currency": "COINS",
+            "amount": 2500
+          },
+          "texture": "res/textures/crops/lettuce.png",
+          "result": {
+            "type": "resource",
+            "id": "Lettuce Seeds",
+            "amount": 1
+          }
+        }
+      ]
+    }
+  ]
+}

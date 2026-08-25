@@ -29,7 +29,7 @@ public class DialogueNPC extends TilePart {
         );
     }
     public boolean isStandable() {
-        return true;
+        return definition.standable();
     }
     public void onStand(GameContext context) {}
     public void onClick(GameContext context) {

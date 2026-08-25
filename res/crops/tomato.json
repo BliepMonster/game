@@ -1,0 +1,13 @@
+{
+  "id": "base:tomato",
+  "ready": "base:empty",
+  "unready": "base:empty",
+  "icon": "base:crops:tomato_icon",
+  "duration": 3600000,
+  "guaranteed": "base:tomato_drops",
+  "optional": "base:no_drops",
+  "name": "Tomato",
+  "seed": "Tomato Seeds",
+  "destroyed": false,
+  "exp": 1900
+}

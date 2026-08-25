@@ -1,3 +1,5 @@
 {
-  "base:crops:cucumber_icon": "res/textures/crops/cucumber.png"
+  "base:crops:cucumber_icon": "res/textures/crops/cucumber.png",
+  "base:crops:tomato_icon": "res/textures/crops/tomato.png",
+  "base:crops:lettuce_icon": "res/textures/crops/lettuce.png"
 }

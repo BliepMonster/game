@@ -3,5 +3,6 @@
   "base:item:carrot_cake": "res/textures/food/carrot_cake.png",
   "base:item:farmer_stew": "res/textures/food/farmer_stew.png",
   "base:item:golden_strawberry": "res/textures/food/golden_strawberry.png",
-  "base:item:pizza": "res/textures/food/pizza.png"
+  "base:item:pizza": "res/textures/food/pizza.png",
+  "base:item:salad": "res/textures/food/salad.png"
 }

@@ -61,6 +61,9 @@ public class GardenPotTilePart extends TilePart {
         this.crop = new PlantedCrop(type, (long) (System.currentTimeMillis()+type.milliDuration()/(compostNextHarvest == null ? 1 : compostNextHarvest.growthBoost())), compostNextHarvest);
         compostNextHarvest = null;
     }
+    public void destroyCrop() {
+        this.crop = null;
+    }
     public static final Texture BASE = TextureIdMap.get("base:tiles:garden_pot");
 
     public void render(int x, int y, Camera camera) {
