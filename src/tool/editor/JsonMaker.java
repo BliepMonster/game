@@ -1,6 +1,8 @@
 package tool.editor;
 
 import engine.CoordinateMap;
+import engine.core.Screen;
+import engine.core.input.Console;
 import main.DungeonWorld;
 import main.World;
 
@@ -9,6 +11,7 @@ import java.io.IOException;
 
 public class JsonMaker {
     void main() throws IOException {
+        new Screen().create(new Console(), 0);
         String filename = IO.readln("Filename?");
         String id = IO.readln("ID?");
         String type = IO.readln("Type?");

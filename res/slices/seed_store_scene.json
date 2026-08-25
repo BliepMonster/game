@@ -1,0 +1,7 @@
+{
+  "dimensions": [8, 10],
+  "type": "algo",
+  "prefix": "base:scenes:seed_store:",
+  "between": ":",
+  "texid": "base:scenes:seed_store"
+}

@@ -1,4 +1,5 @@
 {
   "base:scenes:restaurant": "res/textures/scenes/restaurant.png",
-  "base:scenes:witch_hut": "res/textures/scenes/witch_hut.png"
+  "base:scenes:witch_hut": "res/textures/scenes/witch_hut.png",
+  "base:scenes:seed_store": "res/textures/scenes/seed_store.png"
 }
