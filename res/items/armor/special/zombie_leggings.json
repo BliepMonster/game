@@ -1,0 +1,25 @@
+{
+  "type": "equipment",
+  "id": "base:armor:zombie_leggings",
+  "name": "Zombie Leggings",
+  "texture": "base:item:zombie_leggings",
+  "stats": [
+    {
+      "type": "DEFENSE",
+      "count": -25
+    },
+    {
+      "type": "STRENGTH",
+      "count": 16
+    },
+    {
+      "type": "CRIT_DAMAGE",
+      "count": 13
+    },
+    {
+      "type": "CRIT_CHANCE",
+      "count": 6
+    }
+  ],
+  "slot": "LEGGINGS"
+}

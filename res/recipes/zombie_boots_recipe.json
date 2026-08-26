@@ -1,0 +1,26 @@
+{
+  "name": "Zombie Boots",
+
+  "inputs": [
+    {
+      "type": "resource",
+      "id": "Zombie Fragment",
+      "amount": 4
+    }
+  ],
+
+  "outputs": [
+    {
+      "type": "item",
+      "id": "base:armor:zombie_boots",
+      "amount": 1
+    }
+  ],
+  "requirements": [
+    {
+      "type": "skill",
+      "skill": "COMBAT",
+      "level": 9
+    }
+  ]
+}

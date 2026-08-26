@@ -1,0 +1,26 @@
+{
+  "name": "Zombie Chestplate",
+
+  "inputs": [
+    {
+      "type": "resource",
+      "id": "Zombie Fragment",
+      "amount": 7
+    }
+  ],
+
+  "outputs": [
+    {
+      "type": "item",
+      "id": "base:armor:zombie_chestplate",
+      "amount": 1
+    }
+  ],
+  "requirements": [
+    {
+      "type": "skill",
+      "skill": "COMBAT",
+      "level": 9
+    }
+  ]
+}

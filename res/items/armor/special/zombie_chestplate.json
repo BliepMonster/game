@@ -1,0 +1,25 @@
+{
+  "type": "equipment",
+  "id": "base:armor:zombie_chestplate",
+  "name": "Zombie Chestplate",
+  "texture": "base:item:zombie_chestplate",
+  "stats": [
+    {
+      "type": "DEFENSE",
+      "count": -30
+    },
+    {
+      "type": "STRENGTH",
+      "count": 20
+    },
+    {
+      "type": "CRIT_DAMAGE",
+      "count": 15
+    },
+    {
+      "type": "CRIT_CHANCE",
+      "count": 8
+    }
+  ],
+  "slot": "CHESTPLATE"
+}

@@ -1,0 +1,25 @@
+{
+  "type": "equipment",
+  "id": "base:armor:zombie_boots",
+  "name": "Zombie Boots",
+  "texture": "base:item:zombie_boots",
+  "stats": [
+    {
+      "type": "DEFENSE",
+      "count": -15
+    },
+    {
+      "type": "STRENGTH",
+      "count": 10
+    },
+    {
+      "type": "CRIT_DAMAGE",
+      "count": 8
+    },
+    {
+      "type": "CRIT_CHANCE",
+      "count": 5
+    }
+  ],
+  "slot": "BOOTS"
+}

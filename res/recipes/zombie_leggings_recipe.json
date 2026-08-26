@@ -1,0 +1,26 @@
+{
+  "name": "Zombie Leggings",
+
+  "inputs": [
+    {
+      "type": "resource",
+      "id": "Zombie Fragment",
+      "amount": 6
+    }
+  ],
+
+  "outputs": [
+    {
+      "type": "item",
+      "id": "base:armor:zombie_leggings",
+      "amount": 1
+    }
+  ],
+  "requirements": [
+    {
+      "type": "skill",
+      "skill": "COMBAT",
+      "level": 9
+    }
+  ]
+}

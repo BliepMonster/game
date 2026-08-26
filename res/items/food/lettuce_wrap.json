@@ -1,0 +1,18 @@
+{
+  "type": "consumable",
+  "id": "base:food:lettuce_wrap",
+  "name": "Lettuce Wrap",
+  "texture": "base:item:lettuce_wrap",
+  "stats": [
+    {
+      "type": "DEFENSE",
+      "count": 30
+    },
+    {
+      "type": "CRIT_DAMAGE",
+      "count": 10
+    }
+  ],
+  "duration": 1200000,
+  "eid": "wrap_lettuce"
+}

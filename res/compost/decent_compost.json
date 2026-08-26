@@ -1,0 +1,8 @@
+{
+  "id": "base:decent_compost",
+  "compost_item": "Decent Compost",
+  "overlay": "base:empty",
+  "name": "Decent Compost",
+  "growth": 1.3,
+  "yield": 1.2
+}

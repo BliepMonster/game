@@ -8,5 +8,6 @@
   "base:item:mushroom_stew": "res/textures/food/mushroom_stew.png",
   "base:item:tomato_soup": "res/textures/food/tomato_soup.png",
   "base:item:sunflower_bread": "res/textures/food/sunflower_bread.png",
-  "base:item:cucumber_wrap": "res/textures/food/cucumber_wrap.png"
+  "base:item:cucumber_wrap": "res/textures/food/cucumber_wrap.png",
+  "base:item:lettuce_wrap": "res/textures/food/lettuce_wrap.png"
 }

@@ -3,6 +3,7 @@
     "res/recipes/smithing/copper/copper_bar_recipe.json",
     "res/recipes/smithing/iron/iron_bar_recipe.json",
     "res/recipes/smithing/steel/steel_bar_recipe.json",
-    "res/recipes/smithing/gold/gold_bar_recipe.json"
+    "res/recipes/smithing/gold/gold_bar_recipe.json",
+    "res/recipes/smithing/silver/silver_bar_recipe.json"
   ]
 }

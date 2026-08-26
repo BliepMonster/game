@@ -1,0 +1,29 @@
+{
+  "name": "Decent Compost",
+
+  "inputs": [
+    {
+      "type": "resource",
+      "id": "Pine Resin",
+      "amount": 8
+    },
+    {
+      "type": "resource",
+      "id": "Flour",
+      "amount": 2
+    },
+    {
+      "type": "resource",
+      "id": "Carrot",
+      "amount": 7
+    }
+  ],
+
+  "outputs": [
+    {
+      "type": "resource",
+      "id": "Decent Compost",
+      "amount": 1
+    }
+  ]
+}

@@ -4,6 +4,7 @@
     "res/recipes/weapons/wooden_club_recipe.json",
     "res/recipes/bowl_recipe.json",
     "res/recipes/zombie_helmet_recipe.json",
+    "res/recipes/zombie_chestplate_recipe.json",
     "res/recipes/placers/crafting_table_recipe.json",
     "res/recipes/placers/deconstructor_recipe.json",
     "res/recipes/placers/chest_recipe.json",
@@ -24,6 +25,7 @@
     "res/recipes/fireball_wand_recipe.json",
     "res/recipes/cucumber_sword_recipe.json",
     "res/recipes/sunflower_hat_recipe.json",
-    "res/recipes/compost/basic_compost_recipe.json"
+    "res/recipes/compost/basic_compost_recipe.json",
+    "res/recipes/compost/decent_compost_recipe.json"
   ]
 }
