@@ -1,0 +1,14 @@
+{
+  "type": "consumable",
+  "id": "base:food:tomato_soup",
+  "name": "Tomato Soup",
+  "texture": "base:item:tomato_soup",
+  "stats": [
+    {
+      "type": "STRENGTH",
+      "count": 25
+    }
+  ],
+  "duration": 300000,
+  "eid": "tomato_soup"
+}

@@ -1,0 +1,16 @@
+{
+  "type": "melee",
+  "id": "base:weapons:cucumber_sword",
+  "name": "Cucumber on a Stick",
+  "texture": "base:item:cucumber_sword",
+
+  "knockback": 1.6,
+  "damage_type": "NORMAL",
+  "stats": [],
+  "melee_type": "cone",
+  "damage": 40,
+  "cooldown": 20,
+
+  "range": 4,
+  "angle": 30
+}

@@ -1,3 +1,4 @@
 {
-  "base:item:strength_potion": "res/textures/potions/strength.png"
+  "base:item:strength_potion": "res/textures/potions/strength.png",
+  "base:item:speed_potion": "res/textures/potions/speed.png"
 }

@@ -1,0 +1,24 @@
+{
+  "name": "Cucumber on a Stick",
+
+  "inputs": [
+    {
+      "type": "resource",
+      "id": "Maple Wood",
+      "amount": 16
+    },
+    {
+      "type": "resource",
+      "id": "Cucumber",
+      "amount": 12
+    }
+  ],
+
+  "outputs": [
+    {
+      "type": "item",
+      "id": "base:weapons:cucumber_sword",
+      "amount": 1
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "name": "Potion of Speed",
+
+  "inputs": [
+    {
+      "type": "resource",
+      "id": "Water Bottle",
+      "amount": 1
+    },
+    {
+      "type": "resource",
+      "id": "Potionberry",
+      "amount": 1
+    },
+    {
+      "type": "resource",
+      "id": "Cucumber",
+      "amount": 6
+    }
+  ],
+
+  "outputs": [
+    {
+      "type": "item",
+      "id": "base:potions:speed_potion",
+      "amount": 1
+    }
+  ],
+  "requirements": [
+    {
+      "type": "skill",
+      "skill": "ALCHEMY",
+      "level": 8
+    },
+    {
+      "type": "skill",
+      "skill": "FARMING",
+      "level": 7
+    }
+  ]
+}

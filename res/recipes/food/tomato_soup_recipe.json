@@ -1,0 +1,29 @@
+{
+  "name": "Tomato Soup",
+  "inputs": [
+    {
+      "type": "resource",
+      "id": "Tomato",
+      "amount": 5
+    },
+    {
+      "type": "resource",
+      "id": "Bowl",
+      "amount": 1
+    }
+  ],
+  "outputs": [
+    {
+      "type": "item",
+      "id": "base:food:tomato_soup",
+      "amount": 1
+    }
+  ],
+  "requirements": [
+    {
+      "type": "skill",
+      "skill": "FARMING",
+      "level": 11
+    }
+  ]
+}

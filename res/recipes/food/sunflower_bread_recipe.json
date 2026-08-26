@@ -1,0 +1,29 @@
+{
+  "name": "Sunflower Seed Bread",
+  "inputs": [
+    {
+      "type": "resource",
+      "id": "Sunflower Seeds",
+      "amount": 3
+    },
+    {
+      "type": "resource",
+      "id": "Flour",
+      "amount": 2
+    }
+  ],
+  "outputs": [
+    {
+      "type": "item",
+      "id": "base:food:sunflower_bread",
+      "amount": 1
+    }
+  ],
+  "requirements": [
+    {
+      "type": "skill",
+      "skill": "FARMING",
+      "level": 10
+    }
+  ]
+}

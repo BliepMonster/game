@@ -1,0 +1,7 @@
+{
+  "type": "food",
+  "id": "base:food:sunflower_bread",
+  "name": "Sunflower Seed Bread",
+  "texture": "base:item:sunflower_bread",
+  "restored": 75
+}

@@ -1,0 +1,6 @@
+{
+  "recipe": "res/recipes/alchemy_back/speed_potion_recipe.json",
+  "xp": 2500,
+  "time": 1200000,
+  "tex": "base:item:speed_potion"
+}

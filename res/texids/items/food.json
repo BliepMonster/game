@@ -5,5 +5,7 @@
   "base:item:golden_strawberry": "res/textures/food/golden_strawberry.png",
   "base:item:pizza": "res/textures/food/pizza.png",
   "base:item:salad": "res/textures/food/salad.png",
-  "base:item:mushroom_stew": "res/textures/food/mushroom_stew.png"
+  "base:item:mushroom_stew": "res/textures/food/mushroom_stew.png",
+  "base:item:tomato_soup": "res/textures/food/tomato_soup.png",
+  "base:item:sunflower_bread": "res/textures/food/sunflower_bread.png"
 }
