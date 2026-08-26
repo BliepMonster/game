@@ -1,0 +1,24 @@
+{
+  "name": "Basic Compost",
+
+  "inputs": [
+    {
+      "type": "resource",
+      "id": "Pine Resin",
+      "amount": 3
+    },
+    {
+      "type": "resource",
+      "id": "Wheat",
+      "amount": 5
+    }
+  ],
+
+  "outputs": [
+    {
+      "type": "resource",
+      "id": "Basic Compost",
+      "amount": 1
+    }
+  ]
+}

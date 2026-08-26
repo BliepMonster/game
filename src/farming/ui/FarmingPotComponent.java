@@ -68,12 +68,15 @@ public class FarmingPotComponent extends Component {
 
     @Override
     public void detectClick(Screen screen, float x, float y) {
-        if (System.currentTimeMillis()-opened < 100) return;
+        if (System.currentTimeMillis()-opened < 400) return;
         if (!isInBounds(screen, x, y)) return;
         if (x > .5f && y > .4f) close();
         else if (x > .2f && y < -.3f)
             this.owner.harvest(context); // takes care of issues
-        else if (x > .2f && y < -.1f && owner.crop == null) {}
+        else if (x > .2f && y < -.1f && owner.crop == null) {
+            isSelf = false;
+            state = new CompostSelectionComponent(this);
+        }
         else if (x > .2f && y < .1f && owner.crop == null){
             isSelf = false;
             state = new CropSelectionComponent(this);

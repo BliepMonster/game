@@ -1,0 +1,18 @@
+{
+  "type": "consumable",
+  "id": "base:food:cucumber_wrap",
+  "name": "Cucumber Wrap",
+  "texture": "base:item:cucumber_wrap",
+  "stats": [
+    {
+      "type": "MAX_HEALTH",
+      "count": 10
+    },
+    {
+      "type": "REGENERATION",
+      "count": 15
+    }
+  ],
+  "duration": 1200000,
+  "eid": "cucumber_wrap"
+}

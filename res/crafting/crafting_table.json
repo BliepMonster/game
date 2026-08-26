@@ -22,6 +22,8 @@
     "res/recipes/placers/anvil_recipe.json",
     "res/recipes/placers/wardrobe_recipe.json",
     "res/recipes/fireball_wand_recipe.json",
-    "res/recipes/cucumber_sword_recipe.json"
+    "res/recipes/cucumber_sword_recipe.json",
+    "res/recipes/sunflower_hat_recipe.json",
+    "res/recipes/compost/basic_compost_recipe.json"
   ]
 }

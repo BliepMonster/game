@@ -4,6 +4,7 @@
     "res/recipes/scrolls/mining_power_scroll_recipe.json",
     "res/recipes/scrolls/foraging_power_scroll_recipe.json",
     "res/recipes/scrolls/magic_power_scroll_recipe.json",
-    "res/recipes/scrolls/luck_scroll_recipe.json"
+    "res/recipes/scrolls/luck_scroll_recipe.json",
+    "res/recipes/scrolls/regeneration_scroll_recipe.json"
   ]
 }

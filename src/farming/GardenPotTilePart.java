@@ -63,6 +63,9 @@ public class GardenPotTilePart extends TilePart {
     public void destroyCrop() {
         this.crop = null;
     }
+    public void setCompostNextHarvest(CompostType compost) {
+        this.compostNextHarvest = compost;
+    }
     public static final Texture BASE = TextureIdMap.get("base:tiles:garden_pot");
 
     public void render(int x, int y, Camera camera) {

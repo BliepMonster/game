@@ -1,0 +1,19 @@
+{
+  "name": "Tortilla",
+
+  "inputs": [
+    {
+      "type": "resource",
+      "id": "Flour",
+      "amount": 1
+    }
+  ],
+
+  "outputs": [
+    {
+      "type": "resource",
+      "id": "Tortilla",
+      "amount": 2
+    }
+  ]
+}

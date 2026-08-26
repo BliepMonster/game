@@ -35,6 +35,7 @@ public final class TilePartLoader {
     public static final String ID_IRON_ORE = "iron_ore";
     public static final String ID_UNSTANDABLE = "unstandable";
     public static final String ID_FURNACE = "furnace";
+    public static final String ID_SILVER_ORE = "silver_ore";
     public static final String ID_CRUSHER = "crusher";
     public static final String ID_SCROLL_TABLE = "scroll_crafter";
     public static final String ID_POLISHING_MACHINE = "polishing_machine";
@@ -159,6 +160,7 @@ public final class TilePartLoader {
             case ID_ANVIL -> new AnvilTilePart(pos);
             case ID_SAPPHIRE -> new SapphireGemstoneTilePart(pos);
             case ID_SEED_MAKER -> new SeedMakerTilePart(pos);
+            case ID_SILVER_ORE -> new SilverOrePart(pos);
             case ID_ALCHEMY_STATION -> {
                 var recipeV = (JsonString) obj.values.get("recipe");
                 yield new AlchemyStationTilePart(pos,

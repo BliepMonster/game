@@ -1,0 +1,8 @@
+{
+  "type": "scroll",
+  "texture": "base:item:regeneration_scroll",
+  "name": "Scroll of Regeneration",
+  "id": "base:scrolls:scroll_regeneration",
+  "stat": "REGENERATION",
+  "scaling": 2
+}

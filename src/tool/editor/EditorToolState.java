@@ -1,7 +1,5 @@
 package tool.editor;
 
-import buildings.RepairTask;
-import buildings.RepairTaskNPC;
 import engine.CoordinateMap;
 import engine.core.Texture;
 import entities.dungeons.ShooterEnemy;
@@ -10,10 +8,9 @@ import org.joml.Vector2f;
 import tiles.*;
 import tiles.doors.DungeonExitTilePart;
 import tiles.doors.EntranceTilePart;
-import tiles.npc.DialogueNPC;
-import tiles.npc.ShopDefinitionRegistry;
 import tiles.resources.*;
-import tiles.resources.ores.SapphireGemstoneTilePart;
+import tiles.resources.ores.GoldOrePart;
+import tiles.resources.ores.SilverOrePart;
 
 
 public enum EditorToolState {
@@ -41,12 +38,12 @@ public enum EditorToolState {
                 map.put(x, y, a);
             }
             case O3 -> {
-                tile.setPart(new DialogueNPC(new Vector2f(x, y), ShopDefinitionRegistry.get("seed_guy"), Main.font));
+                tile.setPart(new SilverOrePart(new Vector2f(x, y)));
             }
-            case O4 -> tile.setPart(new SapphireGemstoneTilePart(new Vector2f(x, y)));
-            case O5 -> ((TextureAdaptTilePart) tile.getPart()).setPart(new DialogueNPC(new Vector2f(x, y), ShopDefinitionRegistry.get("chef"), Main.font));
-            case O6 -> tile.setPart(new UnstandableTilePart(new Vector2f(x, y)));
-            case O7 -> map.put(x, y, new DefaultTile(TileType.get("GRASS")));
+            case O4 -> tile.setPart(new EntranceTilePart(new Vector2f(x, y), "GOLD_CAVE_WORLD", new Vector2f(-30, 16), TextureIdMap.get("base:placeholder")));
+            case O5 -> map.put(x, y, new DefaultTile(TileType.get("ROAD")));
+            case O6 -> tile.setPart(new GoldOrePart(new Vector2f(x, y)));
+            case O7 -> map.put(x, y, new DefaultTile(TileType.get("WALL")));
             case O8 -> {
                 if (Game.getTickCount()-lastTick < 20) return;
                 try {

@@ -1,0 +1,36 @@
+{
+  "name": "Cucumber Wrap",
+
+  "inputs": [
+    {
+      "type": "resource",
+      "id": "Carrot",
+      "amount": 5
+    },
+    {
+      "type": "resource",
+      "id": "Cucumber",
+      "amount": 2
+    },
+    {
+      "type": "resource",
+      "id": "Tortilla",
+      "amount": 1
+    }
+  ],
+
+  "outputs": [
+    {
+      "type": "item",
+      "id": "base:food:cucumber_wrap",
+      "amount": 1
+    }
+  ],
+  "requirements": [
+    {
+      "type": "skill",
+      "skill": "FARMING",
+      "level": 9
+    }
+  ]
+}

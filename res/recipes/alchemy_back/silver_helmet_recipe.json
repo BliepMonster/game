@@ -1,0 +1,34 @@
+{
+  "name": "Silver Helmet",
+  "inputs": [
+    {
+      "type": "resource",
+      "id": "Refined Sapphire",
+      "amount": 1
+    },
+    {
+      "type": "resource",
+      "id": "Purest Silver",
+      "amount": 6
+    }
+  ],
+  "outputs": [
+    {
+      "type": "item",
+      "id": "base:weapons:silver_helmet",
+      "amount": 1
+    }
+  ],
+  "requirements": [
+    {
+      "type": "skill",
+      "skill": "COMBAT",
+      "level": 12
+    },
+    {
+      "type": "skill",
+      "skill": "ALCHEMY",
+      "level": 8
+    }
+  ]
+}

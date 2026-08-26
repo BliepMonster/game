@@ -3,5 +3,6 @@
   "base:item:strength_scroll": "res/textures/scrolls/strength_scroll.png",
   "base:item:foraging_power_scroll": "res/textures/scrolls/foraging_power_scroll.png",
   "base:item:magic_power_scroll": "res/textures/scrolls/magic_power_scroll.png",
-  "base:item:luck_scroll": "res/textures/scrolls/luck_scroll.png"
+  "base:item:luck_scroll": "res/textures/scrolls/luck_scroll.png",
+  "base:item:regeneration_scroll": "res/textures/scrolls/regeneration_scroll.png"
 }

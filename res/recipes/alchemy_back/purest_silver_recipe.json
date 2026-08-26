@@ -1,0 +1,19 @@
+{
+  "name": "Purest Silver",
+
+  "inputs": [
+    {
+      "type": "resource",
+      "id": "Silver Bar",
+      "amount": 12
+    }
+  ],
+
+  "outputs": [
+    {
+      "type": "resource",
+      "id": "Purest Silver",
+      "amount": 1
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "name": "Sunflower Crown",
+
+  "inputs": [
+    {
+      "type": "resource",
+      "id": "Sunflower",
+      "amount": 16
+    },
+    {
+      "type": "upgrade",
+      "id": "base:armor:steel_helmet",
+      "amount": 1
+    },
+    {
+      "type": "resource",
+      "id": "Gold Bar",
+      "amount": 2
+    }
+  ],
+
+  "outputs": [
+    {
+      "type": "item",
+      "id": "base:armor:sunflower_hat",
+      "amount": 1
+    }
+  ],
+  "requirements": [
+    {
+      "type": "skill",
+      "skill": "MINING",
+      "level": 12
+    },
+    {
+      "type": "skill",
+      "skill": "FARMING",
+      "level": 16
+    }
+  ]
+}

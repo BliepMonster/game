@@ -1,0 +1,29 @@
+{
+  "name": "Silver Bar",
+  "inputs": [
+    {
+      "type": "resource",
+      "id": "Silver Ore",
+      "amount": 2
+    },
+    {
+      "type": "resource",
+      "id": "Coal",
+      "amount": 1
+    }
+  ],
+  "outputs": [
+    {
+      "type": "resource",
+      "id": "Silver Bar",
+      "amount": 1
+    }
+  ],
+  "requirements": [
+    {
+      "type": "skill",
+      "skill": "MINING",
+      "level": 11
+    }
+  ]
+}

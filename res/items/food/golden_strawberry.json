@@ -6,7 +6,7 @@
   "stats": [
     {
       "type": "REGENERATION",
-      "count": 10
+      "count": 100
     }
   ],
   "duration": 1000,

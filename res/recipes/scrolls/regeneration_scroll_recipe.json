@@ -1,0 +1,34 @@
+{
+  "name": "Scroll of Regeneration",
+  "inputs": [
+    {
+      "type": "resource",
+      "id": "Paper",
+      "amount": 5
+    },
+    {
+      "type": "resource",
+      "id": "Silver Bar",
+      "amount": 3
+    }
+  ],
+  "outputs": [
+    {
+      "type": "item",
+      "id": "base:scrolls:scroll_regeneration",
+      "amount": 1
+    }
+  ],
+  "requirements": [
+    {
+      "type": "skill",
+      "skill": "MINING",
+      "level": 13
+    },
+    {
+      "type": "skill",
+      "skill": "COMBAT",
+      "level": 10
+    }
+  ]
+}
