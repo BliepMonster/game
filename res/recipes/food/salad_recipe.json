@@ -20,6 +20,11 @@
       "type": "resource",
       "id": "Bowl",
       "amount": 1
+    },
+    {
+      "type": "resource",
+      "id": "Sunflower Oil",
+      "amount": 1
     }
   ],
   "outputs": [

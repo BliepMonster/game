@@ -1,0 +1,19 @@
+{
+  "name": "Sunflower",
+
+  "inputs": [
+    {
+      "type": "resource",
+      "id": "Sunflower",
+      "amount": 1
+    }
+  ],
+
+  "outputs": [
+    {
+      "type": "resource",
+      "id": "Sunflower Seeds",
+      "amount": 2
+    }
+  ]
+}

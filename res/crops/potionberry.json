@@ -1,5 +1,5 @@
 {
-  "id": "base:cucumber",
+  "id": "base:potionberry",
   "ready": "base:empty",
   "unready": "base:empty",
   "icon": "base:crops:potionberry_icon",

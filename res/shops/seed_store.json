@@ -36,6 +36,20 @@
             "id": "Lettuce Seeds",
             "amount": 1
           }
+        },
+        {
+          "requirements": [],
+          "ingredients": [],
+          "price": {
+            "currency": "COINS",
+            "amount": 12000
+          },
+          "texture": "res/textures/crops/sunflower.png",
+          "result": {
+            "type": "resource",
+            "id": "Sunflower Seeds",
+            "amount": 1
+          }
         }
       ]
     }

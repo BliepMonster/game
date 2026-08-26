@@ -34,7 +34,7 @@ public class CookingStationTilePart extends TilePart {
         return FONT;
     }
     public void render(int x, int y, Camera camera) {
-        camera.image(TEXTURE, x, y, 1, 1.5f);
+        camera.addRenderJob(() -> camera.image(TEXTURE, x, y, 1, 1.5f), -y);
     }
     public boolean isStandable() {
         return false;

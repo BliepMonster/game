@@ -1,0 +1,13 @@
+{
+  "id": "base:sunflower",
+  "ready": "base:empty",
+  "unready": "base:empty",
+  "icon": "base:crops:sunflower_icon",
+  "duration": 3600000,
+  "guaranteed": "base:sunflower_drops",
+  "optional": "base:no_drops",
+  "name": "Sunflower",
+  "seed": "Sunflower Seeds",
+  "destroyed": false,
+  "exp": 2800
+}

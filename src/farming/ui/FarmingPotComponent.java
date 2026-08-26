@@ -9,6 +9,7 @@ import engine.gui.GUI;
 import engine.gui.components.Component;
 import engine.gui.constraints.position.CenterConstraint;
 import engine.gui.constraints.size.RelativeSizeConstraint;
+import farming.CropType;
 import farming.GardenPotTilePart;
 import main.GameContext;
 import main.Main;
@@ -20,6 +21,7 @@ public class FarmingPotComponent extends Component {
     public final GameContext context;
     boolean isSelf = true;
     Component state;
+    long opened = System.currentTimeMillis();
     public static final Mesh READY = new TextMesh("Harvest", Main.font, Main.font.getSizeForWidth("Harvest", .4f), 1000).create();
     public static final Mesh COMPOST = new TextMesh("Apply Compost", Main.font, Main.font.getSizeForWidth("Apply Compost", .4f), 1000).create();
     public static final Mesh PLANT = new TextMesh("Plant", Main.font, Main.font.getSizeForWidth("Plant", .4f), 1000).create();
@@ -66,6 +68,7 @@ public class FarmingPotComponent extends Component {
 
     @Override
     public void detectClick(Screen screen, float x, float y) {
+        if (System.currentTimeMillis()-opened < 100) return;
         if (!isInBounds(screen, x, y)) return;
         if (x > .5f && y > .4f) close();
         else if (x > .2f && y < -.3f)

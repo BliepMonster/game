@@ -4,5 +4,5 @@
   "name": "Scroll of Luck",
   "id": "base:scrolls:scroll_luck",
   "stat": "LUCK",
-  "scaling": 0.1
+  "scaling": 1
 }

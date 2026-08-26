@@ -54,10 +54,10 @@ public class GardenPotTilePart extends TilePart {
         player.inventory.apply(map);
         player.currency.get(gdrops.coins);
         player.skills.get(SkillSet.SkillType.FARMING).getXP(crop.type().exp());
-        crop = crop.type().getsDestroyed() ? null : crop;
+        crop = crop.type().getsDestroyed() ? null : new PlantedCrop(crop.type(), System.currentTimeMillis()+crop.type().milliDuration(), crop.compost());
     }
     public void plant(CropType type) {
-        this.crop = new PlantedCrop(type, (long) (System.currentTimeMillis()+type.milliDuration()/(compostNextHarvest == null ? 1 : compostNextHarvest.growthBoost())), compostNextHarvest);
+        this.crop = new PlantedCrop(type, (long) (System.currentTimeMillis()+type.milliDuration()/(compostNextHarvest == null ? 1 : (double) compostNextHarvest.growthBoost())), compostNextHarvest);
         compostNextHarvest = null;
     }
     public void destroyCrop() {

@@ -1,0 +1,29 @@
+{
+  "name": "Sunflower Oil",
+  "inputs": [
+    {
+      "type": "resource",
+      "id": "Sunflower",
+      "amount": 2
+    },
+    {
+      "type": "resource",
+      "id": "Water Bottle",
+      "amount": 1
+    }
+  ],
+  "outputs": [
+    {
+      "type": "resource",
+      "id": "Sunflower Oil",
+      "amount": 1
+    }
+  ],
+  "requirements": [
+    {
+      "type": "skill",
+      "skill": "FARMING",
+      "level": 16
+    }
+  ]
+}

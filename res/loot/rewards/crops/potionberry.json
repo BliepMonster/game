@@ -1,0 +1,8 @@
+{
+  "id": "base:potionberry_drops",
+  "items": [],
+  "resources": {
+    "Potionberry": 1
+  },
+  "coins": 0
+}
