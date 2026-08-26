@@ -1,6 +1,5 @@
 package farming;
 
-import crafting.FullItemStorage;
 import engine.core.Texture;
 import engine.gui.GUI;
 import engine.json.JsonNumber;
@@ -50,7 +49,7 @@ public class GardenPotTilePart extends TilePart {
             player.items.add(new Item(item));
         }
         var map = (HashMap<String, Integer>) gdrops.loot.clone();
-        map.replaceAll((k, v) -> YieldUtils.getYieldEffect(YieldUtils.getYieldEffect(v, player.stats.get(StatHolder.Stat.FARMING_YIELD)), (crop.compost() == null ? 1 : crop.compost().yieldMultiplier()*100-100)));
+        map.replaceAll((_, v) -> YieldUtils.getYieldEffect(YieldUtils.getYieldEffect(v, player.stats.get(StatHolder.Stat.FARMING_YIELD)), (crop.compost() == null ? 1 : crop.compost().yieldMultiplier()*100-100)));
         player.inventory.apply(map);
         player.currency.get(gdrops.coins);
         player.skills.get(SkillSet.SkillType.FARMING).getXP(crop.type().exp());
@@ -87,8 +86,6 @@ public class GardenPotTilePart extends TilePart {
 
     @Override
     public void onClick(GameContext context) {
-        var player = context.getPlayer();
-        var inv = new FullItemStorage(player.items, player.inventory, player.currency);
         if (GUI.getAll(0).isEmpty()) {
             GUI.add(new FarmingPotComponent(this, context), 0);
             GUI.toggle(62);

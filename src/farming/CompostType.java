@@ -30,7 +30,7 @@ try (Stream<Path> paths = Files.walk(Path.of("res/texids"))) {
  */
 // "overlay" represents the colored spots in the dirt on both the tile texture and the UI texture
 public record CompostType(String id, Texture overlay, String name, float growthBoost, float yieldMultiplier, String compostItem) {
-    private static HashMap<String, CompostType> map = new HashMap<>();
+    private static final HashMap<String, CompostType> map = new HashMap<>();
     static {
         try (Stream<Path> paths = Files.walk(Path.of("res/compost"))) {
             paths
