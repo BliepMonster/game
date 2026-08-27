@@ -17,8 +17,8 @@ public class CaveBatDungeonEnemy extends DungeonEnemy {
     public CaveBatDungeonEnemy(Vector2f position) {
         super(
                 position,
-                300,
-                25,
+                500,
+                100,
                 LootTableRegistry.get("base:cave_bat")
         );
     }

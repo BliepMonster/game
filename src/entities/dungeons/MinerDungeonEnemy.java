@@ -28,6 +28,6 @@ public class MinerDungeonEnemy extends MeleeDungeonEnemy {
         return 1;
     }
     public MinerDungeonEnemy(Vector2f vec) {
-        super(vec, 300, 40, LootTableRegistry.get("base:miner_zombie"), 7, 10, 25, 18, 30, 3);
+        super(vec, 300, 60, LootTableRegistry.get("base:miner_zombie"), 7, 10, 25, 18, 30, 3);
     }
 }

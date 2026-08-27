@@ -19,7 +19,7 @@ import java.util.HashMap;
 import java.util.stream.Stream;
 
 public record CropType(String id, Texture ready, Texture unready, Texture icon, long milliDuration, LootReward guaranteed, LootTable bonus, String cropName, String seedType, boolean getsDestroyed, int exp) {
-    private static HashMap<String, CropType> map = new HashMap<>();
+    private static final HashMap<String, CropType> map = new HashMap<>();
     static {
         try (Stream<Path> paths = Files.walk(Path.of("res/crops"))) {
             paths
