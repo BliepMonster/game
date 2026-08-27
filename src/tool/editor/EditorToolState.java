@@ -3,6 +3,7 @@ package tool.editor;
 import engine.CoordinateMap;
 import engine.core.Texture;
 import entities.MinecartSpawnerEntity;
+import entities.dungeons.MinerDungeonEnemy;
 import entities.dungeons.ShooterEnemy;
 import main.*;
 import org.joml.Vector2f;
@@ -33,9 +34,9 @@ public enum EditorToolState {
             }
             case O2 -> {
                 int xx = 0, yy = 0;
-                TileType built = TileType.get("base:scenes:sapphire_f1:" + (x - xx) + ":" + (y - yy));
+                TileType built = TileType.get("base:scenes:sapphire_f2:" + (x - xx) + ":" + (y - yy));
                 if (built == null) return;
-                Tile a = new RenderOverTile(new DefaultTile(TileType.get("ROAD")), built, 800);
+                Tile a = new DefaultTile(built);
                 map.put(x, y, a);
             }
             case O3 -> {
@@ -50,7 +51,7 @@ public enum EditorToolState {
                 try {
                     world.onLoadEntities.add(
                             new EntityProducer(
-                                    MinecartSpawnerEntity.class.getConstructor(Vector2f.class),
+                                    MinerDungeonEnemy.class.getConstructor(Vector2f.class),
                                     x,
                                     y
                             )

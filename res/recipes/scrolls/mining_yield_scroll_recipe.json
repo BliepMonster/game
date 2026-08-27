@@ -1,0 +1,34 @@
+{
+  "name": "Scroll of Mining Yield",
+  "inputs": [
+    {
+      "type": "resource",
+      "id": "Paper",
+      "amount": 5
+    },
+    {
+      "type": "resource",
+      "id": "Miner Fragment",
+      "amount": 6
+    }
+  ],
+  "outputs": [
+    {
+      "type": "item",
+      "id": "base:scrolls:scroll_mining_yield",
+      "amount": 1
+    }
+  ],
+  "requirements": [
+    {
+      "type": "skill",
+      "skill": "MINING",
+      "level": 15
+    },
+    {
+      "type": "skill",
+      "skill": "COMBAT",
+      "level": 10
+    }
+  ]
+}

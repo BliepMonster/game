@@ -37,6 +37,7 @@
     "res/recipes/smithing/ruby_axe_recipe.json",
     "res/recipes/smithing/sapphire_pickaxe_recipe.json",
     "res/recipes/smithing/sapphire_axe_recipe.json",
-    "res/recipes/smithing/miner_hat_recipe.json"
+    "res/recipes/smithing/miner_hat_recipe.json",
+    "res/recipes/smithing/miner_vest_recipe.json"
   ]
 }

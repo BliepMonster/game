@@ -1,0 +1,29 @@
+{
+  "type": "equipment",
+  "id": "base:armor:miner_pants",
+  "name": "Miner's Pants",
+  "texture": "base:item:miner_pants",
+  "stats": [
+    {
+      "type": "DEFENSE",
+      "count": 55
+    },
+    {
+      "type": "MAX_HEALTH",
+      "count": 8
+    },
+    {
+      "type": "STRENGTH",
+      "count": 4
+    },
+    {
+      "type": "MINING_YIELD",
+      "count": 5
+    },
+    {
+      "type": "MINING_POWER",
+      "count": 50
+    }
+  ],
+  "slot": "LEGGINGS"
+}

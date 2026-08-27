@@ -1,0 +1,8 @@
+{
+  "id": "base:defense_potion",
+  "items": [
+    "base:potions:defense_potion"
+  ],
+  "resources": {},
+  "coins": 400
+}

@@ -1,0 +1,14 @@
+{
+  "type": "consumable",
+  "id": "base:potions:defense_potion",
+  "name": "Potion of Defense",
+  "texture": "base:item:defense_potion",
+  "stats": [
+    {
+      "type": "DEFENSE",
+      "count": 60
+    }
+  ],
+  "duration": 600000,
+  "eid": "potion_defense"
+}

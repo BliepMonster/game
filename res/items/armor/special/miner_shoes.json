@@ -1,0 +1,29 @@
+{
+  "type": "equipment",
+  "id": "base:armor:miner_shoes",
+  "name": "Miner's Shoes",
+  "texture": "base:item:miner_shoes",
+  "stats": [
+    {
+      "type": "DEFENSE",
+      "count": 50
+    },
+    {
+      "type": "MAX_HEALTH",
+      "count": 5
+    },
+    {
+      "type": "STRENGTH",
+      "count": 3
+    },
+    {
+      "type": "MINING_YIELD",
+      "count": 5
+    },
+    {
+      "type": "MINING_POWER",
+      "count": 50
+    }
+  ],
+  "slot": "BOOTS"
+}

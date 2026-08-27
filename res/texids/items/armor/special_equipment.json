@@ -9,5 +9,8 @@
   "base:item:zombie_boots": "res/textures/special/zombie_boots.png",
   "base:item:silver_helmet": "res/textures/special/silver_helmet.png",
   "base:item:miner_hat": "res/textures/special/miner_helmet.png",
+  "base:item:miner_vest": "res/textures/special/miner_vest.png",
+  "base:item:miner_pants": "res/textures/special/miner_pants.png",
+  "base:item:miner_shoes": "res/textures/special/miner_shoes.png",
   "base:item:sunflower_hat": "res/textures/special/sunflower_crown.png"
 }

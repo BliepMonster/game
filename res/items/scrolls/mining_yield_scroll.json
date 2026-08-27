@@ -1,0 +1,8 @@
+{
+  "type": "scroll",
+  "texture": "base:item:mining_yield_scroll",
+  "name": "Scroll of Mining Yield",
+  "id": "base:scrolls:scroll_mining_yield",
+  "stat": "MINING_YIELD",
+  "scaling": 4
+}

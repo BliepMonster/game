@@ -35,13 +35,15 @@ Each floor is a separate JSON map file and world. Every floor uses `"type": "dun
 | Floor 1 brightness | 0.3 (already set in `sapphire_dung1.json`) |
 | Floors 2-6 brightness | 0.12-0.20 (per-floor, listed below) |
 | World IDs | Floor 1: `SAPPHIRE_DUNGEON_1`; Floors 2-6: `SAPPHIRE_MINE_F2`-`SAPPHIRE_MINE_F6` |
-| Map files | Floor 1: `res/maps/sapphire_dung1.json` (existing, scene-based); Floors 2-6: `res/maps/sapphire_mine_f2.json`-`sapphire_mine_f6.json` |
+| Map files | Floor 1: `res/maps/sapphire_dung1.json` (existing, scene-based); Floor 2: `res/maps/sapphire_dung2.json` (scene-based); Floors 3-6: `res/maps/sapphire_mine_f3.json`-`sapphire_mine_f6.json` |
 | Recommended tile size per floor | ~600-900 tiles |
 
 > Floor 1 already exists as `sapphire_dung1.json` and uses the **scene** tile system
 > (a 12x15 grid slicing `res/textures/scenes/sapphire_dungeon_001.png`; tile keys are
-> `base:scenes:sapphire_f1:x:y` instead of `WALL`/`ROAD`). Floors 2-6 are built with
-> the standard `WALL`/`ROAD` tile layout.
+> `base:scenes:sapphire_f1:x:y` instead of `WALL`/`ROAD`). Floor 2 follows the same
+> **scene** system slicing `res/textures/scenes/sapphire_dungeon_002.png`
+> (`base:scenes:sapphire_dung2`, already registered in `res/texids/tiles/scenes.json`).
+> Floors 3-6 are built with the standard `WALL`/`ROAD` tile layout.
 
 ---
 
@@ -61,7 +63,7 @@ Each floor is a separate JSON map file and world. Every floor uses `"type": "dun
 | XP | 35 |
 | Knockback Resistance | `max(log(25)/100, 1) = 1` |
 | Render | Dark grey-brown 1x1 rect, red when hurt |
-| Loot | COMMON: 5 coins + 1 "Mine Fragment"; RARE: 1x "Mine Fragment" (bonus) |
+| Loot | COMMON: 5 coins + 1 "Mine Fragment"; RARE: 1x "Mine Fragment" (bonus); LEGENDARY: 1x `base:armor:miner_boots` |
 
 > Stat block is slightly tougher than the first draft (HP 200→220, DMG 25→28,
 > DEF 20→25, XP 30→35) so Floor 1's mobs hit a bit harder.
@@ -81,7 +83,7 @@ Each floor is a separate JSON map file and world. Every floor uses `"type": "dun
 | XP | 20 |
 | Knockback Resistance | 1 |
 | Render | Dark purple 1x1 rect, smaller hitbox (0.6x0.6) |
-| Loot | COMMON: 3 coins |
+| Loot | COMMON: 3 coins; LEGENDARY: 1x `base:armor:miner_leggings` |
 
 ### 3. Crystal Golem
 
@@ -249,6 +251,30 @@ Requires a new `TilePartLoader` entry: `ID_MINECART_SPAWNER = "minecart_spawner"
 | Stats | DEFENSE: 40, MINING_YIELD: 5, STRENGTH: 8 |
 | Texture | `base:item:miner_vest` |
 
+#### Miner's Leggings
+
+| Property | Value |
+|----------|-------|
+| ID | `base:armor:miner_leggings` |
+| Name | Miner's Leggings |
+| Type | `equipment` |
+| Slot | `LEGGINGS` |
+| Stats | DEFENSE: 30, MINING_YIELD: 5, SPEED: 1 |
+| Texture | `base:item:miner_leggings` |
+| Source | Drop-only (Cave Bat, LEGENDARY 2%) — no crafting recipe |
+
+#### Miner's Boots
+
+| Property | Value |
+|----------|-------|
+| ID | `base:armor:miner_boots` |
+| Name | Miner's Boots |
+| Type | `equipment` |
+| Slot | `BOOTS` |
+| Stats | DEFENSE: 20, MINING_YIELD: 5, KNOCKBACK: 3 |
+| Texture | `base:item:miner_boots` |
+| Source | Drop-only (Miner Zombie, LEGENDARY 2%) — no crafting recipe |
+
 #### Crystal Pendant
 
 | Property | Value |
@@ -316,23 +342,28 @@ exploding carts force the player to keep moving — standing on the track is pun
 
 ---
 
-### Floor 2: The Narrow Tunnels
+### Floor 2: The Swarm Room
 
 **World ID**: `SAPPHIRE_MINE_F2`
+**Map file**: `res/maps/sapphire_dung2.json` (scene-based — slices `sapphire_dungeon_002.png` via `base:scenes:sapphire_dung2`)
 **Brightness**: 0.12
-**Theme**: Tight corridors with branching paths. First ranged enemy introduced.
-**Tile layout**: Narrow winding tunnels (2-3 tile wide corridors), a few small alcoves.
+**Theme**: One large rectangular room (~20x30) swarming with Miner Zombies and Cave Bats. A small wooden platform sits in the room as decor — the intended future home for loot barrels (not yet implemented).
+**Tile layout**: Large open rectangular room, low obstacle density, a small wooden platform near one wall.
 
 **Enemies (onLoad):**
 
 | Enemy | Count | Position (approx) |
 |-------|-------|--------------------|
-| Miner Zombie | 3 | Main corridors |
-| Cave Bat | 1 | Alcove at dead end |
+| Miner Zombie | 6-8 (large swarm) | Spread across the room |
+| Cave Bat | 5-6 | Perched around the room |
 
 **DungeonExit**: Leads to `SAPPHIRE_MINE_F3` at spawn (0,0).
 
-**Design note**: The narrow corridors make the Cave Bat harder to dodge and the Miner Zombies harder to kite.
+**Design note**: The room is **less crowded than Floor 1** — fewer enemies per tile and
+plenty of open floor to maneuver. This intentionally buffs an evasive / magic playstyle:
+players dodge bat shots and kite the zombie swarm through open space instead of
+face-tanking. The legs/boots drops (Cave Bat / Miner Zombie, LEGENDARY 2%) fit the swarm
+fantasy here — high kill counts make the chase items farmable.
 
 ---
 
@@ -538,8 +569,8 @@ Alchemy back recipe:
 
 | Enemy | COMMON (50%) | UNCOMMON (30%) | RARE (12%) | EPIC (6%) | LEGENDARY (2%) |
 |-------|-------------|----------------|------------|-----------|----------------|
-| Miner Zombie | 5 coins + 1 Mine Fragment | — | 1 Mine Fragment (bonus) | — | — |
-| Cave Bat | 3 coins | — | — | — | — |
+| Miner Zombie | 5 coins + 1 Mine Fragment | — | 1 Mine Fragment (bonus) | — | 1 Miner's Boots |
+| Cave Bat | 3 coins | — | — | — | 1 Miner's Leggings |
 | Crystal Golem | 1 Sapphire Shard | — | — | — | — |
 | Dynamite Goblin | 5 coins | 1 Mine Fragment | — | — | — |
 | Tunnel Worm | 1 Mine Fragment | 2 Mine Fragment | — | — | — |
@@ -568,7 +599,7 @@ Alchemy back recipe:
 | # | File Path | Description |
 |---|-----------|-------------|
 | 10 | `res/maps/sapphire_dung1.json` | Floor 1: Mine Entrance (already exists) |
-| 11 | `res/maps/sapphire_mine_f2.json` | Floor 2: Narrow Tunnels |
+| 11 | `res/maps/sapphire_dung2.json` | Floor 2: Swarm Room (scene-based, uses `sapphire_dungeon_002.png`) |
 | 12 | `res/maps/sapphire_mine_f3.json` | Floor 3: Crystal Cavern |
 | 13 | `res/maps/sapphire_mine_f4.json` | Floor 4: Blast Zone |
 | 14 | `res/maps/sapphire_mine_f5.json` | Floor 5: Deep Shaft |
@@ -580,27 +611,29 @@ Alchemy back recipe:
 |---|-----------|-------------|
 | 16 | `res/items/weapons/pickaxe_blade.json` | Melee weapon |
 | 17 | `res/items/armor/miner_vest.json` | Chestplate equipment |
-| 18 | `res/items/rings/crystal_pendant.json` | Ring equipment |
-| 19 | `res/items/potions/mine_potion.json` | Consumable potion |
+| 18 | `res/items/armor/miner_leggings.json` | Leggings equipment (Cave Bat drop) |
+| 19 | `res/items/armor/miner_boots.json` | Boots equipment (Miner Zombie drop) |
+| 20 | `res/items/rings/crystal_pendant.json` | Ring equipment |
+| 21 | `res/items/potions/mine_potion.json` | Consumable potion |
 
 ### Recipe JSON Files
 
 | # | File Path | Description |
 |---|-----------|-------------|
-| 20 | `res/recipes/anvil/pickaxe_blade.json` | Weapon recipe |
-| 21 | `res/recipes/crafting_table/miner_vest.json` | Armor recipe |
-| 22 | `res/recipes/crafting_table/crystal_pendant.json` | Ring recipe |
-| 23 | `res/recipes/alchemy/mine_potion.json` | Alchemy recipe |
-| 24 | `res/recipes/alchemy_back/mine_potion.json` | Alchemy back-end recipe |
+| 22 | `res/recipes/anvil/pickaxe_blade.json` | Weapon recipe |
+| 23 | `res/recipes/crafting_table/miner_vest.json` | Armor recipe |
+| 24 | `res/recipes/crafting_table/crystal_pendant.json` | Ring recipe |
+| 25 | `res/recipes/alchemy/mine_potion.json` | Alchemy recipe |
+| 26 | `res/recipes/alchemy_back/mine_potion.json` | Alchemy back-end recipe |
 
 ### Modified Files
 
 | # | File Path | Change |
 |---|-----------|--------|
-| 25 | `res/maps/sapphire_cave.json` | Add entrance object: `{ "x": <x>, "y": <y>, "object": { "type": "entrance", "world_id": "SAPPHIRE_DUNGEON_1", "x": 0, "y": 0, "texture_id": "res/bred.png" } }` |
-| 26 | `res/crafting/anvil.json` | Add `"res/recipes/anvil/pickaxe_blade.json"` to recipe list |
-| 27 | `res/crafting/crafting_table.json` | Add `"res/recipes/crafting_table/miner_vest.json"` and `"res/recipes/crafting_table/crystal_pendant.json"` to recipe list |
-| 28 | `src/tool/editor/TilePartLoader.java` | Add `ID_MINECART_SPAWNER = "minecart_spawner"` + load case: `new MinecartSpawner(pos, context, direction, interval, distance)` |
+| 27 | `res/maps/sapphire_cave.json` | Add entrance object: `{ "x": <x>, "y": <y>, "object": { "type": "entrance", "world_id": "SAPPHIRE_DUNGEON_1", "x": 0, "y": 0, "texture_id": "res/bred.png" } }` |
+| 28 | `res/crafting/anvil.json` | Add `"res/recipes/anvil/pickaxe_blade.json"` to recipe list |
+| 29 | `res/crafting/crafting_table.json` | Add `"res/recipes/crafting_table/miner_vest.json"` and `"res/recipes/crafting_table/crystal_pendant.json"` to recipe list |
+| 30 | `src/tool/editor/TilePartLoader.java` | Add `ID_MINECART_SPAWNER = "minecart_spawner"` + load case: `new MinecartSpawner(pos, context, direction, interval, distance)` |
 
 **Item and enemy JSON are auto-discovered** (`StaticItemLoader` finds items; map
 `onLoad` entries construct enemies by class name) — no code work for those. The ONLY
@@ -628,7 +661,7 @@ Player reaches Sapphire Cave (needs MINING 14, Sapphire Pickaxe)
 
 ```
 Floor 1: █████░░░░░░░░░░░░░░░  Easy (3 tougher melee + exploding minecart hazards)
-Floor 2: ██████░░░░░░░░░░░░░░  Medium (first ranged enemy)
+Floor 2: ██████░░░░░░░░░░░░░░  Medium (large open swarm room — evasive/magic favored)
 Floor 3: ██████████░░░░░░░░░░  Medium-Hard (Crystal Golem + ranged)
 Floor 4: █████████████░░░░░░░  Hard (AoE explosions + new enemy types)
 Floor 5: ████████████████░░░░  Very Hard (dense enemies, dark, all types)

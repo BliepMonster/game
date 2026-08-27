@@ -1,0 +1,29 @@
+{
+  "type": "equipment",
+  "id": "base:armor:miner_vest",
+  "name": "Miner's Vest",
+  "texture": "base:item:miner_vest",
+  "stats": [
+    {
+      "type": "DEFENSE",
+      "count": 60
+    },
+    {
+      "type": "MAX_HEALTH",
+      "count": 10
+    },
+    {
+      "type": "STRENGTH",
+      "count": 5
+    },
+    {
+      "type": "MINING_YIELD",
+      "count": 5
+    },
+    {
+      "type": "MINING_POWER",
+      "count": 50
+    }
+  ],
+  "slot": "CHESTPLATE"
+}

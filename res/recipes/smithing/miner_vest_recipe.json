@@ -1,0 +1,36 @@
+{
+  "name": "Miner's Vest",
+
+  "inputs": [
+    {
+      "type": "resource",
+      "id": "Miner Fragment",
+      "amount": 12
+    },
+    {
+      "type": "resource",
+      "id": "Silver Bar",
+      "amount": 2
+    }
+  ],
+
+  "outputs": [
+    {
+      "type": "item",
+      "id": "base:armor:miner_vest",
+      "amount": 1
+    }
+  ],
+  "requirements": [
+    {
+      "type": "skill",
+      "skill": "MINING",
+      "level": 14
+    },
+    {
+      "type": "skill",
+      "skill": "COMBAT",
+      "level": 12
+    }
+  ]
+}

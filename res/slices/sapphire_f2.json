@@ -1,0 +1,7 @@
+{
+  "dimensions": [20, 30],
+  "type": "algo",
+  "prefix": "base:scenes:sapphire_f2:",
+  "between": ":",
+  "texid": "base:scenes:sapphire_dung2"
+}

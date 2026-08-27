@@ -1,0 +1,17 @@
+{
+  "id": "base:miner_zombie",
+  "loot": [
+    {
+      "reward": "base:miner_frag",
+      "type": "UNCOMMON"
+    },
+    {
+      "reward": "base:defense_potion",
+      "type": "EPIC"
+    },
+    {
+      "reward": "base:miner_shoes",
+      "type": "LEGENDARY"
+    }
+  ]
+}

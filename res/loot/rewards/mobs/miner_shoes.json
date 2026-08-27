@@ -1,0 +1,8 @@
+{
+  "id": "base:miner_shoes",
+  "items": [
+    "base:armor:miner_shoes"
+  ],
+  "resources": {},
+  "coins": 400
+}

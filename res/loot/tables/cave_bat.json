@@ -1,0 +1,13 @@
+{
+  "id": "base:cave_bat",
+  "loot": [
+    {
+      "reward": "base:miner_frag",
+      "type": "RARE"
+    },
+    {
+      "reward": "base:miner_pants",
+      "type": "LEGENDARY"
+    }
+  ]
+}
