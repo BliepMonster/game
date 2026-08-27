@@ -61,7 +61,7 @@ public class SilverOrePart extends HittableResourceCreator implements LightSourc
 
     @Override
     public Color[] getChipColors() {
-        return new Color[] { Color.YELLOW, new Color(220, 180, 60), new Color(160, 120, 40) };
+        return new Color[] { Color.WHITE, new Color(220, 220, 220), new Color(250, 240, 240) };
     }
 
     @Override

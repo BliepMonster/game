@@ -2,6 +2,7 @@ package tool.editor;
 
 import engine.CoordinateMap;
 import engine.core.Texture;
+import entities.MinecartSpawnerEntity;
 import entities.dungeons.ShooterEnemy;
 import main.*;
 import org.joml.Vector2f;
@@ -31,16 +32,16 @@ public enum EditorToolState {
                 System.out.println(new Vector2f(x, y));
             }
             case O2 -> {
-                int xx = -5, yy = -1;
-                TileType built = TileType.get("base:scenes:seed_store:" + (x - xx) + ":" + (y - yy));
-                if (built == null ) return;
-                Tile a = new DefaultTile(built);
+                int xx = 0, yy = 0;
+                TileType built = TileType.get("base:scenes:sapphire_f1:" + (x - xx) + ":" + (y - yy));
+                if (built == null) return;
+                Tile a = new RenderOverTile(new DefaultTile(TileType.get("ROAD")), built, 800);
                 map.put(x, y, a);
             }
             case O3 -> {
-                tile.setPart(new SilverOrePart(new Vector2f(x, y)));
+                tile.setPart(new UnstandableTilePart(new Vector2f(x, y)));
             }
-            case O4 -> tile.setPart(new EntranceTilePart(new Vector2f(x, y), "GOLD_CAVE_WORLD", new Vector2f(-30, 16), TextureIdMap.get("base:placeholder")));
+            case O4 -> tile.setPart(new EntranceTilePart(new Vector2f(x, y), "SAPPHIRE_CAVE", new Vector2f(4, 28), TextureIdMap.get("base:empty")));
             case O5 -> map.put(x, y, new DefaultTile(TileType.get("ROAD")));
             case O6 -> tile.setPart(new GoldOrePart(new Vector2f(x, y)));
             case O7 -> map.put(x, y, new DefaultTile(TileType.get("WALL")));
@@ -49,7 +50,7 @@ public enum EditorToolState {
                 try {
                     world.onLoadEntities.add(
                             new EntityProducer(
-                                    ShooterEnemy.class.getConstructor(Vector2f.class),
+                                    MinecartSpawnerEntity.class.getConstructor(Vector2f.class),
                                     x,
                                     y
                             )
