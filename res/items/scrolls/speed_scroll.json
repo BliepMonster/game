@@ -1,0 +1,8 @@
+{
+  "type": "scroll",
+  "texture": "base:item:speed_scroll",
+  "name": "Scroll of Speed",
+  "id": "base:scrolls:scroll_speed",
+  "stat": "SPEED",
+  "scaling": 0.08
+}

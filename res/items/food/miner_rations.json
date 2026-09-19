@@ -1,0 +1,22 @@
+{
+  "type": "consumable",
+  "id": "base:food:miner_rations",
+  "name": "Miner's Rations",
+  "texture": "base:item:miner_rations",
+  "stats": [
+    {
+      "type": "DEFENSE",
+      "count": 12
+    },
+    {
+      "type": "MINING_POWER",
+      "count": 100
+    },
+    {
+      "type": "MINING_YIELD",
+      "count": 10
+    }
+  ],
+  "duration": 1200000,
+  "eid": "miner_rations"
+}

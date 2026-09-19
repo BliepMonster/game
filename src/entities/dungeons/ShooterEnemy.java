@@ -42,7 +42,7 @@ public class ShooterEnemy extends DungeonEnemy {
     }
     public void render(Camera camera) {
         camera.addRenderJob(
-                () -> camera.rect(Color.white, position.x, position.y, 1, 1),
+                () -> camera.rect(Color.white, getRenderX(), getRenderY(), 1, 1),
                 -position.y
         );
     }

@@ -117,6 +117,12 @@ public class JsonItemLoader {
         var scaling = ((JsonNumber) file.values.get("scaling")).num;
         return new ScrollItemDefinition(id, name, description, texture, stat, (float) scaling);
     }
+    private static DeployableItemDefinition loadDeployable(JsonFile file, String id, String name, String description, Texture texture) {
+        return new DeployableItemDefinition(id, name, description, texture, (int) ((JsonNumber) file.values.get("duration")).num,
+                TextureIdMap.get(((JsonString) file.values.get("deployable_tex")).value),
+                (int) ((JsonNumber) file.values.get("radius")).num,
+                JsonStatLoader.load((JsonArray) file.values.get("stats")), (int) ((JsonNumber) file.values.get("cost")).num);
+    }
     public static ItemDefinition load(JsonFile file) {
         String id = ((JsonString) file.values.get("id")).value;
         String name = ((JsonString) file.values.get("name")).value;
@@ -135,6 +141,7 @@ public class JsonItemLoader {
             case "ability" -> loadAbility(file, id, name, description, texture);
             case "consumable" -> loadConsumable(file, id, name, description, texture);
             case "scroll" -> loadScroll(file, id, name, description, texture);
+            case "deployable" -> loadDeployable(file, id, name, description, texture);
             default -> throw new RuntimeException(type);
         };
     }

@@ -48,7 +48,7 @@ public class MinecartEntity extends Projectile {
     @Override
     public void render(Camera camera) {
         camera.addRenderJob(
-                () -> camera.rect(Color.orange, position.x - 1, position.y - 1, 2, 2),
+                () -> camera.rect(Color.orange, getRenderX() - 1, getRenderY() - 1, 2, 2),
                 -position.y
         );
     }

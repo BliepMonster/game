@@ -30,7 +30,7 @@ public class PineTreePart extends HittableResourceCreator {
         DESCRIPTION = new HittableResourceDescription(
                 Game.TICKS_PER_SECOND*45,
                 "Pine Wood",
-                2,
+                4,
                 SkillSet.SkillType.FORAGING,
                 150,
                 StatHolder.Stat.FORAGING_YIELD,
@@ -38,7 +38,8 @@ public class PineTreePart extends HittableResourceCreator {
                 7,
                 false,
                 ToolItemDefinition.PowerType.WOODCUTTING,
-                table
+                table,
+                4.5f
         );
     }
     public static final HittableResourceDescription DESCRIPTION;

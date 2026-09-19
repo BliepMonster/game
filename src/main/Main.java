@@ -20,6 +20,7 @@ import quests.ui.QuestPanel;
 import saving.SavedGame;
 import stats.inventory.items.ui.HotbarComponent;
 import stats.inventory.items.ui.InventoryGridComponent;
+import stats.inventory.resources.ui.DropTrackerComponent;
 import stats.inventory.resources.ui.InventoryPanel;
 import stats.skills.ui.SkillPanel;
 import stats.ui.CoinDisplayComponent;
@@ -49,6 +50,7 @@ public class Main {
         LOAD_WORLD,
         ONGOING
     }
+    public static DropTrackerComponent tracker = new DropTrackerComponent();
     public static State state = State.MAIN_MENU;
     public static Font font;
     public static Object[] fund = new Object[1000000];
@@ -73,7 +75,8 @@ public class Main {
 
 
         GUI.add(new HotbarComponent(game.player), 62);
-        GUI.add(new CoinDisplayComponent(game.player, font, Currency.COINS), 61);
+        GUI.add(new CoinDisplayComponent(game.player, font, Currency.COINS), 62);
+        GUI.add(tracker, 62);
 
         GUI.add(new HealthBar(game.player), 62);
         GUI.add(new ManaBar(game.player), 62);
@@ -88,7 +91,8 @@ public class Main {
 
 
         GUI.add(new HotbarComponent(game.player), 62);
-        GUI.add(new CoinDisplayComponent(game.player, font, Currency.COINS), 61);
+        GUI.add(new CoinDisplayComponent(game.player, font, Currency.COINS), 62);
+        GUI.add(tracker, 62);
 
         GUI.add(new HealthBar(game.player), 62);
         GUI.add(new ManaBar(game.player), 62);
@@ -152,6 +156,9 @@ public class Main {
         Keybinds.manage(console);
 
         long framestamp = System.currentTimeMillis();
+
+        float alpha = Math.max(0f, Math.min(1f, (float)((framestamp - lastTick) / tickRate)));
+        game.getCamera().setInterpolationAlpha(alpha);
 
         game.render();
 

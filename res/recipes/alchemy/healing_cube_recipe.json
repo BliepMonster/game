@@ -1,0 +1,6 @@
+{
+  "recipe": "res/recipes/alchemy_back/healing_cube_recipe.json",
+  "xp": 1200,
+  "time": 30000,
+  "tex": "base:item:healing_cube"
+}

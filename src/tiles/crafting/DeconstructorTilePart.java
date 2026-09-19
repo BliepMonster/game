@@ -8,6 +8,7 @@ import engine.json.JsonValue;
 import main.Camera;
 import main.GameContext;
 import org.joml.Vector2f;
+import stats.inventory.items.ItemDefinition;
 import tiles.TilePart;
 import tool.editor.TilePartLoader;
 
@@ -45,5 +46,9 @@ public class DeconstructorTilePart extends TilePart {
                 () -> camera.image(TEXTURE, x, y, 1, 1),
                 -y
         );
+    }
+    @Override
+    public ItemDefinition getItemDefinition() {
+        return ItemDefinition.get("base:placers:deconstructor");
     }
 }

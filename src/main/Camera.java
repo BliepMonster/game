@@ -3,6 +3,7 @@ package main;
 import engine.core.DrawManager;
 import engine.core.Screen;
 import engine.core.Texture;
+import engine.core.graphics.TextMesh;
 import entities.Player;
 
 import java.awt.*;
@@ -18,6 +19,7 @@ public class Camera {
     private static final Comparator<RenderJob> JOB_ORDER = (a, b) -> Float.compare(a.z, b.z);
     private final Player player;
     private float tileSize;
+    private float interpolationAlpha = 0f;
     private final DrawManager draw;
     private final List<CameraEffect> effects = new ArrayList<>();
     private final ArrayList<RenderJob> renderJobs = new ArrayList<>();
@@ -37,6 +39,22 @@ public class Camera {
         return tileSize;
     }
 
+    public void setInterpolationAlpha(float interpolationAlpha) {
+        this.interpolationAlpha = interpolationAlpha;
+    }
+
+    public float getInterpolationAlpha() {
+        return interpolationAlpha;
+    }
+
+    private float getRenderPlayerX() {
+        return player.getRenderX();
+    }
+
+    private float getRenderPlayerY() {
+        return player.getRenderY();
+    }
+
     public DrawManager getDraw() {
         return draw;
     }
@@ -54,8 +72,8 @@ public class Camera {
     public void rebuildLightmap(Screen screen) {
         float halfW = screen.getAspectRatio() / tileSize;
         float halfH = 1f / tileSize;
-        float px = player.getX();
-        float py = player.getY();
+        float px = getRenderPlayerX();
+        float py = getRenderPlayerY();
         float minX = px - halfW - 2;
         float minY = py - halfH - 2;
         float maxX = px + halfW + 2;
@@ -114,11 +132,11 @@ public class Camera {
     }
 
     public void rect(Color color, float x, float y, float w, float h) {
-        draw.litRect(color, (x-player.getX())*tileSize, (y-player.getY())*tileSize, w*tileSize, h*tileSize,
+        draw.litRect(color, (x-getRenderPlayerX())*tileSize, (y-getRenderPlayerY())*tileSize, w*tileSize, h*tileSize,
                 computeBrightness(x, y+h), computeBrightness(x+w, y+h), computeBrightness(x+w, y), computeBrightness(x, y));
     }
     public void circle(Color color, float x, float y, float r) {
-        draw.circle(color, (x-player.getX())*tileSize, (y-player.getY())*tileSize, r*tileSize);
+        draw.circle(color, (x-getRenderPlayerX())*tileSize, (y-getRenderPlayerY())*tileSize, r*tileSize);
     }
     public void addRenderJob(Runnable function, float z) {
         RenderJob job = jobPool.isEmpty() ? new RenderJob() : jobPool.remove(jobPool.size() - 1);
@@ -138,16 +156,19 @@ public class Camera {
         renderJobs.clear();
     }
     public void image(Texture texture, float x, float y, float w, float h) {
-        draw.litImage(texture, (x-player.getX())*tileSize, (y-player.getY())*tileSize, w*tileSize, h*tileSize,
+        draw.litImage(texture, (x-getRenderPlayerX())*tileSize, (y-getRenderPlayerY())*tileSize, w*tileSize, h*tileSize,
                 computeBrightness(x, y+h), computeBrightness(x+w, y+h), computeBrightness(x+w, y), computeBrightness(x, y));
     }
     public void tintedImage(Texture texture, Color color, float x, float y, float w, float h) {
-        draw.litTintedImage(texture, color, (x-player.getX())*tileSize, (y-player.getY())*tileSize, w*tileSize, h*tileSize,
+        draw.litTintedImage(texture, color, (x-getRenderPlayerX())*tileSize, (y-getRenderPlayerY())*tileSize, w*tileSize, h*tileSize,
                 computeBrightness(x, y+h), computeBrightness(x+w, y+h), computeBrightness(x+w, y), computeBrightness(x, y));
     }
     public void batchedImage(Texture texture, float x, float y, float w, float h) {
-        draw.batchLitImage(texture, (x-player.getX())*tileSize, (y-player.getY())*tileSize, w*tileSize, h*tileSize,
+        draw.batchLitImage(texture, (x-getRenderPlayerX())*tileSize, (y-getRenderPlayerY())*tileSize, w*tileSize, h*tileSize,
                 computeBrightness(x, y+h), computeBrightness(x+w, y+h), computeBrightness(x+w, y), computeBrightness(x, y));
+    }
+    public void renderAsText(TextMesh mesh, Color color, float x, float y) {
+        draw.renderAsText(mesh, Main.font, color, (x-getRenderPlayerX())*tileSize, (y-getRenderPlayerY())*tileSize);
     }
     public void flushBatch() {
         draw.flushLitBatch();
@@ -162,8 +183,8 @@ public class Camera {
         if (coneScratch.length < segments * 6) coneScratch = new float[segments * 6];
         float[] verts = coneScratch;
         float invAspect = 1f/draw.getScreen().getAspectRatio();
-        float sx = (cx-player.getX())*tileSize*invAspect;
-        float sy = (cy-player.getY())*tileSize;
+        float sx = (cx-getRenderPlayerX())*tileSize*invAspect;
+        float sy = (cy-getRenderPlayerY())*tileSize;
         float ss = size*tileSize;
         float start = aim - sweep/2;
         int idx = 0;

@@ -47,7 +47,7 @@ public class SpeedsterEnemy extends MeleeDungeonEnemy {
             this
     );
     public void render(Camera camera) {
-        camera.addRenderJob(() -> camera.rect(Game.getTickCount()-lastHurtTick < 5 ? Color.red : Color.green, getX(), getY(), getWidth(), getHeight()), -getY());
+        camera.addRenderJob(() -> camera.rect(Game.getTickCount()-lastHurtTick < 5 ? Color.red : Color.green, getRenderX(), getRenderY(), getWidth(), getHeight()), -position.y);
     }
     public Hitbox getHitbox() {
         return hitbox;

@@ -20,6 +20,10 @@ public class DefaultTile extends Tile {
     protected boolean isSelfStandable() {
         return type.standable;
     }
+    @Override
+    protected boolean isSelfProjectileStandable() {
+        return type.projectileStandable;
+    }
     public void onSelfStand(GameContext context) {}
     public JsonValue save() {
         return type.save();

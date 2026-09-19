@@ -9,6 +9,7 @@ import main.GameContext;
 
 public abstract class Tile {
     protected abstract boolean isSelfStandable();
+    protected abstract boolean isSelfProjectileStandable();
     protected TilePart part;
     public TilePart getPart() {
         return part;
@@ -19,6 +20,9 @@ public abstract class Tile {
     public abstract void onSelfStand(GameContext context);
     public boolean isStandable() {
         return isSelfStandable() && (part == null || part.isStandable());
+    }
+    public boolean isProjectileStandable() {
+        return isSelfProjectileStandable() && (part == null || part.isProjectileStandable());
     }
     protected abstract void renderSelf(Camera camera, int x, int y);
     public void render(Camera camera, int x, int y) {

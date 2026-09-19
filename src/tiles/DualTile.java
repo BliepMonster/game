@@ -32,6 +32,14 @@ public class DualTile extends Tile {
     public boolean isSelfStandable() {
         return true; // unused
     }
+    @Override
+    public boolean isProjectileStandable() {
+        if (context == null) return false;
+        return context.attributes().contains(attrib) ? a.isProjectileStandable() : b.isProjectileStandable();
+    }
+    protected boolean isSelfProjectileStandable() {
+        return true; // unused
+    }
 
     @Override
     public void onStand(GameContext context) {

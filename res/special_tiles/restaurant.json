@@ -1,6 +1,7 @@
 {
   "type": "texture_adapt",
   "standable": false,
+  "projectileStandable": false,
   "ids": [
     "base:tiles:restaurant11",
     "base:tiles:restaurant31",

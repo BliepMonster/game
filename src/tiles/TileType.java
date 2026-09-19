@@ -18,6 +18,7 @@ public class TileType {
     static final HashMap<String, TileType> types = new HashMap<>();
     static final HashMap<TileType, String> keys = new HashMap<>();
     public final boolean standable;
+    public final boolean projectileStandable;
     public final Texture texture;
     static {
         try (Stream<Path> paths = Files.walk(Path.of("res/tiles"))) {
@@ -35,6 +36,7 @@ public class TileType {
                                 String id = ((JsonString)file.values.get("id")).value;
                                 TileType type = new TileType(
                                         ((JsonBoolean) file.values.get("standable")).bool,
+                                        !(file.values.get("projectileStandable") instanceof JsonBoolean projectile) || projectile.bool,
                                         TextureIdMap.get(((JsonString)file.values.get("texture")).value)
                                 );
                                 types.put(id, type);
@@ -59,18 +61,20 @@ public class TileType {
                                 String type = ((JsonString)file.values.get("type")).value;
                                 if (type.equals("texture_adapt")) {
                                     boolean b = ((JsonBoolean) file.values.get("standable")).bool;
+                                    boolean projectile = !(file.values.get("projectileStandable") instanceof JsonBoolean projectileValue) || projectileValue.bool;
                                     List<String> ids = ((JsonArray) file.values.get("ids")).values.stream().map(json ->
                                             ((JsonString) json).value).toList();
                                     for (String s : ids) {
-                                        TileType t = new TileType(b, TextureIdMap.get(s));
+                                        TileType t = new TileType(b, projectile, TextureIdMap.get(s));
                                         types.put(s, t);
                                         keys.put(t, s);
                                     }
                                 } else if (type.equals("prefix_adapt")) {
                                     boolean b = ((JsonBoolean) file.values.get("standable")).bool;
+                                    boolean projectile = !(file.values.get("projectileStandable") instanceof JsonBoolean projectileValue) || projectileValue.bool;
                                     String prefix = ((JsonString) file.values.get("prefix")).value;
                                     for (var entry : TextureIdMap.getByPrefix(prefix).entrySet()) {
-                                        TileType t = new TileType(b, entry.getValue());
+                                        TileType t = new TileType(b, projectile, entry.getValue());
                                         types.put(entry.getKey(), t);
                                         keys.put(t, entry.getKey());
                                     }
@@ -93,8 +97,9 @@ public class TileType {
     public void renderPriority(Camera camera, int x, int y, float priority) {
         camera.addRenderJob(() -> camera.image(texture, x, y, 1, 1), priority);
     }
-    TileType(boolean isStandable, Texture texture) {
+    TileType(boolean isStandable, boolean isProjectileStandable, Texture texture) {
         this.standable = isStandable;
+        this.projectileStandable = isProjectileStandable;
         this.texture = texture;
     }
     public JsonValue save() {

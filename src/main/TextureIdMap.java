@@ -11,9 +11,12 @@ import java.util.HashMap;
 import java.util.stream.Stream;
 
 public class TextureIdMap {
+    public static final Texture MISSING = new Texture("res/textures/missing.png");
     private static final HashMap<String, Texture> textures = new HashMap<>();
     public static Texture get(String id) {
-        return textures.get(id);
+        if (textures.containsKey(id))
+            return textures.get(id);
+        return MISSING;
     }
     public static void put(String id, Texture tex) {
         textures.put(id, tex);
@@ -41,7 +44,11 @@ public class TextureIdMap {
                     .forEach(string -> {
                                 JsonFile file = new JsonParser().parse(string);
                                 for (var entry : file.values.entrySet()) {
-                                    put(entry.getKey(), new Texture(((JsonString)entry.getValue()).value));
+                                    try {
+                                        put(entry.getKey(), new Texture(((JsonString) entry.getValue()).value));
+                                    } catch (Exception e) {
+                                        put(entry.getKey(), MISSING);
+                                    }
                                 }
                             }
                     );

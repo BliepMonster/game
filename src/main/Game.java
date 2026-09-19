@@ -114,6 +114,10 @@ public class Game implements GameContext {
         return world;
     }
 
+    public Camera getCamera() {
+        return camera;
+    }
+
     @Override
     public AttributeData attributes() {
         return attributes;

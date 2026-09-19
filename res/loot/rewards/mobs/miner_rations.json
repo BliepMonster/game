@@ -1,0 +1,8 @@
+{
+  "id": "base:miner_rations",
+  "items": [
+    "base:food:miner_rations"
+  ],
+  "resources": {},
+  "coins": 10
+}

@@ -1,7 +1,9 @@
 package stats.inventory.resources;
 
+import main.Main;
 import org.jetbrains.annotations.NotNull;
 import saving.SavedStorage;
+import stats.inventory.resources.ui.DropTrackerComponent;
 
 import java.util.*;
 
@@ -10,6 +12,15 @@ public final class InventoryStorage implements Iterable<Map.Entry<String, Intege
     private final HashMap<String, Integer> inventory = new HashMap<>();
     private final List<String> keys = new ArrayList<>();
     public void add(String name, int count) {
+        Main.tracker.add(new DropTrackerComponent.Drop(name, System.currentTimeMillis(), count));
+        if (inventory.containsKey(name)) {
+            inventory.put(name, inventory.get(name) + count);
+        } else {
+            keys.add(name);
+            inventory.put(name, count);
+        }
+    }
+    public void addSilent(String name, int count) {
         if (inventory.containsKey(name)) {
             inventory.put(name, inventory.get(name) + count);
         } else {
@@ -32,11 +43,11 @@ public final class InventoryStorage implements Iterable<Map.Entry<String, Intege
     public InventoryStorage() {}
     public InventoryStorage(SavedStorage storage) {
         for (var pair : storage.entries()) {
-            add(pair.key(), pair.value());
+            addSilent(pair.key(), pair.value());
         }
     }
     public InventoryStorage(Map<String, Integer> map) {
-        for (var entry : map.entrySet()) this.add(entry.getKey(), entry.getValue());
+        for (var entry : map.entrySet()) this.addSilent(entry.getKey(), entry.getValue());
     }
 
     // This method does not care whether you have enough. Please check before using this method.

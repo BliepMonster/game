@@ -15,7 +15,7 @@ public class BasicArrowProjectile extends ArrowProjectile {
 
     public void render(Camera camera) {
         camera.addRenderJob(
-                () -> camera.rect(Color.white, position.x, position.y, .1f, .1f),
+                () -> camera.rect(Color.white, getRenderX(), getRenderY(), .1f, .1f),
                 -position.y
         );
     }

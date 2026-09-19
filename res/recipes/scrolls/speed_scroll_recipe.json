@@ -1,0 +1,34 @@
+{
+  "name": "Scroll of Speed",
+  "inputs": [
+    {
+      "type": "resource",
+      "id": "Paper",
+      "amount": 5
+    },
+    {
+      "type": "resource",
+      "id": "Bat Wing",
+      "amount": 2
+    }
+  ],
+  "outputs": [
+    {
+      "type": "item",
+      "id": "base:scrolls:scroll_speed",
+      "amount": 1
+    }
+  ],
+  "requirements": [
+    {
+      "type": "skill",
+      "skill": "MINING",
+      "level": 13
+    },
+    {
+      "type": "skill",
+      "skill": "COMBAT",
+      "level": 10
+    }
+  ]
+}

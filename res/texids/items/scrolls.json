@@ -5,5 +5,6 @@
   "base:item:magic_power_scroll": "res/textures/scrolls/magic_power_scroll.png",
   "base:item:luck_scroll": "res/textures/scrolls/luck_scroll.png",
   "base:item:regeneration_scroll": "res/textures/scrolls/regeneration_scroll.png",
-  "base:item:mining_yield_scroll": "res/textures/scrolls/mining_yield_scroll.png"
+  "base:item:mining_yield_scroll": "res/textures/scrolls/mining_yield_scroll.png",
+  "base:item:speed_scroll": "res/textures/scrolls/speed_scroll.png"
 }

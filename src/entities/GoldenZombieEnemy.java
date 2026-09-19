@@ -55,7 +55,7 @@ public class GoldenZombieEnemy extends RespawnableEnemy {
     }
     public void render(Camera camera) {
         var color = Game.getTickCount() <= lastHurtTick+5 ? java.awt.Color.red : java.awt.Color.green;
-        camera.addRenderJob(() -> camera.rect(color, position.x, position.y, 1, 1), -position.y);
+        camera.addRenderJob(() -> camera.rect(color, getRenderX(), getRenderY(), 1, 1), -position.y);
     }
     public boolean shouldDie(GameContext context) {
         return health <= 0;

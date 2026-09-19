@@ -3,7 +3,12 @@
   "texture": "base:item:sapphire_axe",
   "name": "Sapphire Axe",
   "id": "base:tools:sapphire_axe",
-  "stats": [],
+  "stats": [
+    {
+      "type": "FORAGING_YIELD",
+      "count": 10
+    }
+  ],
   "power": [
     {
       "type": "WOODCUTTING",

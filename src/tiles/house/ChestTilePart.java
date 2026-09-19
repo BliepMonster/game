@@ -108,4 +108,9 @@ public class ChestTilePart extends TilePart {
         }
         return chest;
     }
+
+    @Override
+    public ItemDefinition getItemDefinition() {
+        return ItemDefinition.get("base:placers:chest");
+    }
 }

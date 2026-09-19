@@ -12,6 +12,7 @@ import main.GameContext;
 import org.joml.Vector2f;
 import saving.SavedItem;
 import stats.inventory.items.Item;
+import stats.inventory.items.ItemDefinition;
 import tiles.TilePart;
 import tool.editor.TilePartLoader;
 
@@ -36,6 +37,14 @@ public class WardrobeTilePart extends TilePart {
     @Override
     public void onStand(GameContext context) {
 
+    }
+
+    @Override
+    public boolean canBreak() {
+        for (Item item : items) {
+            if (item != null) return false;
+        }
+        return true;
     }
 
     @Override
@@ -77,5 +86,10 @@ public class WardrobeTilePart extends TilePart {
             }
         }
         return wardrobe;
+    }
+
+    @Override
+    public ItemDefinition getItemDefinition() {
+        return ItemDefinition.get("base:placers:wardrobe");
     }
 }

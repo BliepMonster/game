@@ -11,7 +11,7 @@ import java.awt.*;
 public class MinerDungeonEnemy extends MeleeDungeonEnemy {
     @Override
     public void render(Camera camera) {
-        camera.addRenderJob(() -> camera.rect(Color.orange, position.x, position.y, 1, 2), -position.y);
+        camera.addRenderJob(() -> camera.rect(Color.orange, getRenderX(), getRenderY(), 1, 2), -position.y);
     }
     private final Hitbox hit = new RectangularHitbox(0, 0, 1, .2f, this);
 

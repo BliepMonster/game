@@ -18,7 +18,7 @@ public class MapleTreePart extends HittableResourceCreator {
     public static final HittableResourceDescription DESCRIPTION = new HittableResourceDescription(
             Game.TICKS_PER_SECOND*25,
             ItemConstants.ITEM_MAPLE_WOOD,
-            2,
+            4,
             SkillSet.SkillType.FORAGING,
             15,
             StatHolder.Stat.FORAGING_YIELD,

@@ -17,5 +17,6 @@ public interface GameContext {
     Tile getTile(int x, int y);
     void movePlayer(World world, Vector2f position);
     World getWorld();
+    Camera getCamera();
     AttributeData attributes();
 }

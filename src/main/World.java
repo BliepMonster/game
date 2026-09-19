@@ -12,6 +12,7 @@ import engine.json.JsonString;
 import entities.Enemy;
 import entities.Entity;
 import entities.Player;
+import entities.projectiles.Projectile;
 import org.jetbrains.annotations.NotNull;
 import org.joml.Vector2f;
 import tiles.*;
@@ -42,6 +43,7 @@ public class World {
     public final List<Entity> entities = new ArrayList<>();
     private final Vector2f facingScratch = new Vector2f();
     private Hitbox hitbox = EmptyHitbox.INSTANCE;
+    private Hitbox projectileHitbox = EmptyHitbox.INSTANCE;
     public float getBrightness() {
         return brightness;
     }
@@ -52,6 +54,7 @@ public class World {
         WorldRegistry.put(id, this);
     }
     public void load(Camera camera, Player player) {
+        unloadLoopingSources();
         onLoadSpawnedEnemies.clear();
         onLoadEntities.forEach(
                 (constructor) -> {
@@ -91,12 +94,17 @@ public class World {
     }
     public void reloadHitbox() {
         var hitbox = new CompoundHitbox();
+        var projectileHitbox = new CompoundHitbox();
         for (var tile : map) {
             if (!tile.element().isStandable()) {
                 hitbox.add(new RectangularHitbox(tile.x(), tile.y(), 1, 1, Unpositioned.INSTANCE));
             }
+            if (!tile.element().isProjectileStandable()) {
+                projectileHitbox.add(new RectangularHitbox(tile.x(), tile.y(), 1, 1, Unpositioned.INSTANCE));
+            }
         }
         this.hitbox = hitbox;
+        this.projectileHitbox = projectileHitbox;
     }
     int lastHitboxReload = 0;
     public Hitbox getHitbox() {
@@ -106,10 +114,18 @@ public class World {
         }
         return hitbox;
     }
+    public Hitbox getProjectileHitbox() {
+        if (Game.getTickCount()-lastHitboxReload > 10) {
+            lastHitboxReload = Game.getTickCount();
+            reloadHitbox();
+        }
+        return projectileHitbox;
+    }
     public void tick(Game game, boolean pressed, Screen screen, float tsize, boolean canClick) {
         var hitbox = getHitbox();
+        var projectileHitbox = getProjectileHitbox();
         entities.forEach(entity -> entity.tick(game));
-        entities.forEach(entity -> entity.move(hitbox));
+        entities.forEach(entity -> entity.move(entity instanceof Projectile ? projectileHitbox : hitbox));
         entities.addAll(toAdd);
         toAdd.clear();
         for (var entity : entities) {
@@ -151,8 +167,8 @@ public class World {
         var minX = bounds.x;
         Screen screen = camera.getDraw().getScreen();
         var player = game.player;
-        float px = -screen.getAspectRatio()/tsize+player.getX();
-        float py = -1/tsize+player.getY();
+        float px = -screen.getAspectRatio()/tsize+player.getRenderX();
+        float py = -1/tsize+player.getRenderY();
         float pw = 2*screen.getAspectRatio()/tsize;
         float ph = 2/tsize;
         minX = Math.max((int) Math.floor(px), minX)-1;

@@ -29,6 +29,9 @@ public class RenderOverTile extends Tile {
     public boolean isSelfStandable() {
         return bottom.isSelfStandable() && type.standable;
     }
+    protected boolean isSelfProjectileStandable() {
+        return bottom.isSelfProjectileStandable() && type.projectileStandable;
+    }
     public void onSelfStand(GameContext context) {
         bottom.onSelfStand(context);
     }

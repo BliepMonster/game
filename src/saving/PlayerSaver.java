@@ -67,6 +67,7 @@ public class PlayerSaver {
     public static SavedStatusEffect[] saveStatusEffects(HashSet<StatusEffect> effects) {
         ArrayList<SavedStatusEffect> e = new ArrayList<>();
         for (var effect : effects) {
+            if (effect.id.startsWith(entities.DeployableEntity.EFFECT_ID_PREFIX)) continue;
             e.add(effect.save());
         }
         return e.toArray(new SavedStatusEffect[]{});

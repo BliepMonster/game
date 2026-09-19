@@ -11,6 +11,7 @@ import engine.json.JsonValue;
 import main.Camera;
 import main.GameContext;
 import org.joml.Vector2f;
+import stats.inventory.items.ItemDefinition;
 import tiles.TilePart;
 
 import java.awt.Color;
@@ -45,5 +46,9 @@ public class FurnaceTilePart extends TilePart {
     @Override
     public JsonValue save() {
         return new JsonString(ID_FURNACE);
+    }
+    @Override
+    public ItemDefinition getItemDefinition() {
+        return ItemDefinition.get("base:placers:furnace");
     }
 }

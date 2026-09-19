@@ -36,27 +36,30 @@ public class StatHolder implements Cloneable {
     }
 
     public enum Stat {
-        SPEED("Speed"),
-        FORAGING_YIELD("Foraging Yield"),
-        FARMING_YIELD("Farming Yield"),
-        MAX_HEALTH("Health"),
-        STRENGTH("Strength"),
-        MINING_YIELD("Mining Yield"),
-        DAMAGE("Damage"),
-        MINING_POWER("Mining Power"),
-        FORAGING_POWER("Foraging Power"),
-        KNOCKBACK("Knockback"),
-        DEFENSE("Defense"),
-        CRIT_CHANCE("Crit Chance"),
-        CRIT_DAMAGE("Crit Damage"),
-        REGENERATION("Regeneration"),
-        GLOWING("Glowing"),
-        MAGIC_POWER("Magic Power"),
-        LUCK("Luck")
+        SPEED("Speed", true),
+        FORAGING_YIELD("Foraging Yield", true),
+        FARMING_YIELD("Farming Yield", true),
+        MAX_HEALTH("Health", true),
+        STRENGTH("Strength", true),
+        MINING_YIELD("Mining Yield", true),
+        DAMAGE("Damage", true),
+        MINING_POWER("Mining Power", true),
+        FORAGING_POWER("Foraging Power", true),
+        KNOCKBACK("Knockback", true),
+        DEFENSE("Defense", true),
+        CRIT_CHANCE("Crit Chance", true),
+        CRIT_DAMAGE("Crit Damage", true),
+        REGENERATION("Regeneration", true),
+        GLOWING("Glowing", true),
+        MAGIC_POWER("Magic Power", true),
+        LUCK("Luck", true),
+        HEALING("Healing", false)
         ;
         public final String name;
-        Stat(String s) {
+        public final boolean visible;
+        Stat(String s, boolean visible) {
             this.name = s;
+            this.visible = visible;
         }
     }
     public static final int NUM_STATS = Stat.values().length;

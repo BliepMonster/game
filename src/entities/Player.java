@@ -32,13 +32,14 @@ import static org.lwjgl.glfw.GLFW.*;
 public class Player implements Entity, LightSource {
     private final ArrayList<VelocityChange> velocityChanges = new ArrayList<>();
     private final Vector2f position = new Vector2f();
+    private float prevX, prevY;
+    private Camera cameraRef;
     private final Hitbox step = new RectangularHitbox(-.35f-1f/16f, -1.01f, .7f+2f/16f, .2f, this);
     public StatHolder stats;
     private int selectedHotbarSlot = 0;
     public final ItemInventory items;
     public final InventoryStorage inventory;
     public final SkillSet skills;
-    private int ticksTo = 0;
     private int ticksSinceLastDamage = 0;
     private boolean hitLastTick;
     private int lastRespawn = -100;
@@ -60,6 +61,7 @@ public class Player implements Entity, LightSource {
         this.skills = new SkillSet(player.skills());
         this.inventory = new InventoryStorage(player.storage());
         for (var effect : player.statusEffects()) {
+            if (effect.uid().startsWith(DeployableEntity.EFFECT_ID_PREFIX)) continue;
             effects.add(new StatusEffect(effect));
         }
         this.health = player.health();
@@ -125,12 +127,11 @@ public class Player implements Entity, LightSource {
 
     @Override
     public void tick(GameContext context) {
-        if (ticksTo++ == 3 || stats == null) {
-            updateStats(context);
-            ticksTo = 0;
-        }
+        updateStats(context);
         if (ticksSinceLastDamage > 5)
             heal(stats.get(StatHolder.Stat.MAX_HEALTH)/(100*TICKS_PER_SECOND)); // heal 1% per second
+        float healing = stats.get(StatHolder.Stat.HEALING);
+        if (healing > 0) heal(healing / TICKS_PER_SECOND);
         float maxMana = stats.get(StatHolder.Stat.MAGIC_POWER);
         mana += maxMana * 0.03f / TICKS_PER_SECOND;
         if (mana > maxMana) mana = maxMana;
@@ -140,8 +141,9 @@ public class Player implements Entity, LightSource {
     public static final Texture TEXTURE = new Texture("res/textures/enemies/character.png");
     @Override
     public void render(Camera camera) {
+        cameraRef = camera;
         var color = isDead() ? Color.orange : ticksSinceLastDamage < 5 ? Color.red : Color.white;
-        camera.addRenderJob(() -> camera.tintedImage(TEXTURE, color, position.x, position.y, 1, 2), -position.y);
+        camera.addRenderJob(() -> camera.tintedImage(TEXTURE, color, getRenderX() - .5f, getRenderY() - 1, 1, 2), -position.y);
     }
 
     @Override
@@ -156,18 +158,35 @@ public class Player implements Entity, LightSource {
     }
 
     @Override
+    public float getRenderX() {
+        if (isDead()) return position.x;
+        float alpha = getCameraAlpha();
+        return (prevX + (position.x - prevX) * alpha) + .5f;
+    }
+    @Override
+    public float getRenderY() {
+        if (isDead()) return position.y;
+        float alpha = getCameraAlpha();
+        return (prevY + (position.y - prevY) * alpha) + 1;
+    }
+    private float getCameraAlpha() {
+        return cameraRef == null ? 0f : cameraRef.getInterpolationAlpha();
+    }
+
+    @Override
     public Hitbox getHitbox() {
         return step;
     }
     private final Vector2f movementScratch = new Vector2f();
     public void move(Hitbox world) {
+        prevX = position.x;
+        prevY = position.y;
         Vector2f movement = movementScratch;
         movement.set(0, 0);
         if (isKeyDown(GLFW_KEY_LEFT)) {
             movement.x -= 1f;
         }
         if (isKeyDown(GLFW_KEY_RIGHT)) movement.x += 1f;
-        var m = false;
         if (isKeyDown(GLFW_KEY_UP)) {
             movement.y += 1f;
         }
@@ -185,14 +204,10 @@ public class Player implements Entity, LightSource {
             movement.add(change.getVelocityChange());
         }
         position.x += movement.x;
-        if (movement.x != 0)
-            m = true;
         if (step.collidesWith(world)) position.x -= movement.x;
 
         movement.x = 0;
         position.y += movement.y;
-        if (movement.y != 0)
-            m = true;
         if (step.collidesWith(world)) position.y -= movement.y;
     }
     public void selectItem(int i) {

@@ -1,5 +1,6 @@
 {
   "type": "texture_adapt",
+  "standable": true,
   "ids": [
     "base:tiles:restaurant16",
     "base:tiles:restaurant26",
@@ -17,6 +18,5 @@
     "base:tiles:restaurant48",
     "base:tiles:restaurant58",
     "base:tiles:restaurant21"
-  ],
-  "standable": true
+  ]
 }

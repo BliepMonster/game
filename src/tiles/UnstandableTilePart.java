@@ -31,4 +31,9 @@ public class UnstandableTilePart extends TilePart {
 
     @Override
     public void onClick(GameContext context) {}
+
+    @Override
+    public boolean isProjectileStandable() {
+        return false;
+    }
 }

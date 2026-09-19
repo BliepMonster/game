@@ -1,0 +1,44 @@
+{
+  "name": "Healing Cube",
+  "inputs": [
+    {
+      "type": "resource",
+      "id": "Refined Ruby",
+      "amount": 2
+    },
+    {
+      "type": "resource",
+      "id": "Refined Sapphire",
+      "amount": 1
+    },
+    {
+      "type": "resource",
+      "id": "Purest Gold",
+      "amount": 1
+    },
+    {
+      "type": "resource",
+      "id": "Purest Silver",
+      "amount": 4
+    }
+  ],
+  "outputs": [
+    {
+      "type": "item",
+      "id": "base:deployables:healing_cube",
+      "amount": 1
+    }
+  ],
+  "requirements": [
+    {
+      "type": "skill",
+      "skill": "COMBAT",
+      "level": 14
+    },
+    {
+      "type": "skill",
+      "skill": "ALCHEMY",
+      "level": 7
+    }
+  ]
+}

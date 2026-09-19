@@ -3,7 +3,12 @@
   "texture": "base:item:ruby_pickaxe",
   "name": "Ruby Pickaxe",
   "id": "base:tools:ruby_pickaxe",
-  "stats": [],
+  "stats": [
+    {
+      "type": "MINING_YIELD",
+      "count": 5
+    }
+  ],
   "power": [
     {
       "type": "MINING",

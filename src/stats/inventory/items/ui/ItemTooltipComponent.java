@@ -20,6 +20,7 @@ import java.util.List;
 
 public class ItemTooltipComponent extends Component {
     private static String formatStatLine(StatHolder.Stat stat, StatHolder holder) {
+        if (!stat.visible) return null;
         float base = holder.getBase(stat);
         float additive = holder.getAdditive(stat);
         float multiplicative = holder.getMultiplicative(stat);

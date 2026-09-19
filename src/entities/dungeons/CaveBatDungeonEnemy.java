@@ -41,7 +41,7 @@ public class CaveBatDungeonEnemy extends DungeonEnemy {
     }
     public void render(Camera camera) {
         camera.addRenderJob(
-                () -> camera.rect(Color.black, position.x, position.y, 1, 1),
+                () -> camera.rect(Color.black, getRenderX(), getRenderY(), 1, 1),
                 -position.y
         );
     }

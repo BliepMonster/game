@@ -3,7 +3,12 @@
   "texture": "base:item:ruby_axe",
   "name": "Ruby Axe",
   "id": "base:tools:ruby_axe",
-  "stats": [],
+  "stats": [
+    {
+      "type": "FORAGING_YIELD",
+      "count": 5
+    }
+  ],
   "power": [
     {
       "type": "WOODCUTTING",

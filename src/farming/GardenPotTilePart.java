@@ -14,6 +14,7 @@ import main.YieldUtils;
 import org.joml.Vector2f;
 import stats.StatHolder;
 import stats.inventory.items.Item;
+import stats.inventory.items.ItemDefinition;
 import stats.skills.SkillSet;
 import tiles.TilePart;
 import tool.editor.TilePartLoader;
@@ -107,5 +108,9 @@ public class GardenPotTilePart extends TilePart {
             object.values.put("nextCompost", new JsonString(compostNextHarvest.id()));
         }
         return object;
+    }
+    @Override
+    public ItemDefinition getItemDefinition() {
+        return ItemDefinition.get("base:placers:garden_pot");
     }
 }

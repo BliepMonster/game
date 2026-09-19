@@ -1,0 +1,17 @@
+{
+  "type": "deployable",
+  "id": "base:deployables:healing_cube",
+  "name": "Healing Cube",
+  "texture": "base:item:healing_cube",
+  "deployable_tex": "base:item:healing_cube",
+  "radius": 4,
+  "description": "Heals you for 5 hp/s when within 4 tiles. Mana cost: 80",
+  "stats": [
+    {
+      "type": "HEALING",
+      "count": 5
+    }
+  ],
+  "cost": 80,
+  "duration": 1200
+}

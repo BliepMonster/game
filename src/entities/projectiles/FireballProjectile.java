@@ -23,7 +23,7 @@ public class FireballProjectile extends SimpleProjectile {
         entity.knock(this.movement.normalize(new Vector2f()), 5f);
     }
     public void render(Camera camera) {
-        camera.addRenderJob(() -> camera.rect(Color.red, position.x-.25f, position.y-.25f, .5f, .5f), -position.y+.25f);
+        camera.addRenderJob(() -> camera.rect(Color.red, getRenderX()-.25f, getRenderY()-.25f, .5f, .5f), -position.y+.25f);
     }
     public final Hitbox hitbox = new RectangularHitbox(-.25f, -.25f, .5f, .5f, this);
 

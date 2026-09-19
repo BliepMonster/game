@@ -41,7 +41,7 @@ public class GemstoneGolemEnemy extends MeleeDungeonEnemy {
     public final Hitbox hitbox = new RectangularHitbox(0, 0, 1, 1, this);
     public void render(Camera camera) {
         camera.addRenderJob(
-                () -> camera.rect(Color.cyan, getX(), getY(), 1, 1), -getY()
+                () -> camera.rect(Color.cyan, getRenderX(), getRenderY(), 1, 1), -position.y
         );
     }
 

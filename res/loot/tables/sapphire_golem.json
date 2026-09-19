@@ -1,0 +1,13 @@
+{
+  "id": "base:sapphire_golem",
+  "loot": [
+    {
+      "reward": "base:refined_sapphire",
+      "type": "UNCOMMON"
+    },
+    {
+      "reward": "base:miner_rations",
+      "type": "EPIC"
+    }
+  ]
+}

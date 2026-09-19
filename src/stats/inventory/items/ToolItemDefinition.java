@@ -43,8 +43,11 @@ public class ToolItemDefinition extends ItemDefinition {
         if (Input.isKeyDown(GLFW.GLFW_KEY_LEFT_SHIFT) && context.getWorld().getID().equals("HOUSE")) {
             TilePart part = tile.getPart();
             if (part == null) return new ItemUseResult(Optional.of(item), false);
-            if (part.canBreak()) {
+            if (part.canBreak() && !context.getPlayer().items.isFull()) {
+                var def = tile.getPart().getItemDefinition();
+                if (def == null) return new ItemUseResult(Optional.of(item), false);
                 tile.setPart(null);
+                context.getPlayer().items.add(new Item(def));
                 return new ItemUseResult(Optional.of(item), true);
             }
         }

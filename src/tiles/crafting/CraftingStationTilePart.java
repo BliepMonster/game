@@ -12,6 +12,7 @@ import engine.json.JsonValue;
 import main.Camera;
 import main.GameContext;
 import org.joml.Vector2f;
+import stats.inventory.items.ItemDefinition;
 import tiles.TilePart;
 
 import java.util.List;
@@ -53,5 +54,9 @@ public class CraftingStationTilePart extends TilePart {
     @Override
     public JsonValue save() {
         return new JsonString(ID_CRAFTING_STATION);
+    }
+    @Override
+    public ItemDefinition getItemDefinition() {
+        return ItemDefinition.get("base:placers:crafting_table");
     }
 }

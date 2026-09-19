@@ -2,6 +2,7 @@ package entities;
 
 import main.Game;
 import main.GameContext;
+import main.Camera;
 import org.joml.Vector2f;
 import stats.VelocityChange;
 
@@ -10,14 +11,28 @@ import java.util.ArrayList;
 public abstract class Enemy implements Entity {
     public final ArrayList<VelocityChange> changes = new ArrayList<>();
     public final Vector2f position;
+    private float prevX, prevY;
     public Enemy(Vector2f position) {
         this.position = position;
+        this.prevX = position.x;
+        this.prevY = position.y;
     }
     public abstract float getKnockbackResistance();
     private GameContext context;
     private final Vector2f velocityScratch = new Vector2f();
     protected GameContext getContext() {
         return context;
+    }
+    @Override
+    public float getRenderX() {
+        return prevX + (position.x - prevX) * getCameraAlpha();
+    }
+    @Override
+    public float getRenderY() {
+        return prevY + (position.y - prevY) * getCameraAlpha();
+    }
+    private float getCameraAlpha() {
+        return context == null ? 0f : context.getCamera().getInterpolationAlpha();
     }
     public Vector2f getVelocityChange() {
         velocityScratch.set(0, 0);
@@ -29,6 +44,8 @@ public abstract class Enemy implements Entity {
     }
     public void tick(GameContext context) {
         this.context = context;
+        prevX = position.x;
+        prevY = position.y;
         tickSelf(context);
     }
     public abstract void tickSelf(GameContext context);

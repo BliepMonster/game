@@ -13,6 +13,7 @@ import main.Camera;
 import main.GameContext;
 import main.TextureIdMap;
 import org.joml.Vector2f;
+import stats.inventory.items.ItemDefinition;
 import tiles.TilePart;
 
 import java.util.List;
@@ -54,5 +55,9 @@ public class CookingStationTilePart extends TilePart {
     @Override
     public JsonValue save() {
         return new JsonString(ID_COOKING_STATION);
+    }
+    @Override
+    public ItemDefinition getItemDefinition() {
+        return ItemDefinition.get("base:placers:cooking_station");
     }
 }

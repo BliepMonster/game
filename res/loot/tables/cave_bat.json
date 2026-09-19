@@ -2,8 +2,8 @@
   "id": "base:cave_bat",
   "loot": [
     {
-      "reward": "base:miner_frag",
-      "type": "RARE"
+      "reward": "base:bat_wing",
+      "type": "UNCOMMON"
     },
     {
       "reward": "base:miner_pants",

@@ -1,6 +1,7 @@
 package engine.json;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import static engine.json.JsonToken.Type.*;
 
@@ -16,10 +17,12 @@ public class JsonScanner {
         while (!isAtEnd()) {
             tokens.add(scanOnce());
         }
+        tokens.removeIf(Objects::isNull);
         return tokens;
     }
     JsonToken scanOnce() {
         skipWhitespace();
+        if (isAtEnd()) return null;
         char c = advance();
         if (c == '{') return makeToken(LBRACE);
         if (c == '}') return makeToken(RBRACE);

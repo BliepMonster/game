@@ -1,5 +1,6 @@
 {
   "type": "texture_adapt",
+  "standable": true,
   "ids": [
     "base:tiles:house16",
     "base:tiles:house26",
@@ -17,6 +18,5 @@
     "base:tiles:house48",
     "base:tiles:house58",
     "base:tiles:house21"
-  ],
-  "standable": true
+  ]
 }

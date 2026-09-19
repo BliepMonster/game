@@ -1,5 +1,6 @@
 {
   "id": "WALL",
   "standable": false,
-  "texture": "base:tiles:wall"
+  "texture": "base:tiles:wall",
+  "projectileStandable": false
 }
