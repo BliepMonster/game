@@ -3,6 +3,7 @@
   "id": "base:potions:speed_potion",
   "name": "Potion of Speed",
   "texture": "base:item:speed_potion",
+  "description": "Grants additional Speed for 10 minutes.",
   "stats": [
     {
       "type": "SPEED",

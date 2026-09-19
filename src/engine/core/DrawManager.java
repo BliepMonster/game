@@ -391,7 +391,7 @@ public class DrawManager {
                               float topLeft, float topRight, float bottomRight, float bottomLeft) {
         float ax = x/screen.getAspectRatio();
         float aw = width/screen.getAspectRatio();
-        var buffer = batches.computeIfAbsent(tex, k -> new BatchBuffer());
+        var buffer = batches.computeIfAbsent(tex, _ -> new BatchBuffer());
         buffer.beginQuad();
         float x1 = ax + aw;
         float y1 = y + height;
