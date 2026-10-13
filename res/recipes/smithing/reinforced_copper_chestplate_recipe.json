@@ -24,13 +24,15 @@
   "requirements": [
     {
       "type": "skill",
-      "skill": "MINING",
-      "level": 5
+      "skill": "SMITHING",
+      "level": 3
     },
     {
       "type": "skill",
       "skill": "COMBAT",
       "level": 2
     }
-  ]
+  ],
+  "skill": "SMITHING",
+  "xp": 50
 }

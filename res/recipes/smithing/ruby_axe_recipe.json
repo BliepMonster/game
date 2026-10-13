@@ -24,13 +24,15 @@
   "requirements": [
     {
       "type": "skill",
-      "skill": "MINING",
-      "level": 12
+      "skill": "SMITHING",
+      "level": 11
     },
     {
       "type": "skill",
       "skill": "FORAGING",
       "level": 8
     }
-  ]
+  ],
+  "skill": "SMITHING",
+  "xp": 300
 }

@@ -27,8 +27,10 @@
     },
     {
       "type": "skill",
-      "skill": "MINING",
-      "level": 10
+      "skill": "COOKING",
+      "level": 15
     }
-  ]
+  ],
+  "skill": "COOKING",
+  "xp": 500
 }

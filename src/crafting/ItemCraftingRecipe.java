@@ -2,17 +2,22 @@ package crafting;
 
 import main.GameContext;
 import stats.inventory.items.Item;
+import stats.skills.SkillSet;
 
 public class ItemCraftingRecipe implements CraftingRecipe {
     public final ItemRequirement[] ingredients;
     private final CraftingResult result;
     public final PreCraftRequirement[] preCraftRequirements;
     public final String name;
-    public ItemCraftingRecipe(ItemRequirement[] ingredients, CraftingResult result, PreCraftRequirement[] preCraftRequirements, String name) {
+    public final SkillSet.SkillType skill;
+    public final int xp;
+    public ItemCraftingRecipe(ItemRequirement[] ingredients, CraftingResult result, PreCraftRequirement[] preCraftRequirements, String name, SkillSet.SkillType skill, int xp) {
         this.ingredients = ingredients;
         this.result = result;
         this.preCraftRequirements = preCraftRequirements;
         this.name = name;
+        this.skill = skill;
+        this.xp = xp;
     }
     public boolean canCraft(FullItemStorage storage, GameContext context) {
         for (PreCraftRequirement requirement : preCraftRequirements) {
@@ -29,6 +34,8 @@ public class ItemCraftingRecipe implements CraftingRecipe {
             consume(storage);
             produce(storage);
         }
+        if (skill != null)
+            context.getPlayer().skills.get(skill).getXP(xp);
     }
     public void consume(FullItemStorage storage) {
         for (ItemRequirement requirement : ingredients) {

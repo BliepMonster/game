@@ -131,7 +131,7 @@ public class Player implements Entity, LightSource {
         if (ticksSinceLastDamage > 5)
             heal(stats.get(StatHolder.Stat.MAX_HEALTH)/(100*TICKS_PER_SECOND)); // heal 1% per second
         float healing = stats.get(StatHolder.Stat.HEALING);
-        if (healing > 0) heal(healing / TICKS_PER_SECOND);
+        if (healing > 0 && health != 0) heal(healing / TICKS_PER_SECOND);
         float maxMana = stats.get(StatHolder.Stat.MAGIC_POWER);
         mana += maxMana * 0.03f / TICKS_PER_SECOND;
         if (mana > maxMana) mana = maxMana;
@@ -270,6 +270,7 @@ public class Player implements Entity, LightSource {
         context.getWorld().onPlayerRespawn(context);
         this.lastRespawn = Game.getTickCount();
         this.position.set(context.getPlayerRespawnPosition());
+        this.effects.clear();
     }
     public void die(GameContext context) {
         deathTick = Game.getTickCount();

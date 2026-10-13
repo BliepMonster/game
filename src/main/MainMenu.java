@@ -6,6 +6,7 @@ import engine.core.Screen;
 import engine.core.input.Console;
 import engine.core.input.EventManager;
 import engine.core.input.Input;
+import engine.core.text.Font;
 import engine.saving.TokenizedSaveFile;
 import org.lwjgl.glfw.GLFW;
 import saving.*;
@@ -20,6 +21,8 @@ import java.util.ArrayList;
 
 public class MainMenu {
     private static final ArrayList<String> filenames = new ArrayList<>();
+    private static final int PROFILES_PER_PAGE = 5;
+    private static int page = 0;
 
     public static void tick(DrawManager draw) {
         Screen screen = draw.getScreen();
@@ -34,6 +37,8 @@ public class MainMenu {
             SavedGame game = new SavedGame(new SavedPlayer(new SavedCurrencyHolder(0),
                     new SavedItemInventory(new SavedItem[]{}, new SavedItem[]{}, new EquipmentSlot[]{}),
                     new SavedStorage(new SavedStorage.Entry[]{}), new SavedStatusEffect[]{}, 100, 100, new SavedSkillSet(new SavedSkill[]{
+                    new SavedSkill(0, 0),
+                    new SavedSkill(0, 0),
                     new SavedSkill(0, 0),
                     new SavedSkill(0, 0),
                     new SavedSkill(0, 0),
@@ -65,11 +70,14 @@ public class MainMenu {
         }
         var x = Input.getMouseX(screen);
         var y = Input.getMouseY(screen);
-        var max = Math.min(10, filenames.size());
         var font = Main.font;
-        for (int i = 0; i < max; ++i) {
+        var pageCount = Math.max(1, (filenames.size() + PROFILES_PER_PAGE - 1) / PROFILES_PER_PAGE);
+        page = Math.max(0, Math.min(page, pageCount - 1));
+        var start = page * PROFILES_PER_PAGE;
+        var end = Math.min(start + PROFILES_PER_PAGE, filenames.size());
+        for (int i = start; i < end; ++i) {
             String s = filenames.get(i);
-            float yy = -1+i*.2f;
+            float yy = .6f - (i - start) * .3f;
             draw.rect(Color.blue, -.2f, yy, .4f, .2f);
             float size = Math.min(font.getSizeForHeight(.2f), font.getSizeForWidth(s, .4f));
             draw.string(
@@ -89,9 +97,40 @@ public class MainMenu {
                 Main.state = Main.State.ONGOING;
             }
         }
+        drawPageControls(draw, font, x, y, clicked, pageCount);
+    }
+
+    private static void drawPageControls(DrawManager draw, Font font, float x, float y, boolean clicked, int pageCount) {
+        var by = -.9f;
+        var bw = .2f;
+        var bh = .14f;
+        var hasPrev = page > 0;
+        var hasNext = page < pageCount - 1;
+        var prevX = -.45f;
+        var nextX = .25f;
+        draw.rect(hasPrev ? Color.orange : Color.gray, prevX, by, bw, bh);
+        draw.rect(hasNext ? Color.orange : Color.gray, nextX, by, bw, bh);
+        drawCentered(draw, font, "Prev", Color.black, prevX + bw/2, by + bh/2, .09f);
+        drawCentered(draw, font, "Next", Color.black, nextX + bw/2, by + bh/2, .09f);
+        drawCentered(draw, font, "Page " + (page + 1) + " / " + pageCount, Color.white, 0f, by + bh/2, .09f);
+        if (clicked) {
+            if (hasPrev && x >= prevX && x <= prevX + bw && y >= by && y <= by + bh) page--;
+            if (hasNext && x >= nextX && x <= nextX + bw && y >= by && y <= by + bh) page++;
+        }
+    }
+
+    private static void drawCentered(DrawManager draw, Font font, String text, Color color, float cx, float cy, float height) {
+        var size = font.getSizeForHeight(height);
+        draw.string(
+                text, color,
+                cx - font.getWidthForSize(text, size)/2,
+                cy - font.getHeight(size)/2,
+                font, size
+        );
     }
 
     public static void initLoadWorldMenu() {
+        page = 0;
         filenames.clear();
         try (var paths = Files.walk(Path.of("saves"))) {
             paths.filter(Files::isRegularFile)

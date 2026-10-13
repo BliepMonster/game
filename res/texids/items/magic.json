@@ -1,3 +1,4 @@
 {
-  "base:item:fireball_wand": "res/textures/magic/fireball_wand.png"
+  "base:item:fireball_wand": "res/textures/magic/fireball_wand.png",
+  "base:item:healing_wand": "res/textures/magic/healing_wand.png"
 }

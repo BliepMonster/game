@@ -128,7 +128,9 @@ public class JsonRecipeLoader {
                 reqs,
                 result,
                 preqs,
-                name
+                name,
+                file.values.containsKey("skill") ? SkillSet.SkillType.valueOf(((JsonString) file.values.get("skill")).value) : null,
+                file.values.containsKey("xp") ? (int) ((JsonNumber) file.values.get("xp")).num : 0
         );
     }
 }

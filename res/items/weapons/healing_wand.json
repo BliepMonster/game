@@ -1,0 +1,10 @@
+{
+  "type": "ability",
+  "id": "base:weapons:healing_wand",
+  "name": "Healing Wand",
+  "texture": "base:item:healing_wand",
+  "ability": "healing_1",
+  "cooldown": 40,
+  "stats": [
+  ]
+}

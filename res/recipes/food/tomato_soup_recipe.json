@@ -22,8 +22,10 @@
   "requirements": [
     {
       "type": "skill",
-      "skill": "FARMING",
-      "level": 11
+      "skill": "COOKING",
+      "level": 9
     }
-  ]
+  ],
+  "skill": "COOKING",
+  "xp": 120
 }

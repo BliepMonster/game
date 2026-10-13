@@ -15,5 +15,7 @@
       "id": "base:food:bread",
       "amount": 1
     }
-  ]
+  ],
+  "skill": "COOKING",
+  "xp": 10
 }

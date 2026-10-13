@@ -16,6 +16,6 @@ public class CombatSkill extends SimpleSkill {
 
     @Override
     public StatHolder getStatBoost() {
-        return new StatHolder().with(StatHolder.Stat.STRENGTH, 4*getLevel()).with(StatHolder.Stat.CRIT_CHANCE, getLevel()).with(StatHolder.Stat.KNOCKBACK, (float) Math.log(getLevel()+1)/10);
+        return new StatHolder().with(StatHolder.Stat.STRENGTH, 4*getLevel()).with(StatHolder.Stat.CRIT_CHANCE, getLevel()).with(StatHolder.Stat.KNOCKBACK, (float) Math.log(getLevel()+1)/30);
     }
 }

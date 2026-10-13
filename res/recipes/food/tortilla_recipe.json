@@ -15,5 +15,14 @@
       "id": "Tortilla",
       "amount": 2
     }
-  ]
+  ],
+  "requirements": [
+    {
+      "type": "skill",
+      "skill": "COOKING",
+      "level": 4
+    }
+  ],
+  "skill": "COOKING",
+  "xp": 20
 }

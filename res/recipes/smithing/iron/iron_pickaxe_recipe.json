@@ -24,8 +24,10 @@
   "requirements": [
     {
       "type": "skill",
-      "skill": "MINING",
-      "level": 5
+      "skill": "SMITHING",
+      "level": 3
     }
-  ]
+  ],
+  "skill": "SMITHING",
+  "xp": 45
 }
