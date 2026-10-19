@@ -20,11 +20,6 @@
     }
   ],
   "requirements": [
-    {
-      "type": "skill",
-      "skill": "SMITHING",
-      "level": 1
-    }
   ],
   "skill": "SMITHING",
   "xp": 8

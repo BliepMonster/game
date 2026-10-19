@@ -6,6 +6,7 @@ import engine.gui.GUI;
 import engine.gui.components.Component;
 import engine.gui.constraints.position.CenterConstraint;
 import engine.gui.constraints.size.RelativeSizeConstraint;
+import main.GameContext;
 
 public class DialogueController extends Component {
     protected int position;
@@ -15,8 +16,11 @@ public class DialogueController extends Component {
         this.pieces = null;
         this.position = 0;
     }
-    public void set(DialoguePiece[] pieces) {
+    public void set(DialoguePiece[] pieces, GameContext gameContext) {
         this.pieces = pieces;
+        for (var piece : pieces) {
+            piece.bindContext(gameContext);
+        }
         if (pieces.length > 0)
             pieces[0].start();
         else advance();

@@ -1,6 +1,6 @@
 package alchemy;
 
-import engine.core.Texture;
+import engine.core.textures.Texture;
 import engine.gui.GUI;
 import engine.json.JsonNumber;
 import engine.json.JsonObject;
@@ -8,7 +8,6 @@ import engine.json.JsonString;
 import engine.json.JsonValue;
 import main.Camera;
 import main.GameContext;
-import main.Main;
 import main.TextureIdMap;
 import org.joml.Vector2f;
 import tiles.TilePart;

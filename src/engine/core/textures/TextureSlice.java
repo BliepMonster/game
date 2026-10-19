@@ -1,4 +1,4 @@
-package engine.core;
+package engine.core.textures;
 
 public class TextureSlice extends Texture {
     public TextureSlice(Texture tex, float x, float y, float width, float height) {

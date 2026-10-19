@@ -1,0 +1,24 @@
+{
+  "name": "Leaf Cutter",
+
+  "inputs": [
+    {
+      "type": "resource",
+      "id": "Steel Bar",
+      "amount": 2
+    },
+    {
+      "type": "resource",
+      "id": "Pine Wood",
+      "amount": 4
+    }
+  ],
+
+  "outputs": [
+    {
+      "type": "item",
+      "id": "base:tools:leaf_cutter",
+      "amount": 1
+    }
+  ]
+}

@@ -5,6 +5,7 @@ import engine.json.JsonValue;
 import main.Camera;
 import main.Game;
 import main.ItemConstants;
+import main.TextureIdMap;
 import org.joml.Vector2f;
 import stats.StatHolder;
 import stats.inventory.items.ToolItemDefinition;
@@ -33,16 +34,19 @@ public class CoalOrePart extends HittableResourceCreator {
         super(DESC, position);
     }
     public void renderReady(int ticksSinceLastHit, boolean wasLastHitSuccessFul, int x, int y, float health, Camera camera) {
+        var g = Game.getTickCount()-ticksSinceLastHit >= 5;
         camera.addRenderJob(() ->
-                camera.rect(
-                        Game.getTickCount()-ticksSinceLastHit < 5 ?
-                                wasLastHitSuccessFul ? Color.GRAY : HIT_FLASH
-                                : Color.BLACK,
+                camera.tintedImage(
+                        g &&
+                                wasLastHitSuccessFul ? TextureIdMap.get("base:tiles:coal") : TextureIdMap.get("base:tiles:coal_outline"),
+                        g ?Color.WHITE :
+                                wasLastHitSuccessFul ? HIT_FLASH
+                                : Color.WHITE,
                         x, y, 1, 1), -y);
     }
     public void renderUnready(int x, int y, Camera camera) {
         camera.addRenderJob(() ->
-                camera.rect(Color.GRAY, x, y, 1, 1), -y);
+                camera.image(TextureIdMap.get("base:tiles:rock"), x, y, 1, 1), -y);
     }
     @Override
     public Color[] getChipColors() {

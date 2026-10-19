@@ -1,6 +1,6 @@
 package engine.core.graphics;
 
-import engine.core.Texture;
+import engine.core.textures.Texture;
 import engine.core.shaders.Shader;
 import org.joml.Matrix4f;
 import org.lwjgl.opengl.GL13;

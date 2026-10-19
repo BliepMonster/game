@@ -1,0 +1,15 @@
+{
+  "dimensions": [3,3],
+  "ids": [
+    "base:tiles:taiga_path_grass:tl",
+    "base:tiles:taiga_path_grass:tm",
+    "base:tiles:taiga_path_grass:tr",
+    "base:tiles:taiga_path_grass:ml",
+    "base:tiles:taiga_path_grass:mm",
+    "base:tiles:taiga_path_grass:mr",
+    "base:tiles:taiga_path_grass:bl",
+    "base:tiles:taiga_path_grass:bm",
+    "base:tiles:taiga_path_grass:br"
+  ],
+  "texid": "base:tiles:taiga_path_grass"
+}

@@ -1,6 +1,6 @@
 package combat.equipment;
 
-import engine.core.Texture;
+import engine.core.textures.Texture;
 import main.GameContext;
 import org.joml.Vector2f;
 import stats.StatHolder;

@@ -41,7 +41,8 @@ public class DialogueNPC extends TilePart {
             for (int i = 0; i < pieces.length; i++) {
                 pieces[i] = definition.pieces()[i].build(font, controller, context, storage);
             }
-            controller.set(pieces);
+            controller.set(pieces, context);
+            context.getQuests().onTalk(definition.id());
             GUI.add(controller, 0);
             GUI.toggle(62);
         }

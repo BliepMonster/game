@@ -1,7 +1,7 @@
 package tiles.crafting;
 
 import crafting.ui.DeconstructorPanel;
-import engine.core.Texture;
+import engine.core.textures.Texture;
 import engine.gui.GUI;
 import engine.json.JsonString;
 import engine.json.JsonValue;

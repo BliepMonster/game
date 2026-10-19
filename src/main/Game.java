@@ -4,6 +4,8 @@ import engine.core.DrawManager;
 import engine.core.Screen;
 import engine.jobs.JobSystem;
 import engine.saving.objects.SaveFile;
+import engine.saving.objects.SavedDictionary;
+import engine.saving.objects.SavedObject;
 import entities.Entity;
 import entities.Player;
 import org.joml.Vector2f;
@@ -13,6 +15,7 @@ import saving.SavedGame;
 import saving.SavedHome;
 import tiles.Tile;
 
+import java.util.HashMap;
 import java.util.List;
 
 public class Game implements GameContext {
@@ -25,6 +28,7 @@ public class Game implements GameContext {
     final Player player;
     public final QuestTracker quests;
     private final Camera camera;
+    public final SavedObject data;
     public Player getPlayer() {
         return player;
     }
@@ -32,7 +36,8 @@ public class Game implements GameContext {
         return quests;
     }
     public Game(DrawManager draw, float tsize, SaveFile file) {
-        ticks = 0;
+        ticks = SavedGame.readTicks(file);
+        spareTicks = ticks;
         SavedGame save = new SavedGame(file, this);
         player = new Player(save.player());
         quests = new QuestTracker(save.quests());
@@ -42,10 +47,15 @@ public class Game implements GameContext {
         if (save.home().home() != null)
             WorldRegistry.put("HOUSE", save.home().home());
         camera.addLight(player);
+        data = save.data();
         this.attributes = new AttributeData(save.attributes());
     }
+    public boolean isFrozen() {
+        return spareTicks < frozenTick;
+    }
     public Game(DrawManager draw, float tsize, SavedGame save) {
-        ticks = 0;
+        ticks = save.ticks();
+        spareTicks = ticks;
         player = new Player(save.player());
         quests = new QuestTracker(save.quests());
         AutoWorldRegisterer.registerAll(this);
@@ -54,10 +64,18 @@ public class Game implements GameContext {
         if (save.home().home() != null)
             WorldRegistry.put("HOUSE", save.home().home());
         camera.addLight(player);
+        data = save.data();
         this.attributes = new AttributeData(save.attributes());
     }
+    static int spareTicks;
     public void tick(boolean pressed, Screen screen, float tsize, boolean canClick) {
+        if (spareTicks < frozenTick) {
+            ++spareTicks;
+            return;
+        }
         ++ticks;
+        spareTicks = ticks;
+        frozenTick = -1;
         if (player.shouldDie(this) && !player.isDead()) {
             player.die(this);
         }
@@ -65,6 +83,8 @@ public class Game implements GameContext {
         player.tick(this);
         player.move(world.getHitbox());
         quests.update(this);
+
+        camera.tick();
 
         JobSystem.tick(1f/Game.TICKS_PER_SECOND);
     }
@@ -95,7 +115,7 @@ public class Game implements GameContext {
                 PlayerSaver.savePlayer(player),
                 new SavedHome(WorldRegistry.get("HOUSE")),
                 quests.save(),
-                attributes.save()
+                attributes.save(), data, ticks
         );
     }
     public void movePlayer(World world, Vector2f position) {
@@ -112,6 +132,13 @@ public class Game implements GameContext {
     @Override
     public World getWorld() {
         return world;
+    }
+
+    private int frozenTick = -1;
+
+    @Override
+    public void freeze(int ticks) {
+        frozenTick = Math.max(frozenTick, Game.getTickCount() + ticks);
     }
 
     public Camera getCamera() {

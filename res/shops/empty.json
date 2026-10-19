@@ -5,5 +5,46 @@
   "height": 3,
   "z_offset": 0.5,
   "dialogue": [
+    {
+      "type": "cond",
+      "yes": {
+        "type": "attrib",
+        "attrib": ""
+      },
+      "no": {
+        "type": "list",
+        "array": [
+          {
+            "type": "text",
+            "tex": "base:npc:chef",
+            "name": "Chef",
+            "message": "You have to help me!"
+          },
+          {
+            "type": "text",
+            "tex": "base:npc:chef",
+            "name": "Chef",
+            "message": "My house has fallen apart."
+          },
+          {
+            "type": "text",
+            "tex": "base:npc:chef",
+            "name": "Chef",
+            "message": "I'm not the only one with this issue."
+          },
+          {
+            "type": "text",
+            "tex": "base:npc:chef",
+            "name": "Chef",
+            "message": "Can you help me repair it?"
+          },
+          {
+            "type": "attrib",
+            "attrib": "repair_quest"
+          }
+        ]
+      },
+      "attrib": "repair_quest"
+    }
   ]
 }

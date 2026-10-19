@@ -27,6 +27,9 @@
     "res/recipes/cucumber_sword_recipe.json",
     "res/recipes/sunflower_hat_recipe.json",
     "res/recipes/compost/basic_compost_recipe.json",
-    "res/recipes/compost/decent_compost_recipe.json"
+    "res/recipes/compost/decent_compost_recipe.json",
+    "res/recipes/leaf_cutter_recipe.json",
+    "res/recipes/string_recipe.json",
+    "res/recipes/single_use_needle_recipe.json"
   ]
 }

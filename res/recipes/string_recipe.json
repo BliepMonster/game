@@ -1,0 +1,24 @@
+{
+  "name": "String",
+
+  "inputs": [
+    {
+      "type": "resource",
+      "id": "Wheat",
+      "amount": 6
+    },
+    {
+      "type": "resource",
+      "id": "Maple Leaf",
+      "amount": 20
+    }
+  ],
+
+  "outputs": [
+    {
+      "type": "resource",
+      "id": "String",
+      "amount": 1
+    }
+  ]
+}

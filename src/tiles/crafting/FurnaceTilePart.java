@@ -3,7 +3,7 @@ package tiles.crafting;
 import crafting.*;
 import crafting.ui.CraftingPanel;
 import engine.FileUtils;
-import engine.core.Texture;
+import engine.core.textures.Texture;
 import engine.gui.GUI;
 import engine.json.JsonParser;
 import engine.json.JsonString;
@@ -14,7 +14,6 @@ import org.joml.Vector2f;
 import stats.inventory.items.ItemDefinition;
 import tiles.TilePart;
 
-import java.awt.Color;
 import java.util.List;
 
 import static tool.editor.TilePartLoader.ID_FURNACE;

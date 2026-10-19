@@ -1,6 +1,6 @@
 package tiles;
 
-import engine.core.Texture;
+import engine.core.textures.Texture;
 import engine.json.JsonString;
 import engine.json.JsonValue;
 import main.Camera;

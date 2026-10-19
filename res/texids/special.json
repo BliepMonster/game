@@ -1,3 +1,4 @@
 {
-  "base:empty": "res/textures/empty.png"
+  "base:empty": "res/textures/empty.png",
+  "base:npc:chef": "res/textures/npc/chef.png"
 }

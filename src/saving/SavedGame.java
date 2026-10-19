@@ -5,6 +5,8 @@ import engine.json.JsonObject;
 import engine.saving.objects.SaveFile;
 import engine.saving.TokenizedSaveFile;
 import engine.saving.objects.SavedArray;
+import engine.saving.objects.SavedDictionary;
+import engine.saving.objects.SavedDouble;
 import engine.saving.objects.SavedObject;
 import main.GameContext;
 import main.World;
@@ -13,15 +15,22 @@ import tool.editor.JSONLoader;
 import tool.editor.JSONSaver;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
-public record SavedGame(SavedPlayer player, SavedHome home, SavedQuests quests, SavedAttributeData attributes) {
+public record SavedGame(SavedPlayer player, SavedHome home, SavedQuests quests, SavedAttributeData attributes, SavedObject data, int ticks) {
     public SaveFile save() {
         SaveFile file = new TokenizedSaveFile();
         file.put("player", player.save());
         file.put("world", JSONSaver.save(home.home(), home.home().map).toSaveFile());
         file.put("quests", quests.save());
         file.put("attributes", attributes.save());
+        file.put("data", data);
+        file.put("ticks", new SavedDouble(ticks));
         return file;
+    }
+    public static int readTicks(SaveFile file) {
+        var ticks = file.get("ticks");
+        return ticks != null ? (int) (double) ticks.get() : 0;
     }
     public SavedGame(SaveFile file, GameContext context) {
         World world = new World(CoordinateMap.newDefaultPackedMap(), "res/maps/house.json", "HOUSE");
@@ -37,7 +46,8 @@ public record SavedGame(SavedPlayer player, SavedHome home, SavedQuests quests, 
                         : new SavedAttributeData(
                                 ((ArrayList<SavedObject>) file.get("attributes").get())
                                         .stream().map(obj -> (String) obj.get()).toArray(String[]::new)
-                )
+                ), file.map.containsKey("data") ? file.get("data") : new SavedDictionary(new HashMap<>()),
+                readTicks(file)
         );
     }
 }

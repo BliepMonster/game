@@ -1,4 +1,4 @@
-package engine.core;
+package engine.core.textures;
 import org.lwjgl.*;
 import org.lwjgl.opengl.*;
 

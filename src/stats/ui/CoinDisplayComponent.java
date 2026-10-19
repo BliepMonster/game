@@ -25,6 +25,7 @@ public class CoinDisplayComponent extends Component {
         draw.image(currency.getTexture(), x+w-h, y, h, h);
         var s = Long.toString(player.currency.get(currency));
         float fsize = Math.min(font.getSizeForHeight(h), font.getSizeForWidth(s, w-h));
+        y = y + h - font.getHeight(fsize);
         draw.string(s, Color.white, x, y, font, fsize);
     }
     public void detectClick(Screen screen, float x, float y) {}

@@ -1,13 +1,11 @@
 package entities;
 
 import combat.equipment.EquipmentSlot;
-import engine.core.Texture;
+import engine.core.textures.IncrementedAnimatedTexture;
+import engine.core.textures.Texture;
 import engine.hitboxes.Hitbox;
 import engine.hitboxes.RectangularHitbox;
-import main.LightSource;
-import main.Camera;
-import main.Game;
-import main.GameContext;
+import main.*;
 import org.joml.Vector2f;
 import saving.SavedPlayer;
 import stats.StatHolder;
@@ -138,12 +136,24 @@ public class Player implements Entity, LightSource {
         velocityChanges.removeIf(VelocityChange::canBeRemoved);
         ticksSinceLastDamage++;
     }
-    public static final Texture TEXTURE = new Texture("res/textures/enemies/character.png");
+    public static final IncrementedAnimatedTexture TEXTURE_ANIMATION_FRONT = new IncrementedAnimatedTexture(TextureIdMap.getAnimation(8, "res/textures/enemies/character_down/character_walking_animation"));
+    public static final IncrementedAnimatedTexture TEXTURE_ANIMATION_BACK = new IncrementedAnimatedTexture(TextureIdMap.getAnimation(8, "res/textures/enemies/character_up/character_walking_animation"));
+    public static final IncrementedAnimatedTexture TEXTURE_ANIMATION_RIGHT = new IncrementedAnimatedTexture(TextureIdMap.getAnimation(8, "res/textures/enemies/character_right/character_walking_animation"));
+    public static final IncrementedAnimatedTexture TEXTURE_ANIMATION_LEFT = new IncrementedAnimatedTexture(TextureIdMap.getAnimation(8, "res/textures/enemies/character_right/character_walking_animation", (str) -> new Texture(str) {
+        @Override
+        public float[] getDimensions() {
+            return new float[] {1, 0, -1, 1};
+        }
+    }));
+    public static final Texture SHADOW = new Texture("res/textures/enemies/player_shadow.png");
     @Override
     public void render(Camera camera) {
         cameraRef = camera;
         var color = isDead() ? Color.orange : ticksSinceLastDamage < 5 ? Color.red : Color.white;
-        camera.addRenderJob(() -> camera.tintedImage(TEXTURE, color, getRenderX() - .5f, getRenderY() - 1, 1, 2), -position.y);
+        camera.image(SHADOW, getRenderX()-.5f, getRenderY()-1.5f, 1, 1);
+        camera.addRenderJob(() -> camera.tintedImage(direction == Direction.UP ? TEXTURE_ANIMATION_BACK :
+                direction == Direction.RIGHT ? TEXTURE_ANIMATION_RIGHT :
+                direction == Direction.LEFT ? TEXTURE_ANIMATION_LEFT : TEXTURE_ANIMATION_FRONT, color, getRenderX() - .5f, getRenderY() - 1, 1, 2), -position.y);
     }
 
     @Override
@@ -200,6 +210,27 @@ public class Player implements Entity, LightSource {
             movement.normalize();
             movement.mul(stats.get(StatHolder.Stat.SPEED) / TICKS_PER_SECOND);
         }
+        if (direction == Direction.RIGHT) {
+            if (movement.x == 0) {
+                TEXTURE_ANIMATION_RIGHT.reset();
+            }
+            else TEXTURE_ANIMATION_RIGHT.advance(movement.x*3.2f);
+        } else if (direction == Direction.LEFT) {
+            if (movement.x == 0) {
+                TEXTURE_ANIMATION_LEFT.reset();
+            }
+            else TEXTURE_ANIMATION_LEFT.advance(-movement.x*3.2f);
+        } else if (direction == Direction.DOWN) {
+            if (movement.y == 0) {
+                TEXTURE_ANIMATION_FRONT.reset();
+            }
+            else TEXTURE_ANIMATION_FRONT.advance(-movement.y*3.2f);
+        } else if (direction == Direction.UP) {
+            if (movement.y == 0) {
+                TEXTURE_ANIMATION_BACK.reset();
+            }
+            else TEXTURE_ANIMATION_BACK.advance(movement.y*3.2f);
+        }
         for (VelocityChange change : velocityChanges) {
             movement.add(change.getVelocityChange());
         }
@@ -235,8 +266,9 @@ public class Player implements Entity, LightSource {
         boolean defense = type == DamageType.NORMAL;
         if (Game.getTickCount()-lastRespawn < 80) return;
         float def = stats.get(StatHolder.Stat.DEFENSE);
-        if (defense) health -= (amount*(1-def/(def+100)));
-        else health -= amount;
+        var d = defense ? (amount*(1-def/(def+100))) : amount;
+        health -= d;
+        context.getCamera().addShake(d/20);
         if (health <= 0) {
             health = 0;
         }

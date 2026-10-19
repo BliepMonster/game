@@ -3,7 +3,7 @@ package tiles.crafting;
 import crafting.*;
 import crafting.ui.CraftingPanel;
 import engine.FileUtils;
-import engine.core.Texture;
+import engine.core.textures.Texture;
 import engine.core.text.Font;
 import engine.gui.GUI;
 import engine.json.JsonParser;

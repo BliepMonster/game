@@ -2,10 +2,9 @@ package alchemy;
 
 import engine.Maths;
 import engine.core.DrawManager;
-import engine.core.Texture;
+import engine.core.textures.Texture;
 import engine.gui.components.*;
 import engine.gui.components.Container;
-import engine.gui.components.labels.Label;
 import engine.gui.components.shapes.RectangularComponent;
 import engine.gui.constraints.position.CenterConstraint;
 import engine.gui.constraints.position.RelativeYConstraint;

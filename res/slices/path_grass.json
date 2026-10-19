@@ -1,0 +1,15 @@
+{
+  "dimensions": [3,3],
+  "ids": [
+    "base:tiles:path_grass:tl",
+    "base:tiles:path_grass:tm",
+    "base:tiles:path_grass:tr",
+    "base:tiles:path_grass:ml",
+    "base:tiles:path_grass:mm",
+    "base:tiles:path_grass:mr",
+    "base:tiles:path_grass:bl",
+    "base:tiles:path_grass:bm",
+    "base:tiles:path_grass:br"
+  ],
+  "texid": "base:tiles:path_grass"
+}

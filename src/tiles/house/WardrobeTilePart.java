@@ -1,6 +1,6 @@
 package tiles.house;
 
-import engine.core.Texture;
+import engine.core.textures.Texture;
 import engine.json.JsonArray;
 import engine.json.JsonNull;
 import engine.json.JsonObject;

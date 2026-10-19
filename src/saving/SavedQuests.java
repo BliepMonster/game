@@ -10,9 +10,9 @@ import engine.saving.objects.SavedString;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public record SavedQuests(String selectedId, String[] completedIds, String[] claimedIds, HashMap<String, Integer> kills, HashMap<String, Integer> buys, HashMap<String, Integer> gathers, int sells) {
+public record SavedQuests(String selectedId, String[] completedIds, String[] claimedIds, HashMap<String, Integer> kills, HashMap<String, Integer> buys, HashMap<String, Integer> gathers, HashMap<String, Integer> talks, int sells) {
     public static SavedQuests empty() {
-        return new SavedQuests(null, new String[0], new String[0], new HashMap<>(), new HashMap<>(), new HashMap<>(), 0);
+        return new SavedQuests(null, new String[0], new String[0], new HashMap<>(), new HashMap<>(), new HashMap<>(), new HashMap<>(), 0);
     }
 
     public SavedQuests(SavedObject object) {
@@ -23,6 +23,7 @@ public record SavedQuests(String selectedId, String[] completedIds, String[] cla
                 decodeKills((SavedDictionary) object),
                 decodeBuys((SavedDictionary) object),
                 decodeGathers((SavedDictionary) object),
+                decodeTalks((SavedDictionary) object),
                 decodeSells((SavedDictionary) object)
         );
     }
@@ -85,6 +86,17 @@ public record SavedQuests(String selectedId, String[] completedIds, String[] cla
         return gathers;
     }
 
+    private static HashMap<String, Integer> decodeTalks(SavedDictionary dict) {
+        HashMap<String, Integer> talks = new HashMap<>();
+        SavedObject object = dict.get("talks");
+        if (object instanceof SavedDictionary talksDict) {
+            for (var entry : ((HashMap<String, SavedObject>) talksDict.get()).entrySet()) {
+                talks.put(entry.getKey(), (int) ((SavedDouble) entry.getValue()).getCore());
+            }
+        }
+        return talks;
+    }
+
     private static int decodeSells(SavedDictionary dict) {
         SavedObject object = dict.get("sells");
         return object instanceof SavedDouble number ? (int) number.getCore() : 0;
@@ -102,6 +114,7 @@ public record SavedQuests(String selectedId, String[] completedIds, String[] cla
         map.put("kills", encodeCounts(kills));
         map.put("buys", encodeCounts(buys));
         map.put("gathers", encodeCounts(gathers));
+        map.put("talks", encodeCounts(talks));
         map.put("sells", new SavedDouble(sells));
         return new SavedDictionary(map);
     }

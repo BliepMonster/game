@@ -4,7 +4,7 @@ import crafting.CraftingRecipe;
 import crafting.FullItemStorage;
 import crafting.ui.CraftingPanel;
 import engine.FileUtils;
-import engine.core.Texture;
+import engine.core.textures.Texture;
 import engine.gui.GUI;
 import engine.json.JsonParser;
 import engine.json.JsonString;

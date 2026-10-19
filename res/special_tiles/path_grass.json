@@ -1,0 +1,34 @@
+{
+  "type": "texture_adapt",
+  "standable": true,
+  "projectileStandable": true,
+
+  "ids": [
+    "base:tiles:path_grass:tl",
+    "base:tiles:path_grass:tm",
+    "base:tiles:path_grass:tr",
+    "base:tiles:path_grass:ml",
+    "base:tiles:path_grass:mm",
+    "base:tiles:path_grass:mr",
+    "base:tiles:path_grass:bl",
+    "base:tiles:path_grass:bm",
+    "base:tiles:path_grass:br",
+    "base:tiles:path_grass:tl2",
+    "base:tiles:path_grass:tr2",
+    "base:tiles:path_grass:bl2",
+    "base:tiles:path_grass:br2",
+    "base:tiles:taiga_path_grass:tl",
+    "base:tiles:taiga_path_grass:tm",
+    "base:tiles:taiga_path_grass:tr",
+    "base:tiles:taiga_path_grass:ml",
+    "base:tiles:taiga_path_grass:mm",
+    "base:tiles:taiga_path_grass:mr",
+    "base:tiles:taiga_path_grass:bl",
+    "base:tiles:taiga_path_grass:bm",
+    "base:tiles:taiga_path_grass:br",
+    "base:tiles:taiga_path_grass:tl2",
+    "base:tiles:taiga_path_grass:tr2",
+    "base:tiles:taiga_path_grass:bl2",
+    "base:tiles:taiga_path_grass:br2"
+  ]
+}

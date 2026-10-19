@@ -1,13 +1,14 @@
 package main;
 
-import engine.core.Texture;
-import engine.core.TextureSlice;
+import engine.core.textures.Texture;
+import engine.core.textures.TextureSlice;
 import engine.json.*;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.HashMap;
+import java.util.function.Function;
 import java.util.stream.Stream;
 
 public class TextureIdMap {
@@ -17,6 +18,20 @@ public class TextureIdMap {
         if (textures.containsKey(id))
             return textures.get(id);
         return MISSING;
+    }
+    public static Texture[] getAnimation(int size, String prefix) {
+        Texture[] t = new Texture[size];
+        for (int i = 1; i <= size; i++) {
+            t[i-1] = new Texture(prefix+i+".png");
+        }
+        return t;
+    }
+    public static Texture[] getAnimation(int size, String prefix, Function<String, Texture> gen) {
+        Texture[] t = new Texture[size];
+        for (int i = 1; i <= size; i++) {
+            t[i-1] = gen.apply(prefix+i+".png");
+        }
+        return t;
     }
     public static void put(String id, Texture tex) {
         textures.put(id, tex);

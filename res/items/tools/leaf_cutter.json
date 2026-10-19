@@ -1,0 +1,9 @@
+{
+  "type": "ability",
+  "id": "base:tools:leaf_cutter",
+  "name": "Leaf Cutter",
+  "texture": "base:item:leaf_cutter",
+  "ability": "leaf_cutter",
+  "cooldown": 80,
+  "stats": []
+}

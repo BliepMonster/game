@@ -1,19 +1,12 @@
 package tool.editor;
 
 import engine.CoordinateMap;
-import engine.core.Texture;
-import entities.MinecartSpawnerEntity;
-import entities.dungeons.MinerDungeonEnemy;
+import engine.core.textures.Texture;
 import entities.dungeons.SapphireGolemDungeonEnemy;
-import entities.dungeons.ShooterEnemy;
 import main.*;
 import org.joml.Vector2f;
 import tiles.*;
 import tiles.doors.DungeonExitTilePart;
-import tiles.doors.EntranceTilePart;
-import tiles.resources.*;
-import tiles.resources.ores.GoldOrePart;
-import tiles.resources.ores.SilverOrePart;
 
 
 public enum EditorToolState {
@@ -41,28 +34,23 @@ public enum EditorToolState {
                 map.put(x, y, a);
             }
             case O3 -> {
-                tile.setPart(new UnstandableTilePart(new Vector2f(x, y)));
+                map.put(x, y, new DefaultTile(TileType.get("base:tiles:taiga_path_grass:mm")));
             }
-            case O4 -> tile.setPart(new DungeonExitTilePart(new Vector2f(x, y), "SAPPHIRE_CAVE", new Vector2f(4, 28), TextureIdMap.get("base:empty")));
-            case O5 -> tile.setPart(new DungeonExitTilePart(new Vector2f(x, y), "SAPPHIRE_DUNGEON_3", new Vector2f(9.5f, 1), TextureIdMap.get("base:empty")));
-            case O6 -> tile.setPart(null);
-            case O7 -> map.put(x, y, new DefaultTile(TileType.get("WALL")));
+            case O4 ->
+                    map.put(x, y, new DefaultTile(TileType.get("base:tiles:taiga_path_grass:tr2")));
+            case O5 ->
+                    map.put(x, y, new DefaultTile(TileType.get("base:tiles:taiga_path_grass:tl2")));
+            case O6 ->
+                    map.put(x, y, new DefaultTile(TileType.get("base:tiles:taiga_path_grass:bl2")));
+            case O7 -> map.put(x, y, new DefaultTile(TileType.get("base:tiles:taiga_path_grass:br2")));
             case O8 -> {
-                if (Game.getTickCount()-lastTick < 20) return;
-                try {
-                    world.onLoadEntities.add(
-                            new EntityProducer(
-                                    SapphireGolemDungeonEnemy.class.getConstructor(Vector2f.class),
-                                    x,
-                                    y
-                            )
-                    );
-                } catch (Exception _) {
-                    throw new RuntimeException();
-                }
-                lastTick = Game.getTickCount();
+                map.put(x, y, new DefaultTile(TileType.get("base:tiles:path_grass:br2")));
             }
-            case O9 -> tile.setPart(new DungeonExitTilePart(new Vector2f(x, y), "HOME_WORLD", new Vector2f(), new Texture("res/bred.png")));
+            case O9 -> {
+                var t = new DefaultTile(TileType.get("WALL"));
+                t.setPart(tile == null ? null : tile.getPart());
+                map.put(x, y, t);
+            }
         }
     }
 }

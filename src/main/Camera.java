@@ -2,7 +2,7 @@ package main;
 
 import engine.core.DrawManager;
 import engine.core.Screen;
-import engine.core.Texture;
+import engine.core.textures.Texture;
 import engine.core.graphics.TextMesh;
 import entities.Player;
 
@@ -29,6 +29,11 @@ public class Camera {
     private int lightmapW, lightmapH;
     private float lightmapOriginX, lightmapOriginY;
     public float defaultBrightness = 1f;
+    private float shakeIntensity;
+    private float shakeX, shakeY;
+    private float prevShakeX, prevShakeY;
+    private static final float SHAKE_DECAY = .7f;
+    private static final float MAX_SHAKE = .75f;
     public Camera(Player player, float tileSize, DrawManager draw) {
         this.player = player;
         this.tileSize = tileSize;
@@ -48,11 +53,40 @@ public class Camera {
     }
 
     private float getRenderPlayerX() {
-        return player.getRenderX();
+        return player.getRenderX() + getShakeOffsetX();
     }
 
     private float getRenderPlayerY() {
-        return player.getRenderY();
+        return player.getRenderY() + getShakeOffsetY();
+    }
+
+    public void addShake(float magnitude) {
+        shakeIntensity = Math.min(shakeIntensity + magnitude, MAX_SHAKE);
+    }
+
+    public void tick() {
+        prevShakeX = shakeX;
+        prevShakeY = shakeY;
+        shakeIntensity *= SHAKE_DECAY;
+        if (shakeIntensity < .001f) {
+            shakeIntensity = 0;
+            shakeX = 0;
+            shakeY = 0;
+            prevShakeX = 0;
+            prevShakeY = 0;
+            return;
+        }
+        double angle = Math.random() * Math.PI * 2;
+        shakeX = (float) Math.cos(angle) * shakeIntensity;
+        shakeY = (float) Math.sin(angle) * shakeIntensity;
+    }
+
+    private float getShakeOffsetX() {
+        return prevShakeX + (shakeX - prevShakeX) * interpolationAlpha;
+    }
+
+    private float getShakeOffsetY() {
+        return prevShakeY + (shakeY - prevShakeY) * interpolationAlpha;
     }
 
     public DrawManager getDraw() {

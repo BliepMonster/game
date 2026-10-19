@@ -1,6 +1,6 @@
 package farming;
 
-import engine.core.Texture;
+import engine.core.textures.Texture;
 import engine.json.JsonFile;
 import engine.json.JsonNumber;
 import engine.json.JsonParser;

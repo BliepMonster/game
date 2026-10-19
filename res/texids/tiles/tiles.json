@@ -38,5 +38,14 @@
   "base:tiles:strawberry2": "res/textures/tiles/strawberry_bush.png",
   "base:tiles:res_bb": "res/textures/tiles/restaurant_backbar.png",
   "base:tiles:table": "res/textures/tiles/table.png",
-  "base:tiles:alchemy_station": "res/textures/tiles/alchemy_station.png"
+  "base:tiles:alchemy_station": "res/textures/tiles/alchemy_station.png",
+  "base:tiles:path_grass": "res/textures/tiles/grass_tile_large.png",
+  "base:tiles:taiga_path_grass": "res/textures/tiles/taiga_grass_large.png",
+  "base:tiles:taiga_path_grass_2": "res/textures/tiles/taiga_grass_large_2.png",
+  "base:tiles:path_grass_2": "res/textures/tiles/grass_tile_large_2.png",
+  "base:tiles:coal": "res/textures/tiles/ores/coal_tile.png",
+  "base:tiles:iron": "res/textures/tiles/ores/iron_tile.png",
+  "base:tiles:copper": "res/textures/tiles/ores/copper_tile.png",
+  "base:tiles:rock": "res/textures/tiles/ores/rock_tile.png",
+  "base:tiles:coal_outline": "res/textures/tiles/ores/coal_tile_outline.png"
 }

@@ -1,7 +1,7 @@
 package stats.inventory.items;
 
 import combat.equipment.EquipmentSlot;
-import engine.core.Texture;
+import engine.core.textures.Texture;
 import engine.core.input.Input;
 import main.Game;
 import main.GameContext;
@@ -62,6 +62,7 @@ public class ToolItemDefinition extends ItemDefinition {
         if (this.strengths[type.ordinal()] == 0) return new ItemUseResult(Optional.of(item), false);
         var power = context.getPlayer().stats.get(type.getStat()); // and later power buffs too
         creator.hit(context, (int) power);
+        context.freeze(1);
         return new ItemUseResult(Optional.of(item), true);
     }
 

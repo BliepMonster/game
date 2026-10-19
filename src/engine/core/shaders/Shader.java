@@ -1,6 +1,6 @@
 package engine.core.shaders;
 
-import engine.core.Texture;
+import engine.core.textures.Texture;
 import org.joml.Matrix4f;
 import org.joml.Vector2f;
 import org.joml.Vector2i;

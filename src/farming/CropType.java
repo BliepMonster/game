@@ -2,7 +2,7 @@ package farming;
 
 import combat.LootRewardRegistry;
 import combat.LootTableRegistry;
-import engine.core.Texture;
+import engine.core.textures.Texture;
 import engine.json.JsonBoolean;
 import engine.json.JsonNumber;
 import engine.json.JsonParser;

@@ -4,6 +4,7 @@ import engine.Maths;
 import engine.core.graphics.TextMesh;
 import engine.core.text.*;
 import engine.core.shaders.Shader;
+import engine.core.textures.Texture;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.joml.*;

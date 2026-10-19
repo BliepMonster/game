@@ -8,6 +8,8 @@ import engine.core.input.EventManager;
 import engine.core.input.Input;
 import engine.core.text.Font;
 import engine.saving.TokenizedSaveFile;
+import engine.saving.objects.SavedDictionary;
+import engine.saving.objects.SavedDouble;
 import org.lwjgl.glfw.GLFW;
 import saving.*;
 
@@ -18,6 +20,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class MainMenu {
     private static final ArrayList<String> filenames = new ArrayList<>();
@@ -43,8 +46,14 @@ public class MainMenu {
                     new SavedSkill(0, 0),
                     new SavedSkill(0, 0),
                     new SavedSkill(0, 0),
-                    new SavedSkill(0, 0)
-            })), new SavedHome(WorldRegistry.get("HOUSE")), SavedQuests.empty(), new SavedAttributeData(new String[0]));
+                    new SavedSkill(0, 0),
+                    new SavedSkill(0, 0),
+                    new SavedSkill(0, 0),
+                    new SavedSkill(0, 0),
+                    new SavedSkill(0, 0),
+                    new SavedSkill(0, 0),
+                    new SavedSkill(0, 0),
+            })), new SavedHome(WorldRegistry.get("HOUSE")), SavedQuests.empty(), new SavedAttributeData(new String[0]), new SavedDictionary(new HashMap<>()), 0);
             MainMenu.initLoadWorldMenu();
             Main.open(game, "saves/save"+filenames.size()+".save");
             Main.state = Main.State.ONGOING;

@@ -158,7 +158,7 @@ public class Main {
         long framestamp = System.currentTimeMillis();
 
         float alpha = Math.max(0f, Math.min(1f, (float)((framestamp - lastTick) / tickRate)));
-        game.getCamera().setInterpolationAlpha(alpha);
+        if (!game.isFrozen()) game.getCamera().setInterpolationAlpha(alpha);
 
         game.render();
 
@@ -195,8 +195,9 @@ public class Main {
             } else {
                 deadLastFrame = true;
                 Game.ticks++;
+                game.getCamera().tick();
             }
-            pressed = false;
+            if (!game.isFrozen()) pressed = false;
             Input.clearScroll();
         }
         return true;

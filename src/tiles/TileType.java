@@ -1,6 +1,6 @@
 package tiles;
 
-import engine.core.Texture;
+import engine.core.textures.Texture;
 import engine.json.*;
 import main.Camera;
 import main.TextureIdMap;
@@ -8,7 +8,6 @@ import main.TextureIdMap;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Stream;

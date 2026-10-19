@@ -1,6 +1,6 @@
 package engine.core.text;
 
-import engine.core.Texture;
+import engine.core.textures.Texture;
 
 import java.io.*;
 import java.util.*;

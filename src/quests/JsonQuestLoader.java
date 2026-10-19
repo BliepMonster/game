@@ -54,6 +54,15 @@ public class JsonQuestLoader {
                     (int) ((JsonNumber) object.values.get("amount")).num,
                     name
             );
+            case "talk" -> new TalkObjective(
+                    ((JsonString) object.values.get("npc")).value,
+                    object.values.get("amount") == null ? 1 : (int) ((JsonNumber) object.values.get("amount")).num,
+                    name
+            );
+            case "attribute" -> new AttributeObjective(
+                    ((JsonString) object.values.get("attribute")).value,
+                    name
+            );
             default -> throw new RuntimeException("Unknown objective type: " + type);
         };
     }

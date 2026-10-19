@@ -1,6 +1,6 @@
 package tool.editor;
 
-import engine.core.Texture;
+import engine.core.textures.Texture;
 import engine.core.text.Font;
 import engine.json.*;
 import alchemy.AlchemyCraftingRecipe;

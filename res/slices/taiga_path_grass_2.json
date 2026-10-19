@@ -1,0 +1,10 @@
+{
+  "dimensions": [2, 2],
+  "ids": [
+    "base:tiles:taiga_path_grass:tl2",
+    "base:tiles:taiga_path_grass:tr2",
+    "base:tiles:taiga_path_grass:bl2",
+    "base:tiles:taiga_path_grass:br2"
+  ],
+  "texid": "base:tiles:taiga_path_grass_2"
+}

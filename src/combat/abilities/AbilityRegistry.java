@@ -8,6 +8,7 @@ import stats.StatHolder;
 import stats.StatusEffect;
 import stats.inventory.items.Item;
 import stats.inventory.items.ItemUseResult;
+import stats.inventory.items.LeafCutterItemAbility;
 import tiles.Tile;
 import tiles.TilePart;
 import tiles.crafting.CookingStationTilePart;
@@ -54,5 +55,6 @@ public class AbilityRegistry {
                 return new ItemUseResult(Optional.of(item), true);
             }
         });
+        registry.put("leaf_cutter", new LeafCutterItemAbility());
     }
 }

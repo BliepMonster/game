@@ -1,6 +1,6 @@
 package combat.melee;
 
-import engine.core.Texture;
+import engine.core.textures.Texture;
 import engine.hitboxes.ConeHitbox;
 import entities.DamageType;
 import entities.Entity;

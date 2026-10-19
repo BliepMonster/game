@@ -1,6 +1,6 @@
 package tiles.doors;
 
-import engine.core.Texture;
+import engine.core.textures.Texture;
 import engine.json.JsonNumber;
 import engine.json.JsonObject;
 import engine.json.JsonString;

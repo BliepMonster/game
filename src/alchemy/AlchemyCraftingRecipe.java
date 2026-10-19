@@ -3,7 +3,7 @@ package alchemy;
 import crafting.ItemCraftingRecipe;
 import crafting.json.JsonRecipeLoader;
 import engine.FileUtils;
-import engine.core.Texture;
+import engine.core.textures.Texture;
 import engine.json.*;
 import main.TextureIdMap;
 

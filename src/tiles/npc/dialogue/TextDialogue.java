@@ -2,7 +2,7 @@ package tiles.npc.dialogue;
 
 import engine.core.DrawManager;
 import engine.core.Screen;
-import engine.core.Texture;
+import engine.core.textures.Texture;
 import engine.core.graphics.TextMesh;
 import engine.gui.constraints.position.CenterConstraint;
 import engine.gui.constraints.size.RelativeSizeConstraint;

@@ -3,6 +3,7 @@ package tiles.npc.dialogue;
 import engine.gui.components.Component;
 import engine.gui.constraints.position.PositionConstraint;
 import engine.gui.constraints.size.SizeConstraint;
+import main.GameContext;
 
 public abstract class DialoguePiece extends Component {
     private DialogueController controller;
@@ -16,4 +17,10 @@ public abstract class DialoguePiece extends Component {
         controller.advance();
     }
     public void start() {}
+    public void bindContext(GameContext context) {
+
+    }
+    public void setController(DialogueController controller) {
+        this.controller = controller;
+    }
 }

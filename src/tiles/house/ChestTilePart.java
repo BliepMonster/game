@@ -1,14 +1,12 @@
 package tiles.house;
 
-import crafting.json.JsonStatLoader;
-import engine.core.Texture;
+import engine.core.textures.Texture;
 import engine.gui.GUI;
 import engine.json.JsonArray;
 import engine.json.JsonNull;
 import engine.json.JsonObject;
 import engine.json.JsonString;
 import engine.json.JsonValue;
-import engine.saving.objects.SavedObject;
 import main.Camera;
 import main.GameContext;
 import main.TextureIdMap;
@@ -16,11 +14,8 @@ import org.joml.Vector2f;
 import saving.SavedItem;
 import stats.inventory.items.Item;
 import stats.inventory.items.ItemDefinition;
-import stats.inventory.items.ItemScrollSet;
 import tiles.TilePart;
 import tool.editor.TilePartLoader;
-
-import java.awt.*;
 
 public class ChestTilePart extends TilePart {
     public static final int NUM_ITEMS_PER_ROW = 10;

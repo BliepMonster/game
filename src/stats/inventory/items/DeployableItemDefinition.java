@@ -1,7 +1,7 @@
 package stats.inventory.items;
 
 import combat.equipment.EquipmentSlot;
-import engine.core.Texture;
+import engine.core.textures.Texture;
 import entities.DeployableEntity;
 import main.GameContext;
 import org.joml.Vector2f;

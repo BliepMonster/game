@@ -6,7 +6,7 @@ import crafting.PreCraftRequirement;
 import engine.Maths;
 import engine.core.DrawManager;
 import engine.core.Screen;
-import engine.core.Texture;
+import engine.core.textures.Texture;
 import engine.core.audio.AudioMaster;
 import engine.core.audio.AudioSource;
 import engine.core.input.Input;

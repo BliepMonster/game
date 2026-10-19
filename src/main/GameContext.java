@@ -19,4 +19,5 @@ public interface GameContext {
     World getWorld();
     Camera getCamera();
     AttributeData attributes();
+    void freeze(int ticks);
 }

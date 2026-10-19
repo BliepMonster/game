@@ -15,7 +15,7 @@ public abstract class TilePart {
     public abstract void render(int x, int y, Camera camera);
     public abstract boolean isStandable();
     public boolean isProjectileStandable() {
-        return true;
+        return false;
     }
     public abstract void onStand(GameContext context);
     public abstract void onClick(GameContext context);

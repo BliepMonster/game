@@ -25,9 +25,9 @@
     {
       "type": "skill",
       "skill": "SMITHING",
-      "level": 11
+      "level": 9
     }
   ],
   "skill": "SMITHING",
-  "xp": 300
+  "xp": 500
 }

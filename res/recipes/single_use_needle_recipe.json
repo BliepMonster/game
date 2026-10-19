@@ -1,0 +1,19 @@
+{
+  "name": "Single-use Needle",
+
+  "inputs": [
+    {
+      "type": "resource",
+      "id": "Pine Needle",
+      "amount": 4
+    }
+  ],
+
+  "outputs": [
+    {
+      "type": "resource",
+      "id": "Single-use Needle",
+      "amount": 1
+    }
+  ]
+}

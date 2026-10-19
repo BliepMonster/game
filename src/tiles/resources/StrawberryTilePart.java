@@ -1,10 +1,8 @@
 package tiles.resources;
 
-import engine.core.DrawManager;
-import engine.core.Texture;
+import engine.core.textures.Texture;
 import engine.json.JsonString;
 import engine.json.JsonValue;
-import entities.Player;
 import main.Camera;
 import main.TextureIdMap;
 import org.joml.Vector2f;
@@ -15,8 +13,6 @@ import stats.skills.SkillSet;
 import tool.editor.TilePartLoader;
 
 import java.awt.*;
-
-import static java.awt.Color.red;
 
 public class StrawberryTilePart extends ResourceCreator {
     public static final Color green = new Color(0, 160, 0);

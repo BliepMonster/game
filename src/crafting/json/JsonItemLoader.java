@@ -7,7 +7,7 @@ import combat.equipment.EquipmentSlot;
 import combat.melee.ConeWeaponDefinition;
 import combat.melee.MeleeWeaponItemDefinition;
 import combat.melee.SpecificStabWeaponDefinition;
-import engine.core.Texture;
+import engine.core.textures.Texture;
 import engine.json.*;
 import entities.DamageType;
 import main.TextureIdMap;

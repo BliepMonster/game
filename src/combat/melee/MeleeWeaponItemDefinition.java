@@ -1,7 +1,7 @@
 package combat.melee;
 
 import combat.equipment.EquipmentSlot;
-import engine.core.Texture;
+import engine.core.textures.Texture;
 import entities.DamageType;
 import entities.Entity;
 import main.Game;
@@ -62,6 +62,9 @@ public abstract class MeleeWeaponItemDefinition extends ItemDefinition {
                 entity.knock(result, stats.get(StatHolder.Stat.KNOCKBACK)*(float)(Math.random()/5+0.9));
                 hit = true;
             }
+        }
+        if (hit) {
+            context.getCamera().addShake(knockback*knockback/80);
         }
         return new ItemUseResult(Optional.of(item), hit);
     }

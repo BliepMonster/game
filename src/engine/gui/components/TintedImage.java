@@ -1,7 +1,7 @@
 package engine.gui.components;
 
 import engine.core.DrawManager;
-import engine.core.Texture;
+import engine.core.textures.Texture;
 import engine.gui.constraints.position.PositionConstraint;
 import engine.gui.constraints.size.SizeConstraint;
 

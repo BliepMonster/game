@@ -1,6 +1,6 @@
 package tiles.resources;
 
-import engine.core.Texture;
+import engine.core.textures.Texture;
 import engine.json.JsonString;
 import engine.json.JsonValue;
 import main.Camera;
@@ -11,8 +11,6 @@ import main.ItemConstants;
 import stats.StatHolder;
 import stats.skills.SkillSet;
 import tool.editor.TilePartLoader;
-
-import java.awt.*;
 
 public class CarrotTilePart extends CropTilePart {
     public static final Texture UNREADY = TextureIdMap.get("base:tiles:carrot_unready");

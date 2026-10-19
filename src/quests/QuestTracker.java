@@ -14,6 +14,7 @@ public class QuestTracker {
     private final HashMap<String, Integer> kills = new HashMap<>();
     private final HashMap<String, Integer> buys = new HashMap<>();
     private final HashMap<String, Integer> gathers = new HashMap<>();
+    private final HashMap<String, Integer> talks = new HashMap<>();
     private int sells;
 
     public QuestTracker(SavedQuests save) {
@@ -23,6 +24,7 @@ public class QuestTracker {
         if (save.kills() != null) kills.putAll(save.kills());
         if (save.buys() != null) buys.putAll(save.buys());
         if (save.gathers() != null) gathers.putAll(save.gathers());
+        if (save.talks() != null) talks.putAll(save.talks());
         this.sells = save.sells();
     }
 
@@ -91,6 +93,14 @@ public class QuestTracker {
         return gathers.getOrDefault(item, 0);
     }
 
+    public void onTalk(String npcId) {
+        talks.put(npcId, talks.getOrDefault(npcId, 0) + 1);
+    }
+
+    public int getTalks(String npcId) {
+        return talks.getOrDefault(npcId, 0);
+    }
+
     public void update(GameContext context) {
         for (Quest quest : QuestRegistry.all()) {
             if (!completed.contains(quest.getId()) && quest.isUnlocked(this) && quest.isDone(context)) {
@@ -110,6 +120,7 @@ public class QuestTracker {
                 new HashMap<>(kills),
                 new HashMap<>(buys),
                 new HashMap<>(gathers),
+                new HashMap<>(talks),
                 sells
         );
     }
