@@ -56,7 +56,7 @@ public class AlchemyStationPanel extends StateComponent {
     public void claim() {
         var finished = part.recipe;
         if (finished == null || !part.isDone()) return;
-        finished.recipe().produce(storage());
+        finished.recipe().produce(storage(), context);
         context.getPlayer().skills.giveXP(SkillSet.SkillType.ALCHEMY, finished.xp());
         part.recipe = null;
         part.end = 0;

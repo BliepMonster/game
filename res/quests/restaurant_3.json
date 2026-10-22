@@ -1,0 +1,18 @@
+{
+  "id": "base:restaurant_3",
+  "name": "The Restaurant",
+  "requires": "base:restaurant_2",
+  "reward": [
+    {
+      "type": "currency",
+      "amount": 3000
+    }
+  ],
+  "objectives": [
+    {
+      "type": "talk",
+      "npc": "chef",
+      "name": "Talk to the Chef again."
+    }
+  ]
+}

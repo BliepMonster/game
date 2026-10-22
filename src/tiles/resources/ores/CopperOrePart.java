@@ -37,8 +37,7 @@ public class CopperOrePart extends HittableResourceCreator {
         var g = Game.getTickCount()-ticksSinceLastHit >= 5;
         camera.addRenderJob(() ->
                 camera.tintedImage(
-                        g &&
-                                wasLastHitSuccessFul ? TextureIdMap.get("base:tiles:copper") : TextureIdMap.get("base:tiles:coal_outline"),
+                        g ? TextureIdMap.get("base:tiles:copper") : TextureIdMap.get("base:tiles:coal_outline"),
                         g ?Color.WHITE :
                                 wasLastHitSuccessFul ? HIT_FLASH
                                 : Color.WHITE,

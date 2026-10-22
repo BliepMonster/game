@@ -6,6 +6,53 @@
   "z_offset": 0.5,
   "dialogue": [
     {
+      "type": "cond",
+      "yes": {
+        "type": "attrib",
+        "attrib": ""
+      },
+      "no": {
+        "type": "list",
+        "array": [
+          {
+            "type": "text",
+            "tex": "base:npc:chef",
+            "name": "Chef",
+            "message": "Thank you."
+          },
+          {
+            "type": "text",
+            "tex": "base:npc:chef",
+            "name": "Chef",
+            "message": "I don't even know why the restaurant fell apart."
+          },
+          {
+            "type": "text",
+            "tex": "base:npc:chef",
+            "name": "Chef",
+            "message": "It just happened one day, while I was taking a walk."
+          },
+          {
+            "type": "text",
+            "tex": "base:npc:chef",
+            "name": "Chef",
+            "message": "Well, at least now it's back to normal!"
+          },
+          {
+            "type": "text",
+            "tex": "base:npc:chef",
+            "name": "Chef",
+            "message": "You should help the other citizens too."
+          },
+          {
+            "type": "attrib",
+            "attrib": "chef_talked_again"
+          }
+        ]
+      },
+      "attrib": "chef_talked_again"
+    },
+    {
         "type": "shop",
         "entries": [
           {

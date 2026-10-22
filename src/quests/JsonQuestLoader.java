@@ -1,11 +1,6 @@
 package quests;
 
-import engine.json.JsonArray;
-import engine.json.JsonFile;
-import engine.json.JsonNumber;
-import engine.json.JsonObject;
-import engine.json.JsonString;
-import engine.json.JsonValue;
+import engine.json.*;
 import stats.skills.SkillSet;
 
 public class JsonQuestLoader {
@@ -62,6 +57,11 @@ public class JsonQuestLoader {
             case "attribute" -> new AttributeObjective(
                     ((JsonString) object.values.get("attribute")).value,
                     name
+            );
+            case "craft" -> new CraftObjective(
+                    name,
+                    ((JsonString) object.values.get("item")).value,
+                    ((JsonBoolean) object.values.get("resource")).bool
             );
             default -> throw new RuntimeException("Unknown objective type: " + type);
         };

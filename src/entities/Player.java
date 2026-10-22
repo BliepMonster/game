@@ -268,7 +268,7 @@ public class Player implements Entity, LightSource {
         float def = stats.get(StatHolder.Stat.DEFENSE);
         var d = defense ? (amount*(1-def/(def+100))) : amount;
         health -= d;
-        context.getCamera().addShake(d/20);
+        context.getCamera().addShake(d*2/stats.get(StatHolder.Stat.MAX_HEALTH));
         if (health <= 0) {
             health = 0;
         }

@@ -1,5 +1,6 @@
 package crafting;
 
+import main.GameContext;
 import stats.inventory.items.Item;
 
 import java.util.HashMap;
@@ -13,11 +14,14 @@ public class CraftingResult {
         this.resources = resources;
         this.items = items;
     }
-    public void produce(FullItemStorage storage) {
+    public void produce(FullItemStorage storage, GameContext context) {
         for (Supplier<? extends Item> item : items) {
-            storage.inventory.add(item.get());
+            var i = item.get();
+            context.getQuests().onItemCraft(i.definition.id);
+            storage.inventory.add(i);
         }
         for (Map.Entry<String, Integer> entry : resources.entrySet()) {
+            context.getQuests().onResourceCraft(entry.getKey());
             storage.storage.add(entry.getKey(), entry.getValue());
         }
     }

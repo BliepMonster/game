@@ -32,7 +32,7 @@ public class ItemCraftingRecipe implements CraftingRecipe {
         // double check for safety
         if (canCraft(storage, context)) {
             consume(storage);
-            produce(storage);
+            produce(storage, context);
         }
         if (skill != null)
             context.getPlayer().skills.get(skill).getXP(xp);
@@ -42,8 +42,8 @@ public class ItemCraftingRecipe implements CraftingRecipe {
             requirement.consume(storage);
         }
     }
-    public void produce(FullItemStorage storage) {
-        result.produce(storage);
+    public void produce(FullItemStorage storage, GameContext context) {
+        result.produce(storage, context);
     }
     public ItemRequirement[] getRequirements() {
         return ingredients;

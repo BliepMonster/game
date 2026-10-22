@@ -37,9 +37,8 @@ public class CoalOrePart extends HittableResourceCreator {
         var g = Game.getTickCount()-ticksSinceLastHit >= 5;
         camera.addRenderJob(() ->
                 camera.tintedImage(
-                        g &&
-                                wasLastHitSuccessFul ? TextureIdMap.get("base:tiles:coal") : TextureIdMap.get("base:tiles:coal_outline"),
-                        g ?Color.WHITE :
+                        g ? TextureIdMap.get("base:tiles:coal") : TextureIdMap.get("base:tiles:coal_outline"),
+                        g ? Color.WHITE :
                                 wasLastHitSuccessFul ? HIT_FLASH
                                 : Color.WHITE,
                         x, y, 1, 1), -y);

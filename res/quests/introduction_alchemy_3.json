@@ -1,0 +1,14 @@
+{
+  "id": "base:alchemy_intro_3",
+  "name": "An Introduction to Alchemy",
+  "requires": "base:alchemy_intro_2",
+  "reward": [],
+  "objectives": [
+    {
+      "type": "buy",
+      "item": "base:placers:alchemy_station",
+      "amount": 1,
+      "name": "Buy an Alchemy Station from the Witch."
+    }
+  ]
+}

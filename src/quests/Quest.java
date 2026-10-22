@@ -38,7 +38,7 @@ public class Quest {
     }
 
     public boolean isUnlocked(QuestTracker tracker) {
-        return requires == null || tracker.isCompleted(requires);
+        return requires == null || tracker.isClaimed(requires);
     }
 
     public boolean isDone(GameContext context) {

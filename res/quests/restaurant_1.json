@@ -1,0 +1,13 @@
+{
+  "id": "base:restaurant_1",
+  "name": "The Restaurant",
+  "requires": "base:intro_8",
+  "reward": [],
+  "objectives": [
+    {
+      "type": "talk",
+      "npc": "base:empty",
+      "name": "Talk to the Restaurant Chef."
+    }
+  ]
+}

@@ -46,6 +46,11 @@
   "base:tiles:coal": "res/textures/tiles/ores/coal_tile.png",
   "base:tiles:iron": "res/textures/tiles/ores/iron_tile.png",
   "base:tiles:copper": "res/textures/tiles/ores/copper_tile.png",
+  "base:tiles:gold": "res/textures/tiles/ores/gold_tile.png",
+  "base:tiles:silver": "res/textures/tiles/ores/silver_tile.png",
   "base:tiles:rock": "res/textures/tiles/ores/rock_tile.png",
+  "base:tiles:ruby": "res/textures/tiles/ores/ruby_tile.png",
+  "base:tiles:sapphire": "res/textures/tiles/ores/sapphire_tile.png",
+  "base:tiles:gemstone_rock": "res/textures/tiles/ores/gemstone_rock_tile.png",
   "base:tiles:coal_outline": "res/textures/tiles/ores/coal_tile_outline.png"
 }

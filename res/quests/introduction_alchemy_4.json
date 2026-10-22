@@ -1,0 +1,17 @@
+{
+  "id": "base:alchemy_intro_4",
+  "name": "An Introduction to Alchemy",
+  "requires": "base:alchemy_intro_3",
+  "reward": {
+    "type": "currency",
+    "amount": 5000
+  },
+  "objectives": [
+    {
+      "type": "craft",
+      "item": "Purest Gold",
+      "resource": true,
+      "name": "Craft a Purest Gold"
+    }
+  ]
+}

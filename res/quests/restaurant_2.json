@@ -1,0 +1,13 @@
+{
+  "id": "base:restaurant_2",
+  "name": "The Restaurant",
+  "requires": "base:restaurant_1",
+  "reward": [],
+  "objectives": [
+    {
+      "type": "attribute",
+      "attribute": "base:restaurant_unlocked",
+      "name": "Repair the Restaurant."
+    }
+  ]
+}

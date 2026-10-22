@@ -10,9 +10,9 @@ import engine.saving.objects.SavedString;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public record SavedQuests(String selectedId, String[] completedIds, String[] claimedIds, HashMap<String, Integer> kills, HashMap<String, Integer> buys, HashMap<String, Integer> gathers, HashMap<String, Integer> talks, int sells) {
+public record SavedQuests(String selectedId, String[] completedIds, String[] claimedIds, HashMap<String, Integer> kills, HashMap<String, Integer> buys, HashMap<String, Integer> gathers, HashMap<String, Integer> talks, int sells, String[] itemCrafts, String[] resourceCrafts) {
     public static SavedQuests empty() {
-        return new SavedQuests(null, new String[0], new String[0], new HashMap<>(), new HashMap<>(), new HashMap<>(), new HashMap<>(), 0);
+        return new SavedQuests(null, new String[0], new String[0], new HashMap<>(), new HashMap<>(), new HashMap<>(), new HashMap<>(), 0, new String[0], new String[0]);
     }
 
     public SavedQuests(SavedObject object) {
@@ -24,7 +24,9 @@ public record SavedQuests(String selectedId, String[] completedIds, String[] cla
                 decodeBuys((SavedDictionary) object),
                 decodeGathers((SavedDictionary) object),
                 decodeTalks((SavedDictionary) object),
-                decodeSells((SavedDictionary) object)
+                decodeSells((SavedDictionary) object),
+                decodeItemCrafts((SavedDictionary) object),
+                decodeResourceCrafts((SavedDictionary) object)
         );
     }
 
@@ -38,7 +40,7 @@ public record SavedQuests(String selectedId, String[] completedIds, String[] cla
         if (!(object instanceof SavedArray array)) return new String[0];
         String[] completed = new String[array.length()];
         for (int i = 0; i < completed.length; ++i) {
-            completed[i] = (String) ((SavedString) array.get(i)).get();
+            completed[i] = (String) (array.get(i)).get();
         }
         return completed;
     }
@@ -48,7 +50,27 @@ public record SavedQuests(String selectedId, String[] completedIds, String[] cla
         if (!(object instanceof SavedArray array)) return new String[0];
         String[] claimed = new String[array.length()];
         for (int i = 0; i < claimed.length; ++i) {
-            claimed[i] = (String) ((SavedString) array.get(i)).get();
+            claimed[i] = (String) (array.get(i)).get();
+        }
+        return claimed;
+    }
+
+    private static String[] decodeItemCrafts(SavedDictionary dict) {
+        SavedObject object = dict.get("icrafts");
+        if (!(object instanceof SavedArray array)) return new String[0];
+        String[] claimed = new String[array.length()];
+        for (int i = 0; i < claimed.length; ++i) {
+            claimed[i] = (String) ( array.get(i)).get();
+        }
+        return claimed;
+    }
+
+    private static String[] decodeResourceCrafts(SavedDictionary dict) {
+        SavedObject object = dict.get("rcrafts");
+        if (!(object instanceof SavedArray array)) return new String[0];
+        String[] claimed = new String[array.length()];
+        for (int i = 0; i < claimed.length; ++i) {
+            claimed[i] = (String) ( array.get(i)).get();
         }
         return claimed;
     }
@@ -116,6 +138,12 @@ public record SavedQuests(String selectedId, String[] completedIds, String[] cla
         map.put("gathers", encodeCounts(gathers));
         map.put("talks", encodeCounts(talks));
         map.put("sells", new SavedDouble(sells));
+        ArrayList<SavedObject> icrafts = new ArrayList<>();
+        for (String id : itemCrafts) icrafts.add(new SavedString(id));
+        map.put("icrafts", new SavedArray(icrafts));
+        ArrayList<SavedObject> rcrafts = new ArrayList<>();
+        for (String id : resourceCrafts) rcrafts.add(new SavedString(id));
+        map.put("rcrafts", new SavedArray(rcrafts));
         return new SavedDictionary(map);
     }
 

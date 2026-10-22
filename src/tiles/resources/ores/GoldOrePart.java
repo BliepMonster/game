@@ -2,10 +2,7 @@ package tiles.resources.ores;
 
 import engine.json.JsonString;
 import engine.json.JsonValue;
-import main.LightSource;
-import main.Camera;
-import main.Game;
-import main.ItemConstants;
+import main.*;
 import org.joml.Vector2f;
 import stats.StatHolder;
 import stats.inventory.items.ToolItemDefinition;
@@ -29,28 +26,20 @@ public class GoldOrePart extends HittableResourceCreator implements LightSource 
             /*standable*/ false,
             /*powerType*/ ToolItemDefinition.PowerType.MINING
     );
-    public void renderReady(int lastHit, boolean lastHitRight, int x, int y, float health, Camera camera) {
-        float size = health/2+.5f;
-        camera.addRenderJob(
-                () -> camera.rect(
-                        Game.getTickCount()-lastHit < 5 ?
-                                lastHitRight ? Color.RED : Color.orange
-                                : Color.yellow,
-                        x+.5f-size/2,
-                        y+.5f-size/2,
-                        size,
-                        size
-                ),
-                -y
-        );
+    public void renderReady(int ticksSinceLastHit, boolean wasLastHitSuccessFul, int x, int y, float health, Camera camera) {
+        var g = Game.getTickCount()-ticksSinceLastHit >= 5;
+        camera.addRenderJob(() ->
+                camera.tintedImage(
+                        g ? TextureIdMap.get("base:tiles:gold") : TextureIdMap.get("base:tiles:coal_outline"),
+                        g ?Color.WHITE :
+                                wasLastHitSuccessFul ? Color.RED
+                                : Color.WHITE,
+                        x, y, 1, 1), -y);
     }
     public void renderUnready(int x, int y, Camera camera) {
-        camera.addRenderJob(
-                () -> camera.rect(Color.gray, x, y, 1, 1),
-                -y
-        );
+        camera.addRenderJob(() ->
+                camera.image(TextureIdMap.get("base:tiles:rock"), x, y, 1, 1), -y);
     }
-
     @Override
     public JsonValue save() {
         return new JsonString(TilePartLoader.ID_GOLD_ORE);

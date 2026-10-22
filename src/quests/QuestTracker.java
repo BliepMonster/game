@@ -15,6 +15,7 @@ public class QuestTracker {
     private final HashMap<String, Integer> buys = new HashMap<>();
     private final HashMap<String, Integer> gathers = new HashMap<>();
     private final HashMap<String, Integer> talks = new HashMap<>();
+    private final HashSet<String> itemCrafts = new HashSet<>(), resourceCrafts = new HashSet<>();
     private int sells;
 
     public QuestTracker(SavedQuests save) {
@@ -61,6 +62,11 @@ public class QuestTracker {
         claimed.add(id);
     }
 
+    private static boolean hasNoRewards(Quest quest) {
+        ObjectiveReward[] rewards = quest.getRewards();
+        return rewards == null || rewards.length == 0;
+    }
+
     public void onKill(String enemy) {
         kills.put(enemy, kills.getOrDefault(enemy, 0) + 1);
     }
@@ -75,6 +81,12 @@ public class QuestTracker {
 
     public int getBuys(String itemId) {
         return buys.getOrDefault(itemId, 0);
+    }
+    public void onItemCraft(String item) {
+        itemCrafts.add(item);
+    }
+    public void onResourceCraft(String resource) {
+        resourceCrafts.add(resource);
     }
 
     public void onSell() {
@@ -92,6 +104,12 @@ public class QuestTracker {
     public int getGathers(String item) {
         return gathers.getOrDefault(item, 0);
     }
+    public boolean hasItemBeenCrafted(String item) {
+        return itemCrafts.contains(item);
+    }
+    public boolean hasResourceBeenCrafted(String item) {
+        return resourceCrafts.contains(item);
+    }
 
     public void onTalk(String npcId) {
         talks.put(npcId, talks.getOrDefault(npcId, 0) + 1);
@@ -105,6 +123,9 @@ public class QuestTracker {
         for (Quest quest : QuestRegistry.all()) {
             if (!completed.contains(quest.getId()) && quest.isUnlocked(this) && quest.isDone(context)) {
                 completed.add(quest.getId());
+            }
+            if (completed.contains(quest.getId()) && !claimed.contains(quest.getId()) && hasNoRewards(quest)) {
+                claim(quest.getId(), context);
             }
         }
         if (selectedId != null && completed.contains(selectedId)) {
@@ -121,7 +142,9 @@ public class QuestTracker {
                 new HashMap<>(buys),
                 new HashMap<>(gathers),
                 new HashMap<>(talks),
-                sells
+                sells,
+                itemCrafts.toArray(new String[0]),
+                resourceCrafts.toArray(new String[0])
         );
     }
 }

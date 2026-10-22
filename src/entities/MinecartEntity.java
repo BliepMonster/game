@@ -1,5 +1,6 @@
 package entities;
 
+import engine.core.textures.Texture;
 import engine.hitboxes.Hitbox;
 import engine.hitboxes.RectangularHitbox;
 import entities.projectiles.Projectile;
@@ -15,6 +16,7 @@ public class MinecartEntity extends Projectile {
     public static final int DAMAGE = 50;
     private float spawned = Game.getTickCount();
     private final Vector2f movement;
+    public static final Texture TEX = new Texture("res/textures/enemies/minecart.png");
 
     public MinecartEntity(Vector2f position) {
         super(position);
@@ -48,7 +50,7 @@ public class MinecartEntity extends Projectile {
     @Override
     public void render(Camera camera) {
         camera.addRenderJob(
-                () -> camera.rect(Color.orange, getRenderX() - 1, getRenderY() - 1, 2, 2),
+                () -> camera.image(TEX, getRenderX() - 1, getRenderY() - 1, 2, 2),
                 -position.y
         );
     }
