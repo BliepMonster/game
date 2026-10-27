@@ -1,0 +1,13 @@
+{
+  "id": "base:seed_store_1",
+  "name": "The Seed Store",
+  "requires": "base:mine_repair_2",
+  "reward": [],
+  "objectives": [
+    {
+      "type": "talk",
+      "npc": "base:seed_build",
+      "name": "Talk to the Seed Merchant."
+    }
+  ]
+}

@@ -17,6 +17,7 @@ import tiles.crafting.*;
 import tiles.crafting.scrolls.ScrollApplicationTilePart;
 import tiles.doors.DungeonExitTilePart;
 import tiles.doors.EntranceTilePart;
+import tiles.doors.TrapdoorTilePart;
 import tiles.house.ChestTilePart;
 import tiles.house.WardrobeTilePart;
 import tiles.npc.ShopDefinitionRegistry;
@@ -37,6 +38,7 @@ public final class TilePartLoader {
     public static final String ID_FURNACE = "furnace";
     public static final String ID_SILVER_ORE = "silver_ore";
     public static final String ID_CRUSHER = "crusher";
+    public static final String ID_TRAPDOOR = "trapdoor";
     public static final String ID_SCROLL_TABLE = "scroll_crafter";
     public static final String ID_POLISHING_MACHINE = "polishing_machine";
     public static final String ID_COAL_ORE = "coal_ore";
@@ -88,6 +90,20 @@ public final class TilePartLoader {
                 tcache.get(tid)
         );
     }
+    public static TrapdoorTilePart loadTrapdoor(Vector2f tilePos, JsonObject object) {
+        var tid = ((JsonString) object.values.get("texture_id")).value;
+        if (!tcache.containsKey(tid)) tcache.put(tid, new Texture(tid));
+        var wid = ((JsonString) object.values.get("world_id"));
+        return new TrapdoorTilePart(
+                tilePos,
+                wid.value,
+                new Vector2f(
+                        (float) ((JsonNumber) object.values.get("x")).num,
+                        (float) ((JsonNumber) object.values.get("y")).num
+                ),
+                tcache.get(tid)
+        );
+    }
     public static DungeonExitTilePart loadExit(Vector2f tilePos, JsonObject object) {
         var tid = ((JsonString) object.values.get("texture_id")).value;
         if (!tcache.containsKey(tid)) tcache.put(tid, new Texture(tid));
@@ -125,6 +141,7 @@ public final class TilePartLoader {
             case ID_ZOMBIE_SPAWNER -> new ZombieSpawner(pos, context);
             case ID_FURNACE -> new FurnaceTilePart(pos);
             case ID_ENTRANCE -> loadEntrance(pos, obj);
+            case ID_TRAPDOOR -> loadTrapdoor(pos, obj);
             case ID_TEXTURE -> new TextureAdaptTilePart(pos, ((JsonString) obj.values.get("tex")).value, ((JsonBoolean) obj.values.get("standable")).bool, obj.values.containsKey("part") ? load(position, (JsonObject) obj.values.get("part"), context) : null);
             case ID_DUNGEON_EXIT -> loadExit(pos, obj);
             case ID_GOLD_ORE -> new GoldOrePart(pos);

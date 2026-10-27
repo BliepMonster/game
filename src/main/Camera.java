@@ -210,7 +210,7 @@ public class Camera {
     public void renderEffects(GameContext context) {
         effects.replaceAll(effect -> effect.getTimeLeft() < 0 ? effect.getSuccessor(context).orElse(null) : effect);
         effects.removeIf(Objects::isNull);
-        effects.forEach(effect ->effect.draw(draw));
+        effects.forEach(effect -> effect.draw(draw));
     }
     private float[] coneScratch = new float[20 * 6];
     public void cone(Color color, float cx, float cy, float size, float aim, float sweep, int segments) {

@@ -1,0 +1,50 @@
+{
+  "name": "Void",
+  "id": "base:bamboo_guy",
+  "texture": "res/textures/npc/miner.png",
+  "height": 3,
+  "z_offset": 0.5,
+  "dialogue": [
+    {
+      "type": "cond",
+      "yes": {
+        "type": "attrib",
+        "attrib": ""
+      },
+      "no": {
+        "type": "list",
+        "array": [
+          {
+            "type": "text",
+            "tex": "base:npc:chef",
+            "name": "Miner",
+            "message": "My house burnt down."
+          },
+          {
+            "type": "text",
+            "tex": "base:npc:chef",
+            "name": "Chef",
+            "message": "Not like I care or anything, it's whatever."
+          },
+          {
+            "type": "text",
+            "tex": "base:npc:chef",
+            "name": "Chef",
+            "message": "But I'd like to be able to enter the mines again."
+          },
+          {
+            "type": "text",
+            "tex": "base:npc:chef",
+            "name": "Chef",
+            "message": "Can you help me repair the house?"
+          },
+          {
+            "type": "attrib",
+            "attrib": "base:miner_original_dialogue"
+          }
+        ]
+      },
+      "attrib": "base:miner_original_dialogue"
+    }
+  ]
+}

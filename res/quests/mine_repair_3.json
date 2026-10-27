@@ -1,0 +1,18 @@
+{
+  "id": "base:mine_repair_3",
+  "name": "Going Deep",
+  "requires": "base:mine_repair_2",
+  "reward": [
+    {
+      "type": "currency",
+      "amount": 4000
+    }
+  ],
+  "objectives": [
+    {
+      "type": "enter",
+      "world": "GOLD_CAVE_WORLD",
+      "name": "Enter the Gold Mine."
+    }
+  ]
+}

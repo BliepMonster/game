@@ -1,0 +1,13 @@
+{
+  "id": "base:mine_repair_1",
+  "name": "Going Deep",
+  "requires": "base:restaurant_2",
+  "reward": [],
+  "objectives": [
+    {
+      "type": "talk",
+      "npc": "base:bamboo_guy",
+      "name": "Talk to the Gold Miner."
+    }
+  ]
+}

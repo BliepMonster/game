@@ -221,6 +221,7 @@ public class World {
         loopingSources.clear();
     }
     public void onPlayerRespawn(GameContext context) {
+        context.movePlayer(WorldRegistry.get("HOME_WORLD"), new Vector2f());
     }
     public static @NotNull World of(JsonFile file, String address, GameContext context) {
         var map = new ArrayCoordinateMap<Tile>();

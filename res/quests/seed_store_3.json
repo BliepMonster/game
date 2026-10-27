@@ -1,0 +1,13 @@
+{
+  "id": "base:seed_store_3",
+  "name": "The Seed Store",
+  "requires": "base:seed_store_2",
+  "reward": [],
+  "objectives": [
+    {
+      "type": "talk",
+      "npc": "seed_guy",
+      "name": "Talk to the Seed Merchant over the counter."
+    }
+  ]
+}

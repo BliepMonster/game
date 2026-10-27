@@ -1,0 +1,7 @@
+{
+  "dimensions": [6, 12],
+  "type": "algo",
+  "prefix": "base:tiles:bamboo_house:",
+  "between": ":",
+  "texid": "base:tiles:bamboo_house"
+}

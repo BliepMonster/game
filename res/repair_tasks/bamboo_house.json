@@ -1,0 +1,10 @@
+{
+  "id": "base:bamboo_house",
+  "resources": {
+    "Iron Bar": 8,
+    "Pine Wood": 24,
+    "Paper": 2
+  },
+  "coins": 1200,
+  "attrib": "base:bamboo_house_unlocked"
+}

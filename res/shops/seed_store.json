@@ -7,6 +7,41 @@
   "standable": false,
   "dialogue": [
     {
+      "type": "cond",
+      "yes": {
+        "type": "attrib",
+        "attrib": ""
+      },
+      "no": {
+        "type": "list",
+        "array": [
+          {
+            "type": "text",
+            "tex": "base:npc:guy",
+            "name": "Seed Merchant",
+            "message": "Thanks!"
+          },
+          {
+            "type": "text",
+            "tex": "base:npc:guy",
+            "name": "Seed Merchant",
+            "message": "Swing by if you ever need some seeds"
+          },
+          {
+            "type": "text",
+            "tex": "base:npc:guy",
+            "name": "Seed Merchant",
+            "message": "You can plant them in a Garden Pot in your house to grow cool plants!"
+          },
+          {
+            "type": "attrib",
+            "attrib": "chef_talked_again"
+          }
+        ]
+      },
+      "attrib": "chef_talked_again"
+    },
+    {
       "type": "shop",
       "entries": [
         {

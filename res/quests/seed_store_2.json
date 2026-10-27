@@ -1,0 +1,13 @@
+{
+  "id": "base:seed_store_2",
+  "name": "The Seed Store",
+  "requires": "base:seed_store_1",
+  "reward": [],
+  "objectives": [
+    {
+      "type": "attribute",
+      "attribute": "base:seed_store_unlocked",
+      "name": "Repair the Seed Store."
+    }
+  ]
+}

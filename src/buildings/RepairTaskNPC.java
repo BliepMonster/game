@@ -32,7 +32,7 @@ public class RepairTaskNPC extends TilePart {
         this.camera = camera;
         camera.addRenderJob(
                 () -> camera.image(definition.texture(), x, y, 1, definition.height()),
-                -y
+                -y - definition.zOffset()
         );
     }
 

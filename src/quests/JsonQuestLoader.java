@@ -63,6 +63,9 @@ public class JsonQuestLoader {
                     ((JsonString) object.values.get("item")).value,
                     ((JsonBoolean) object.values.get("resource")).bool
             );
+            case "enter" -> new EnterObjective(
+                    ((JsonString) object.values.get("world")).value, name
+            );
             default -> throw new RuntimeException("Unknown objective type: " + type);
         };
     }

@@ -4,5 +4,7 @@
   "base:tiles:restaurant_empty": "res/textures/tiles/restaurant_empty.png",
   "base:tiles:restaurant": "res/textures/tiles/restaurant.png",
   "base:tiles:seed_store_empty": "res/textures/tiles/houses/seed_store_empty.png",
-  "base:tiles:seed_store": "res/textures/tiles/houses/seed_store.png"
+  "base:tiles:seed_store": "res/textures/tiles/houses/seed_store.png",
+  "base:tiles:bamboo_house": "res/textures/tiles/houses/bamboo_house.png",
+  "base:tiles:bamboo_house_empty": "res/textures/tiles/houses/bamboo_house_empty.png"
 }

@@ -49,4 +49,8 @@ public class RenderOverTile extends Tile {
         priority.ifPresent(aFloat -> object.values.put("prio", new JsonNumber(aFloat)));
         return object;
     }
+
+    public void setPriority(float i) {
+        this.priority = Optional.of(i);
+    }
 }

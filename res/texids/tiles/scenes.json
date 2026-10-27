@@ -4,5 +4,6 @@
   "base:scenes:seed_store": "res/textures/scenes/seed_store.png",
   "base:scenes:sapphire_dung1": "res/textures/scenes/sapphire_dungeon_001.png",
   "base:scenes:sapphire_dung2": "res/textures/scenes/sapphire_dungeon_002.png",
-  "base:scenes:sapphire_dung3": "res/textures/scenes/sapphire_dungeon_003.png"
+  "base:scenes:sapphire_dung3": "res/textures/scenes/sapphire_dungeon_003.png",
+  "base:scenes:bamboo_house": "res/textures/scenes/bamboo_house.png"
 }

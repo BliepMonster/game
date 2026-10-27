@@ -2,7 +2,6 @@ package tiles.npc.dialogue;
 
 import engine.core.DrawManager;
 import engine.core.Screen;
-import engine.gui.GUI;
 import engine.gui.constraints.position.CenterConstraint;
 import engine.gui.constraints.size.RelativeSizeConstraint;
 import main.GameContext;

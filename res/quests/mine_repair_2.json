@@ -1,0 +1,13 @@
+{
+  "id": "base:mine_repair_2",
+  "name": "Going Deep",
+  "requires": "base:mine_repair_1",
+  "reward": [],
+  "objectives": [
+    {
+      "type": "attribute",
+      "attribute": "base:bamboo_house_unlocked",
+      "name": "Repair the Miner's Hut."
+    }
+  ]
+}

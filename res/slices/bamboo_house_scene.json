@@ -1,0 +1,7 @@
+{
+  "dimensions": [6, 10],
+  "type": "algo",
+  "prefix": "base:scenes:bamboo_house:",
+  "between": ":",
+  "texid": "base:scenes:bamboo_house"
+}

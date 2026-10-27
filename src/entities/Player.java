@@ -193,14 +193,14 @@ public class Player implements Entity, LightSource {
         prevY = position.y;
         Vector2f movement = movementScratch;
         movement.set(0, 0);
-        if (isKeyDown(GLFW_KEY_LEFT)) {
+        if (isKeyDown(GLFW_KEY_A)) {
             movement.x -= 1f;
         }
-        if (isKeyDown(GLFW_KEY_RIGHT)) movement.x += 1f;
-        if (isKeyDown(GLFW_KEY_UP)) {
+        if (isKeyDown(GLFW_KEY_D)) movement.x += 1f;
+        if (isKeyDown(GLFW_KEY_W)) {
             movement.y += 1f;
         }
-        if (isKeyDown(GLFW_KEY_DOWN)) {
+        if (isKeyDown(GLFW_KEY_S)) {
             movement.y -= 1f;
         }
         if (movement.x != 0 || movement.y != 0) {
@@ -214,22 +214,22 @@ public class Player implements Entity, LightSource {
             if (movement.x == 0) {
                 TEXTURE_ANIMATION_RIGHT.reset();
             }
-            else TEXTURE_ANIMATION_RIGHT.advance(movement.x*3.2f);
+            else TEXTURE_ANIMATION_RIGHT.advance(16f/ TICKS_PER_SECOND);
         } else if (direction == Direction.LEFT) {
             if (movement.x == 0) {
                 TEXTURE_ANIMATION_LEFT.reset();
             }
-            else TEXTURE_ANIMATION_LEFT.advance(-movement.x*3.2f);
+            else TEXTURE_ANIMATION_LEFT.advance(16f/ TICKS_PER_SECOND);
         } else if (direction == Direction.DOWN) {
             if (movement.y == 0) {
                 TEXTURE_ANIMATION_FRONT.reset();
             }
-            else TEXTURE_ANIMATION_FRONT.advance(-movement.y*3.2f);
+            else TEXTURE_ANIMATION_FRONT.advance(16f/ TICKS_PER_SECOND);
         } else if (direction == Direction.UP) {
             if (movement.y == 0) {
                 TEXTURE_ANIMATION_BACK.reset();
             }
-            else TEXTURE_ANIMATION_BACK.advance(movement.y*3.2f);
+            else TEXTURE_ANIMATION_BACK.advance(16f/ TICKS_PER_SECOND);
         }
         for (VelocityChange change : velocityChanges) {
             movement.add(change.getVelocityChange());
